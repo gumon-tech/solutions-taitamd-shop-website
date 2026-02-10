@@ -1,11 +1,18 @@
-import { SITE } from "@/lib/site";
+// app/sitemap.ts
 import type { MetadataRoute } from "next";
 
+// ✅ Required for `output: "export"` (static HTML export)
+export const dynamic = "force-static";
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://taitam-d.com";
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = SITE.baseUrl;
-  const routes = ["", "/services", "/story", "/contact"].map((p) => ({
-    url: `${base}${p}`,
-    lastModified: new Date()
-  }));
-  return routes;
+  // Keep this deterministic for static export.
+  const lastModified = new Date("2026-01-01T00:00:00.000Z");
+  return [
+    { url: `${SITE_URL}/`, lastModified },
+    { url: `${SITE_URL}/services`, lastModified },
+    { url: `${SITE_URL}/gallery`, lastModified },
+    { url: `${SITE_URL}/contact`, lastModified },
+  ];
 }

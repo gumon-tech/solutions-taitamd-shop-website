@@ -36,11 +36,11 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    images: ["/og-facebook.jpg"],
+    images: ["/TAITAMD-OG-facebook-product-1200x630.jpg"],
   },
   twitter: {
     card: "summary_large_image",
-    images: ["/og-x.jpg"],
+    images: ["/TAITAMD-OG-x-product-1200x675.jpg"],
   },
   icons: {
     icon: "/favicon.ico",
