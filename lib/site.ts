@@ -1,7 +1,7 @@
 import { base } from "framer-motion/client";
 
 export const SITE = {
-  baseUrl: "https://taitam-d.com",
+  baseUrl: "https://taitam-d.gumon.dev",
   name: "TaiTam‑D Beauty & Spa",
   tagline: "Relax • Refresh • Recharge",
   description:

@@ -1,8 +1,15 @@
 /** @type {import('next').NextConfig} */
+const repo = process.env.NEXT_PUBLIC_REPO_NAME || ""; // ใส่ชื่อ repo เช่น "my-site"
+const isProd = process.env.NODE_ENV === "production";
+
 const nextConfig = {
+  output: "export",          // ✅ static export
+  trailingSlash: true,       // ✅ ให้ path ลงท้าย / (กัน 404 บน Pages)
+  basePath: isProd && repo ? `/${repo}` : "",
+  assetPrefix: isProd && repo ? `/${repo}/` : "",
   images: {
-    // local-first. If you later use remote images, add domains here.
+    unoptimized: true,       // ✅ GitHub Pages ไม่รองรับ next/image optimization server
   },
 };
 
-export default nextConfig;
+module.exports = nextConfig;
