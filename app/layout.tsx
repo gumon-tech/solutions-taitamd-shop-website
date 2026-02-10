@@ -36,26 +36,11 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: `${SITE.name} — ${SITE.tagline}`,
-    description: SITE.description,
-    url: SITE.baseUrl,
-    siteName: SITE.name,
-    type: "website",
-    images: [
-      {
-        url: "/images/hero/og-1200x630.jpg",
-        width: 1200,
-        height: 630,
-        alt: `${SITE.name} — ${SITE.tagline}`,
-      },
-    ],
+    images: ["/og-facebook.jpg"],
   },
-
   twitter: {
     card: "summary_large_image",
-    title: `${SITE.name} — ${SITE.tagline}`,
-    description: SITE.description,
-    images: ["/images/hero/og-1200x630.jpg"],
+    images: ["/og-x.jpg"],
   },
   icons: {
     icon: "/favicon.ico",
