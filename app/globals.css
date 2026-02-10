@@ -1,0 +1,109 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+  color-scheme: dark;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  background: theme(colors.bg0);
+  color: theme(colors.ink);
+}
+
+/* Luxe background layers */
+.bg-wrap::before{
+  content:"";
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  background: theme(backgroundImage.luxe);
+}
+
+.bg-wrap::after{
+  content:"";
+  position: fixed;
+  inset: -25%;
+  z-index: -2;
+  opacity: 0.42;
+  background:
+    radial-gradient(closest-side, rgba(214,179,106,0.22), rgba(0,0,0,0) 62%),
+    radial-gradient(closest-side, rgba(127,163,138,0.14), rgba(0,0,0,0) 64%),
+    radial-gradient(closest-side, rgba(215,181,109,0.10), rgba(0,0,0,0) 66%);
+  filter: blur(30px);
+  animation: sweep 42s linear infinite;
+}
+
+@keyframes sweep {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.gridlines{
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.045) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse at 50% 20%, black 0%, transparent 70%);
+  pointer-events:none;
+}
+
+/* glass */
+.glass {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  backdrop-filter: blur(14px);
+}
+
+/* luxe button shimmer */
+.btn-shine{
+  position: relative;
+  overflow: hidden;
+}
+.btn-shine::after{
+  content:"";
+  position:absolute;
+  top:-40%;
+  left:-60%;
+  width:40%;
+  height:180%;
+  transform: skewX(-18deg);
+  background: linear-gradient(90deg, transparent, rgba(242,213,139,0.55), transparent);
+  opacity: 0.42;
+  animation: shimmer 2.4s linear infinite;
+}
+@keyframes shimmer{
+  0% { transform: translateX(-40%) skewX(-18deg); }
+  100% { transform: translateX(340%) skewX(-18deg); }
+}
+
+/* subtle selection */
+::selection { background: rgba(214,179,106,0.22); }
+
+/* smooth scrolling */
+html { scroll-behavior: smooth; }
+
+/* ===== Screenshot / Capture mode ===== */
+html[data-capture="true"] .bg-wrap::before,
+html[data-capture="true"] .bg-wrap::after,
+html[data-capture="true"] .gridlines {
+  position: absolute !important;   /* จาก fixed -> absolute */
+  inset: 0 !important;
+}
+
+html[data-capture="true"] .bg-wrap::after {
+  animation: none !important;      /* ปิด sweep */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bg-wrap::after { animation: none; }
+  .btn-shine::after { animation: none; }
+}
+
