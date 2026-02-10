@@ -1,15 +1,14 @@
-/** @type {import('next').NextConfig} */
-const repo = process.env.NEXT_PUBLIC_REPO_NAME || ""; // ใส่ชื่อ repo เช่น "my-site"
+// next.config.mjs
+const repo = process.env.NEXT_PUBLIC_REPO_NAME || ""; // เช่น "solutions-taitamd-shop-website"
 const isProd = process.env.NODE_ENV === "production";
 
+/** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: "export",          // ✅ static export
-  trailingSlash: true,       // ✅ ให้ path ลงท้าย / (กัน 404 บน Pages)
+  output: "export",
+  trailingSlash: true,
   basePath: isProd && repo ? `/${repo}` : "",
   assetPrefix: isProd && repo ? `/${repo}/` : "",
-  images: {
-    unoptimized: true,       // ✅ GitHub Pages ไม่รองรับ next/image optimization server
-  },
+  images: { unoptimized: true },
 };
 
-module.exports = nextConfig;
+export default nextConfig;
