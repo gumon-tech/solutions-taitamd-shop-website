@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowUpRight, MapPin, Clock3, PhoneCall } from "lucide-react";
 import { SITE } from "@/lib/site";
+import { buildWhatsAppLink } from "@/lib/whatsapp";
 import Reveal from "./Reveal";
 import SocialShareBar from "./SocialShareBar";
 
@@ -38,7 +39,7 @@ export default function Hero() {
               href="/book"
               className="btn-shine inline-flex items-center justify-center gap-2 rounded-2xl bg-white/5 border border-white/12 px-5 py-3 text-sm font-semibold hover:bg-white/10 transition shadow-glow"
             >
-              Book Appointment <ArrowUpRight className="h-4 w-4 text-gold" />
+              Special Offer <ArrowUpRight className="h-4 w-4 text-gold" />
             </Link>
             <Link
               href="/services"
@@ -48,8 +49,31 @@ export default function Hero() {
             </Link>
           </div>
 
+          <div className="mt-3 flex flex-wrap gap-2">
+            <a
+              href={SITE.academy}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/5 px-4 py-2 text-[11px] font-semibold tracking-[0.18em] uppercase text-ink/90 hover:bg-white/10 transition"
+            >
+              Academy <ArrowUpRight className="h-4 w-4 text-gold" />
+            </a>
+            <a
+              href={buildWhatsAppLink(SITE.whatsappTemplates.giftCard)}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/5 px-4 py-2 text-[11px] font-semibold tracking-[0.18em] uppercase text-ink/90 hover:bg-white/10 transition"
+            >
+              Gift Card (WhatsApp) <ArrowUpRight className="h-4 w-4 text-gold" />
+            </a>
+          </div>
+
+
           <div className="mt-6">
-            <SocialShareBar compact className="opacity-90" />
+            <SocialShareBar
+              compact
+              className="opacity-90"
+/>
           </div>
 
           <div className="mt-8 grid sm:grid-cols-3 gap-3">

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function ServicesPage() {
   return (
-    <main className="mx-auto max-w-7xl px-5 md:px-8">
+    <main className="mx-auto max-w-7xl px-5 md:px-8 pb-28 md:pb-16">
       <header className="pt-28 md:pt-32 pb-10">
         <p className="text-xs tracking-[0.28em] uppercase text-mist">Service menu</p>
         <h1 className="mt-3 text-4xl md:text-6xl font-semibold leading-[1.05]">

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Reveal from "./Reveal";
 import { SITE } from "@/lib/site";
+import { buildWhatsAppLink } from "@/lib/whatsapp";
 import { ArrowUpRight } from "lucide-react";
 
 export default function CTA() {
@@ -13,10 +14,10 @@ export default function CTA() {
             <div className="md:col-span-7">
               <p className="text-xs tracking-[0.28em] uppercase text-mist">Ready</p>
               <h2 className="mt-3 text-3xl md:text-5xl font-semibold leading-tight">
-                Book your next <span className="text-gold">reset</span>.
+                Your next <span className="text-gold">exclusive</span> moment.
               </h2>
               <p className="mt-4 text-sm md:text-base text-mist max-w-2xl">
-                Check live availability, pick your therapist, and confirm in minutes — securely via Treatwell.
+                Tap to see live availability and confirm in minutes — bookings & payments handled securely via Treatwell.
               </p>
             </div>
             <div className="md:col-span-5 flex flex-col sm:flex-row md:flex-col gap-3 md:items-end">
@@ -24,10 +25,10 @@ export default function CTA() {
                 href="/book"
                 className="btn-shine inline-flex items-center justify-center gap-2 rounded-2xl bg-white/5 border border-white/12 px-5 py-3 text-sm font-semibold hover:bg-white/10 transition shadow-glow"
               >
-                Book on Treatwell <ArrowUpRight className="h-4 w-4 text-gold" />
+                Special Offer — Special Offer <ArrowUpRight className="h-4 w-4 text-gold" />
               </Link>
               <a
-                href={SITE.whatsapp}
+                href={buildWhatsAppLink("Hi TaiTam‑D, I’d like to ask about availability / offers.")}
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center justify-center rounded-2xl bg-transparent border border-white/12 px-5 py-3 text-sm font-semibold hover:bg-white/5 transition"

@@ -4,7 +4,9 @@ import type { MetadataRoute } from "next";
 // ✅ Required for `output: "export"` (static HTML export)
 export const dynamic = "force-static";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://taitam-d.com";
+import { SITE } from "@/lib/site";
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? SITE.baseUrl;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   // Keep this deterministic for static export.
@@ -12,7 +14,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     { url: `${SITE_URL}/`, lastModified },
     { url: `${SITE_URL}/services`, lastModified },
-    { url: `${SITE_URL}/gallery`, lastModified },
+    { url: `${SITE_URL}/story`, lastModified },
     { url: `${SITE_URL}/contact`, lastModified },
   ];
 }

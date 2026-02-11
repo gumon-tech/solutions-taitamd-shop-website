@@ -52,11 +52,12 @@ export default function Footer() {
             </div>
 
             <div className="text-sm">
-              <div className="text-ink font-medium mb-2">Share on social</div>
+              <div className="text-ink font-medium mb-2">Share</div>
               <SocialShareBar compact />
-              <div className="mt-5">
-                <FollowUs />
-              </div>
+            </div>
+
+            <div className="text-sm">
+              <FollowUs />
             </div>
           </div>
         </div>

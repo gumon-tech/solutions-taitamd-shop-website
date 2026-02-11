@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function StoryPage() {
   return (
-    <main className="mx-auto max-w-7xl px-5 md:px-8">
+    <main className="mx-auto max-w-7xl px-5 md:px-8 pt-24 md:pt-28 pb-28 md:pb-16">
       <Story />
       <CTA />
       <div className="h-24" />

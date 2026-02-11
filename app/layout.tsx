@@ -4,6 +4,7 @@ import "./globals.css";
 import { SITE } from "@/lib/site";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import MobileDock from "@/components/MobileDock";
 
 const inter = Inter({ subsets: ["latin"], display: "swap" });
 
@@ -60,6 +61,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <div className="gridlines" aria-hidden />
         <Navbar />
         {children}
+        <MobileDock />
         <Footer />
       </body>
     </html>

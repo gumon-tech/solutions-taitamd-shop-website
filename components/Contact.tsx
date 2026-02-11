@@ -2,6 +2,7 @@ import Reveal from "./Reveal";
 import { SITE } from "@/lib/site";
 import CTA from "./CTA";
 import SocialShareBar from "./SocialShareBar";
+import FollowUs from "./FollowUs";
 
 export default function Contact() {
   const q = encodeURIComponent(SITE.address);
@@ -23,6 +24,10 @@ export default function Contact() {
           <div className="mt-3">
             <SocialShareBar />
           </div>
+        </div>
+
+        <div className="mt-6">
+          <FollowUs />
         </div>
 
         <p className="mt-6 text-mist max-w-2xl">
