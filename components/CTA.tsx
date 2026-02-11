@@ -6,7 +6,7 @@ import { ArrowUpRight } from "lucide-react";
 
 export default function CTA() {
   return (
-    <section className="py-10 md:py-14">
+    <section className="ui-section">
       <Reveal>
         <div className="glass rounded-[28px] p-7 md:p-10 shadow-glow overflow-hidden relative">
           <div className="absolute inset-0 opacity-50 bg-[radial-gradient(600px_280px_at_20%_0%,rgba(214,179,106,0.22),rgba(0,0,0,0)),radial-gradient(550px_260px_at_85%_20%,rgba(255,77,141,0.18),rgba(0,0,0,0))]" />
@@ -23,7 +23,7 @@ export default function CTA() {
             <div className="md:col-span-5 flex flex-col sm:flex-row md:flex-col gap-3 md:items-end">
               <Link
                 href="/book"
-                className="btn-shine inline-flex items-center justify-center gap-2 rounded-2xl bg-white/5 border border-white/12 px-5 py-3 text-sm font-semibold hover:bg-white/10 transition shadow-glow"
+                className="btn-shine inline-flex items-center justify-center gap-2 rounded-2xl bg-ink/5 border border-ink/12 px-5 py-3 text-sm font-semibold hover:bg-ink/8 transition shadow-glow"
               >
                 Special Offer — Special Offer <ArrowUpRight className="h-4 w-4 text-gold" />
               </Link>
@@ -31,7 +31,7 @@ export default function CTA() {
                 href={buildWhatsAppLink("Hi TaiTam‑D, I’d like to ask about availability / offers.")}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center justify-center rounded-2xl bg-transparent border border-white/12 px-5 py-3 text-sm font-semibold hover:bg-white/5 transition"
+                className="inline-flex items-center justify-center rounded-2xl bg-transparent border border-ink/12 px-5 py-3 text-sm font-semibold hover:bg-ink/5 transition"
               >
                 WhatsApp
               </a>

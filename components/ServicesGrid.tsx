@@ -35,7 +35,7 @@ export default function ServicesGrid() {
                 <div className="mt-6 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
                   <Link
                     href="/book"
-                    className="btn-shine inline-flex items-center justify-center gap-2 rounded-xl bg-white/5 border border-white/12 px-4 py-2.5 text-sm font-semibold hover:bg-white/10 transition"
+                    className="btn-shine inline-flex items-center justify-center gap-2 rounded-xl bg-ink/5 border border-ink/12 px-4 py-2.5 text-sm font-semibold hover:bg-ink/8 transition"
                   >
                     Book this <ArrowUpRight className="h-4 w-4 text-gold" />
                   </Link>

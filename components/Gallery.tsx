@@ -19,41 +19,37 @@ const TILES: Array<{
   {
     src: "/images/gallery/massage-1600x900.jpg",
     alt: "Massage treatment",
-    kicker: "Massage Treatment",
-    title: "Also taught in our Academy",
-    href: SITE.academy,
-    external: true,
+    kicker: "Massage",
+    title: "Deep relief — tailored to your body.",
+    href: "/services",
   },
   {
     src: "/images/gallery/brow-1200x800.jpg",
     alt: "Brow & beauty detail",
-    kicker: "Brow Design",
-    title: "Advanced Nano Cosmetic Tattoo Training",
-    href: SITE.academy,
-    external: true,
+    kicker: "Beauty",
+    title: "Clean technique. Precise finishing.",
+    href: "/services",
   },
   {
     src: "/images/gallery/lashes-1200x800.jpg",
     alt: "Eyelash service detail",
-    kicker: "Beauty Detail",
-    title: "Clean technique. Precise finishing.",
+    kicker: "Details",
+    title: "Small details — a big difference.",
     href: "/services",
   },
   {
     src: "/images/gallery/spa-1200x800.jpg",
     alt: "Spa atmosphere",
-    kicker: "Spa Atmosphere",
-    title: "Learn from the best — calm, curated care.",
-    href: SITE.academy,
-    external: true,
+    kicker: "Atmosphere",
+    title: "Quiet, warm, intentional — a calm oasis.",
+    href: "/story",
   },
   {
     src: "/images/gallery/academy-tools-1200x800.jpg",
-    alt: "Academy training tools",
-    kicker: "Academy",
-    title: "Professional training — VTCT & beyond",
-    href: SITE.academy,
-    external: true,
+    alt: "Professional tools and hygiene standards",
+    kicker: "Standards",
+    title: "Hygiene-first practice, curated tools.",
+    href: "/story",
   },
   {
     src: "/images/gallery/giftcard-1200x800.jpg",
@@ -64,6 +60,7 @@ const TILES: Array<{
     external: true,
   },
 ];
+
 
 function TileLink({
   href,
@@ -90,7 +87,7 @@ function TileLink({
 
 export default function Gallery() {
   return (
-    <section className="py-10 md:py-14 scroll-mt-nav">
+    <section className="ui-section scroll-mt-nav">
       <Reveal>
         <div className="flex items-end justify-between gap-6">
           <div>
@@ -113,7 +110,7 @@ export default function Gallery() {
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.55, delay: i * 0.06 }}
               className={[
-                "relative overflow-hidden rounded-[22px] border border-white/10 bg-white/5 group",
+                "relative overflow-hidden rounded-[22px] border border-ink/10 bg-ink/5 group",
                 i === 0
                   ? "md:col-span-7 md:row-span-2 h-[360px] md:h-[520px]"
                   : i === 1 || i === 2
@@ -140,7 +137,7 @@ export default function Gallery() {
                         {t.title}
                       </div>
                     </div>
-                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-white/12 bg-white/5 group-hover:bg-white/10 transition">
+                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-ink/12 bg-ink/5 group-hover:bg-ink/8 transition">
                       <ArrowUpRight className="h-5 w-5 text-gold" />
                     </span>
                   </div>

@@ -27,7 +27,7 @@ export default function MobileDock() {
   return (
     <div className="md:hidden fixed inset-x-0 bottom-3 z-40">
       <div className="mx-auto max-w-7xl px-5">
-        <div className="glass rounded-2xl border border-white/12 shadow-glow">
+        <div className="glass rounded-2xl border border-ink/12 shadow-glow">
           <div className="grid grid-cols-4">
             {items.map((it) => {
               const active = !it.external && pathname === it.href;

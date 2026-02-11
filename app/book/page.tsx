@@ -21,7 +21,7 @@ export default function BookPage() {
 
         <a
           href={SITE.treatwell}
-          className="mt-6 btn-shine inline-flex items-center justify-center gap-2 rounded-2xl bg-white/5 border border-white/12 px-5 py-3 text-sm font-semibold hover:bg-white/10 transition"
+          className="mt-6 btn-shine inline-flex items-center justify-center gap-2 rounded-2xl bg-ink/5 border border-ink/12 px-5 py-3 text-sm font-semibold hover:bg-ink/8 transition"
         >
           Open Treatwell
         </a>

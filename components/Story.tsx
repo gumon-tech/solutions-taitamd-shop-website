@@ -34,7 +34,7 @@ export default function Story() {
                   ["Detail obsession", "Finishing, hygiene, and comfort — no shortcuts."],
                   ["Zero friction booking", "Live availability + payment via Treatwell."]
                 ].map(([t, d]) => (
-                  <div key={t} className="rounded-2xl bg-white/5 border border-white/10 p-5">
+                  <div key={t} className="rounded-2xl bg-ink/5 border border-ink/10 p-5">
                     <div className="font-semibold text-ink/95">{t}</div>
                     <div className="mt-1.5 text-sm text-mist">{d}</div>
                   </div>
@@ -55,12 +55,12 @@ export default function Story() {
               href={SITE.academy}
               target="_blank"
               rel="noreferrer"
-              className="mt-6 inline-flex items-center justify-center rounded-2xl bg-white/5 border border-white/12 px-5 py-3 text-sm font-semibold hover:bg-white/10 transition w-full"
+              className="mt-6 inline-flex items-center justify-center rounded-2xl bg-ink/5 border border-ink/12 px-5 py-3 text-sm font-semibold hover:bg-ink/8 transition w-full"
             >
               Visit Beauty Academy
             </a>
 
-            <div className="mt-8 rounded-2xl bg-white/5 border border-white/10 p-5">
+            <div className="mt-8 rounded-2xl bg-ink/5 border border-ink/10 p-5">
               <div className="text-xs tracking-[0.22em] uppercase text-mist">Address</div>
               <div className="mt-2 text-sm text-ink/90">{SITE.address}</div>
             </div>

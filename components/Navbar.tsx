@@ -70,7 +70,7 @@ export default function Navbar() {
                 <Link
                   key={i.href}
                   href={i.href}
-                  className="px-3 py-2 rounded-xl text-sm text-mist hover:text-ink hover:bg-white/5 transition"
+                  className="px-3 py-2 rounded-xl text-sm text-mist hover:text-ink hover:bg-ink/5 transition"
                 >
                   {i.label}
                 </Link>
@@ -79,7 +79,7 @@ export default function Navbar() {
                 href={SITE.academy}
                 target="_blank"
                 rel="noreferrer"
-                className="px-3 py-2 rounded-xl text-sm text-mist hover:text-ink hover:bg-white/5 transition inline-flex items-center gap-2"
+                className="px-3 py-2 rounded-xl text-sm text-mist hover:text-ink hover:bg-ink/5 transition inline-flex items-center gap-2"
               >
                 Academy <GraduationCap className="h-4 w-4 text-gold" />
               </a>
@@ -89,7 +89,7 @@ export default function Navbar() {
               {/* Desktop / larger phones */}
               <Link
                 href="/book"
-                className="hidden sm:inline-flex btn-shine items-center gap-2 rounded-xl bg-white/5 border border-white/12 px-3.5 py-2 text-sm font-medium hover:bg-white/10 transition whitespace-nowrap"
+                className="hidden sm:inline-flex btn-shine items-center gap-2 rounded-xl bg-ink/5 border border-ink/12 px-3.5 py-2 text-sm font-medium hover:bg-ink/8 transition whitespace-nowrap"
               >
                 Special Offer <ArrowUpRight className="h-4 w-4 text-gold" />
               </Link>
@@ -97,7 +97,7 @@ export default function Navbar() {
               {/* ✅ Small mobile: icon-only CTA so the hamburger never gets pushed off */}
               <Link
                 href="/book"
-                className="sm:hidden inline-flex h-10 w-10 items-center justify-center rounded-xl border border-white/12 bg-white/5 hover:bg-white/10 transition"
+                className="sm:hidden inline-flex h-10 w-10 items-center justify-center rounded-xl border border-ink/12 bg-ink/5 hover:bg-ink/8 transition"
                 aria-label="Special Offer"
               >
                 <ArrowUpRight className="h-5 w-5 text-gold" />
@@ -106,7 +106,7 @@ export default function Navbar() {
               {/* Mobile menu button */}
               <button
                 onClick={() => setOpen(true)}
-                className="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-xl border border-white/12 bg-white/5 hover:bg-white/10 transition"
+                className="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-xl border border-ink/12 bg-ink/5 hover:bg-ink/8 transition"
                 aria-label="Open menu"
               >
                 <Menu className="h-5 w-5 text-gold" />
@@ -118,7 +118,7 @@ export default function Navbar() {
           <div className="mt-3 md:hidden grid grid-cols-2 gap-2">
             <Link
               href="/services"
-              className="inline-flex items-center justify-center rounded-xl border border-white/12 bg-white/5 hover:bg-white/10 transition px-3 py-2 text-[11px] font-semibold tracking-[0.18em] uppercase text-ink/90"
+              className="inline-flex items-center justify-center rounded-xl border border-ink/12 bg-ink/5 hover:bg-ink/8 transition px-3 py-2 text-[11px] font-semibold tracking-[0.18em] uppercase text-ink/90"
             >
               Services
             </Link>
@@ -126,7 +126,7 @@ export default function Navbar() {
               href={SITE.academy}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center justify-center rounded-xl border border-white/12 bg-white/5 hover:bg-white/10 transition px-3 py-2 text-[11px] font-semibold tracking-[0.18em] uppercase text-ink/90"
+              className="inline-flex items-center justify-center rounded-xl border border-ink/12 bg-ink/5 hover:bg-ink/8 transition px-3 py-2 text-[11px] font-semibold tracking-[0.18em] uppercase text-ink/90"
             >
               Academy
             </a>
@@ -148,7 +148,7 @@ export default function Navbar() {
         {open && (
           <>
             <motion.div
-              className="fixed inset-0 z-[60] bg-black/60"
+              className="fixed inset-0 z-[60] bg-ink/40"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -161,12 +161,12 @@ export default function Navbar() {
               exit={{ y: -18, opacity: 0 }}
               transition={{ duration: 0.22 }}
             >
-              <div className="glass rounded-2xl border border-white/12 shadow-glow overflow-hidden">
-                <div className="flex items-center justify-between px-4 py-3 border-b border-white/10">
+              <div className="glass rounded-2xl border border-ink/12 shadow-glow overflow-hidden">
+                <div className="flex items-center justify-between px-4 py-3 border-b border-ink/10">
                   <div className="text-sm font-semibold">Menu</div>
                   <button
                     onClick={() => setOpen(false)}
-                    className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-white/12 bg-white/5 hover:bg-white/10 transition"
+                    className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-ink/12 bg-ink/5 hover:bg-ink/8 transition"
                     aria-label="Close menu"
                   >
                     <X className="h-5 w-5 text-gold" />
@@ -179,7 +179,7 @@ export default function Navbar() {
                       key={i.href}
                       href={i.href}
                       onClick={() => setOpen(false)}
-                      className="inline-flex items-center justify-between rounded-2xl border border-white/12 bg-white/5 hover:bg-white/10 transition px-4 py-3"
+                      className="inline-flex items-center justify-between rounded-2xl border border-ink/12 bg-ink/5 hover:bg-ink/8 transition px-4 py-3"
                     >
                       <span className="text-sm font-semibold">{i.label}</span>
                       <ArrowUpRight className="h-4 w-4 text-gold" />
@@ -190,7 +190,7 @@ export default function Navbar() {
                     href={SITE.academy}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center justify-between rounded-2xl border border-white/12 bg-white/5 hover:bg-white/10 transition px-4 py-3"
+                    className="inline-flex items-center justify-between rounded-2xl border border-ink/12 bg-ink/5 hover:bg-ink/8 transition px-4 py-3"
                   >
                     <span className="text-sm font-semibold">Academy</span>
                     <GraduationCap className="h-4 w-4 text-gold" />
@@ -200,7 +200,7 @@ export default function Navbar() {
                     href={buildWhatsAppLink(SITE.whatsappTemplates.giftCard)}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center justify-between rounded-2xl border border-white/12 bg-white/5 hover:bg-white/10 transition px-4 py-3"
+                    className="inline-flex items-center justify-between rounded-2xl border border-ink/12 bg-ink/5 hover:bg-ink/8 transition px-4 py-3"
                   >
                     <span className="text-sm font-semibold">Gift Card (WhatsApp)</span>
                     <Gift className="h-4 w-4 text-gold" />
@@ -210,7 +210,7 @@ export default function Navbar() {
                     href={buildWhatsAppLink("Hi TaiTam‑D, I have a quick question.")}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center justify-between rounded-2xl border border-white/12 bg-white/5 hover:bg-white/10 transition px-4 py-3"
+                    className="inline-flex items-center justify-between rounded-2xl border border-ink/12 bg-ink/5 hover:bg-ink/8 transition px-4 py-3"
                   >
                     <span className="text-sm font-semibold">Chat on WhatsApp</span>
                     <PhoneCall className="h-4 w-4 text-gold" />

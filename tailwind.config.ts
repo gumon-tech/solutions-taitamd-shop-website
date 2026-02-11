@@ -5,20 +5,20 @@ export default {
   theme: {
     extend: {
       colors: {
-        bg0: "#0B0E0A",
-        bg1: "#10160F",
-        ink: "#F5F3FF",
-        mist: "rgba(245,243,255,0.75)",
+        bg0: "#F6F1E6",
+        bg1: "#EFE7D6",
+        ink: "#1A1A16",
+        mist: "rgba(26,26,22,0.66)",
         gold: "#D7B56D",
         gold2: "#F1D594",
         rose: "#7B8B4C" // olive accent // sage accent
       },
       boxShadow: {
-        glow: "0 0 0 1px rgba(214,179,106,0.18), 0 25px 70px rgba(0,0,0,0.45)"
+        glow: "0 0 0 1px rgba(214,179,106,0.16), 0 18px 55px rgba(40,35,25,0.18)"
       },
       backgroundImage: {
         luxe:
-          "radial-gradient(900px 600px at 18% 12%, rgba(214,179,106,0.18), rgba(0,0,0,0)), radial-gradient(800px 550px at 82% 18%, rgba(127,163,138,0.14), rgba(0,0,0,0)), radial-gradient(700px 500px at 50% 90%, rgba(215,181,109,0.08), rgba(0,0,0,0)), linear-gradient(180deg, #0B0E0A 0%, #10160F 55%, #0B0E0A 100%)"
+          "radial-gradient(1000px 700px at 18% 10%, rgba(127,163,138,0.22), rgba(0,0,0,0)), radial-gradient(900px 650px at 82% 18%, rgba(214,179,106,0.18), rgba(0,0,0,0)), radial-gradient(700px 520px at 50% 92%, rgba(215,181,109,0.12), rgba(0,0,0,0)), linear-gradient(180deg, #F6F1E6 0%, #EFE7D6 55%, #F6F1E6 100%)"
       },
       keyframes: {
         shimmer: {

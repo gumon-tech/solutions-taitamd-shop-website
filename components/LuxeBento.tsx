@@ -54,8 +54,8 @@ export default function LuxeBento() {
       <div className="mt-7 grid md:grid-cols-2 lg:grid-cols-3 gap-4">
         {items.map((i, idx) => (
           <Reveal key={i.title} delay={idx * 0.04}>
-            <div className="glass rounded-2xl p-5 hover:bg-white/8 transition shadow-[0_0_0_1px_rgba(255,255,255,0.06)]">
-              <div className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-white/5 border border-white/10">
+            <div className="glass rounded-2xl p-5 hover:bg-ink/4 transition shadow-[0_0_0_1px_rgba(255,255,255,0.06)]">
+              <div className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-ink/5 border border-ink/10">
                 <i.icon className="h-5 w-5 text-gold" />
               </div>
               <h3 className="mt-4 text-lg font-semibold">{i.title}</h3>

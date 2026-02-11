@@ -17,7 +17,7 @@ export default function FollowUs() {
         {items.map((i) => (
           <a
             key={i.label}
-            className="inline-flex items-center rounded-xl border border-white/12 bg-white/5 hover:bg-white/10 transition px-3 py-2 text-xs font-semibold"
+            className="inline-flex items-center rounded-xl border border-ink/12 bg-ink/5 hover:bg-ink/8 transition px-3 py-2 text-xs font-semibold"
             href={i.href}
             target="_blank"
             rel="noreferrer"

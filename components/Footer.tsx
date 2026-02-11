@@ -5,7 +5,7 @@ import SocialShareBar from "@/components/SocialShareBar";
 
 export default function Footer() {
   return (
-    <footer className="mt-16 border-t border-white/10">
+    <footer className="mt-12 border-t border-ink/10">
       <div className="mx-auto max-w-7xl px-5 md:px-8 py-12">
         <div className="grid gap-10 md:grid-cols-12">
           <div className="md:col-span-5">
