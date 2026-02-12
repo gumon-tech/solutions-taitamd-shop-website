@@ -2,9 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ===== TaiTam‑D Global Theme (Light, Calm Luxury) ===== */
+/* ===== Global Theme — Forest Olive Cinematic (Dark) ===== */
 :root{
-  color-scheme: light;
+  color-scheme: dark;
 }
 
 html, body { height: 100%; }
@@ -14,15 +14,15 @@ body{
   color: theme(colors.ink);
 }
 
-/* ===== Background (no dark luxury) ===== */
+/* ===== Background (Forest Olive Cinematic) ===== */
 .bg-wrap::before{
   content:"";
   position: fixed;
   inset: 0;
   z-index: -3;
   background:
-    radial-gradient(1200px 760px at 18% 0%, rgba(127,163,138,0.18), rgba(0,0,0,0) 60%),
-    radial-gradient(980px 720px at 84% 18%, rgba(214,179,106,0.16), rgba(0,0,0,0) 62%),
+    radial-gradient(1200px 760px at 20% -10%, rgba(107,127,90,0.18), rgba(0,0,0,0) 60%),
+    radial-gradient(1000px 700px at 82% 20%, rgba(63,93,59,0.16), rgba(0,0,0,0) 65%),
     theme(backgroundImage.luxe);
 }
 
@@ -33,9 +33,9 @@ body{
   z-index: -2;
   opacity: 0.55;
   background:
-    radial-gradient(closest-side, rgba(214,179,106,0.16), rgba(0,0,0,0) 62%),
-    radial-gradient(closest-side, rgba(127,163,138,0.10), rgba(0,0,0,0) 64%),
-    radial-gradient(closest-side, rgba(215,181,109,0.08), rgba(0,0,0,0) 66%);
+    radial-gradient(closest-side, rgba(159,179,107,0.14), rgba(0,0,0,0) 62%),
+    radial-gradient(closest-side, rgba(63,93,59,0.12), rgba(0,0,0,0) 64%),
+    radial-gradient(closest-side, rgba(31,58,42,0.10), rgba(0,0,0,0) 66%);
   filter: blur(34px);
   animation: sweep 60s linear infinite;
 }
@@ -47,18 +47,18 @@ body{
   inset: 0;
   z-index: -1;
   background-image:
-    linear-gradient(to right, rgba(26,26,22,0.06) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(26,26,22,0.06) 1px, transparent 1px);
+    linear-gradient(to right, rgba(230,235,223,0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(230,235,223,0.04) 1px, transparent 1px);
   background-size: 72px 72px;
   mask-image: radial-gradient(ellipse at 50% 18%, black 0%, transparent 72%);
   pointer-events:none;
 }
 
-/* ===== Glass / Surfaces (light) ===== */
+/* ===== Glass / Surfaces (cinematic) ===== */
 .glass{
-  background: rgba(246,241,230,0.60);
-  border: 1px solid rgba(26,26,22,0.10);
-  backdrop-filter: blur(14px);
+  background: rgba(20,26,22,0.65);
+  border: 1px solid rgba(160,180,150,0.12);
+  backdrop-filter: blur(18px) saturate(110%);
 }
 
 /* ===== Button shimmer (subtle) ===== */
@@ -71,8 +71,8 @@ body{
   width:40%;
   height:180%;
   transform: skewX(-18deg);
-  background: linear-gradient(90deg, transparent, rgba(242,213,139,0.35), transparent);
-  opacity: 0.35;
+  background: linear-gradient(90deg, transparent, rgba(199,211,160,0.26), transparent);
+  opacity: 0.28;
   animation: shimmer 2.8s linear infinite;
 }
 @keyframes shimmer{
@@ -81,7 +81,7 @@ body{
 }
 
 /* subtle selection */
-::selection{ background: rgba(214,179,106,0.22); }
+::selection{ background: rgba(159,179,107,0.22); }
 
 /* smooth scrolling */
 html{ scroll-behavior: smooth; }
