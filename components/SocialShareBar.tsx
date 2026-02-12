@@ -20,7 +20,6 @@ function enc(s: string) {
 function safeBaseUrl() {
   // prefer explicit baseUrl, then site url, then window origin
   if (SITE.baseUrl) return SITE.baseUrl;
-  if (SITE.url) return SITE.url;
   if (typeof window !== "undefined") return window.location.origin;
   return "https://example.com";
 }

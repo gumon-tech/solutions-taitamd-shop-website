@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Reveal from "./Reveal";
-import { SITE } from "@/lib/site";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
 import { ArrowUpRight } from "lucide-react";
 

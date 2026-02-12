@@ -6,11 +6,12 @@ import { SITE } from "@/lib/site";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
 import { cn } from "@/lib/utils";
 import { Home, Sparkles, GraduationCap, CalendarDays } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
 type Item = {
   href: string;
   label: string;
-  icon: any;
+  icon: LucideIcon;
   external?: boolean;
 };
 

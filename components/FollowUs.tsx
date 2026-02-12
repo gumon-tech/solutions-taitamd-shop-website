@@ -1,21 +1,20 @@
 import { SITE } from "@/lib/site";
 import { Instagram, Facebook } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+
+type FollowItem = {
+  label: string;
+  href: string;
+  icon: LucideIcon;
+};
 
 export default function FollowUs() {
   const s = SITE.social;
 
-  const items = [
-    s.instagram
-      ? { label: "Instagram", href: s.instagram, icon: Instagram }
-      : null,
-    s.facebook
-      ? { label: "Facebook", href: s.facebook, icon: Facebook }
-      : null,
-  ].filter(Boolean) as Array<{
-    label: string;
-    href: string;
-    icon: any;
-  }>;
+  const items: FollowItem[] = [
+    s.instagram ? { label: "Instagram", href: s.instagram, icon: Instagram } : null,
+    s.facebook ? { label: "Facebook", href: s.facebook, icon: Facebook } : null,
+  ].filter((v): v is FollowItem => Boolean(v));
 
   if (!items.length) return null;
 
