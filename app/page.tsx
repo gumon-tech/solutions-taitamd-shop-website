@@ -9,7 +9,7 @@ import AcademyPromo from "@/components/AcademyPromo";
 
 export default function Home() {
   return (
-    <main className="mx-auto max-w-7xl px-5 md:px-8 pt-24 md:pt-28 pb-14 md:pb-12">
+    <main className="mx-auto max-w-7xl px-5 md:px-8 pb-14 md:pb-12">
       <Hero />
       <LuxeBento />
       <ServicesPreview />

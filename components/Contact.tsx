@@ -9,7 +9,7 @@ export default function Contact() {
   const mapSrc = `https://www.google.com/maps?q=${q}&output=embed`;
 
   return (
-    <section className="pt-28 md:pt-32">
+    <section className="pt-8 md:pt-10">
       <Reveal>
         <p className="text-xs tracking-[0.28em] uppercase text-mist">Contact</p>
         <h1 className="mt-3 text-4xl md:text-6xl font-semibold leading-[1.05]">

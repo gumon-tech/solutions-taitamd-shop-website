@@ -3,7 +3,7 @@ import { SITE } from "@/lib/site";
 
 export default function Story() {
   return (
-    <section className="pt-28 md:pt-32 pb-10">
+    <section className="pt-8 md:pt-10 pb-10">
       <Reveal>
         <p className="text-xs tracking-[0.28em] uppercase text-mist">Our story</p>
         <h1 className="mt-3 text-4xl md:text-6xl font-semibold leading-[1.05]">

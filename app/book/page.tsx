@@ -9,7 +9,8 @@ export default function BookPage() {
   }, []);
 
   return (
-    <main className="mx-auto max-w-7xl px-5 md:px-8 pt-28 md:pt-32 pb-28 md:pb-16">
+    <main className="mx-auto max-w-7xl px-5 md:px-8 pb-14 md:pb-12">
+      <div className="p-7 md:p-10" />
       <div className="glass rounded-[28px] p-7 md:p-10 shadow-glow">
         <p className="text-xs tracking-[0.28em] uppercase text-mist">Booking</p>
         <h1 className="mt-3 text-3xl md:text-5xl font-semibold leading-tight">

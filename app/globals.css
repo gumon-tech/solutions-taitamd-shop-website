@@ -5,6 +5,15 @@
 /* ===== Global Theme — Forest Olive Cinematic (Dark) ===== */
 :root {
   color-scheme: dark;
+
+  /* Navbar offset (fix overlap on mobile) */
+  --nav-height: 120px;
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --nav-height: 80px;
+  }
 }
 
 html,
@@ -12,12 +21,18 @@ body {
   height: 100%;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background: #0b0f0c;
   background: theme(colors.bg0);
   color: theme(colors.ink);
   min-height: 100dvh;
   overflow-x: hidden;
+
+  /* IMPORTANT: prevents fixed/sticky navbar from covering hero title */
+  padding-top: var(--nav-height);
 }
 
 /* ===== Background (Forest Olive Cinematic) ===== */
@@ -77,7 +92,6 @@ body {
   -webkit-backdrop-filter: blur(18px) saturate(110%);
 }
 
-
 /* ===== Button shimmer (subtle) ===== */
 .btn-shine {
   position: relative;
@@ -112,11 +126,6 @@ body {
   background: rgba(159, 179, 107, 0.22);
 }
 
-/* smooth scrolling */
-html {
-  scroll-behavior: smooth;
-}
-
 /* ===== Capture mode (GoFullScreen / screenshots) ===== */
 html[data-capture="true"] .bg-wrap::before,
 html[data-capture="true"] .bg-wrap::after,
@@ -143,14 +152,14 @@ html[data-capture="true"] .bg-wrap::after {
   }
 }
 
-
+/* ===== UI Components Layer ===== */
 @layer components {
   .ui-section {
     @apply py-12 md:py-16;
   }
 
   .ui-section-hero {
-    @apply pt-20 md:pt-24 pb-16 md:pb-20 relative;
+    @apply pt-8 md:pt-10 pb-16 md:pb-20 relative;
   }
 
 
@@ -181,4 +190,45 @@ html[data-capture="true"] .bg-wrap::after {
     overflow: hidden;
   }
 
+  .ui-h1 span {
+    color: var(--olive-strong);
+    text-shadow: 0 0 24px rgba(150, 170, 120, 0.25);
+  }
+
+  .ui-serviceCard {
+    border: 1px solid rgba(180, 200, 150, 0.12);
+    background: linear-gradient(145deg, rgba(34, 48, 34, 0.75), rgba(20, 30, 22, 0.65));
+    transition: transform 200ms ease, box-shadow 200ms ease;
+  }
+
+  .ui-serviceCard:hover {
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+    transform: translateY(-4px);
+  }
+
+  .ui-cta {
+    background:
+      radial-gradient(600px 300px at 30% 40%, rgba(160, 180, 120, 0.15), transparent 70%),
+      linear-gradient(135deg, #121a14, #1d2a1e);
+  }
+
+  .ui-btn {
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+
+  .ui-serviceCard__footer {
+    margin-top: 1rem;
+  }
+
+  @media (max-width: 768px) {
+    .ui-h1 {
+      line-height: 1.08;
+      margin-bottom: 1.2rem;
+    }
+
+    .ui-serviceCard {
+      padding: 1.4rem;
+    }
+  }
 }
