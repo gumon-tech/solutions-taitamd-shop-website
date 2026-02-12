@@ -2,6 +2,7 @@ import Reveal from "./Reveal";
 import { SITE } from "@/lib/site";
 import CTA from "./CTA";
 import SocialShareBar from "./SocialShareBar";
+import FollowUs from "./FollowUs";
 
 export default function Contact() {
   const q = encodeURIComponent(SITE.address);
@@ -25,6 +26,10 @@ export default function Contact() {
           </div>
         </div>
 
+        <div className="mt-6">
+          <FollowUs />
+        </div>
+
         <p className="mt-6 text-mist max-w-2xl">
         </p>
       </Reveal>
@@ -33,22 +38,22 @@ export default function Contact() {
         <Reveal className="lg:col-span-5">
           <div className="glass rounded-[28px] p-7 md:p-9">
             <div className="space-y-4 text-sm">
-              <div className="rounded-2xl bg-white/5 border border-white/10 p-5">
+              <div className="rounded-2xl bg-ink/5 border border-ink/10 p-5">
                 <div className="text-xs tracking-[0.22em] uppercase text-mist">Phone</div>
                 <div className="mt-2 text-lg font-semibold">{SITE.phone}</div>
               </div>
 
-              <div className="rounded-2xl bg-white/5 border border-white/10 p-5">
+              <div className="rounded-2xl bg-ink/5 border border-ink/10 p-5">
                 <div className="text-xs tracking-[0.22em] uppercase text-mist">Email</div>
                 <div className="mt-2 text-ink/90">{SITE.email}</div>
               </div>
 
-              <div className="rounded-2xl bg-white/5 border border-white/10 p-5">
+              <div className="rounded-2xl bg-ink/5 border border-ink/10 p-5">
                 <div className="text-xs tracking-[0.22em] uppercase text-mist">Hours</div>
                 <div className="mt-2 text-ink/90">{SITE.hours}</div>
               </div>
 
-              <div className="rounded-2xl bg-white/5 border border-white/10 p-5">
+              <div className="rounded-2xl bg-ink/5 border border-ink/10 p-5">
                 <div className="text-xs tracking-[0.22em] uppercase text-mist">Address</div>
                 <div className="mt-2 text-ink/90">{SITE.address}</div>
               </div>
@@ -57,7 +62,7 @@ export default function Contact() {
         </Reveal>
 
         <Reveal className="lg:col-span-7" delay={0.05}>
-          <div className="glass rounded-[28px] overflow-hidden border border-white/10">
+          <div className="glass rounded-[28px] overflow-hidden border border-ink/10">
             <iframe
               title="Map"
               src={mapSrc}

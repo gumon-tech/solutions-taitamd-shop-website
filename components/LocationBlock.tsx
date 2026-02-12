@@ -6,7 +6,7 @@ export default function LocationBlock() {
   const mapSrc = `https://www.google.com/maps?q=${q}&output=embed`;
 
   return (
-    <section className="py-10 md:py-14">
+    <section className="ui-section">
       <Reveal>
         <div className="grid lg:grid-cols-12 gap-6 items-stretch">
           <div className="lg:col-span-5 glass rounded-[28px] p-7 md:p-9">
@@ -21,18 +21,18 @@ export default function LocationBlock() {
             </p>
 
             <div className="mt-6 grid gap-3 text-sm text-mist">
-              <div className="rounded-2xl bg-white/5 border border-white/10 p-4">
+              <div className="rounded-2xl bg-ink/5 border border-ink/10 p-4">
                 <div className="text-xs tracking-[0.22em] uppercase">Phone</div>
                 <div className="mt-1 text-ink/90">{SITE.phone}</div>
               </div>
-              <div className="rounded-2xl bg-white/5 border border-white/10 p-4">
+              <div className="rounded-2xl bg-ink/5 border border-ink/10 p-4">
                 <div className="text-xs tracking-[0.22em] uppercase">Email</div>
                 <div className="mt-1 text-ink/90">{SITE.email}</div>
               </div>
             </div>
           </div>
 
-          <div className="lg:col-span-7 glass rounded-[28px] overflow-hidden border border-white/10">
+          <div className="lg:col-span-7 glass rounded-[28px] overflow-hidden border border-ink/10">
             <iframe
               title="Map"
               src={mapSrc}

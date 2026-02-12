@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { SITE } from "@/lib/site";
 import { cn } from "@/lib/utils";
-import { Facebook, Link2, Send, Twitter } from "lucide-react";
+import { Facebook, Link2, Send, Share2, Twitter } from "lucide-react";
 
 type Props = {
   className?: string;
@@ -22,7 +22,7 @@ export default function SocialShareBar({
   title = SITE.name,
   text = SITE.description,
   url,
-  compact = false
+  compact = false,
 }: Props) {
   const [currentUrl, setCurrentUrl] = useState(url || "");
   const [copied, setCopied] = useState(false);
@@ -37,9 +37,9 @@ export default function SocialShareBar({
     const msg = enc(text);
 
     return {
-      facebook: `https://www.facebook.com/sharer/sharer.php?u=${u}`,
+      facebookShare: `https://www.facebook.com/sharer/sharer.php?u=${u}`,
       x: `https://twitter.com/intent/tweet?url=${u}&text=${t}%20—%20${msg}`,
-      whatsapp: `https://wa.me/?text=${t}%20—%20${msg}%20${u}`
+      whatsappShare: `https://wa.me/?text=${t}%20—%20${msg}%20${u}`,
     };
   }, [currentUrl, title, text]);
 
@@ -49,49 +49,57 @@ export default function SocialShareBar({
       const nav: any = navigator;
       if (nav?.share) {
         await nav.share({ title, text, url: currentUrl });
-      } else {
-        window.open(links.facebook, "_blank", "noopener,noreferrer");
+        return;
       }
-    } catch {}
+    } catch {
+      // ignore
+    }
+    // fallback
+    window.open(links.facebookShare, "_blank", "noopener,noreferrer");
   }
 
   async function onCopy() {
     try {
       await navigator.clipboard.writeText(currentUrl);
       setCopied(true);
-      setTimeout(() => setCopied(false), 1000);
-    } catch {}
+      setTimeout(() => setCopied(false), 900);
+    } catch {
+      // ignore
+    }
   }
 
-  const btn =
-    "inline-flex items-center gap-2 rounded-xl border border-white/12 bg-white/5 hover:bg-white/10 transition px-3 py-2 text-xs font-semibold";
+  const btnBase =
+    "inline-flex items-center justify-center rounded-xl border border-ink/12 bg-ink/5 hover:bg-ink/8 transition font-semibold";
+  const btn = compact
+    ? cn(btnBase, "h-10 w-10")
+    : cn(btnBase, "gap-2 px-3 py-2 text-xs");
 
   return (
     <div className={cn("flex flex-wrap items-center gap-2", className)}>
-      <button onClick={onShareNative} className={btn} title="Share">
-        <Send className="h-4 w-4 text-gold" />
-        {!compact && "Share"}
+      <button type="button" className={btn} onClick={onShareNative} title="Share">
+        <Share2 className="h-4 w-4 text-gold" />
+        {!compact && <span>Share</span>}
       </button>
 
-      <a className={btn} href={links.facebook} target="_blank" rel="noreferrer" title="Share on Facebook">
-        <Facebook className="h-4 w-4 text-gold" />
-        {!compact && "Facebook"}
+      <button type="button" className={btn} onClick={onCopy} title="Copy link">
+        <Link2 className="h-4 w-4 text-gold" />
+        {!compact && <span>{copied ? "Copied" : "Copy"}</span>}
+      </button>
+
+      <a className={btn} href={links.whatsappShare} target="_blank" rel="noreferrer" title="Share on WhatsApp">
+        <Send className="h-4 w-4 text-gold" />
+        {!compact && <span>WhatsApp</span>}
       </a>
 
       <a className={btn} href={links.x} target="_blank" rel="noreferrer" title="Share on X">
         <Twitter className="h-4 w-4 text-gold" />
-        {!compact && "X"}
+        {!compact && <span>X</span>}
       </a>
 
-      <a className={btn} href={links.whatsapp} target="_blank" rel="noreferrer" title="Share on WhatsApp">
-        <span className="inline-flex h-4 w-4 items-center justify-center text-gold">✦</span>
-        {!compact && "WhatsApp"}
+      <a className={btn} href={links.facebookShare} target="_blank" rel="noreferrer" title="Share on Facebook">
+        <Facebook className="h-4 w-4 text-gold" />
+        {!compact && <span>Facebook</span>}
       </a>
-
-      <button onClick={onCopy} className={btn} title="Copy link">
-        <Link2 className="h-4 w-4 text-gold" />
-        {copied ? "Copied" : !compact ? "Copy" : ""}
-      </button>
     </div>
   );
 }

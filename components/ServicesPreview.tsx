@@ -1,12 +1,11 @@
 import Link from "next/link";
-import Image from "next/image";
 import { SERVICE_CATEGORIES } from "@/lib/site";
 import Reveal from "./Reveal";
 import { ArrowRight } from "lucide-react";
 
 export default function ServicesPreview() {
   return (
-    <section className="py-10 md:py-14">
+    <section className="ui-section">
       <Reveal>
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
           <div>
@@ -27,9 +26,7 @@ export default function ServicesPreview() {
       <div className="mt-7 grid lg:grid-cols-2 gap-4">
         {SERVICE_CATEGORIES.slice(0, 6).map((c, idx) => (
           <Reveal key={c.slug} delay={idx * 0.05}>
-            <div className="glass rounded-2xl p-6 overflow-hidden relative">
-              <Image src={idx % 3 === 0 ? "/images/gallery/massage-1600x900.jpg" : idx % 3 === 1 ? "/images/gallery/brow-1200x800.jpg" : "/images/gallery/lashes-1200x800.jpg"} alt="Spa ambiance" fill className="object-cover opacity-[0.14]" />
-              <div className="absolute -top-16 -right-16 h-56 w-56 rounded-full bg-gold/10 blur-2xl" />
+            <div className="glass rounded-2xl p-6 overflow-hidden relative">              <div className="absolute -top-16 -right-16 h-56 w-56 rounded-full bg-gold/10 blur-2xl" />
               <div className="absolute -bottom-20 -left-20 h-60 w-60 rounded-full bg-rose/10 blur-2xl" />
               <div className="relative">
                 <div className="text-xs tracking-[0.28em] uppercase text-mist">{c.title}</div>

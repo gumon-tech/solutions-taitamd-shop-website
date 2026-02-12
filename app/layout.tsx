@@ -45,12 +45,11 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon.ico",
-    apple: "/apple-icon.png",
   },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#07060A"
+  themeColor: "#F6F1E6"
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

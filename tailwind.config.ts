@@ -5,20 +5,23 @@ export default {
   theme: {
     extend: {
       colors: {
-        bg0: "#060807",
-        bg1: "#0B100D",
-        ink: "#F5F3FF",
-        mist: "rgba(245,243,255,0.75)",
-        gold: "#D7B56D",
-        gold2: "#F1D594",
-        rose: "#7FA38A" // sage accent
+        // Forest Olive Cinematic (Dark)
+        bg0: "#0B0F0B", // forest black
+        bg1: "#111614", // deep olive shadow
+        ink: "#E6EBDF", // off-white moss
+        mist: "rgba(230,235,223,0.66)",
+
+        // Accents (keep legacy keys used across components)
+        gold: "#9FB36B",  // cinematic olive highlight
+        gold2: "#C7D3A0", // pale highlight
+        rose: "#3F5D3B"   // moss accent
       },
       boxShadow: {
-        glow: "0 0 0 1px rgba(214,179,106,0.18), 0 25px 70px rgba(0,0,0,0.55)"
+        glow: "0 0 0 1px rgba(159,179,107,0.14), 0 18px 55px rgba(0,0,0,0.55)"
       },
       backgroundImage: {
         luxe:
-          "radial-gradient(900px 600px at 18% 12%, rgba(214,179,106,0.18), rgba(0,0,0,0)), radial-gradient(800px 550px at 82% 18%, rgba(127,163,138,0.14), rgba(0,0,0,0)), radial-gradient(700px 500px at 50% 90%, rgba(215,181,109,0.08), rgba(0,0,0,0)), linear-gradient(180deg, #07060A 0%, #0B0A12 70%, #07060A 100%)"
+          "radial-gradient(1100px 760px at 18% 6%, rgba(107,127,90,0.22), rgba(0,0,0,0) 62%), radial-gradient(980px 720px at 84% 18%, rgba(63,93,59,0.18), rgba(0,0,0,0) 66%), radial-gradient(720px 520px at 50% 92%, rgba(159,179,107,0.10), rgba(0,0,0,0) 70%), linear-gradient(180deg, #0B0F0B 0%, #111614 55%, #0B0F0B 100%)"
       },
       keyframes: {
         shimmer: {

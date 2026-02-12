@@ -1,5 +1,3 @@
-import { base } from "framer-motion/client";
-
 export const SITE = {
   baseUrl: "https://taitam-d.gumon.dev",
   name: "TaiTam‑D Beauty & Spa",
@@ -9,15 +7,34 @@ export const SITE = {
   address: "72-74 Caledonian Road, King's Cross, London, N1 9DN",
   hours: "Mon – Sun 10:30 AM – 9:00 PM",
   phone: "020 7278 0906",
-  whatsapp: "https://wa.me/447882359499",
   email: "info@taitam-d.com",
+
+  // Booking
   treatwell: "https://www.treatwell.co.uk/place/taitam-d-massage-beauty/",
+
+  // Direct chat / enquiries
+  whatsappNumber: "447882359499", // E.164 without "+"
+  whatsappDisplay: "+44 7882 359499",
+
+  // Academy
   academy: "https://taitamd-beautyacademy.com/",
+
   social: {
-    facebook: "https://www.facebook.com/TaitamDBeautyAndWellness",
     instagram: "https://www.instagram.com/taitamd/",
-    googleMaps: "https://www.google.com/maps?q=72-74%20Caledonian%20Road%2C%20King%27s%20Cross%2C%20London%2C%20N1%209DN"
-  }
+    facebook: "https://www.facebook.com/TaitamdBeautyAcademy",
+    // Customer confirmed: Academy page
+    academyFacebook: "https://www.facebook.com/TaitamdBeautyAcademy",
+    googleMaps:
+      "https://www.google.com/maps?q=72-74%20Caledonian%20Road%2C%20King%27s%20Cross%2C%20London%2C%20N1%209DN",
+  },
+
+  // Prefilled WhatsApp messages (lead capture)
+  whatsappTemplates: {
+    giftCard:
+      "Hi TaiTam‑D, I’d like to order a Gift Card.\n\nRecipient name: ___\nAmount: ___\nMessage on card: ___\nPreferred date: ___\n\nThank you!",
+    academyGeneral:
+      "Hi TaiTam‑D Academy, I’m interested in training courses.\n\nCourse: ___\nPreferred dates: ___\nExperience level: ___\n\nPlease share details & availability. Thank you!",
+  },
 };
 
 export const SERVICE_CATEGORIES: Array<{
@@ -26,6 +43,7 @@ export const SERVICE_CATEGORIES: Array<{
   subtitle: string;
   highlights: string[];
 }> = [
+
   {
     slug: "massage",
     title: "Massage",
