@@ -232,3 +232,23 @@ html[data-capture="true"] .bg-wrap::after {
     }
   }
 }
+
+/* ===== Google Maps — Olive Tint (keeps interactions) ===== */
+.map-tint__frame{
+  /* Subtle grade so whites don't scream on olive backgrounds */
+  filter: 
+    saturate(0.82)
+    contrast(0.95)
+    brightness(0.92);
+}
+.map-tint__overlay{
+  /* Brand olive wash without blocking clicks */
+  background: rgba(32, 48, 28, 0.22);
+  mix-blend-mode: multiply;
+}
+@supports not (mix-blend-mode: multiply){
+  .map-tint__overlay{
+    /* Fallback: slightly stronger opacity */
+    background: rgba(42, 58, 34, 0.22);
+  }
+}

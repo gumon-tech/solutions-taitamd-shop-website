@@ -33,13 +33,16 @@ export default function LocationBlock() {
           </div>
 
           <div className="lg:col-span-7 glass rounded-[28px] overflow-hidden border border-ink/10">
+            <div className="glass rounded-[28px] overflow-hidden border border-ink/10 relative map-tint">
             <iframe
               title="Map"
               src={mapSrc}
-              className="w-full h-[380px] md:h-full min-h-[380px]"
+              className="w-full h-[380px] md:h-full min-h-[380px] map-tint__frame"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             />
+            <div className="pointer-events-none absolute inset-0 map-tint__overlay" />
+          </div>
           </div>
         </div>
       </Reveal>
