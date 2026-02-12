@@ -9,37 +9,49 @@ import { motion } from "framer-motion";
 export default function ServicesGrid() {
   return (
     <section className="pb-8">
-      <div className="grid lg:grid-cols-12 gap-6">
+      {/* Equal-height cards per row */}
+      <div className="grid lg:grid-cols-12 gap-6 auto-rows-fr">
         {SERVICE_CATEGORIES.map((c, idx) => (
-          <Reveal key={c.slug} delay={idx * 0.03} className="lg:col-span-6">
+          <Reveal key={c.slug} delay={idx * 0.03} className="lg:col-span-6 h-full">
             <motion.div
               whileHover={{ y: -3 }}
               transition={{ type: "spring", stiffness: 260, damping: 20 }}
-              className="glass rounded-2xl p-6 overflow-hidden relative"
+              className="glass rounded-2xl p-6 overflow-hidden relative h-full flex flex-col"
             >
               <div className="absolute -top-24 -right-24 h-72 w-72 rounded-full bg-gold/10 blur-2xl" />
               <div className="absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-rose/10 blur-2xl" />
-              <div className="relative">
-                <div className="text-xs tracking-[0.28em] uppercase text-mist">{c.title}</div>
-                <div className="mt-2 text-2xl font-semibold">{c.subtitle}</div>
 
-                <ul className="mt-5 grid sm:grid-cols-2 gap-2.5 text-sm text-mist">
+              <div className="relative flex flex-col h-full">
+                {/* Header block gets a consistent weight */}
+                <div>
+                  <div className="text-xs tracking-[0.28em] uppercase text-mist">{c.title}</div>
+                  <div className="mt-2 text-2xl font-semibold leading-snug min-h-[3.25rem]">{c.subtitle}</div>
+                </div>
+
+                {/* Content fills the available height */}
+                <ul className="mt-5 grid sm:grid-cols-2 gap-x-4 gap-y-2.5 text-sm text-mist flex-1">
                   {c.highlights.map((h) => (
-                    <li key={h} className="flex gap-2">
-                      <span className="text-gold">✦</span>
-                      <span>{h}</span>
+                    <li key={h} className="flex gap-2 items-start min-h-[2.75rem]">
+                      <span className="text-gold mt-[0.1rem]">✦</span>
+                      <span className="leading-snug">{h}</span>
                     </li>
                   ))}
                 </ul>
 
-                <div className="mt-6 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
+                {/* Footer is pinned to the bottom for perfect alignment */}
+                <div className="mt-6 pt-4 border-t border-ink/10 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
                   <Link
                     href="/book"
                     className="btn-shine inline-flex items-center justify-center gap-2 rounded-xl bg-ink/5 border border-ink/12 px-4 py-2.5 text-sm font-semibold hover:bg-ink/8 transition"
                   >
                     Book this <ArrowUpRight className="h-4 w-4 text-gold" />
                   </Link>
-                  <a href={SITE.treatwell} target="_blank" rel="noreferrer" className="text-xs text-mist hover:text-ink">
+                  <a
+                    href={SITE.treatwell}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-xs text-mist hover:text-ink"
+                  >
                     View pricing & availability on Treatwell
                   </a>
                 </div>
