@@ -1,13 +1,21 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { SITE } from "@/lib/site";
-import { ArrowUpRight, Menu, X, GraduationCap, Gift, PhoneCall } from "lucide-react";
-import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
-import Image from "next/image";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
+import {
+  ArrowUpRight,
+  Menu,
+  X,
+  GraduationCap,
+  Gift,
+  PhoneCall,
+} from "lucide-react";
+import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
+import { usePathname } from "next/navigation";
 
 const nav = [
   { href: "/services", label: "Services" },
@@ -18,8 +26,15 @@ const nav = [
 export default function Navbar() {
   const [solid, setSolid] = useState(false);
   const [open, setOpen] = useState(false);
+
+  const pathname = usePathname();
+
   const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, { stiffness: 110, damping: 30, mass: 0.22 });
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 110,
+    damping: 30,
+    mass: 0.22,
+  });
 
   useEffect(() => {
     const onScroll = () => setSolid(window.scrollY > 12);
@@ -37,6 +52,35 @@ export default function Navbar() {
       document.body.style.overflow = prev;
     };
   }, [open]);
+
+  function isActivePath(href: string) {
+    if (href === "/") return pathname === "/";
+    return pathname === href || pathname.startsWith(href + "/");
+  }
+
+  const desktopLinkCls = (active: boolean) =>
+    cn(
+      "px-3 py-2 rounded-xl text-sm transition",
+      active
+        ? "bg-gold/14 text-ink font-semibold border border-gold/25"
+        : "text-mist hover:text-ink hover:bg-ink/5"
+    );
+
+  const mobileQuickCls = (active: boolean) =>
+    cn(
+      "inline-flex items-center justify-center rounded-xl border px-3 py-2 text-[11px] font-semibold tracking-[0.18em] uppercase transition",
+      active
+        ? "border-gold/30 bg-gold/10 text-ink"
+        : "border-ink/12 bg-ink/5 hover:bg-ink/8 text-ink/90"
+    );
+
+  const drawerItemCls = (active: boolean) =>
+    cn(
+      "inline-flex items-center justify-between rounded-2xl border transition px-4 py-3",
+      active
+        ? "border-gold/25 bg-gold/10"
+        : "border-ink/12 bg-ink/5 hover:bg-ink/8"
+    );
 
   return (
     <div className="fixed inset-x-0 top-0 z-50">
@@ -60,7 +104,9 @@ export default function Navbar() {
 
               <div className="leading-tight">
                 <div className="text-sm font-semibold tracking-wide">{SITE.name}</div>
-                <div className="text-[11px] text-mist tracking-[0.22em] uppercase">{SITE.tagline}</div>
+                <div className="text-[11px] text-mist tracking-[0.22em] uppercase">
+                  {SITE.tagline}
+                </div>
               </div>
             </Link>
 
@@ -70,11 +116,12 @@ export default function Navbar() {
                 <Link
                   key={i.href}
                   href={i.href}
-                  className="px-3 py-2 rounded-xl text-sm text-mist hover:text-ink hover:bg-ink/5 transition"
+                  className={desktopLinkCls(isActivePath(i.href))}
                 >
                   {i.label}
                 </Link>
               ))}
+
               <a
                 href={SITE.academy}
                 target="_blank"
@@ -94,7 +141,7 @@ export default function Navbar() {
                 Special Offer <ArrowUpRight className="h-4 w-4 text-gold" />
               </Link>
 
-              {/* ✅ Small mobile: icon-only CTA so the hamburger never gets pushed off */}
+              {/* Small mobile: icon-only CTA */}
               <Link
                 href="/book"
                 className="sm:hidden inline-flex h-10 w-10 items-center justify-center rounded-xl border border-ink/12 bg-ink/5 hover:bg-ink/8 transition"
@@ -108,31 +155,31 @@ export default function Navbar() {
                 onClick={() => setOpen(true)}
                 className="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-xl border border-ink/12 bg-ink/5 hover:bg-ink/8 transition"
                 aria-label="Open menu"
+                type="button"
               >
                 <Menu className="h-5 w-5 text-gold" />
               </button>
             </div>
           </div>
 
-          {/* ✅ Mobile quick nav: visible, thumb-friendly */}
+          {/* Mobile quick nav */}
           <div className="mt-3 md:hidden grid grid-cols-2 gap-2">
-            <Link
-              href="/services"
-              className="inline-flex items-center justify-center rounded-xl border border-ink/12 bg-ink/5 hover:bg-ink/8 transition px-3 py-2 text-[11px] font-semibold tracking-[0.18em] uppercase text-ink/90"
-            >
+            <Link href="/services" className={mobileQuickCls(isActivePath("/services"))}>
               Services
             </Link>
+
+            {/* external -> no active */}
             <a
               href={SITE.academy}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center justify-center rounded-xl border border-ink/12 bg-ink/5 hover:bg-ink/8 transition px-3 py-2 text-[11px] font-semibold tracking-[0.18em] uppercase text-ink/90"
+              className={mobileQuickCls(false)}
             >
               Academy
             </a>
           </div>
 
-          {/* top progress */}
+          {/* Top progress */}
           <div className="absolute left-0 right-0 bottom-0 h-[3px]">
             <motion.div
               style={{ scaleX }}
@@ -154,6 +201,7 @@ export default function Navbar() {
               exit={{ opacity: 0 }}
               onClick={() => setOpen(false)}
             />
+
             <motion.div
               className="fixed z-[70] left-0 right-0 top-0 mx-auto max-w-7xl px-5 md:px-8 pt-4"
               initial={{ y: -18, opacity: 0 }}
@@ -168,6 +216,7 @@ export default function Navbar() {
                     onClick={() => setOpen(false)}
                     className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-ink/12 bg-ink/5 hover:bg-ink/8 transition"
                     aria-label="Close menu"
+                    type="button"
                   >
                     <X className="h-5 w-5 text-gold" />
                   </button>
@@ -179,7 +228,7 @@ export default function Navbar() {
                       key={i.href}
                       href={i.href}
                       onClick={() => setOpen(false)}
-                      className="inline-flex items-center justify-between rounded-2xl border border-ink/12 bg-ink/5 hover:bg-ink/8 transition px-4 py-3"
+                      className={drawerItemCls(isActivePath(i.href))}
                     >
                       <span className="text-sm font-semibold">{i.label}</span>
                       <ArrowUpRight className="h-4 w-4 text-gold" />
@@ -190,7 +239,8 @@ export default function Navbar() {
                     href={SITE.academy}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center justify-between rounded-2xl border border-ink/12 bg-ink/5 hover:bg-ink/8 transition px-4 py-3"
+                    className={drawerItemCls(false)}
+                    onClick={() => setOpen(false)}
                   >
                     <span className="text-sm font-semibold">Academy</span>
                     <GraduationCap className="h-4 w-4 text-gold" />
@@ -200,17 +250,19 @@ export default function Navbar() {
                     href={buildWhatsAppLink(SITE.whatsappTemplates.giftCard)}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center justify-between rounded-2xl border border-ink/12 bg-ink/5 hover:bg-ink/8 transition px-4 py-3"
+                    className={drawerItemCls(false)}
+                    onClick={() => setOpen(false)}
                   >
                     <span className="text-sm font-semibold">Gift Card (WhatsApp)</span>
                     <Gift className="h-4 w-4 text-gold" />
                   </a>
 
                   <a
-                    href={buildWhatsAppLink("Hi TaiTam‑D, I have a quick question.")}
+                    href={buildWhatsAppLink("Hi TaiTam-D, I have a quick question.")}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center justify-between rounded-2xl border border-ink/12 bg-ink/5 hover:bg-ink/8 transition px-4 py-3"
+                    className={drawerItemCls(false)}
+                    onClick={() => setOpen(false)}
                   >
                     <span className="text-sm font-semibold">Chat on WhatsApp</span>
                     <PhoneCall className="h-4 w-4 text-gold" />
