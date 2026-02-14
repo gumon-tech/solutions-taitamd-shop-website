@@ -102,18 +102,50 @@ body {
 .btn-shine {
   position: relative;
   overflow: hidden;
+  isolation: isolate;
   background: #114811 !important;
   color: #ffffff !important;
   border: 1px solid rgba(17, 72, 17, 0.88) !important;
   box-shadow: 0 8px 24px rgba(17, 72, 17, 0.2);
+  animation: cta-breath 2.8s ease-in-out infinite;
+  transition: transform 180ms ease, box-shadow 220ms ease, filter 220ms ease;
+}
+
+.btn-shine::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(circle at 20% 25%, rgba(255, 255, 255, 0.24), transparent 38%);
+  opacity: 0.45;
+  animation: cta-glint 3.4s ease-in-out infinite;
+}
+
+.btn-shine > * {
+  position: relative;
+  z-index: 1;
 }
 
 .btn-shine:hover {
   background: #0f3f0f !important;
+  transform: translateY(-1px);
+  box-shadow: 0 14px 30px rgba(17, 72, 17, 0.28);
+  filter: saturate(1.05);
+}
+
+.btn-shine:active {
+  transform: translateY(0);
 }
 
 .btn-shine svg {
   color: rgba(255, 255, 255, 0.92) !important;
+  transition: transform 220ms ease;
+}
+
+.btn-shine:hover svg {
+  transform: translateX(2px);
 }
 
 .btn-shine::after {
@@ -129,6 +161,40 @@ body {
   animation: shimmer 2.8s linear infinite;
 }
 
+/* ===== Epic CTA sweep (for key hero CTAs) ===== */
+.btn-epic {
+  animation: cta-breath 2.2s ease-in-out infinite;
+}
+
+.btn-epic::before {
+  background:
+    linear-gradient(
+      110deg,
+      rgba(255, 255, 255, 0) 18%,
+      rgba(255, 255, 255, 0.22) 36%,
+      rgba(255, 255, 255, 0.45) 48%,
+      rgba(255, 255, 255, 0.16) 58%,
+      rgba(255, 255, 255, 0) 72%
+    );
+  background-size: 210% 100%;
+  background-position: 140% 0;
+  opacity: 0.9;
+  animation: epic-sweep 2.4s cubic-bezier(0.2, 0.65, 0.25, 1) infinite;
+}
+
+.btn-epic::after {
+  width: 58%;
+  left: -72%;
+  opacity: 0.42;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.36),
+    rgba(255, 255, 255, 0)
+  );
+  animation: epic-trail 2.4s cubic-bezier(0.2, 0.65, 0.25, 1) infinite;
+}
+
 @keyframes shimmer {
   0% {
     transform: translateX(-40%) skewX(-18deg);
@@ -136,6 +202,50 @@ body {
 
   100% {
     transform: translateX(340%) skewX(-18deg);
+  }
+}
+
+@keyframes cta-breath {
+  0%,
+  100% {
+    box-shadow: 0 8px 24px rgba(17, 72, 17, 0.2);
+  }
+
+  50% {
+    box-shadow: 0 12px 30px rgba(17, 72, 17, 0.28);
+  }
+}
+
+@keyframes cta-glint {
+  0%,
+  100% {
+    transform: translateX(0);
+    opacity: 0.38;
+  }
+
+  50% {
+    transform: translateX(8%);
+    opacity: 0.58;
+  }
+}
+
+@keyframes epic-sweep {
+  0% {
+    background-position: 140% 0;
+  }
+
+  100% {
+    background-position: -45% 0;
+  }
+}
+
+@keyframes epic-trail {
+  0% {
+    transform: translateX(-24%) skewX(-18deg);
+  }
+
+  100% {
+    transform: translateX(380%) skewX(-18deg);
   }
 }
 
@@ -156,6 +266,12 @@ html[data-capture="true"] .bg-wrap::after {
   animation: none !important;
 }
 
+html[data-capture="true"] .btn-shine,
+html[data-capture="true"] .btn-shine::before,
+html[data-capture="true"] .btn-shine::after {
+  animation: none !important;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -167,6 +283,23 @@ html[data-capture="true"] .bg-wrap::after {
 
   .btn-shine::after {
     animation: none;
+  }
+
+  .btn-shine,
+  .btn-shine::before {
+    animation: none;
+  }
+
+  .btn-epic::after {
+    animation: none;
+  }
+
+  .btn-shine:hover {
+    transform: none;
+  }
+
+  .btn-shine:hover svg {
+    transform: none;
   }
 }
 

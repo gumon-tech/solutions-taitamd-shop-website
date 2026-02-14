@@ -33,7 +33,7 @@ export default function Hero() {
           <div className="mt-8 flex flex-col sm:flex-row gap-3">
             <Link
               href="/services"
-              className="btn-shine inline-flex items-center justify-center gap-2 rounded-2xl bg-ink/5 border border-ink/12 px-5 py-3 text-sm font-semibold hover:bg-ink/8 transition shadow-glow"
+              className="btn-shine btn-epic inline-flex items-center justify-center gap-2 rounded-2xl bg-ink/5 border border-ink/12 px-5 py-3 text-sm font-semibold hover:bg-ink/8 transition shadow-glow"
             >
               Book / Service Menu <ArrowUpRight className="h-4 w-4 text-gold" />
             </Link>

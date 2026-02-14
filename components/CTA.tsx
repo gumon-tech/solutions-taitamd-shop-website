@@ -26,7 +26,7 @@ export default function CTA() {
             <div className="md:col-span-5 flex flex-col sm:flex-row md:flex-col gap-3 md:items-end md:justify-center">
               <Link
                 href="/book"
-                className="btn-shine inline-flex items-center justify-center gap-2 rounded-2xl bg-ink/5 border border-ink/12 px-6 py-3.5 text-sm font-semibold hover:bg-ink/8 transition shadow-glow"
+                className="btn-shine btn-epic inline-flex items-center justify-center gap-2 rounded-2xl bg-ink/5 border border-ink/12 px-6 py-3.5 text-sm font-semibold hover:bg-ink/8 transition shadow-glow"
               >
                 Check availability <ArrowUpRight className="h-4 w-4 text-gold" />
               </Link>

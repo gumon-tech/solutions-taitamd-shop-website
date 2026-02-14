@@ -136,7 +136,7 @@ export default function Navbar() {
               {/* Desktop / larger phones */}
               <Link
                 href="/book"
-                className="hidden sm:inline-flex btn-shine items-center gap-2 rounded-xl bg-ink/5 border border-ink/12 px-3.5 py-2 text-sm font-medium hover:bg-ink/8 transition whitespace-nowrap"
+                className="hidden sm:inline-flex btn-shine btn-epic items-center gap-2 rounded-xl bg-ink/5 border border-ink/12 px-3.5 py-2 text-sm font-medium hover:bg-ink/8 transition whitespace-nowrap"
               >
                 Special Offer <ArrowUpRight className="h-4 w-4 text-gold" />
               </Link>
