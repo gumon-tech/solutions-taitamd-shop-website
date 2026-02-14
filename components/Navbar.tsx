@@ -62,7 +62,7 @@ export default function Navbar() {
     cn(
       "px-3 py-2 rounded-xl text-sm transition",
       active
-        ? "bg-gold/14 text-ink font-semibold border border-gold/25"
+        ? "bg-gold text-white font-semibold border border-gold shadow-[0_8px_22px_rgba(17,72,17,0.24)]"
         : "text-mist hover:text-ink hover:bg-ink/5"
     );
 
@@ -70,7 +70,7 @@ export default function Navbar() {
     cn(
       "inline-flex items-center justify-center rounded-xl border px-3 py-2 text-[11px] font-semibold tracking-[0.18em] uppercase transition",
       active
-        ? "border-gold/30 bg-gold/10 text-ink"
+        ? "border-gold bg-gold text-white"
         : "border-ink/12 bg-ink/5 hover:bg-ink/8 text-ink/90"
     );
 
@@ -78,7 +78,7 @@ export default function Navbar() {
     cn(
       "inline-flex items-center justify-between rounded-2xl border transition px-4 py-3",
       active
-        ? "border-gold/25 bg-gold/10"
+        ? "border-gold bg-gold text-white [&>svg]:text-white"
         : "border-ink/12 bg-ink/5 hover:bg-ink/8"
     );
 
@@ -88,7 +88,7 @@ export default function Navbar() {
         <div
           className={cn(
             "glass relative overflow-hidden rounded-2xl px-4 md:px-5 py-3 transition-all",
-            solid ? "shadow-glow" : "bg-transparent border-transparent backdrop-blur-0"
+            solid ? "shadow-glow" : "bg-white/55 border-ink/10 backdrop-blur-md"
           )}
         >
           <div className="flex items-center justify-between">

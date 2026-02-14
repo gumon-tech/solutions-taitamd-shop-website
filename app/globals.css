@@ -2,9 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ===== Global Theme — Forest Olive Cinematic (Dark) ===== */
+/* ===== Global Theme — Fresh Botanical Daylight (Light) ===== */
 :root {
-  color-scheme: dark;
+  color-scheme: light;
+  --olive-strong: #114811;
 
   /* Navbar offset (fix overlap on mobile) */
   --nav-height: 120px;
@@ -35,16 +36,20 @@ body {
   padding-top: var(--nav-height);
 }
 
-/* ===== Background (Forest Olive Cinematic) ===== */
+/* ===== Background (Fresh Botanical Daylight) ===== */
 .bg-wrap::before {
   content: "";
   position: fixed;
   inset: 0;
   z-index: -3;
   background:
-    radial-gradient(1200px 760px at 20% -10%, rgba(107, 127, 90, 0.18), rgba(0, 0, 0, 0) 60%),
-    radial-gradient(1000px 700px at 82% 20%, rgba(63, 93, 59, 0.16), rgba(0, 0, 0, 0) 65%),
-    theme(backgroundImage.luxe);
+    linear-gradient(rgba(252, 249, 241, 0.88), rgba(252, 249, 241, 0.92)),
+    radial-gradient(1200px 760px at 20% -10%, rgba(56, 128, 62, 0.10), rgba(0, 0, 0, 0) 60%),
+    radial-gradient(1000px 700px at 82% 20%, rgba(17, 72, 17, 0.08), rgba(0, 0, 0, 0) 65%),
+    url("/images/treatwell/treatwell-1628965.jpg");
+  background-size: auto, auto, auto, cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .bg-wrap::after {
@@ -52,12 +57,12 @@ body {
   position: fixed;
   inset: -18%;
   z-index: -2;
-  opacity: 0.55;
+  opacity: 0.3;
   background:
-    radial-gradient(closest-side, rgba(159, 179, 107, 0.14), rgba(0, 0, 0, 0) 62%),
-    radial-gradient(closest-side, rgba(63, 93, 59, 0.12), rgba(0, 0, 0, 0) 64%),
-    radial-gradient(closest-side, rgba(31, 58, 42, 0.10), rgba(0, 0, 0, 0) 66%);
-  filter: blur(34px);
+    radial-gradient(closest-side, rgba(100, 165, 92, 0.16), rgba(0, 0, 0, 0) 62%),
+    radial-gradient(closest-side, rgba(56, 128, 62, 0.14), rgba(0, 0, 0, 0) 64%),
+    radial-gradient(closest-side, rgba(17, 72, 17, 0.10), rgba(0, 0, 0, 0) 66%);
+  filter: blur(30px);
   animation: sweep 60s linear infinite;
 }
 
@@ -76,26 +81,39 @@ body {
   inset: 0;
   z-index: -1;
   background-image:
-    linear-gradient(to right, rgba(230, 235, 223, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(230, 235, 223, 0.04) 1px, transparent 1px);
+    linear-gradient(to right, rgba(17, 72, 17, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(17, 72, 17, 0.05) 1px, transparent 1px);
   background-size: 72px 72px;
   mask-image: radial-gradient(ellipse at 50% 18%, black 0%, transparent 72%);
   -webkit-mask-image: radial-gradient(ellipse at 50% 18%, black 0%, transparent 72%);
   pointer-events: none;
 }
 
-/* ===== Glass / Surfaces (cinematic) ===== */
+/* ===== Glass / Surfaces (daylight) ===== */
 .glass {
-  background: rgba(20, 26, 22, 0.65);
-  border: 1px solid rgba(160, 180, 150, 0.12);
-  backdrop-filter: blur(18px) saturate(110%);
-  -webkit-backdrop-filter: blur(18px) saturate(110%);
+  background: rgba(255, 255, 255, 0.93);
+  border: 1px solid rgba(17, 72, 17, 0.16);
+  box-shadow: 0 10px 30px rgba(17, 72, 17, 0.08);
+  backdrop-filter: blur(14px) saturate(112%);
+  -webkit-backdrop-filter: blur(14px) saturate(112%);
 }
 
 /* ===== Button shimmer (subtle) ===== */
 .btn-shine {
   position: relative;
   overflow: hidden;
+  background: #114811 !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(17, 72, 17, 0.88) !important;
+  box-shadow: 0 8px 24px rgba(17, 72, 17, 0.2);
+}
+
+.btn-shine:hover {
+  background: #0f3f0f !important;
+}
+
+.btn-shine svg {
+  color: rgba(255, 255, 255, 0.92) !important;
 }
 
 .btn-shine::after {
@@ -106,8 +124,8 @@ body {
   width: 40%;
   height: 180%;
   transform: skewX(-18deg);
-  background: linear-gradient(90deg, transparent, rgba(199, 211, 160, 0.26), transparent);
-  opacity: 0.28;
+  background: linear-gradient(90deg, transparent, rgba(63, 132, 68, 0.22), transparent);
+  opacity: 0.24;
   animation: shimmer 2.8s linear infinite;
 }
 
@@ -123,7 +141,7 @@ body {
 
 /* subtle selection */
 ::selection {
-  background: rgba(159, 179, 107, 0.22);
+  background: rgba(17, 72, 17, 0.20);
 }
 
 /* ===== Capture mode (GoFullScreen / screenshots) ===== */
@@ -164,7 +182,7 @@ html[data-capture="true"] .bg-wrap::after {
 
 
   .ui-kicker {
-    @apply text-xs tracking-[0.32em] uppercase text-mist;
+    @apply text-xs tracking-[0.32em] uppercase text-ink/70;
   }
 
   .ui-h1 {
@@ -176,7 +194,7 @@ html[data-capture="true"] .bg-wrap::after {
   }
 
   .ui-lead {
-    @apply mt-6 text-base md:text-lg text-mist max-w-2xl leading-relaxed;
+    @apply mt-6 text-base md:text-lg text-ink/85 max-w-2xl leading-relaxed;
   }
 
   .ui-section-cta {
@@ -192,24 +210,24 @@ html[data-capture="true"] .bg-wrap::after {
 
   .ui-h1 span {
     color: var(--olive-strong);
-    text-shadow: 0 0 24px rgba(150, 170, 120, 0.25);
+    text-shadow: 0 0 18px rgba(53, 130, 57, 0.22);
   }
 
   .ui-serviceCard {
-    border: 1px solid rgba(180, 200, 150, 0.12);
-    background: linear-gradient(145deg, rgba(34, 48, 34, 0.75), rgba(20, 30, 22, 0.65));
+    border: 1px solid rgba(17, 72, 17, 0.14);
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.84), rgba(236, 246, 233, 0.82));
     transition: transform 200ms ease, box-shadow 200ms ease;
   }
 
   .ui-serviceCard:hover {
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 14px 36px rgba(17, 72, 17, 0.15);
     transform: translateY(-4px);
   }
 
   .ui-cta {
     background:
-      radial-gradient(600px 300px at 30% 40%, rgba(160, 180, 120, 0.15), transparent 70%),
-      linear-gradient(135deg, #121a14, #1d2a1e);
+      radial-gradient(600px 300px at 30% 40%, rgba(74, 154, 78, 0.16), transparent 70%),
+      linear-gradient(135deg, rgba(255, 255, 255, 0.86), rgba(234, 245, 232, 0.90));
   }
 
   .ui-btn {
@@ -235,20 +253,20 @@ html[data-capture="true"] .bg-wrap::after {
 
 /* ===== Google Maps — Olive Tint (keeps interactions) ===== */
 .map-tint__frame{
-  /* Subtle grade so whites don't scream on olive backgrounds */
+  /* Keep the map close to native in light mode */
   filter: 
-    saturate(0.82)
-    contrast(0.95)
-    brightness(0.92);
+    saturate(0.96)
+    contrast(1)
+    brightness(1);
 }
 .map-tint__overlay{
-  /* Brand olive wash without blocking clicks */
-  background: rgba(32, 48, 28, 0.22);
+  /* Brand green wash without blocking clicks */
+  background: rgba(17, 72, 17, 0.08);
   mix-blend-mode: multiply;
 }
 @supports not (mix-blend-mode: multiply){
   .map-tint__overlay{
     /* Fallback: slightly stronger opacity */
-    background: rgba(42, 58, 34, 0.22);
+    background: rgba(17, 72, 17, 0.12);
   }
 }

@@ -129,7 +129,7 @@ export default function Gallery() {
         <div className="flex items-end justify-between gap-6">
           <div>
             <p className="text-xs tracking-[0.28em] uppercase text-mist">Inside TaiTam-D</p>
-            <h2 className="mt-3 text-3xl md:text-5xl font-semibold leading-tight">
+            <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-[-0.01em] text-ink leading-tight">
               A calm, curated <span className="text-gold">beauty ritual</span>.
             </h2>
             <p className="mt-4 text-sm md:text-base text-mist max-w-2xl">
@@ -138,7 +138,7 @@ export default function Gallery() {
           </div>
         </div>
 
-        <div className="mt-8 grid md:grid-cols-12 gap-3">
+        <div className="mt-10 md:mt-12 grid md:grid-cols-12 gap-3">
           {TILES.map((t, i) => (
             <motion.div
               key={t.src}

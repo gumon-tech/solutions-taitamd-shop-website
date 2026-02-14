@@ -10,7 +10,7 @@ export default function Story() {
         <h1 className="mt-3 text-4xl md:text-6xl font-semibold leading-[1.05]">
           Precision, by <span className="text-gold">design</span>.
         </h1>
-        <p className="mt-6 text-mist max-w-3xl leading-relaxed">
+        <p className="mt-6 text-ink/82 max-w-3xl leading-relaxed">
           Founded in 2009, {SITE.name} is a Thai beauty and wellness house in King’s Cross —
           refined through experience and led by a single standard: measured excellence.
         </p>
@@ -27,8 +27,8 @@ export default function Story() {
               priority
               className="object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-bg0/80 via-bg0/25 to-transparent" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_15%,rgba(196,170,98,.18),transparent_55%)]" />
+            <div className="absolute inset-0 bg-gradient-to-t from-white/34 via-white/10 to-transparent" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_15%,rgba(196,170,98,.14),transparent_58%)]" />
           </div>
         </div>
       </Reveal>
@@ -41,11 +41,11 @@ export default function Story() {
             <div className="absolute -bottom-28 -left-24 h-72 w-72 rounded-full bg-rose/10 blur-3xl" />
             <div className="relative">
               <h2 className="text-2xl md:text-3xl font-semibold">A house built on standards</h2>
-              <p className="mt-4 text-sm md:text-base text-mist leading-relaxed">
+              <p className="mt-4 text-sm md:text-base text-ink/80 leading-relaxed">
                 Luxury is not loud. It lives in technique, hygiene, and finishing detail — consistent, intentional, and calm.
               </p>
 
-              <div className="mt-7 grid sm:grid-cols-2 gap-3 text-sm text-mist">
+              <div className="mt-7 grid sm:grid-cols-2 gap-3 text-sm text-ink/78">
                 {[
                   ["Technique first", "Pressure, pacing, and precision — tailored every time."],
                   ["Thai + modern", "Traditional craft, delivered with London-level discipline."],
@@ -54,7 +54,7 @@ export default function Story() {
                 ].map(([t, d]) => (
                   <div key={t} className="rounded-2xl bg-ink/5 border border-ink/10 p-5">
                     <div className="font-semibold text-ink/95">{t}</div>
-                    <div className="mt-1.5 text-sm text-mist">{d}</div>
+                    <div className="mt-1.5 text-sm text-ink/76">{d}</div>
                   </div>
                 ))}
               </div>
@@ -66,7 +66,7 @@ export default function Story() {
           <div className="glass rounded-[28px] p-7 md:p-9 h-full">
             <p className="text-xs tracking-[0.28em] uppercase text-mist">Good to know</p>
             <h3 className="mt-3 text-2xl font-semibold">Beauty Academy</h3>
-            <p className="mt-3 text-sm text-mist leading-relaxed">
+            <p className="mt-3 text-sm text-ink/80 leading-relaxed">
               Our professional training lives on a dedicated site, keeping this space focused and refined — while holding education to the same standard.
             </p>
 
@@ -105,7 +105,7 @@ export default function Story() {
                 fill
                 className="object-cover object-[50%_18%]"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-bg0/85 via-bg0/25 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/18 via-black/4 to-transparent" />
             </div>
           </div>
         </Reveal>
@@ -118,20 +118,20 @@ export default function Story() {
               <h2 className="mt-3 text-2xl md:text-3xl font-semibold">The standard begins with her</h2>
               <div className="mt-3 space-y-1">
                 <div className="text-lg md:text-xl font-semibold text-ink/95">Thanyarat Phomnongsan <span className="text-mist font-medium">(Kru Nok)</span></div>
-                <div className="text-sm text-mist">CEO &amp; Founder, TaiTam-D Group • TaiTam-D Beauty Academy</div>
-                <div className="text-sm text-mist">Beauty Mentor • Certified NLP Master</div>
+                <div className="text-sm text-ink/78">CEO &amp; Founder, TaiTam-D Group • TaiTam-D Beauty Academy</div>
+                <div className="text-sm text-ink/78">Beauty Mentor • Certified NLP Master</div>
               </div>
-              <p className="mt-4 text-sm md:text-base text-mist leading-relaxed max-w-2xl">
+              <p className="mt-4 text-sm md:text-base text-ink/80 leading-relaxed max-w-2xl">
                 TaiTam-D was created to elevate Thai craftsmanship through modern structure. From treatment protocols to curriculum design,
                 every detail follows one principle: technique first, detail always — no shortcuts.
               </p>
 
               <div className="mt-6 rounded-2xl bg-ink/5 border border-ink/10 p-5">
                 <div className="text-sm font-semibold text-ink/95">“Luxury is not decoration. It is discipline.”</div>
-                <div className="mt-1.5 text-sm text-mist">— Thanyarat Phomnongsan (Kru Nok), Founder</div>
+                <div className="mt-1.5 text-sm text-ink/78">— Thanyarat Phomnongsan (Kru Nok), Founder</div>
               </div>
 
-              <div className="mt-6 grid sm:grid-cols-3 gap-3 text-sm text-mist">
+              <div className="mt-6 grid sm:grid-cols-3 gap-3 text-sm text-ink/78">
                 {[
                   ["Established", "2009"],
                   ["Location", "King’s Cross"],
@@ -151,10 +151,10 @@ export default function Story() {
       {/* Cultural depth */}
       <div className="mt-6 md:mt-8 grid lg:grid-cols-12 gap-6 items-stretch">
         <Reveal className="lg:col-span-7">
-          <div className="glass rounded-[28px] p-7 md:p-9 h-full">
+          <div className="glass rounded-[28px] p-7 md:p-9 h-full flex flex-col justify-center">
             <p className="text-xs tracking-[0.28em] uppercase text-mist">Rooted</p>
             <h2 className="mt-3 text-2xl md:text-3xl font-semibold">Rooted in Thai craft</h2>
-            <p className="mt-4 text-sm md:text-base text-mist leading-relaxed max-w-2xl">
+            <p className="mt-4 text-sm md:text-base text-ink/80 leading-relaxed max-w-2xl">
               From pressure mapping to finishing detail, every element traces back to traditional Thai practice — refined for a modern audience.
               Calm is built through consistency, not volume.
             </p>
@@ -162,7 +162,7 @@ export default function Story() {
         </Reveal>
 
         <Reveal className="lg:col-span-5" delay={0.06}>
-          <div className="glass rounded-[28px] overflow-hidden h-full border border-ink/10">
+          <div className="glass rounded-[28px] overflow-hidden border border-ink/10 h-full">
             <div className="relative h-full min-h-[260px]">
               <Image
                 src="/images/gallery/spa-1200x800.jpg"
@@ -170,7 +170,7 @@ export default function Story() {
                 fill
                 className="object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-bg0/70 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/16 via-black/0 to-transparent" />
             </div>
           </div>
         </Reveal>

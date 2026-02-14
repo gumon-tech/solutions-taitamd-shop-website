@@ -14,15 +14,15 @@ export default function ServicesPage() {
         <h1 className="mt-3 text-4xl md:text-6xl font-semibold leading-[1.05]">
           Everything you need — <span className="text-gold">crafted</span> with precision.
         </h1>
-        <p className="mt-5 max-w-2xl text-mist">
+        <p className="mt-5 max-w-2xl text-ink/80">
           Browse categories and book online via Treatwell. We keep the site fast and focused — the booking engine does the heavy lifting.
         </p>
       </header>
 
       <ServicesGrid />
-      <div className="h-12" />
+      <div className="h-4 md:h-6" />
       <CTA />
-      <div className="h-20" />
+      <div className="h-10 md:h-12" />
     </main>
   );
 }

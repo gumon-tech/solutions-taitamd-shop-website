@@ -15,7 +15,7 @@ export default function LocationBlock() {
           {/* LEFT: info card */}
           <div className="lg:col-span-5 glass rounded-[28px] p-7 md:p-9">
             <p className="text-xs tracking-[0.28em] uppercase text-mist">Location</p>
-            <h2 className="mt-3 text-3xl md:text-5xl font-semibold leading-tight">
+            <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-[-0.01em] text-ink leading-tight">
               King’s Cross — <span className="text-gold">easy</span> to reach.
             </h2>
 
@@ -26,7 +26,7 @@ export default function LocationBlock() {
             </p>
 
             {/* Quick facts (fills the “empty” feel without clutter) */}
-            <div className="mt-6 grid gap-3 text-sm">
+            <div className="mt-8 md:mt-9 grid gap-3 text-sm">
               <div className="rounded-2xl bg-[radial-gradient(700px_240px_at_20%_0%,rgba(214,179,106,0.14),rgba(0,0,0,0)),radial-gradient(700px_240px_at_90%_60%,rgba(127,153,82,0.14),rgba(0,0,0,0))] border border-ink/12 p-4">
                 <div className="flex items-start gap-3">
                   <div className="mt-0.5 inline-flex h-9 w-9 items-center justify-center rounded-xl bg-white/5 border border-ink/10">

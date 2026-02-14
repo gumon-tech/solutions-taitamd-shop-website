@@ -23,10 +23,10 @@ export default function CTA() {
               </p>
             </div>
 
-            <div className="md:col-span-5 flex flex-col sm:flex-row md:flex-col gap-3 md:items-end">
+            <div className="md:col-span-5 flex flex-col sm:flex-row md:flex-col gap-3 md:items-end md:justify-center">
               <Link
                 href="/book"
-                className="btn-shine inline-flex items-center justify-center gap-2 rounded-2xl bg-ink/5 border border-ink/12 px-5 py-3 text-sm font-semibold hover:bg-ink/8 transition shadow-glow"
+                className="btn-shine inline-flex items-center justify-center gap-2 rounded-2xl bg-ink/5 border border-ink/12 px-6 py-3.5 text-sm font-semibold hover:bg-ink/8 transition shadow-glow"
               >
                 Check availability <ArrowUpRight className="h-4 w-4 text-gold" />
               </Link>
@@ -37,7 +37,7 @@ export default function CTA() {
                 )}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center justify-center rounded-2xl bg-transparent border border-ink/12 px-5 py-3 text-sm font-semibold hover:bg-ink/5 transition"
+                className="inline-flex items-center justify-center rounded-2xl bg-white/60 border border-ink/16 px-6 py-3 text-sm font-semibold text-ink/90 hover:bg-white/75 transition"
               >
                 WhatsApp
               </a>
@@ -47,7 +47,7 @@ export default function CTA() {
                 href={buildWhatsAppLink(SITE.whatsappTemplates.giftCard)}
                 target="_blank"
                 rel="noreferrer"
-                className="text-[11px] tracking-[0.18em] uppercase text-mist hover:text-ink transition md:text-right"
+                className="text-[11px] tracking-[0.18em] uppercase text-ink/72 hover:text-ink transition md:text-right"
               >
                 Gift card via WhatsApp →
               </a>

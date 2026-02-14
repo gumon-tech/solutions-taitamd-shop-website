@@ -77,14 +77,14 @@ export default function Hero() {
           >
             <div className="glass rounded-[28px] p-5 shadow-glow overflow-hidden">
               <div className="relative rounded-[22px] overflow-hidden border border-ink/10">
-                <Image src="/images/hero/hero-16x9-1600x900.jpg" alt="Luxury spa waiting area" fill priority className="object-cover opacity-[0.33]" />
-                <div className="absolute inset-0 bg-[radial-gradient(700px_420px_at_20%_10%,rgba(214,179,106,0.35),rgba(0,0,0,0)),radial-gradient(600px_420px_at_85%_25%,rgba(127,163,138,0.18),rgba(0,0,0,0)),linear-gradient(135deg,rgba(0,0,0,0.35),rgba(255,255,255,0.02))]" />
+                <Image src="/images/hero/hero-16x9-1600x900.jpg" alt="Luxury spa waiting area" fill priority className="object-cover opacity-[0.48]" />
+                <div className="absolute inset-0 bg-[radial-gradient(700px_420px_at_20%_10%,rgba(214,179,106,0.22),rgba(0,0,0,0)),radial-gradient(600px_420px_at_85%_25%,rgba(127,163,138,0.12),rgba(0,0,0,0)),linear-gradient(135deg,rgba(255,255,255,0.34),rgba(255,255,255,0.08))]" />
                 <div className="relative p-6 md:p-7">
-                  <div className="text-xs tracking-[0.32em] uppercase text-mist">Signature experience</div>
-                  <div className="mt-3 text-2xl font-semibold leading-tight">
+                  <div className="text-xs tracking-[0.32em] uppercase text-ink/72">Signature experience</div>
+                  <div className="mt-3 text-2xl font-semibold leading-tight text-ink/95">
                     Deep relief, soft luxury.
                   </div>
-                  <p className="mt-3 text-sm text-mist leading-relaxed">
+                  <p className="mt-3 text-sm text-ink/82 leading-relaxed">
                     Thai + Deep Tissue + Aromatherapy blends — tailored to your body. Clean, modern interiors inspired by Thai tradition.
                   </p>
 
@@ -95,18 +95,18 @@ export default function Hero() {
                       { k: "5 min", v: "from King’s Cross" },
                       { k: "Mon–Sun", v: "open daily" }
                     ].map((b) => (
-                      <div key={b.k} className="rounded-2xl bg-ink/5 border border-ink/10 p-4">
+                      <div key={b.k} className="rounded-2xl bg-white/58 border border-ink/12 p-4">
                         <div className="text-xl font-semibold text-gold">{b.k}</div>
-                        <div className="text-xs text-mist mt-1">{b.v}</div>
+                        <div className="text-xs text-ink/76 mt-1">{b.v}</div>
                       </div>
                     ))}
                   </div>
                 </div>
               </div>
 
-              <div className="mt-4 flex items-center justify-between gap-4 text-xs text-mist">
+              <div className="mt-4 flex items-center justify-between gap-4 text-xs text-ink/72">
                 <span>Booking & payments are handled securely via Treatwell.</span>
-                <span className="inline-flex h-8 w-8 items-center justify-center rounded-xl bg-ink/5 border border-ink/10 animate-floaty">
+                <span className="inline-flex h-8 w-8 items-center justify-center rounded-xl bg-white/60 border border-ink/12 animate-floaty">
                   ✦
                 </span>
               </div>

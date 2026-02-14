@@ -41,7 +41,7 @@ export default function LuxeBento() {
         <div className="flex items-end justify-between gap-4">
           <div>
             <p className="text-xs tracking-[0.28em] uppercase text-mist">Why us</p>
-            <h2 className="mt-3 text-3xl md:text-5xl font-semibold leading-tight">
+            <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-[-0.01em] text-ink leading-tight">
               Designed to feel <span className="text-gold">exclusive</span>.
             </h2>
           </div>
@@ -51,7 +51,7 @@ export default function LuxeBento() {
         </div>
       </Reveal>
 
-      <div className="mt-7 grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="mt-9 md:mt-10 grid md:grid-cols-2 lg:grid-cols-3 gap-4">
         {items.map((i, idx) => (
           <Reveal key={i.title} delay={idx * 0.04}>
             <div className="glass rounded-2xl p-5 hover:bg-ink/4 transition shadow-[0_0_0_1px_rgba(255,255,255,0.06)]">

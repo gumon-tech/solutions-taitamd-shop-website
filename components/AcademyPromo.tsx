@@ -13,7 +13,7 @@ export default function AcademyPromo() {
           <div>
             <p className="text-xs tracking-[0.28em] uppercase text-mist">Academy</p>
 
-            <h2 className="mt-3 text-3xl md:text-5xl font-semibold leading-tight">
+            <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-[-0.01em] text-ink leading-tight">
               Train with <span className="text-gold">real technique</span> — not just theory.
             </h2>
 
@@ -42,7 +42,7 @@ export default function AcademyPromo() {
         </div>
 
         {/* Content */}
-        <div className="mt-8 grid lg:grid-cols-12 gap-4">
+        <div className="mt-10 md:mt-12 grid lg:grid-cols-12 gap-4">
           {/* Left card */}
           <div className="lg:col-span-5">
             <div className="glass rounded-[28px] p-5 md:p-6 overflow-hidden">

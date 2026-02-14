@@ -5,23 +5,23 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Forest Olive Cinematic (Dark)
-        bg0: "#0B0F0B", // forest black
-        bg1: "#111614", // deep olive shadow
-        ink: "#E6EBDF", // off-white moss
-        mist: "rgba(230,235,223,0.66)",
+        // Fresh Botanical Daylight (Light)
+        bg0: "#FCF9F1", // warm cream canvas
+        bg1: "#F3EEDF", // soft cream surface
+        ink: "#15321B", // deep readable green
+        mist: "rgba(21,50,27,0.9)",
 
         // Accents (keep legacy keys used across components)
-        gold: "#9FB36B",  // cinematic olive highlight
-        gold2: "#C7D3A0", // pale highlight
-        rose: "#3F5D3B"   // moss accent
+        gold: "#114811",  // brand green
+        gold2: "#2F7A35", // active green
+        rose: "#5E8F5D"   // soft botanical accent
       },
       boxShadow: {
-        glow: "0 0 0 1px rgba(159,179,107,0.14), 0 18px 55px rgba(0,0,0,0.55)"
+        glow: "0 0 0 1px rgba(17,72,17,0.14), 0 14px 40px rgba(17,72,17,0.12)"
       },
       backgroundImage: {
         luxe:
-          "radial-gradient(1100px 760px at 18% 6%, rgba(107,127,90,0.22), rgba(0,0,0,0) 62%), radial-gradient(980px 720px at 84% 18%, rgba(63,93,59,0.18), rgba(0,0,0,0) 66%), radial-gradient(720px 520px at 50% 92%, rgba(159,179,107,0.10), rgba(0,0,0,0) 70%), linear-gradient(180deg, #0B0F0B 0%, #111614 55%, #0B0F0B 100%)"
+          "radial-gradient(1100px 760px at 18% 6%, rgba(56,128,62,0.12), rgba(0,0,0,0) 62%), radial-gradient(980px 720px at 84% 18%, rgba(17,72,17,0.10), rgba(0,0,0,0) 66%), radial-gradient(720px 520px at 50% 92%, rgba(111,174,116,0.10), rgba(0,0,0,0) 70%), linear-gradient(180deg, #FCF9F1 0%, #F3EEDF 55%, #FCF9F1 100%)"
       },
       keyframes: {
         shimmer: {

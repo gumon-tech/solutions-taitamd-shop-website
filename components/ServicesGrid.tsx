@@ -14,9 +14,9 @@ export default function ServicesGrid() {
         {SERVICE_CATEGORIES.map((c, idx) => (
           <Reveal key={c.slug} delay={idx * 0.03} className="lg:col-span-6 h-full">
             <motion.div
-              whileHover={{ y: -3 }}
+              whileHover={{ y: -4 }}
               transition={{ type: "spring", stiffness: 260, damping: 20 }}
-              className="glass rounded-2xl p-6 overflow-hidden relative h-full flex flex-col"
+              className="glass rounded-2xl p-6 overflow-hidden relative h-full flex flex-col border border-ink/12 shadow-[0_6px_18px_rgba(17,72,17,0.08)] hover:shadow-[0_18px_36px_rgba(17,72,17,0.14)] transition-shadow duration-300"
             >
               <div className="absolute -top-24 -right-24 h-72 w-72 rounded-full bg-gold/10 blur-2xl" />
               <div className="absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-rose/10 blur-2xl" />
@@ -50,7 +50,7 @@ export default function ServicesGrid() {
                     href={SITE.treatwell}
                     target="_blank"
                     rel="noreferrer"
-                    className="text-xs text-mist hover:text-ink"
+                    className="text-xs text-ink/74 hover:text-ink"
                   >
                     View pricing & availability on Treatwell
                   </a>

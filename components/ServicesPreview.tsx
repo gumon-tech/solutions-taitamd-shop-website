@@ -10,7 +10,7 @@ export default function ServicesPreview() {
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
           <div>
             <p className="text-xs tracking-[0.28em] uppercase text-mist">Service menu</p>
-            <h2 className="mt-3 text-3xl md:text-5xl font-semibold leading-tight">
+            <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-[-0.01em] text-ink leading-tight">
               Choose your <span className="text-gold">ritual</span>.
             </h2>
           </div>
@@ -23,7 +23,7 @@ export default function ServicesPreview() {
         </div>
       </Reveal>
 
-      <div className="mt-7 grid lg:grid-cols-2 gap-4">
+      <div className="mt-9 md:mt-10 grid lg:grid-cols-2 gap-4">
         {SERVICE_CATEGORIES.slice(0, 6).map((c, idx) => (
           <Reveal key={c.slug} delay={idx * 0.05}>
             <div className="glass rounded-2xl p-6 overflow-hidden relative">              <div className="absolute -top-16 -right-16 h-56 w-56 rounded-full bg-gold/10 blur-2xl" />
