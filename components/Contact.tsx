@@ -72,7 +72,7 @@ export default function Contact() {
                 <div className="mt-3">
                   <Link
                     href={SITE.social.googleMaps}
-                    className="inline-flex items-center gap-2 rounded-full border border-ink/20 bg-white/5 px-3 py-1.5 text-xs text-ink/90 hover:bg-white/10"
+                    className="inline-flex items-center gap-2 rounded-full border border-gold/25 bg-ink/8 px-3 py-1.5 text-xs text-ink/90 hover:bg-ink/12"
                     target="_blank"
                     rel="noreferrer"
                   >

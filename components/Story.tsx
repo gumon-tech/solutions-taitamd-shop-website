@@ -27,7 +27,7 @@ export default function Story() {
               priority
               className="object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-white/34 via-white/10 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/26 via-black/8 to-transparent" />
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_15%,rgba(196,170,98,.14),transparent_58%)]" />
           </div>
         </div>

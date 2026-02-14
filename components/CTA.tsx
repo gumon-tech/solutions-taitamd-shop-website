@@ -9,7 +9,7 @@ export default function CTA() {
     <section className="ui-section">
       <Reveal>
         <div className="glass rounded-[28px] p-7 md:p-10 shadow-glow overflow-hidden relative">
-          <div className="absolute inset-0 opacity-50 bg-[radial-gradient(600px_280px_at_20%_0%,rgba(214,179,106,0.22),rgba(0,0,0,0)),radial-gradient(550px_260px_at_85%_20%,rgba(255,77,141,0.18),rgba(0,0,0,0))]" />
+          <div className="absolute inset-0 opacity-50 bg-[radial-gradient(600px_280px_at_20%_0%,rgba(214,179,106,0.22),rgba(0,0,0,0)),radial-gradient(550px_260px_at_85%_20%,rgba(127,163,105,0.16),rgba(0,0,0,0))]" />
           <div className="relative grid md:grid-cols-12 gap-6 items-center">
             <div className="md:col-span-7">
               <p className="text-xs tracking-[0.28em] uppercase text-mist">
@@ -37,7 +37,7 @@ export default function CTA() {
                 )}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center justify-center rounded-2xl bg-white/60 border border-ink/16 px-6 py-3 text-sm font-semibold text-ink/90 hover:bg-white/75 transition"
+                className="inline-flex items-center justify-center rounded-2xl bg-ink/8 border border-gold/20 px-6 py-3 text-sm font-semibold text-ink/90 hover:bg-ink/12 transition"
               >
                 WhatsApp
               </a>
