@@ -5,7 +5,14 @@
 /* ===== Global Theme — Reference Green Hero ===== */
 :root {
   color-scheme: dark;
-  --olive-strong: #c8b07c;
+  --olive-strong: #e5ca83;
+  --emerald-900: #042e2c;
+  --emerald-800: #0a4e4d;
+  --emerald-700: #0f6662;
+  --gold-soft: #c8b07c;
+  --gold-bright: #e2ce9a;
+  --bg-lock-top: rgba(88, 128, 78, 0.58);
+  --bg-lock-bottom: rgba(52, 92, 63, 0.66);
 
   /* Navbar offset (fix overlap on mobile) */
   --nav-height: 120px;
@@ -37,33 +44,45 @@ body {
 }
 
 /* ===== Background (Reference Green Hero) ===== */
+.bg-wrap {
+  position: relative;
+  isolation: isolate;
+}
+
 .bg-wrap::before {
   content: "";
   position: fixed;
   inset: 0;
   z-index: -3;
   background:
-    linear-gradient(rgba(20, 165, 52, 0.78), rgba(10, 95, 31, 0.88)),
-    radial-gradient(1200px 760px at 18% -8%, rgba(98, 192, 92, 0.28), rgba(0, 0, 0, 0) 62%),
-    radial-gradient(1000px 700px at 82% 14%, rgba(200, 176, 124, 0.16), rgba(0, 0, 0, 0) 68%),
-    radial-gradient(900px 600px at 50% 95%, rgba(9, 67, 22, 0.48), rgba(0, 0, 0, 0) 72%);
-  background-size: auto, auto, auto, cover;
-  background-position: center;
+    radial-gradient(1300px 760px at 10% -20%, rgba(171, 193, 116, 0.34), rgba(0, 0, 0, 0) 62%),
+    radial-gradient(1120px 720px at 88% 20%, rgba(238, 216, 156, 0.34), rgba(0, 0, 0, 0) 68%),
+    radial-gradient(980px 580px at 52% 110%, rgba(67, 102, 63, 0.24), rgba(0, 0, 0, 0) 72%),
+    linear-gradient(165deg, rgba(151, 178, 106, 0.62) 0%, rgba(106, 148, 90, 0.68) 38%, rgba(66, 110, 71, 0.74) 100%),
+    linear-gradient(var(--bg-lock-top), var(--bg-lock-bottom));
+  background-size: auto, auto, auto, auto, auto;
+  background-position: 0 0, 0 0, 0 0, center, center;
   background-repeat: no-repeat;
 }
 
 .bg-wrap::after {
   content: "";
   position: fixed;
-  inset: -18%;
+  inset: 0;
   z-index: -2;
-  opacity: 0.5;
+  opacity: 0.64;
   background:
-    radial-gradient(closest-side, rgba(200, 176, 124, 0.16), rgba(0, 0, 0, 0) 62%),
-    radial-gradient(closest-side, rgba(127, 155, 82, 0.22), rgba(0, 0, 0, 0) 64%),
-    radial-gradient(closest-side, rgba(8, 58, 21, 0.34), rgba(0, 0, 0, 0) 66%);
-  filter: blur(32px);
-  animation: sweep 60s linear infinite;
+    radial-gradient(900px 440px at 62% 0%, rgba(248, 220, 150, 0.18), rgba(0, 0, 0, 0) 72%),
+    radial-gradient(circle at 10% 94%, rgba(238, 216, 156, 0.3), rgba(0, 0, 0, 0) 28%),
+    radial-gradient(circle at 22% 88%, rgba(238, 216, 156, 0.27), rgba(0, 0, 0, 0) 22%),
+    radial-gradient(circle at 36% 92%, rgba(238, 216, 156, 0.22), rgba(0, 0, 0, 0) 26%),
+    radial-gradient(circle at 50% 90%, rgba(238, 216, 156, 0.28), rgba(0, 0, 0, 0) 24%),
+    radial-gradient(circle at 66% 92%, rgba(238, 216, 156, 0.24), rgba(0, 0, 0, 0) 24%),
+    radial-gradient(circle at 82% 89%, rgba(238, 216, 156, 0.27), rgba(0, 0, 0, 0) 22%),
+    radial-gradient(circle at 94% 95%, rgba(238, 216, 156, 0.22), rgba(0, 0, 0, 0) 26%),
+    radial-gradient(1800px 520px at 50% 105%, rgba(84, 120, 64, 0.26), rgba(0, 0, 0, 0) 74%);
+  filter: blur(22px);
+  animation: sweep 80s linear infinite;
 }
 
 @keyframes sweep {
@@ -81,21 +100,25 @@ body {
   inset: 0;
   z-index: -1;
   background-image:
-    linear-gradient(to right, rgba(200, 176, 124, 0.08) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(200, 176, 124, 0.07) 1px, transparent 1px);
-  background-size: 72px 72px;
-  mask-image: radial-gradient(ellipse at 50% 18%, black 0%, transparent 72%);
-  -webkit-mask-image: radial-gradient(ellipse at 50% 18%, black 0%, transparent 72%);
+    radial-gradient(120% 80% at 50% 116%, rgba(0, 0, 0, 0) 67%, rgba(238, 216, 156, 0.3) 68%, rgba(0, 0, 0, 0) 69%),
+    radial-gradient(120% 80% at 50% 120%, rgba(0, 0, 0, 0) 70%, rgba(238, 216, 156, 0.24) 71%, rgba(0, 0, 0, 0) 72%),
+    linear-gradient(to right, rgba(238, 216, 156, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(238, 216, 156, 0.08) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 96px 96px, 96px 96px;
+  mask-image: radial-gradient(ellipse at 50% 16%, black 0%, transparent 74%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 16%, black 0%, transparent 74%);
   pointer-events: none;
 }
 
 /* ===== Glass / Surfaces (dark luxe) ===== */
 .glass {
-  background: rgba(7, 55, 22, 0.6);
-  border: 1px solid rgba(200, 176, 124, 0.24);
-  box-shadow: 0 12px 34px rgba(5, 32, 12, 0.38);
-  backdrop-filter: blur(12px) saturate(116%);
-  -webkit-backdrop-filter: blur(12px) saturate(116%);
+  background:
+    linear-gradient(150deg, rgba(108, 146, 84, 0.44), rgba(63, 102, 69, 0.38)),
+    radial-gradient(420px 180px at 10% 0, rgba(238, 216, 156, 0.2), rgba(0, 0, 0, 0));
+  border: 1px solid rgba(238, 216, 156, 0.4);
+  box-shadow: 0 10px 24px rgba(34, 56, 32, 0.24);
+  backdrop-filter: blur(14px) saturate(120%);
+  -webkit-backdrop-filter: blur(14px) saturate(120%);
 }
 
 /* ===== Button shimmer (subtle) ===== */
@@ -103,10 +126,10 @@ body {
   position: relative;
   overflow: hidden;
   isolation: isolate;
-  background: #0d4318 !important;
+  background: #6e8d52 !important;
   color: #f2f4e8 !important;
-  border: 1px solid rgba(200, 176, 124, 0.42) !important;
-  box-shadow: 0 10px 26px rgba(5, 32, 12, 0.42);
+  border: 1px solid rgba(238, 216, 156, 0.62) !important;
+  box-shadow: 0 10px 24px rgba(34, 56, 32, 0.26);
   animation: cta-breath 2.8s ease-in-out infinite;
   transition: transform 180ms ease, box-shadow 220ms ease, filter 220ms ease;
 }
@@ -118,7 +141,7 @@ body {
   border-radius: inherit;
   pointer-events: none;
   z-index: 0;
-  background: radial-gradient(circle at 20% 25%, rgba(200, 176, 124, 0.22), transparent 40%);
+  background: radial-gradient(circle at 20% 25%, rgba(238, 216, 156, 0.34), transparent 42%);
   opacity: 0.5;
   animation: cta-glint 3.4s ease-in-out infinite;
 }
@@ -129,9 +152,9 @@ body {
 }
 
 .btn-shine:hover {
-  background: #11511d !important;
+  background: #7d9e5f !important;
   transform: translateY(-1px);
-  box-shadow: 0 15px 32px rgba(5, 32, 12, 0.54);
+  box-shadow: 0 14px 30px rgba(34, 56, 32, 0.32);
   filter: saturate(1.08);
 }
 
@@ -156,8 +179,8 @@ body {
   width: 40%;
   height: 180%;
   transform: skewX(-18deg);
-  background: linear-gradient(90deg, transparent, rgba(212, 188, 138, 0.3), transparent);
-  opacity: 0.3;
+  background: linear-gradient(90deg, transparent, rgba(248, 220, 150, 0.62), transparent);
+  opacity: 0.48;
   animation: shimmer 2.8s linear infinite;
 }
 
@@ -208,11 +231,11 @@ body {
 @keyframes cta-breath {
   0%,
   100% {
-    box-shadow: 0 10px 26px rgba(5, 32, 12, 0.42);
+    box-shadow: 0 0 0 1px rgba(238, 216, 156, 0.24), 0 10px 24px rgba(34, 56, 32, 0.26);
   }
 
   50% {
-    box-shadow: 0 14px 34px rgba(5, 32, 12, 0.56);
+    box-shadow: 0 0 0 1px rgba(238, 216, 156, 0.34), 0 14px 30px rgba(34, 56, 32, 0.34);
   }
 }
 
