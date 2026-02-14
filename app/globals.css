@@ -6,6 +6,9 @@
 :root {
   color-scheme: dark;
   --olive-strong: #c8b07c;
+  /* Background lock: keep this green theme stable */
+  --bg-lock-top: rgba(20, 165, 52, 0.74);
+  --bg-lock-bottom: rgba(10, 95, 31, 0.84);
 
   /* Navbar offset (fix overlap on mobile) */
   --nav-height: 120px;
@@ -43,11 +46,12 @@ body {
   inset: 0;
   z-index: -3;
   background:
-    linear-gradient(rgba(20, 165, 52, 0.78), rgba(10, 95, 31, 0.88)),
+    linear-gradient(var(--bg-lock-top), var(--bg-lock-bottom)),
     radial-gradient(1200px 760px at 18% -8%, rgba(98, 192, 92, 0.28), rgba(0, 0, 0, 0) 62%),
     radial-gradient(1000px 700px at 82% 14%, rgba(200, 176, 124, 0.16), rgba(0, 0, 0, 0) 68%),
-    radial-gradient(900px 600px at 50% 95%, rgba(9, 67, 22, 0.48), rgba(0, 0, 0, 0) 72%);
-  background-size: auto, auto, auto, cover;
+    radial-gradient(900px 600px at 50% 95%, rgba(9, 67, 22, 0.38), rgba(0, 0, 0, 0) 72%),
+    url("/images/treatwell/treatwell-1628965.jpg");
+  background-size: auto, auto, auto, auto, cover;
   background-position: center;
   background-repeat: no-repeat;
 }
