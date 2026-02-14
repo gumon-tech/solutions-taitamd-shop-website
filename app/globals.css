@@ -5,10 +5,14 @@
 /* ===== Global Theme — Reference Green Hero ===== */
 :root {
   color-scheme: dark;
-  --olive-strong: #c8b07c;
-  /* Background lock: keep this green theme stable */
-  --bg-lock-top: rgba(20, 165, 52, 0.74);
-  --bg-lock-bottom: rgba(10, 95, 31, 0.84);
+  --olive-strong: #d7be87;
+  --emerald-900: #042e2c;
+  --emerald-800: #0a4e4d;
+  --emerald-700: #0f6662;
+  --gold-soft: #c8b07c;
+  --gold-bright: #e2ce9a;
+  --bg-lock-top: rgba(16, 86, 84, 0.72);
+  --bg-lock-bottom: rgba(8, 52, 54, 0.8);
 
   /* Navbar offset (fix overlap on mobile) */
   --nav-height: 120px;
@@ -40,34 +44,44 @@ body {
 }
 
 /* ===== Background (Reference Green Hero) ===== */
+.bg-wrap {
+  position: relative;
+  isolation: isolate;
+}
+
 .bg-wrap::before {
   content: "";
   position: fixed;
   inset: 0;
   z-index: -3;
   background:
-    linear-gradient(var(--bg-lock-top), var(--bg-lock-bottom)),
-    radial-gradient(1200px 760px at 18% -8%, rgba(98, 192, 92, 0.28), rgba(0, 0, 0, 0) 62%),
-    radial-gradient(1000px 700px at 82% 14%, rgba(200, 176, 124, 0.16), rgba(0, 0, 0, 0) 68%),
-    radial-gradient(900px 600px at 50% 95%, rgba(9, 67, 22, 0.38), rgba(0, 0, 0, 0) 72%),
-    url("/images/treatwell/treatwell-1628965.jpg");
-  background-size: auto, auto, auto, auto, cover;
-  background-position: center;
+    radial-gradient(1300px 760px at 10% -20%, rgba(60, 180, 165, 0.34), rgba(0, 0, 0, 0) 62%),
+    radial-gradient(1120px 720px at 88% 20%, rgba(226, 206, 154, 0.2), rgba(0, 0, 0, 0) 68%),
+    radial-gradient(980px 580px at 52% 110%, rgba(10, 67, 70, 0.34), rgba(0, 0, 0, 0) 72%),
+    linear-gradient(168deg, rgba(48, 145, 138, 0.66) 0%, rgba(20, 104, 103, 0.74) 38%, rgba(10, 69, 72, 0.82) 100%),
+    linear-gradient(var(--bg-lock-top), var(--bg-lock-bottom));
+  background-size: auto, auto, auto, auto, auto;
+  background-position: 0 0, 0 0, 0 0, center, center;
   background-repeat: no-repeat;
 }
 
 .bg-wrap::after {
   content: "";
   position: fixed;
-  inset: -18%;
+  inset: 0;
   z-index: -2;
-  opacity: 0.5;
+  opacity: 0.58;
   background:
-    radial-gradient(closest-side, rgba(200, 176, 124, 0.16), rgba(0, 0, 0, 0) 62%),
-    radial-gradient(closest-side, rgba(127, 155, 82, 0.22), rgba(0, 0, 0, 0) 64%),
-    radial-gradient(closest-side, rgba(8, 58, 21, 0.34), rgba(0, 0, 0, 0) 66%);
-  filter: blur(32px);
-  animation: sweep 60s linear infinite;
+    radial-gradient(circle at 10% 94%, rgba(226, 206, 154, 0.22), rgba(0, 0, 0, 0) 28%),
+    radial-gradient(circle at 22% 88%, rgba(226, 206, 154, 0.2), rgba(0, 0, 0, 0) 22%),
+    radial-gradient(circle at 36% 92%, rgba(226, 206, 154, 0.16), rgba(0, 0, 0, 0) 26%),
+    radial-gradient(circle at 50% 90%, rgba(226, 206, 154, 0.2), rgba(0, 0, 0, 0) 24%),
+    radial-gradient(circle at 66% 92%, rgba(226, 206, 154, 0.18), rgba(0, 0, 0, 0) 24%),
+    radial-gradient(circle at 82% 89%, rgba(226, 206, 154, 0.2), rgba(0, 0, 0, 0) 22%),
+    radial-gradient(circle at 94% 95%, rgba(226, 206, 154, 0.16), rgba(0, 0, 0, 0) 26%),
+    radial-gradient(1800px 520px at 50% 105%, rgba(19, 78, 78, 0.3), rgba(0, 0, 0, 0) 74%);
+  filter: blur(22px);
+  animation: sweep 80s linear infinite;
 }
 
 @keyframes sweep {
@@ -85,21 +99,25 @@ body {
   inset: 0;
   z-index: -1;
   background-image:
-    linear-gradient(to right, rgba(200, 176, 124, 0.08) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(200, 176, 124, 0.07) 1px, transparent 1px);
-  background-size: 72px 72px;
-  mask-image: radial-gradient(ellipse at 50% 18%, black 0%, transparent 72%);
-  -webkit-mask-image: radial-gradient(ellipse at 50% 18%, black 0%, transparent 72%);
+    radial-gradient(120% 80% at 50% 116%, rgba(0, 0, 0, 0) 67%, rgba(226, 206, 154, 0.18) 68%, rgba(0, 0, 0, 0) 69%),
+    radial-gradient(120% 80% at 50% 120%, rgba(0, 0, 0, 0) 70%, rgba(226, 206, 154, 0.14) 71%, rgba(0, 0, 0, 0) 72%),
+    linear-gradient(to right, rgba(226, 206, 154, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(226, 206, 154, 0.03) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 96px 96px, 96px 96px;
+  mask-image: radial-gradient(ellipse at 50% 16%, black 0%, transparent 74%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 16%, black 0%, transparent 74%);
   pointer-events: none;
 }
 
 /* ===== Glass / Surfaces (dark luxe) ===== */
 .glass {
-  background: rgba(7, 55, 22, 0.6);
-  border: 1px solid rgba(200, 176, 124, 0.24);
-  box-shadow: 0 12px 34px rgba(5, 32, 12, 0.38);
-  backdrop-filter: blur(12px) saturate(116%);
-  -webkit-backdrop-filter: blur(12px) saturate(116%);
+  background:
+    linear-gradient(150deg, rgba(24, 106, 102, 0.5), rgba(12, 73, 74, 0.46)),
+    radial-gradient(420px 180px at 10% 0, rgba(226, 206, 154, 0.1), rgba(0, 0, 0, 0));
+  border: 1px solid rgba(226, 206, 154, 0.28);
+  box-shadow: 0 12px 30px rgba(7, 37, 40, 0.32);
+  backdrop-filter: blur(14px) saturate(120%);
+  -webkit-backdrop-filter: blur(14px) saturate(120%);
 }
 
 /* ===== Button shimmer (subtle) ===== */
@@ -107,10 +125,10 @@ body {
   position: relative;
   overflow: hidden;
   isolation: isolate;
-  background: #0d4318 !important;
+  background: #1b6f6b !important;
   color: #f2f4e8 !important;
-  border: 1px solid rgba(200, 176, 124, 0.42) !important;
-  box-shadow: 0 10px 26px rgba(5, 32, 12, 0.42);
+  border: 1px solid rgba(226, 206, 154, 0.46) !important;
+  box-shadow: 0 10px 24px rgba(7, 37, 40, 0.34);
   animation: cta-breath 2.8s ease-in-out infinite;
   transition: transform 180ms ease, box-shadow 220ms ease, filter 220ms ease;
 }
@@ -133,9 +151,9 @@ body {
 }
 
 .btn-shine:hover {
-  background: #11511d !important;
+  background: #21807b !important;
   transform: translateY(-1px);
-  box-shadow: 0 15px 32px rgba(5, 32, 12, 0.54);
+  box-shadow: 0 14px 30px rgba(7, 37, 40, 0.4);
   filter: saturate(1.08);
 }
 
