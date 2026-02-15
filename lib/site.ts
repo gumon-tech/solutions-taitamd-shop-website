@@ -1,5 +1,5 @@
 export const SITE = {
-  baseUrl: "https://taitam-d.gumon.dev",
+  baseUrl: "https://taitam-d.com",
   name: "TaiTam‑D Beauty & Spa",
   tagline: "Relax • Refresh • Recharge",
   description:
