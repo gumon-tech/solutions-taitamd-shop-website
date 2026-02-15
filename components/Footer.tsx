@@ -7,10 +7,13 @@ export default function Footer() {
   return (
     <footer className="mt-12 border-t border-ink/10">
       <div className="mx-auto max-w-7xl px-5 md:px-8 py-12">
-        <div className="grid gap-10 md:grid-cols-12">
+        <div className="grid gap-12 md:grid-cols-12">
           <div className="md:col-span-5">
             <div className="text-lg font-semibold">{SITE.name}</div>
-            <p className="mt-2 text-sm text-mist max-w-xl">{SITE.description}</p>
+            <p className="mt-2 text-sm text-mist max-w-xl md:hidden">
+              Thai-inspired beauty & wellness in King&apos;s Cross, London.
+            </p>
+            <p className="mt-2 text-sm text-mist max-w-xl hidden md:block">{SITE.description}</p>
 
             <p className="mt-4 text-sm text-mist leading-relaxed">
               <span className="text-ink">Address:</span> {SITE.address}

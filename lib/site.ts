@@ -11,6 +11,8 @@ export const SITE = {
 
   // Booking
   treatwell: "https://www.treatwell.co.uk/place/taitam-d-massage-beauty/",
+  treatwellWidget:
+    "https://widget.treatwell.co.uk/place/taitam-d-massage-beauty/?utm_source=partner&utm_medium=salon-site-embedded-book-now-widget",
 
   // Direct chat / enquiries
   whatsappNumber: "447882359499", // E.164 without "+"
