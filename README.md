@@ -1,4 +1,4 @@
-# TaiTam‑D — Luxury Next.js Site (Replacement for taitam-d.com)
+# Taitam‑D — Luxury Next.js Site (Replacement for taitam-d.com)
 
 This project is a **high-end, animation-heavy** marketing site designed to replace the current taitam-d.com with **WhatsApp-first booking**.
 
