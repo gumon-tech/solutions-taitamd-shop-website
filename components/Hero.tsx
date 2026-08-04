@@ -108,7 +108,7 @@ export default function Hero() {
               </div>
 
               <div className="mt-4 flex items-center justify-between gap-4 text-xs text-ink/72">
-                <span>Reserve by WhatsApp · 07882359499</span>
+                <span>Reserve by WhatsApp · {SITE.whatsappDisplay}</span>
                 <span className="inline-flex h-8 w-8 items-center justify-center rounded-xl bg-black/16 border border-white/14 animate-floaty">
                   ✦
                 </span>

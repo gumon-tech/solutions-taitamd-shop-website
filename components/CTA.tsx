@@ -33,11 +33,7 @@ export default function CTA() {
               </a>
 
               <a
-                href={buildWhatsAppLink(
-                  "Hi TaiTam-D, I’d like to ask about availability and current offers."
-                )}
-                target="_blank"
-                rel="noreferrer"
+                href={`tel:${SITE.phone}`}
                 className="inline-flex items-center justify-center rounded-2xl bg-ink/8 border border-gold/20 px-6 py-3 text-sm font-semibold text-ink/90 hover:bg-ink/12 transition"
               >
                 Call {SITE.phone}

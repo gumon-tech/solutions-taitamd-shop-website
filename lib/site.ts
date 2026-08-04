@@ -6,7 +6,7 @@ export const SITE = {
     "Thai‑inspired beauty & wellness in King’s Cross, London — massage, hair, nails, waxing, facials & more. Established in 2009. Message us on WhatsApp to reserve your treatment.",
   address: "72-74 Caledonian Road, King's Cross, London, N1 9DN",
   hours: "Mon – Sun 10:30 AM – 9:00 PM",
-  phone: "07882359499",
+  phone: "07564292247",
   email: "info@taitam-d.com",
 
   // Direct chat / enquiries
