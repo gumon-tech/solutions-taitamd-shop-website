@@ -50,7 +50,7 @@ export default function Story() {
                   ["Technique first", "Pressure, pacing, and precision — tailored every time."],
                   ["Thai + modern", "Traditional craft, delivered with London-level discipline."],
                   ["Detail obsession", "Finishing, hygiene, and comfort — no shortcuts."],
-                  ["Zero-friction booking", "Live availability + payment via Treatwell."]
+                  ["Zero-friction booking", "Message us on WhatsApp and we’ll take care of the details."]
                 ].map(([t, d]) => (
                   <div key={t} className="rounded-2xl bg-ink/5 border border-ink/10 p-5">
                     <div className="font-semibold text-ink/95">{t}</div>
@@ -135,7 +135,7 @@ export default function Story() {
                 {[
                   ["Established", "2009"],
                   ["Location", "King’s Cross"],
-                  ["Bookings", "Treatwell"]
+                    ["Bookings", "WhatsApp"]
                 ].map(([k, v]) => (
                   <div key={k} className="rounded-2xl bg-ink/5 border border-ink/10 p-5">
                     <div className="text-xs tracking-[0.22em] uppercase text-mist">{k}</div>

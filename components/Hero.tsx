@@ -3,9 +3,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ArrowUpRight, MapPin, Clock3, PhoneCall } from "lucide-react";
+import { ArrowUpRight, MapPin, Clock3, PhoneCall, MessageCircle } from "lucide-react";
 import { SITE } from "@/lib/site";
 import Reveal from "./Reveal";
+import { buildWhatsAppLink } from "@/lib/whatsapp";
 
 export default function Hero() {
   return (
@@ -26,22 +27,24 @@ export default function Hero() {
             </h1>
             <p className="ui-lead">
               A calm oasis in King’s Cross — massage, hair, nails, waxing and facials. Thoughtful technique, gentle atmosphere.
-              Book online in seconds.
+              Message us on WhatsApp and we’ll help you find the right treatment.
             </p>
           </Reveal>
 
           <div className="mt-8 flex flex-col sm:flex-row gap-3">
             <Link
-              href="/services"
+              href={buildWhatsAppLink("Hi TaiTam-D, I’d like to book a treatment. Please share availability and current offers.")}
+              target="_blank"
+              rel="noreferrer"
               className="btn-shine btn-epic inline-flex items-center justify-center gap-2 rounded-2xl bg-ink/5 border border-ink/12 px-5 py-3 text-sm font-semibold hover:bg-ink/8 transition shadow-glow"
             >
-              Book / Service Menu <ArrowUpRight className="h-4 w-4 text-gold" />
+              <MessageCircle className="h-4 w-4 text-gold" /> WhatsApp to book <ArrowUpRight className="h-4 w-4 text-gold" />
             </Link>
             <Link
-              href="/book"
+              href="#promotions"
               className="inline-flex items-center justify-center gap-2 rounded-2xl bg-transparent border border-ink/12 px-5 py-3 text-sm font-semibold hover:bg-ink/5 transition"
             >
-              Special Offer
+              See promotions
             </Link>
           </div>
 
@@ -77,7 +80,7 @@ export default function Hero() {
           >
             <div className="glass rounded-[28px] p-5 shadow-glow overflow-hidden">
               <div className="relative rounded-[22px] overflow-hidden border border-ink/10">
-                <Image src="/images/hero/hero-16x9-1600x900.jpg" alt="Luxury spa waiting area" fill priority className="object-cover opacity-[0.56]" />
+                <Image src="/images/hero/taitamd-gemini-hero.jpg" alt="Serene TaiTam-D massage room with warm natural light" fill priority className="object-cover opacity-[0.78]" />
                 <div className="absolute inset-0 bg-[radial-gradient(700px_420px_at_20%_10%,rgba(200,176,124,0.2),rgba(0,0,0,0)),radial-gradient(600px_420px_at_85%_25%,rgba(127,155,82,0.16),rgba(0,0,0,0)),linear-gradient(135deg,rgba(15,51,20,0.62),rgba(11,42,16,0.38))]" />
                 <div className="relative p-6 md:p-7">
                   <div className="text-xs tracking-[0.32em] uppercase text-ink/72">Signature experience</div>
@@ -90,10 +93,10 @@ export default function Hero() {
 
                   <div className="mt-6 grid grid-cols-2 gap-3">
                     {[
-                      { k: "4.7/5", v: "rating on Treatwell" },
-                      { k: "6k+", v: "reviews" },
+                      { k: "Since", v: "2009" },
                       { k: "5 min", v: "from King’s Cross" },
-                      { k: "Mon–Sun", v: "open daily" }
+                      { k: "Daily", v: "10:30am – 9pm" },
+                      { k: "WhatsApp", v: "fast replies" }
                     ].map((b) => (
                       <div key={b.k} className="rounded-2xl bg-black/16 border border-white/14 p-4">
                         <div className="text-xl font-semibold text-gold">{b.k}</div>
@@ -105,7 +108,7 @@ export default function Hero() {
               </div>
 
               <div className="mt-4 flex items-center justify-between gap-4 text-xs text-ink/72">
-                <span>Booking & payments are handled securely via Treatwell.</span>
+                <span>Reserve by WhatsApp · 07882359499</span>
                 <span className="inline-flex h-8 w-8 items-center justify-center rounded-xl bg-black/16 border border-white/14 animate-floaty">
                   ✦
                 </span>

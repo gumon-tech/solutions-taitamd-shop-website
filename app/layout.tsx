@@ -1,11 +1,8 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import { SITE } from "@/lib/site";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-
-const inter = Inter({ subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.baseUrl),
@@ -28,7 +25,7 @@ export const metadata: Metadata = {
     "facial",
     "King's Cross",
     "London",
-    "Treatwell",
+    "WhatsApp booking",
   ],
 
   alternates: {
@@ -49,12 +46,12 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#6E8D52"
+  themeColor: "#123A2B"
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={inter.className}>
+    <html lang="en">
       <body className="bg-wrap min-h-screen">
         <div className="gridlines" aria-hidden />
         <Navbar />

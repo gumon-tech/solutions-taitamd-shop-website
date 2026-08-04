@@ -15,7 +15,7 @@ export default function ServicesPage() {
           Everything you need — <span className="text-gold">crafted</span> with precision.
         </h1>
         <p className="mt-5 max-w-2xl text-ink/80">
-          Browse categories and book online via Treatwell. We keep the site fast and focused — the booking engine does the heavy lifting.
+          Browse categories, then message us on WhatsApp for availability, advice and the latest promotions.
         </p>
       </header>
 

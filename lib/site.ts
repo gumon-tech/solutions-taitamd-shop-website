@@ -3,20 +3,17 @@ export const SITE = {
   name: "TaiTam‑D Beauty & Spa",
   tagline: "Relax • Refresh • Recharge",
   description:
-    "Thai‑inspired beauty & wellness in King’s Cross, London — massage, hair, nails, waxing, facials & more. Established in 2009. Book online via Treatwell.",
+    "Thai‑inspired beauty & wellness in King’s Cross, London — massage, hair, nails, waxing, facials & more. Established in 2009. Message us on WhatsApp to reserve your treatment.",
   address: "72-74 Caledonian Road, King's Cross, London, N1 9DN",
   hours: "Mon – Sun 10:30 AM – 9:00 PM",
-  phone: "020 7278 0906",
+  phone: "07882359499",
   email: "info@taitam-d.com",
-
-  // Booking
-  treatwell: "https://www.treatwell.co.uk/place/taitam-d-massage-beauty/",
-  treatwellWidget:
-    "https://widget.treatwell.co.uk/place/taitam-d-massage-beauty/?utm_source=partner&utm_medium=salon-site-embedded-book-now-widget",
 
   // Direct chat / enquiries
   whatsappNumber: "447882359499", // E.164 without "+"
-  whatsappDisplay: "+44 7882 359499",
+  whatsappDisplay: "07882359499",
+  whatsappQr: "/images/whatsapp/whatsapp-qr-only.jpg",
+  whatsappLink: "https://wa.me/qr/YIN5KFQPKWI2F1",
 
   // Academy
   academy: "https://taitamd-beautyacademy.com/",

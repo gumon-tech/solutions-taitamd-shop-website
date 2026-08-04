@@ -1,10 +1,10 @@
 import Reveal from "./Reveal";
 import { SITE } from "@/lib/site";
 import CTA from "./CTA";
-import SocialShareBar from "./SocialShareBar";
 import FollowUs from "./FollowUs";
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowUpRight, Clock3, MapPin, MessageCircle, Phone } from "lucide-react";
 
 export default function Contact() {
   const q = encodeURIComponent(SITE.address);
@@ -13,127 +13,35 @@ export default function Contact() {
   return (
     <section className="pt-8 md:pt-10">
       <Reveal>
-        <p className="text-xs tracking-[0.28em] uppercase text-mist">Contact</p>
-        <h1 className="mt-3 text-4xl md:text-6xl font-semibold leading-[1.05]">
-          Let’s plan your <span className="text-gold">reset</span>.
-        </h1>
-        <p className="mt-6 text-mist max-w-2xl">
-          For bookings, use{" "}
-          <Link href={SITE.treatwell} className="underline decoration-ink/30 underline-offset-4 hover:decoration-ink/60">
-            Treatwell
-          </Link>{" "}
-          for live availability and secure payments (rated 4.7 with 6,480+ reviews). For quick questions, call or email us below.
-        </p>
-
-        <div className="mt-7">
-          <div className="text-xs tracking-[0.28em] uppercase text-mist">Share</div>
-          <div className="mt-3">
-            <SocialShareBar />
-          </div>
+        <div className="grid items-end gap-6 lg:grid-cols-[1fr_360px]">
+          <div><p className="text-xs uppercase tracking-[0.28em] text-mist">Contact TaiTam-D</p><h1 className="mt-3 max-w-3xl text-4xl font-semibold leading-[1.02] md:text-6xl">Make time for your <span className="text-gold">reset.</span></h1><p className="mt-5 max-w-2xl text-sm leading-relaxed text-mist md:text-base">Tell us what you need, and our team will help you choose the right treatment and time. WhatsApp is the quickest way to reach us.</p></div>
+          <a href={SITE.whatsappLink} target="_blank" rel="noreferrer" className="btn-shine inline-flex items-center justify-center gap-2 rounded-2xl px-5 py-3.5 text-sm font-semibold"><MessageCircle className="h-4 w-4" /> Start on WhatsApp <ArrowUpRight className="h-4 w-4" /></a>
         </div>
-
-        <div className="mt-6">
-          <FollowUs />
-        </div>
+        <div className="mt-6"><FollowUs /></div>
       </Reveal>
 
-      <div className="mt-10 grid lg:grid-cols-12 gap-6">
-        <Reveal className="lg:col-span-5">
-          <div className="glass rounded-[28px] p-7 md:p-9">
-            <div className="space-y-4 text-sm">
-              <div className="rounded-2xl bg-[radial-gradient(700px_240px_at_20%_0%,rgba(214,179,106,0.18),rgba(0,0,0,0)),radial-gradient(700px_240px_at_90%_60%,rgba(127,153,82,0.18),rgba(0,0,0,0))] border border-ink/12 p-5 shadow-glow">
-                <div className="text-xs tracking-[0.22em] uppercase text-mist">Phone</div>
-                <Link
-                  href={`tel:${SITE.phone.replace(/\s+/g, "")}`}
-                  className="mt-2 inline-flex text-lg font-semibold hover:opacity-90"
-                >
-                  {SITE.phone}
-                </Link>
-                <div className="mt-2 text-xs text-mist">
-                  Open daily {SITE.hours.replace("Mon – Sun ", "")} · Near King’s Cross
-                </div>
-              </div>
-
-              <div className="rounded-2xl bg-ink/5 border border-ink/10 p-5">
-                <div className="text-xs tracking-[0.22em] uppercase text-mist">Email</div>
-                <Link href={`mailto:${SITE.email}`} className="mt-2 inline-flex text-ink/90 hover:opacity-90">
-                  {SITE.email}
-                </Link>
-              </div>
-
-              <div className="rounded-2xl bg-ink/5 border border-ink/10 p-5">
-                <div className="text-xs tracking-[0.22em] uppercase text-mist">Hours</div>
-                <div className="mt-2 text-ink/90">{SITE.hours}</div>
-              </div>
-
-              <div className="rounded-2xl bg-ink/5 border border-ink/10 p-5">
-                <div className="text-xs tracking-[0.22em] uppercase text-mist">Address</div>
-                <div className="mt-2 text-ink/90">{SITE.address}</div>
-                <div className="mt-3">
-                  <Link
-                    href={SITE.social.googleMaps}
-                    className="inline-flex items-center gap-2 rounded-full border border-gold/25 bg-ink/8 px-3 py-1.5 text-xs text-ink/90 hover:bg-ink/12"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Directions
-                    <span aria-hidden>↗</span>
-                  </Link>
-                </div>
-              </div>
-            </div>
+      <div className="mt-10 grid gap-6 lg:grid-cols-12">
+        <Reveal className="lg:col-span-7">
+          <div className="glass overflow-hidden rounded-[30px] border border-gold/20 shadow-glow">
+            <div className="relative aspect-[16/9]"><Image src="/images/contact/contact-ritual-gemini.jpg" alt="Calm spa ritual with towels, frangipani and an emerald bowl" fill className="object-cover" priority /><div className="absolute inset-0 bg-gradient-to-t from-[#082f20]/70 via-transparent to-transparent" /><div className="absolute bottom-5 left-5 right-5 text-white"><p className="text-[10px] uppercase tracking-[0.25em] text-[#e8cf90]">King’s Cross · London</p><p className="mt-2 text-xl font-semibold md:text-2xl">A calm welcome, five minutes from the station.</p></div></div>
+            <div className="grid gap-3 p-5 sm:grid-cols-2 md:p-6"><div className="rounded-2xl bg-ink/5 p-4"><div className="flex items-center gap-2 text-xs uppercase tracking-[0.18em] text-mist"><MapPin className="h-4 w-4 text-gold" /> Visit us</div><p className="mt-2 text-sm leading-relaxed">{SITE.address}</p><Link href={SITE.social.googleMaps} target="_blank" rel="noreferrer" className="mt-3 inline-flex items-center gap-1 text-xs text-gold underline underline-offset-4">Get directions <ArrowUpRight className="h-3 w-3" /></Link></div><div className="rounded-2xl bg-ink/5 p-4"><div className="flex items-center gap-2 text-xs uppercase tracking-[0.18em] text-mist"><Clock3 className="h-4 w-4 text-gold" /> Open daily</div><p className="mt-2 text-sm leading-relaxed">{SITE.hours}</p><Link href={`tel:${SITE.phone}`} className="mt-3 inline-flex items-center gap-1 text-xs text-gold underline underline-offset-4">Call {SITE.phone} <Phone className="h-3 w-3" /></Link></div></div>
           </div>
         </Reveal>
 
-        <Reveal className="lg:col-span-7" delay={0.05}>
-          <div className="space-y-4">
-            <div className="glass rounded-[28px] overflow-hidden border border-ink/10 relative map-tint">
-              <iframe
-                title="Map"
-                src={mapSrc}
-                className="w-full h-[420px] md:h-full min-h-[420px] map-tint__frame"
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
-              {/* Olive tint (keeps map fully clickable) */}
-              <div className="pointer-events-none absolute inset-0 map-tint__overlay" />
-              {/* Luxe light sweep */}
-              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(800px_320px_at_20%_0%,rgba(127,153,82,0.10),rgba(0,0,0,0)),radial-gradient(700px_300px_at_90%_70%,rgba(214,179,106,0.10),rgba(0,0,0,0))]" />
-            </div>
-
-            <div className="glass rounded-[28px] overflow-hidden border border-ink/10">
-              <div className="relative aspect-[21/9] sm:aspect-[3/2] md:aspect-[21/9]">
-                <Image
-                  src="/images/contact/storefront-21x9-1680x720.webp"
-                  alt="TaiTam‑D storefront on Caledonian Road"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 58vw, 680px"
-                  priority={false}
-                />
-                <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0)_0%,rgba(0,0,0,0.12)_100%)]" />
-              </div>
-              <div className="px-5 py-4">
-                <div className="flex flex-wrap items-center justify-between gap-3">
-                  <p className="text-xs tracking-[0.22em] uppercase text-mist">Storefront</p>
-                  <Link
-                    href={SITE.social.googleMaps}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-xs text-ink/80 underline decoration-ink/20 underline-offset-4 hover:decoration-ink/50"
-                  >
-                    Open in Google Maps
-                  </Link>
-                </div>
-              </div>
-            </div>
+        <Reveal className="lg:col-span-5" delay={0.06}>
+          <div className="h-full rounded-[30px] border border-[#d7c39a] bg-[#f5efe3] p-6 text-[#183b2b] shadow-[0_20px_48px_rgba(11,48,29,0.22)] md:p-8">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.26em] text-[#947239]">Scan to connect</p>
+            <h2 className="mt-3 text-3xl font-semibold leading-tight">Your next treatment is one message away.</h2>
+            <p className="mt-3 text-sm leading-relaxed text-[#5a6c61]">Scan the QR code or tap WhatsApp. Ask about the comeback offers, availability or the best treatment for you.</p>
+            <div className="mx-auto mt-6 max-w-[220px] rounded-[24px] bg-white p-3 shadow-[0_10px_24px_rgba(24,59,43,0.14)]"><Image src={SITE.whatsappQr} alt="WhatsApp QR code for TaiTam-D" width={380} height={380} className="h-auto w-full rounded-xl" /></div>
+            <a href={SITE.whatsappLink} target="_blank" rel="noreferrer" className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#183d2d] px-5 py-3 text-sm font-semibold text-[#f7f3e9] transition hover:bg-[#25563e]"><MessageCircle className="h-4 w-4 text-[#d7b874]" /> Open WhatsApp <ArrowUpRight className="h-4 w-4 text-[#d7b874]" /></a>
+            <p className="mt-3 text-center text-xs text-[#6d7b72]">{SITE.whatsappDisplay} · {SITE.email}</p>
           </div>
         </Reveal>
       </div>
 
-      <div className="mt-10">
-        <CTA />
-      </div>
+      <Reveal className="mt-6"><div className="glass overflow-hidden rounded-[30px] border border-ink/10"><iframe title="TaiTam-D location map" src={mapSrc} className="map-tint__frame block h-[300px] w-full md:h-[360px]" loading="lazy" referrerPolicy="no-referrer-when-downgrade" /></div></Reveal>
+      <div className="mt-10"><CTA /></div>
     </section>
   );
 }

@@ -1,8 +1,8 @@
 import Reveal from "./Reveal";
 
 const stats = [
-  { k: "4.7", v: "Treatwell rating" },
-  { k: "6,484", v: "verified reviews" },
+  { k: "16+", v: "years of craft" },
+  { k: "5 min", v: "from King’s Cross" },
   { k: "2009", v: "established" },
   { k: "7 days", v: "open weekly" }
 ];
@@ -20,7 +20,7 @@ export default function Awards() {
               Loved by thousands — <span className="text-gold">earned</span>, not claimed.
             </h2>
             <p className="mt-4 text-sm md:text-base text-mist max-w-2xl">
-              Our booking and reviews live on Treatwell — so the numbers are real and up to date.
+              A founder-led Thai beauty and wellness destination, open every day in the heart of King’s Cross.
             </p>
 
             <div className="mt-10 md:mt-11 grid sm:grid-cols-2 lg:grid-cols-4 gap-3">

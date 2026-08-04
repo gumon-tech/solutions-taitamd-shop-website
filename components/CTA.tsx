@@ -1,4 +1,3 @@
-import Link from "next/link";
 import Reveal from "./Reveal";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
 import { ArrowUpRight } from "lucide-react";
@@ -19,17 +18,19 @@ export default function CTA() {
                 Your next <span className="text-gold">exclusive</span> moment.
               </h2>
               <p className="mt-4 text-sm md:text-base text-mist max-w-2xl">
-                Tap to see live availability and confirm in minutes — bookings & payments handled securely via Treatwell.
+                Message us directly for availability, treatment advice and today’s promotions.
               </p>
             </div>
 
             <div className="md:col-span-5 flex flex-col sm:flex-row md:flex-col gap-3 md:items-end md:justify-center">
-              <Link
-                href="/book"
+              <a
+                href={SITE.whatsappLink}
+                target="_blank"
+                rel="noreferrer"
                 className="btn-shine btn-epic inline-flex items-center justify-center gap-2 rounded-2xl bg-ink/5 border border-ink/12 px-6 py-3.5 text-sm font-semibold hover:bg-ink/8 transition shadow-glow"
               >
-                Check availability <ArrowUpRight className="h-4 w-4 text-gold" />
-              </Link>
+                WhatsApp to book <ArrowUpRight className="h-4 w-4 text-gold" />
+              </a>
 
               <a
                 href={buildWhatsAppLink(
@@ -39,7 +40,7 @@ export default function CTA() {
                 rel="noreferrer"
                 className="inline-flex items-center justify-center rounded-2xl bg-ink/8 border border-gold/20 px-6 py-3 text-sm font-semibold text-ink/90 hover:bg-ink/12 transition"
               >
-                WhatsApp
+                Call {SITE.phone}
               </a>
 
               {/* Optional: gift-card CTA (ใช้ template ที่คุณมีอยู่แล้ว) */}

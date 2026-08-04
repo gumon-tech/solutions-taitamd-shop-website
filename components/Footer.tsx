@@ -38,7 +38,7 @@ export default function Footer() {
                   <Link href="/contact" className="hover:text-ink">Contact</Link>
                 </li>
                 <li>
-                  <Link href="/book" className="hover:text-ink">Book on Treatwell</Link>
+                  <Link href="/book" className="hover:text-ink">Book via WhatsApp</Link>
                 </li>
               </ul>
             </div>
@@ -67,7 +67,7 @@ export default function Footer() {
 
         <div className="mt-10 flex flex-col md:flex-row gap-3 md:items-center md:justify-between text-xs text-mist">
           <span>© {new Date().getFullYear()} {SITE.name}. All rights reserved.</span>
-          <span className="opacity-80">Bookings via Treatwell</span>
+          <span className="opacity-80">Bookings via WhatsApp · {SITE.whatsappDisplay}</span>
         </div>
       </div>
     </footer>

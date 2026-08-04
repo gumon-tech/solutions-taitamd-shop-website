@@ -25,7 +25,7 @@ const items = [
   {
     icon: Flame,
     title: "Fast booking. Zero friction.",
-    desc: "Availability and payments via Treatwell — book in minutes."
+    desc: "Message us on WhatsApp and we’ll help you choose a time."
   },
   {
     icon: Sparkles,

@@ -1,6 +1,6 @@
 # TaiTam‑D — Luxury Next.js Site (Replacement for taitam-d.com)
 
-This project is a **high-end, animation-heavy** marketing site designed to replace the current taitam-d.com while keeping **booking handled by Treatwell**.
+This project is a **high-end, animation-heavy** marketing site designed to replace the current taitam-d.com with **WhatsApp-first booking**.
 
 ## Tech
 - Next.js (App Router) + TypeScript
@@ -26,11 +26,11 @@ All business content is centralized in:
 Update:
 - name/description
 - address/hours/phone
-- Treatwell booking URL
+- WhatsApp booking link and QR code
 - service categories
 
 ## Notes
-- This site intentionally **does not duplicate Treatwell pricing/availability**. It links out to Treatwell for live booking.
+- Promotions are presented from the campaign artwork in `public/images/campaigns` and reservations open WhatsApp.
 - Academy remains a separate site: `https://taitamd-beautyacademy.com/`
 
 

@@ -1,6 +1,7 @@
 "use client";
 
-import { SERVICE_CATEGORIES, SITE } from "@/lib/site";
+import { SERVICE_CATEGORIES } from "@/lib/site";
+import { buildWhatsAppLink } from "@/lib/whatsapp";
 import Reveal from "./Reveal";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
@@ -41,19 +42,14 @@ export default function ServicesGrid() {
                 {/* Footer is pinned to the bottom for perfect alignment */}
                 <div className="mt-6 pt-4 border-t border-ink/10 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
                   <Link
-                    href="/book"
+                    href={buildWhatsAppLink(`Hi TaiTam-D, I’m interested in ${c.title}. Please share availability and prices.`)}
+                    target="_blank"
+                    rel="noreferrer"
                     className="btn-shine inline-flex items-center justify-center gap-2 rounded-xl bg-ink/5 border border-ink/12 px-4 py-2.5 text-sm font-semibold hover:bg-ink/8 transition"
                   >
                     Book this <ArrowUpRight className="h-4 w-4 text-gold" />
                   </Link>
-                  <a
-                    href={SITE.treatwell}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-xs text-ink/74 hover:text-ink"
-                  >
-                    View pricing & availability on Treatwell
-                  </a>
+                  <span className="text-xs text-ink/74">Ask for availability on WhatsApp</span>
                 </div>
               </div>
             </motion.div>
