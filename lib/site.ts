@@ -1,6 +1,7 @@
 export const SITE = {
   baseUrl: "https://taitam-d.com",
   name: "Taitam‑D Beauty & Spa",
+  legalName: "Taitam-D Beauty & Spa",
   tagline: "Relax • Refresh • Recharge",
   description:
     "Thai‑inspired beauty & wellness in King’s Cross, London — massage, hair, nails, waxing, facials & more. Established in 2009. Message us on WhatsApp to reserve your treatment.",
@@ -8,6 +9,10 @@ export const SITE = {
   hours: "Mon – Sun 10:30 AM – 9:00 PM",
   phone: "07564292247",
   email: "info@taitam-d.com",
+  priceRange: "££",
+  foundingDate: "2009",
+  logo: "/images/logo.png",
+  image: "/images/hero/og-1200x630.jpg",
 
   // Direct chat / enquiries
   whatsappNumber: "447882359499", // E.164 without "+"

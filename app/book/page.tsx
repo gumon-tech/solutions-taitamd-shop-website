@@ -2,6 +2,19 @@ import Image from "next/image";
 import { ArrowUpRight, MessageCircle } from "lucide-react";
 import { SITE } from "@/lib/site";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Book a Treatment on WhatsApp",
+  description: "Book a massage, beauty or wellness treatment at Taitam-D in King's Cross, London by messaging our team on WhatsApp.",
+  alternates: { canonical: "/book" },
+  openGraph: {
+    title: "Book a Treatment on WhatsApp",
+    description: "Book a massage, beauty or wellness treatment at Taitam-D in King's Cross, London by messaging our team on WhatsApp.",
+    url: "/book",
+    images: ["/TAITAMD-OG-facebook-product-1200x630.jpg"],
+  },
+};
 
 export default function BookPage() {
   return (
