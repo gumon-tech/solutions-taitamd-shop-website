@@ -19,9 +19,23 @@ export default function CookiesPage() {
         <section>
           <h2 className="text-lg font-medium text-ink">The short version</h2>
           <p className="mt-2">
-            This website sets <span className="text-gold">no cookies at all</span> unless you
-            choose to accept optional analytics cookies. Browsing, reading and
-            contacting us on WhatsApp all work without any cookies.
+            We set <span className="text-gold">no cookies on your device</span> unless you
+            accept. If you decline, our measurement tool still records that an
+            anonymous visit happened — but with no cookie, no advertising
+            identifier and nothing that could be traced back to you.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="text-lg font-medium text-ink">What happens if you decline</h2>
+          <p className="mt-2 text-mist">
+            We use Google Consent Mode. Google&apos;s tag loads on the page, but every
+            storage permission starts switched off and stays off unless you accept.
+            While it is off, the tag sends only a basic, cookieless signal that a
+            page was viewed. It cannot store anything on your device, cannot read a
+            previous visit, and click identifiers from adverts are stripped out
+            before the signal is sent. This lets us see roughly how many people
+            visit without tracking anyone individually.
           </p>
         </section>
 
@@ -34,10 +48,10 @@ export default function CookiesPage() {
               (key <code>ttd-consent</code>). This is not a cookie and is never sent to us.
             </li>
             <li>
-              <span className="text-ink">Analytics &amp; advertising cookies (optional, only after
-              you accept)</span> — we load Google Analytics 4, which sets cookies
-              (such as <code>_ga</code>) to help us understand how visitors find and use
-              the site, and to measure whether our Google Ads bring guests to the
+              <span className="text-ink">Analytics &amp; advertising cookies (only after
+              you accept)</span> — Google Analytics 4 sets cookies (such as
+              <code> _ga</code>) to help us understand how visitors find and use the
+              site, and to measure whether our Google Ads bring guests to the
               salon. We look at this information in aggregate only.
             </li>
           </ul>

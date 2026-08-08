@@ -3,8 +3,12 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
-// Consent-first analytics: nothing loads and no cookie is set until the
-// visitor explicitly accepts. Choice persists in localStorage (not a cookie).
+// Google Consent Mode v2 (advanced). The tag loads on every visit but every
+// storage type starts denied, so nothing is written to the device and no
+// identifier is sent until the visitor accepts. While denied, Google receives
+// only cookieless pings, which is what lets it model the conversions we would
+// otherwise lose entirely. Accepting flips the storage grants; declining leaves
+// them denied for the rest of the session.
 export const GA_ID = "G-R8SGQ58R5E";
 const CONSENT_KEY = "ttd-consent"; // "granted" | "denied"
 
@@ -15,9 +19,8 @@ declare global {
   }
 }
 
-function loadGtag() {
-  if (document.getElementById("ttd-gtag")) return;
-
+function ensureGtag() {
+  if (window.gtag) return;
   window.dataLayer = window.dataLayer || [];
   function gtag() {
     // GA requires the Arguments object itself, not a spread copy.
@@ -25,9 +28,35 @@ function loadGtag() {
     window.dataLayer!.push(arguments);
   }
   window.gtag = gtag as unknown as Window["gtag"];
+}
+
+function bootstrap(stored: string | null) {
+  ensureGtag();
+
+  // Defaults must be queued before the library loads, or the first hit escapes
+  // ungoverned.
+  window.gtag!("consent", "default", {
+    ad_storage: "denied",
+    ad_user_data: "denied",
+    ad_personalization: "denied",
+    analytics_storage: "denied",
+    functionality_storage: "denied",
+    personalization_storage: "denied",
+    security_storage: "granted",
+    wait_for_update: 500,
+  });
+
+  // Without cookies, the ad click id has to survive in the URL instead, and
+  // click identifiers are stripped from the cookieless pings.
+  window.gtag!("set", "url_passthrough", true);
+  window.gtag!("set", "ads_data_redaction", true);
+
+  if (stored === "granted") grantConsent();
+
   window.gtag!("js", new Date());
   window.gtag!("config", GA_ID);
 
+  if (document.getElementById("ttd-gtag")) return;
   const s = document.createElement("script");
   s.id = "ttd-gtag";
   s.async = true;
@@ -35,7 +64,30 @@ function loadGtag() {
   document.head.appendChild(s);
 }
 
-// Fire lead events for the site's two real conversion paths.
+function grantConsent() {
+  ensureGtag();
+  window.gtag!("consent", "update", {
+    ad_storage: "granted",
+    ad_user_data: "granted",
+    ad_personalization: "granted",
+    analytics_storage: "granted",
+    functionality_storage: "granted",
+    personalization_storage: "granted",
+  });
+}
+
+function denyConsent() {
+  ensureGtag();
+  window.gtag!("consent", "update", {
+    ad_storage: "denied",
+    ad_user_data: "denied",
+    ad_personalization: "denied",
+    analytics_storage: "denied",
+  });
+}
+
+// Fire lead events for the site's two real conversion paths. Safe to attach
+// regardless of consent: while denied these travel as cookieless pings.
 function trackLeadClicks() {
   document.addEventListener("click", (e) => {
     if (!window.gtag) return;
@@ -67,16 +119,15 @@ export function resetConsent() {
 }
 
 export default function Analytics() {
-  // null = undecided (show banner); "granted" | "denied" = decided
+  // "pending" keeps the banner hidden until we have read localStorage, so it
+  // never flashes for someone who already chose.
   const [consent, setConsent] = useState<string | null>("pending");
 
   useEffect(() => {
     const stored = getConsent();
     setConsent(stored);
-    if (stored === "granted") {
-      loadGtag();
-      trackLeadClicks();
-    }
+    bootstrap(stored);
+    trackLeadClicks();
   }, []);
 
   const decide = (value: "granted" | "denied") => {
@@ -86,10 +137,8 @@ export default function Analytics() {
       /* ignore */
     }
     setConsent(value);
-    if (value === "granted") {
-      loadGtag();
-      trackLeadClicks();
-    }
+    if (value === "granted") grantConsent();
+    else denyConsent();
   };
 
   if (consent !== null) return null;
@@ -102,8 +151,8 @@ export default function Analytics() {
     >
       <p className="text-sm text-ink/90 leading-relaxed">
         We&apos;d like to use optional analytics cookies (Google Analytics &amp; Google
-        Ads) to understand visits and improve how we welcome you. None are set
-        unless you accept.{" "}
+        Ads) to understand visits and improve how we welcome you. If you decline,
+        no cookies are stored on your device.{" "}
         <Link href="/cookies" className="underline text-gold hover:text-gold2">
           Cookie policy
         </Link>
