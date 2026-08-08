@@ -13,7 +13,6 @@
 
 | # | งาน | สถานะ | owner | โซนไฟล์ | verify gate | หมายเหตุ |
 |---|---|---|---|---|---|---|
-| W-4 | ลบ workflow ที่ deploy ซ้ำ (`pages.yml` **หรือ** `nextjs.yml`) | ⏸ hold | — | `.github/workflows/**` | run เดียวต่อ push + เว็บยังขึ้นปกติ | 🔴 ทั้งสองไฟล์ deploy ลง Pages ทุก push · group `pages` เหมือนกันแต่ `cancel-in-progress` **ขัดกัน** (false vs true) ⇒ ตัวไหน live ขึ้นกับจังหวะ · `deploy-pages` คนละเวอร์ชัน (v5 vs v4) · `nextjs.yml` มี `configure-pages` inject basePath ส่วน `pages.yml` ไม่มี ⇒ build ไม่เหมือนกัน (ตอนนี้ผลตรงกันเพราะ custom domain ทำให้ basePath ว่างทั้งคู่ — ฟลุก ไม่ใช่ดีไซน์) · **แตะ deploy pipeline ของเว็บที่ live ⇒ รอเจ้าของเคาะ** |
 | W-3 | ย้าย lint จาก `next lint` ไป ESLint CLI | 🟡 queued | — | `package.json` · `.eslintrc.json` | `npm run build && npm run lint` | `next lint` deprecated **จะถูกถอดใน Next 16** ⇒ verify gate ตาม D-W4 จะพังเงียบตอน upgrade · codemod: `npx @next/codemod@canary next-lint-to-eslint-cli .` · ยังไม่ด่วน (ตอนนี้เขียว) แต่ต้องทำ**ก่อน**แตะ Next major |
 
 ## เสร็จแล้ว
@@ -22,6 +21,7 @@
 |---|---|---|---|
 | W-0 | รับโอนความรับผิดชอบเว็บไซต์จากห้อง Marketing Lead + เข้า Gumon Lore + วางกติกา Lead/Executor | 2026-08-09 | Marketing ยืนยันหยุดแก้ repo · `lore-add` สำเร็จ (14 โปรเจกต์) · `CLAUDE.md` มีกฎ 4 ข้อ + delta กติกา |
 | W-2 | commit `CLAUDE.md` + `docs/plans/` เข้า repo | 2026-08-09 | verify เขียวก่อน push ตาม D-W4/D-W5 (`npm run build` ✓ 11 หน้า · `npm run lint` ✓ no warnings) · stage ราย path ตาม §11.17 |
+| W-4 | ลบ workflow ที่ deploy ซ้ำ — เหลือ `nextjs.yml` ตัวเดียว | 2026-08-09 | ลบ `.github/workflows/pages.yml` ตาม D-W6 · ยืนยันหลัง push ว่าเหลือ **run เดียว** ต่อ push และเว็บ live ยังปกติ |
 | W-1 | รับจัดสรร port band + สร้าง `.claude/launch.json` | 2026-08-09 | ได้ **3300–3399** จากห้อง Local Dev Lead (บันทึกใน `gumon-localdev/registry.json → devServerPorts`) · เติม `distDir` ให้ `next.config.mjs` รองรับ `NEXT_DIST_DIR` (ไม่ตั้ง env = `.next` เหมือนเดิม) · เติม `.next-*` ใน `.gitignore` (`.next` ไม่ match `.next-claude`) · **พิสูจน์แล้ว**: `preview_start` ขึ้น 3300 · หน้าแรก render ครบ · cookie banner ทำงาน · หยุด server + คืนไฟล์ + ยืนยันพอร์ตปิดด้วย `lsof` |
 
 ---

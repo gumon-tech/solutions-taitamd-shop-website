@@ -11,7 +11,7 @@
 
 | # | เรื่อง | รอใคร | บริบท |
 |---|---|---|---|
-| D-W6 | จะเก็บ workflow ตัวไหน ระหว่าง `nextjs.yml` กับ `pages.yml` | **เจ้าของ** | ทั้งสองตัว deploy ลง Pages ทุก push ⇒ build ซ้ำ + แย่ง concurrency group เดียวกันโดยสั่งขัดกัน ⇒ **สิ่งที่ live ขึ้นกับจังหวะ** · ข้อเสนอของห้องนี้: เก็บ `nextjs.yml` (มี `configure-pages`, `deploy-pages@v5`, `cancel-in-progress: false` ซึ่งเหมาะกับ production) ลบ `pages.yml` · แตะ deploy pipeline ของเว็บที่มีเงินโฆษณายิงอยู่ ⇒ ไม่เคาะเอง · บล็อกแถว W-4 |
+_(ว่าง)_
 
 ## เคาะแล้ว
 
@@ -21,4 +21,5 @@
 | D-W3 | **ยืนที่ 2 ชั้น (Lead → sub-agent) ไม่รับ Executor tier ชั้นที่ 3** | Shop Lead | 2026-08-09 | งานที่นี่คือแก้ section/copy/รูปทีละจุด ไม่มี loop verify→fix ยาวแบบ backend · token tax ~4x/ชั้น ไม่คุ้ม · ตรงกับที่ห้อง Principia ประเมินไว้แล้ว · ทบทวนใหม่เมื่อมีงานที่ต้อง loop จริง |
 | D-W4 | **"verify เขียว" = `npm run build && npm run lint` + visual gate** | Shop Lead | 2026-08-09 | repo ไม่มี test runner เลย · `next build` ทำ typecheck + จับ static-export error ให้ในตัว · ไม่มีเทสต์ ⇒ visual gate คือด่านสุดท้ายจริง ห้ามข้าม |
 | D-W5 | **gate อยู่ก่อน merge · Lead เท่านั้นที่ push `main`** | Shop Lead | 2026-08-09 | push `main` = GitHub Actions deploy ขึ้น Pages ทันที ต่างจากกติกากลางที่ merge ≠ deploy · มีงบ PMax ยิงมาที่ apex อยู่ ⇒ ของที่หลุดคือของที่ลูกค้าจริงเห็น |
+| D-W6 | **ลบ `pages.yml` · เหลือ `nextjs.yml` ตัวเดียวเป็น deploy path** | Shop Lead (เจ้าของมอบอำนาจให้เคาะเอง 2026-08-09) | เดิมสองไฟล์ deploy ลง Pages ทุก push · group `pages` เดียวกันแต่ `cancel-in-progress` ขัดกัน · **หลักฐานจริง ไม่ใช่ทฤษฎี**: push `7199546` → success ทั้งคู่ · push `6585eaa` → `pages.yml` success แต่ `nextjs.yml` **cancelled** ⇒ โค้ดชุดเดียวกัน push ติดกันสองครั้ง ได้ผลคนละแบบ · เลือกลบ `pages.yml` เพราะมันคือตัวที่ตั้ง `cancel-in-progress: true` ซึ่งเป็นกลไกที่ฆ่า deploy ที่กำลังวิ่งอยู่ — พฤติกรรมที่ไม่ควรมีกับ production · ตัวที่เก็บไว้ยังมี `configure-pages` (inject basePath ให้ถ้าวันหนึ่งเลิกใช้ custom domain) และ `deploy-pages@v5` |
 | D-W2 | **band `3300–3399`** (3300 dev · 3301 visual gate) · **แหล่งจริง = `gumon-localdev/registry.json → devServerPorts`** ไม่ใช่ §4.1 ที่ platform | ห้อง Local Dev Lead | 2026-08-09 | ตอนขอ พบว่า**ทะเบียนพอร์ต dev server ไม่เคยมีอยู่จริง** — `registry.json` เดิมมีแต่พอร์ต datastore · ของที่ใช้กันจริงคือ §4.1 ซึ่งอยู่ในรีโปของโปรเจกต์เดียว ⇒ **โปรเจกต์นอก Taitam-D ไม่เคยเห็นมัน** (สแกนเจอ 2 รายที่ bind ทับ band ของ human/paragon อยู่แล้วโดยไม่รู้ตัว) · Local Dev Lead สร้าง `devServerPorts` ขึ้นเป็นแหล่งเดียว และจะประสานให้ §4.1 เปลี่ยนเป็นตัวชี้มาที่นั่น ⇒ **repo นี้ห้ามคัดตารางพอร์ตมาเก็บเอง** จะกลายเป็นสำเนาใบที่สาม |
