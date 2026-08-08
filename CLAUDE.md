@@ -101,11 +101,20 @@ npm run build && npm run lint
 **3 · Pre-commit gate** — ผ่านกฎ 4 ข้อในหัวข้อ "🔴 กฎที่ห้ามย้อน" ข้างบนทุกครั้ง
 โดยเฉพาะ **ตรวจขนาดไฟล์รูปก่อน commit** และ **วัดทะเบียนคุกกี้ใหม่เมื่อแตะ tag**
 
-**4 · Port band — ยังไม่ได้รับจัดสรร ⇒ ห้ามรัน dev server**
-ยังไม่มี `.claude/launch.json` และยังไม่มี band เป็นของตัวเอง
-🔴 **ต้องขอจากห้อง Local Dev Lead** (`~/dev/gumon-localdev`) ซึ่งถือทะเบียนพอร์ตรวมของทุกโปรเจกต์บนเครื่อง —
-§4.1 ของกติกากลางเห็นแค่ band ฝั่ง Taitam-D จึงไม่ใช่แหล่งจริง · **ห้ามเดา band เอง** เสี่ยงชน session อื่น
-ระหว่างนี้พิสูจน์งานด้วย `npm run build` + อ่าน output แทนการเปิด server (ดู D-W2)
+**4 · Dev server — band `3300–3399` (3300 dev · 3301 visual gate)**
+
+🔗 **แหล่งจริงของ band = `~/dev/gumon-localdev/registry.json` → `devServerPorts`** (ห้อง Local Dev Lead ถือ)
+อย่าคัดตารางพอร์ตมาไว้ที่นี่ — สำเนาสองใบจะขยับไม่พร้อมกัน · อยากได้พอร์ตเพิ่ม **ไปขอที่ห้องนั้น อย่าจองเอง**
+(§4.1 ของกติกากลางที่ platform เห็นแค่ฝั่ง Taitam-D จึงไม่ใช่แหล่งจริง — Local Dev Lead กำลังแก้ให้เป็นตัวชี้)
+
+รันผ่าน [`.claude/launch.json`](.claude/launch.json) ด้วย `preview_start` เท่านั้น ห้าม spawn ดิบผ่าน shell
+พอร์ตใน band ตัวเองไม่ว่าง = **สันนิษฐานว่าเป็น session อื่นของเราเอง ห้าม kill** — ใช้เลขถัดไปหรือ attach ของเดิม
+
+🔴 **กับดัก: รัน dev server แล้ว Next จะไปแก้ `next-env.d.ts` + `tsconfig.json` ให้ชี้ `.next-claude`**
+`launch.json` ตั้ง `NEXT_DIST_DIR` แยกเพื่อไม่ให้ชน `.next` ของ human (next dev ตัวที่สองใน dir เดียวกัน
+refuse แม้คนละ port เพราะ lock อยู่ใน distDir) — ผลข้างเคียงคือ Next เขียนทับสองไฟล์นั้นทุกครั้ง
+ถ้าหลุดขึ้นไป **build ของ human จะพัง** เพราะ `next-env.d.ts` อ้าง path ที่ฝั่งเขาไม่มี
+⇒ **หยุด server แล้วต้อง `git checkout -- next-env.d.ts tsconfig.json` ทุกครั้ง** และยืนยันว่าพอร์ตปิดจริงด้วย `lsof`
 
 ## Gumon Lore
 โปรเจกต์นี้ใช้ shared knowledge hub ที่ `/Users/komphet.me/dev/gumon-lore-hub`
