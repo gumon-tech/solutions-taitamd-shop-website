@@ -37,24 +37,67 @@ export default function CookiesPage() {
             before the signal is sent. This lets us see roughly how many people
             visit without tracking anyone individually.
           </p>
+          <p className="mt-3 text-mist">
+            To be complete about it: that signal travels to Google&apos;s servers,
+            which see the IP address of the request in the ordinary way any
+            internet request reveals it, along with your browser type. When you
+            have declined, Google cannot use this to identify you or to follow
+            you from one website to another.
+          </p>
         </section>
 
         <section>
           <h2 className="text-lg font-medium text-ink">What we store and when</h2>
-          <ul className="mt-2 list-disc pl-5 space-y-2 text-mist">
-            <li>
-              <span className="text-ink">Your cookie choice</span> — when you press Accept or
-              Decline, we remember that choice in your browser&apos;s local storage
-              (key <code>ttd-consent</code>). This is not a cookie and is never sent to us.
-            </li>
-            <li>
-              <span className="text-ink">Analytics &amp; advertising cookies (only after
-              you accept)</span> — Google Analytics 4 sets cookies (such as
-              <code> _ga</code>) to help us understand how visitors find and use the
-              site, and to measure whether our Google Ads bring guests to the
-              salon. We look at this information in aggregate only.
-            </li>
-          </ul>
+          <p className="mt-2 text-mist">
+            This is the complete list, checked against what the site actually
+            writes — not a typical example.
+          </p>
+          <div className="mt-3 overflow-x-auto">
+            <table className="w-full text-left text-xs md:text-sm border-collapse">
+              <thead>
+                <tr className="border-b border-ink/15 text-ink">
+                  <th className="py-2 pr-4 font-medium">Name</th>
+                  <th className="py-2 pr-4 font-medium">Set when</th>
+                  <th className="py-2 pr-4 font-medium">Purpose</th>
+                  <th className="py-2 font-medium">Expires</th>
+                </tr>
+              </thead>
+              <tbody className="text-mist align-top">
+                <tr className="border-b border-ink/10">
+                  <td className="py-2 pr-4"><code>ttd-consent</code></td>
+                  <td className="py-2 pr-4">Accept or Decline</td>
+                  <td className="py-2 pr-4">
+                    Remembers your choice so we stop asking. Stored in local
+                    storage, not a cookie, and never sent to us or anyone else.
+                  </td>
+                  <td className="py-2">Until you clear it</td>
+                </tr>
+                <tr className="border-b border-ink/10">
+                  <td className="py-2 pr-4"><code>_ga</code></td>
+                  <td className="py-2 pr-4">Only if you accept</td>
+                  <td className="py-2 pr-4">
+                    Google Analytics — tells returning visits apart from new ones.
+                  </td>
+                  <td className="py-2">400 days</td>
+                </tr>
+                <tr>
+                  <td className="py-2 pr-4"><code>_ga_R8SGQ58R5E</code></td>
+                  <td className="py-2 pr-4">Only if you accept</td>
+                  <td className="py-2 pr-4">
+                    Google Analytics — keeps track of the current visit for this
+                    site&apos;s property.
+                  </td>
+                  <td className="py-2">400 days</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p className="mt-3 text-mist">
+            Both analytics cookies are set for <span className="text-ink">this
+            website only</span>. They are not shared with our Academy site at
+            academy.taitam-d.com, which sets no cookies of its own. If we ever add
+            anything to this list, we will update this table before it goes live.
+          </p>
         </section>
 
         <section>
@@ -64,6 +107,11 @@ export default function CookiesPage() {
             behalf (Google Analytics and Google Ads). We do not sell your data or
             share it with anyone else. We do not use analytics to identify you
             personally.
+          </p>
+          <p className="mt-3 text-mist">
+            Google processes this outside the UK, including in the United States.
+            That transfer relies on the UK Extension to the EU–US Data Privacy
+            Framework, which Google LLC is certified under.
           </p>
         </section>
 
