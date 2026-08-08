@@ -30,6 +30,18 @@ function ensureGtag() {
   window.gtag = gtag as unknown as Window["gtag"];
 }
 
+// Anyone who accepted before the host-only switch still carries a .taitam-d.com
+// cookie that surfaces on the Academy subdomain. Clear those once, on the
+// parent domain, so the leak drains instead of lingering for its two-year life.
+function dropWideCookies() {
+  const parent = location.hostname.replace(/^www\./, "");
+  for (const raw of document.cookie.split(";")) {
+    const name = raw.trim().split("=")[0];
+    if (!name.startsWith("_ga")) continue;
+    document.cookie = `${name}=; Max-Age=0; path=/; domain=.${parent}`;
+  }
+}
+
 function bootstrap(stored: string | null) {
   ensureGtag();
 
@@ -53,8 +65,13 @@ function bootstrap(stored: string | null) {
 
   if (stored === "granted") grantConsent();
 
+  dropWideCookies();
+
   window.gtag!("js", new Date());
-  window.gtag!("config", GA_ID);
+  // "none" keeps the cookie host-only. The default, "auto", writes to
+  // .taitam-d.com, so an accept here would put _ga on academy.taitam-d.com
+  // too — a site that sets no cookies of its own and says so in its policy.
+  window.gtag!("config", GA_ID, { cookie_domain: "none" });
 
   if (document.getElementById("ttd-gtag")) return;
   const s = document.createElement("script");
