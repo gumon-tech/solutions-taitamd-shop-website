@@ -17,5 +17,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/story`, lastModified },
     { url: `${SITE_URL}/contact`, lastModified },
     { url: `${SITE_URL}/book`, lastModified },
+    { url: `${SITE_URL}/cookies`, lastModified },
   ];
 }

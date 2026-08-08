@@ -40,6 +40,9 @@ export default function Footer() {
                 <li>
                   <Link href="/book" className="hover:text-ink">Book via WhatsApp</Link>
                 </li>
+                <li>
+                  <Link href="/cookies" className="hover:text-ink">Cookie Policy</Link>
+                </li>
               </ul>
             </div>
 
