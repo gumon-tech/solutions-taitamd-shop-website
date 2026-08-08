@@ -42,6 +42,11 @@ GA default คือ `auto` ⇒ เขียนคุกกี้ที่ `.tai
 Legal แนะนำให้สลับถ้อยคำ (โปสเตอร์หน้าร้านเขียน SINCE 2013) แต่ **เจ้าของสั่งว่าไม่ต้องแก้** —
 ถ้อยคำแบรนด์เป็นการตัดสินใจของเจ้าของ Legal ให้ได้แค่ความเห็น
 
+## 🔑 เริ่ม session ใหม่อ่านตรงนี้ก่อน
+
+[`docs/plans/HANDOFF.md`](docs/plans/HANDOFF.md) — สถานะล่าสุด · งานค้าง · กับดัก · **บล็อก "ตรวจก่อนเชื่อ" ที่ต้องรันก่อนลงมือ**
+แล้วจึงดู [`docs/plans/QUEUE-WEB.md`](docs/plans/QUEUE-WEB.md) (คิวงาน) และ [`docs/plans/DECISIONS-BOARD.md`](docs/plans/DECISIONS-BOARD.md) (มติ)
+
 ## วิธีทำงาน (AI agent) — delta จากกติกากลาง
 
 🔗 **กติกากลาง (canonical):** [`~/dev/solution-taitamd-platform/docs/dev/ai-agent-operating-rules.md`](../solution-taitamd-platform/docs/dev/ai-agent-operating-rules.md)
