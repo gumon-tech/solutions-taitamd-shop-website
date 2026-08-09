@@ -94,13 +94,19 @@ export default function CookiesPage() {
           </div>
           <p className="mt-3 text-mist">
             Both analytics cookies are set for <span className="text-ink">this
-            website only</span>. They are not shared with our Academy site at
-            academy.taitam-d.com. That site sets <span className="text-ink">no
-            analytics or advertising cookies</span> — only strictly necessary
-            ones, such as remembering your language and, if you sign in, keeping
-            you signed in securely. Those do not require your consent. If we ever
-            add anything to this list, we will update this table before it goes
-            live.
+            website only</span>. They are <span className="text-ink">not shared
+            with our Academy site</span> at academy.taitam-d.com — that is a
+            separate site, and whatever it stores on your device is covered by{" "}
+            <a
+              href="https://academy.taitam-d.com/en/policies/cookie-policy"
+              target="_blank"
+              rel="noreferrer"
+              className="underline text-gold hover:text-gold2"
+            >
+              its own cookie policy
+            </a>
+            . If we ever add anything to this list, we will update this table
+            before it goes live.
           </p>
         </section>
 
