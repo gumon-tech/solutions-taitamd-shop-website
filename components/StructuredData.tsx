@@ -23,8 +23,10 @@ export default function StructuredData() {
       address: {
         "@type": "PostalAddress",
         streetAddress: "72-74 Caledonian Road",
-        addressLocality: "King's Cross",
-        addressRegion: "London",
+        // The city goes in addressLocality; King's Cross is a district, and naming it here
+        // left the town field saying something no postal system uses. It still reaches
+        // readers through areaServed and the copy. Values confirmed by Marketing (Q-MKT-002).
+        addressLocality: "London",
         postalCode: "N1 9DN",
         addressCountry: "GB",
       },
@@ -37,7 +39,11 @@ export default function StructuredData() {
           closes: "21:00",
         },
       ],
-      sameAs: [SITE.social.instagram, SITE.social.facebook, SITE.social.googleMaps],
+      // One entry, on purpose. `sameAs` is a claim that a channel is us, so an unverified
+      // entry is worse than a missing one. Instagram has no linked business account yet and
+      // the old Google Maps value was a `?q=<address>` search, not a Business Profile —
+      // neither identifies anything. Marketing adds the rest as each is confirmed (Q-MKT-002).
+      sameAs: [SITE.social.facebook],
       hasOfferCatalog: {
         "@type": "OfferCatalog",
         name: "Beauty and spa services",

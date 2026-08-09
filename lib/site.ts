@@ -24,9 +24,15 @@ export const SITE = {
   academy: "https://academy.taitam-d.com/",
 
   social: {
+    // Instagram is deliberately absent from `sameAs` — there is no business account
+    // linked to the page yet, so it is not an official channel we can vouch for (Q-MKT-002).
     instagram: "https://www.instagram.com/taitamd/",
-    facebook: "https://www.facebook.com/TaitamdBeautyAcademy",
-    // Customer confirmed: Academy page
+    // The shop's own page. Verified by fetching it: og:title "Taitam-D Beauty&Spa Centre | London".
+    // It used to hold the Academy URL below, which put the Academy's page in the shop's
+    // `sameAs` — the schema was telling Google the two brands were one channel.
+    facebook: "https://www.facebook.com/TaitamDBeautyAndWellness",
+    // Customer confirmed: Academy page — og:title "Taitam-D Beauty Academy | London".
+    // Keep it out of the shop's `sameAs` until the page is renamed to Taitam-D Academy London.
     academyFacebook: "https://www.facebook.com/TaitamdBeautyAcademy",
     googleMaps:
       "https://www.google.com/maps?q=72-74%20Caledonian%20Road%2C%20King%27s%20Cross%2C%20London%2C%20N1%209DN",
