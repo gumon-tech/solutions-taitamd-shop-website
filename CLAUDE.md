@@ -116,7 +116,9 @@ npm run build && npm run lint
 
 **4 · Dev server — band `3300–3399` (3300 dev · 3301 visual gate)**
 
-🔗 **แหล่งจริงของ band = `~/dev/gumon-localdev/registry.json` → `devServerPorts`** (ห้อง Local Dev Lead ถือ)
+🔗 **แหล่งจริงของ band = `~/dev/gumon-workspace/machines/<machine-id>/registry.json` → `devServerPorts`**
+(ห้อง **Gumon Workspace Lead** ถือ · เดิมชื่อ Local Dev Lead / `~/dev/gumon-localdev` — rename 2026-08-09
+path เก่าเป็น symlink ยังใช้ได้ แต่ไฟล์ย้ายลง `machines/<id>/` แล้ว ไม่อยู่ที่ root อีก · ยืนยัน 2026-08-10)
 อย่าคัดตารางพอร์ตมาไว้ที่นี่ — สำเนาสองใบจะขยับไม่พร้อมกัน · อยากได้พอร์ตเพิ่ม **ไปขอที่ห้องนั้น อย่าจองเอง**
 (§4.1 ของกติกากลางที่ platform เห็นแค่ฝั่ง Taitam-D จึงไม่ใช่แหล่งจริง — Local Dev Lead กำลังแก้ให้เป็นตัวชี้)
 

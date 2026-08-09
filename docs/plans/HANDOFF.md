@@ -2,12 +2,17 @@
 
 ## 🔑 `WORKSPACE-RESUME` — ทำสามข้อนี้ก่อนทำอะไรทั้งสิ้น
 
-> คำนี้ใช้เหมือนกันทุกห้องในเวิร์กสเปซ (ตกลงกับห้อง **Local Dev Lead** · เตรียมรับการเปลี่ยนบัญชี Claude 2026-08-09)
+> 🔴 **นิยามฉบับจริงอยู่ที่ `~/.claude/CLAUDE.md` (5 ขั้น) — ไฟล์นี้เป็นแค่สำเนาย่อ ถ้าขัดกัน ฉบับกลางชนะ**
 > **พิมพ์ `WORKSPACE-RESUME` เมื่อไร ห้องนี้ต้อง:**
 >
-> 1. **อ่านไฟล์นี้ให้จบก่อน** — โดยเฉพาะบล็อก §0 "ตรวจก่อนเชื่อ" ข้างล่าง **แล้วรันจริง** อย่าเชื่อตามที่เขียน
-> 2. **อ่าน `MEMORY.md`** ของโปรเจกต์ แล้ว **ตรวจว่าที่จดไว้ยังจริงกับโค้ดปัจจุบัน** — ข้อไหนไม่จริงแล้วให้แก้/ลบทันที
-> 3. **แนะนำตัวกลับไปที่ห้อง Local Dev Lead** (`~/dev/gumon-localdev`) ผ่าน `mcp__ccd_session_mgmt__send_message`
+> 1. **อ่านไฟล์นี้ให้จบก่อน**
+> 2. **รันบล็อก §0 "ตรวจก่อนเชื่อ" ข้างล่างจริง ๆ** แล้วรายงานส่วนที่ไม่ตรงกับเอกสาร อย่าเชื่อตามที่เขียน
+> 3. **เช็คตู้รับใบคิวกลางของห้องนี้**: `ls ~/dev/gumon-workspace/machines/*/queue/SHOP/`
+>    (รหัสห้องนี้คือ `SHOP` · ออกใบใหม่เป็น `queue/<รหัสผู้รับ>/Q-SHOP-<nnn>-<เรื่อง>.md` เดินเลขในเขต `SHOP` เท่านั้น)
+> 4. **อ่าน `MEMORY.md`** ของโปรเจกต์ แล้ว **ตรวจว่าที่จดไว้ยังจริงกับโค้ดปัจจุบัน** — ข้อไหนไม่จริงแล้วให้แก้/ลบทันที
+> 5. **แนะนำตัวกลับไปที่ห้อง Gumon Workspace Lead** (`~/dev/gumon-workspace`) ผ่าน `mcp__ccd_session_mgmt__send_message`
+>    (เดิมเขียนว่า "Local Dev Lead / `~/dev/gumon-localdev`" — รีโปถูก rename เป็น `gumon-workspace` เมื่อ 2026-08-09
+>    path เก่าเป็น symlink ยังใช้ได้ แต่ **ชื่อห้องที่ถูกต้องคือ Gumon Workspace Lead**)
 >
 > 🔴 **context ในห้องอาจไม่รอดการเปลี่ยนบัญชี — ของที่ไม่ได้ลงดิสก์ถือว่าหาย** ⇒ เอกสารนี้คือความจำทั้งหมดที่เหลือ
 
@@ -61,13 +66,15 @@ curl -s -o /dev/null -w "%{http_code}\n" https://taitam-d.com/   # คาดห�
 
 ## 3 · งานค้าง
 
-### 🟡 W-7 · W-8 — คิวปัจจุบัน (ทั้งคู่ไม่ด่วน ไม่มีอะไรพังอยู่)
+### ✅ ไม่มีงานเทคนิคค้าง — คิวว่าง (ยืนยัน 2026-08-10)
 
-- **W-7** annotation "Node.js 20 is deprecated" ทุก run — **เป็นเรื่อง runtime ของตัว action ไม่ใช่ `node-version`**
-  ต้องยกเวอร์ชัน action ทั้งชุด (รายการอยู่ในคิว) · **W-9** CI build ด้วย Node 20 แต่เครื่องเรา Node 22 (ญาติของ D-W8 คนละชั้น)
-- **W-8** `npm audit` 10 รายการ (9 high — `sharp`/libvips · `postcss`) · **อ่านหมายเหตุในคิวก่อนลงมือ** —
-  เว็บเป็น static export ไม่มี server runtime และ `images.unoptimized = true` ⇒ `sharp` ไม่ได้ถูกเรียกด้วยซ้ำ
-  ความเสี่ยงจริงต่ำกว่าตัวเลข severity มาก · `npm audit fix` อาจดัน transitive ของ `next`
+[`QUEUE-WEB.md`](QUEUE-WEB.md) ตารางคิวปัจจุบัน **ว่าง** · **W-7 · W-8 · W-9 ปิดครบแล้วตั้งแต่ 2026-08-09**
+(ย่อหน้าเดิมตรงนี้ยังเขียนว่าทั้งคู่ค้างอยู่ — เท็จ ลบทิ้งแล้ว)
+
+- **W-7 · W-9 ปิดโดยการแก้จริง** — ยก action ทั้งชุด + `node-version 20→22` · ยืนยันจากล็อก CI ว่า
+  annotation "Node 20 is being deprecated" เหลือ **0 ครั้ง**
+- **W-8 ปิดโดยการเคาะว่าไม่ทำ ไม่ใช่การเลื่อน** — static export ไม่มี server runtime และ
+  `images.unoptimized = true` ⇒ `sharp` ไม่ถูกเรียก · เงื่อนไข 3 ข้อที่จะทำให้กลับมาทบทวนอยู่ใน [D-W13](DECISIONS-BOARD.md)
 
 **W-3 (ESLint CLI) เสร็จแล้ว** — `next lint` หายไปจาก repo แล้ว ตอนนี้ gate คือ `eslint . --max-warnings=0`
 ตาม [D-W9](DECISIONS-BOARD.md) · 🔑 **warning = ตก gate** อย่าปล่อยผ่านเพราะเห็น exit code 0
@@ -195,8 +202,8 @@ production แล้วแก้ [`app/cookies/page.tsx`](../../app/cookies/page
 
 | เรื่อง | อยู่ที่ใคร |
 |---|---|
-| ให้ §4.1 ของ `solution-taitamd-platform` เปลี่ยนเป็น **ตัวชี้** มาที่ `gumon-localdev/registry.json` แทนการเป็นสำเนา | **Local Dev Lead** รับไปแล้ว — เขาบอกชัดว่า **เราไม่ต้องไปขอ Platform Lead เอง** |
-| แจ้ง `solutions-c2-rice-flow-mobile` และ `vera-d` ว่า bind พอร์ตทับ band คนอื่น | **Local Dev Lead** |
+| ให้ §4.1 ของ `solution-taitamd-platform` เปลี่ยนเป็น **ตัวชี้** มาที่ `gumon-localdev/registry.json` แทนการเป็นสำเนา | **Gumon Workspace Lead** (เดิมชื่อ Local Dev Lead) รับไปแล้ว — เขาบอกชัดว่า **เราไม่ต้องไปขอ Platform Lead เอง** |
+| แจ้ง `solutions-c2-rice-flow-mobile` และ `vera-d` ว่า bind พอร์ตทับ band คนอื่น | **Gumon Workspace Lead** (เดิมชื่อ Local Dev Lead) |
 | mark `whatsapp_click` เป็น Key event + import เป็น conversion (งานในคอนโซล ไม่แตะ repo) | **Marketing Lead** |
 
 ---
@@ -208,7 +215,8 @@ production แล้วแก้ [`app/cookies/page.tsx`](../../app/cookies/page
 2. **push `main` = deploy ขึ้นเว็บจริงทันที** และมีงบ PMax ยิงมาที่ apex อยู่ ⇒ verify เขียว **ก่อน** merge เสมอ
 3. **ไม่มี test runner** ⇒ `npm run build && npm run lint` + **visual gate** คือทั้งหมดที่มี ตาคือด่านสุดท้ายจริง
 4. **ห้าม `git add -A`** — repo มี `.env` · `out/` · `.next*` อยู่ในเครื่อง stage เป็นราย path เสมอ
-5. **ห้ามคัดตารางพอร์ตมาเก็บใน repo นี้** — แหล่งจริงคือ `gumon-localdev/registry.json → devServerPorts`
+5. **ห้ามคัดตารางพอร์ตมาเก็บใน repo นี้** — แหล่งจริงคือ
+   `gumon-workspace/machines/<machine-id>/registry.json → devServerPorts` (ยืนยัน path นี้ 2026-08-10)
 6. **ใช้ `npm` เท่านั้น ห้าม `pnpm install` ในรีโปนี้** — CI ตรวจ package manager แบบ
    "มี `yarn.lock` ไหม ถ้าไม่มีก็ `npm ci`" ⇒ **มันไม่รู้จัก pnpm** · ถ้าใครลง dep ด้วย pnpm
    `package-lock.json` จะไม่ขยับตาม แล้ว CI จะ build ด้วยของคนละชุดกับที่เรา verify (เคยแตกมาแล้ว ดู D-W8)
