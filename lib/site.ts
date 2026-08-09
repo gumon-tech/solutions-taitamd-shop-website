@@ -21,7 +21,7 @@ export const SITE = {
   whatsappLink: "https://wa.me/qr/YIN5KFQPKWI2F1",
 
   // Academy
-  academy: "https://taitamd-beautyacademy.com/",
+  academy: "https://academy.taitam-d.com/",
 
   social: {
     instagram: "https://www.instagram.com/taitamd/",

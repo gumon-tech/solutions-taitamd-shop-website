@@ -81,13 +81,20 @@ curl -s -o /dev/null -w "%{http_code}\n" https://taitam-d.com/   # คาดห�
 โปสเตอร์หน้าร้าน SINCE 2013 ยังไม่มีคำอธิบาย **แต่ไม่กระทบเว็บ** และไม่ใช่เรื่องของห้องนี้
 📄 ที่มาและขอบเขตการค้นอยู่ใน [`RESEARCH-2026-08-09-founding-year.md`](RESEARCH-2026-08-09-founding-year.md)
 
-### 🔴 ด่วนที่สุดตอนนี้ — W-14 ลิงก์ Academy ชี้คนละโดเมนกับที่นโยบายคุกกี้เราเขียน
+### ⏰ ระเบิดเวลาที่ต้องรู้ — W-15 ถ้อยคำบน `/cookies` ผูกกับวันที่ GA4 ขึ้นฝั่ง Academy
 
-ลิงก์ "Academy" **9 จุด** (navbar + footer อยู่ทุกหน้า) ชี้ไป `taitamd-beautyacademy.com` = **WordPress**
-title `Taitam-D Beauty Academy` (**ชื่อที่เจ้าของเลิกใช้แล้ว**) · แต่ [`app/cookies/page.tsx`](../../app/cookies/page.tsx)
-บอกผู้ใช้ว่าเว็บ Academy ของเราคือ `academy.taitam-d.com` = **Next.js** title `Taitam-D Academy London`
-⇒ **เอกสารกับลิงก์ขัดกันเองบน production** · Platform บอกว่าโดเมน WordPress ไม่มีในรีโปเขาเลย · Legal กำลังตรวจว่าใครถือ
-🔒 **ห้ามสลับลิงก์เอง** — ย้ายปลายทางทราฟฟิกลูกค้าจริงเป็นการตัดสินใจเชิงธุรกิจ · **Academy launch 16 ส.ค. ⇒ ต้องได้คำตอบก่อน**
+หน้า [`/cookies`](../../app/cookies/page.tsx) **ประกาศแทน Academy** ว่า *"sets no cookies of its own"*
+Marketing วัดให้แล้วว่า **วันนี้ยังจริง** (ไม่มี GA4/GTM/pixel · `dataLayer` ว่าง) **แต่**
+Platform (`Q356`) จะลง **GA4 + banner + แก้นโยบาย Academy พร้อมกัน** ⇒ **วินาทีที่ขึ้น ถ้อยคำของเราเป็นเท็จทันที**
+
+🔑 **นี่คือ hold ที่รอ *สัญญาณ* ไม่ใช่รอ *มติ*** — Platform จะแจ้งห้องนี้ตรง ๆ เมื่อ GA4 ขึ้น
+🔴 **ห้ามปิดแถวนี้เพราะเห็นว่าตอนนี้ถ้อยคำยังถูก** — นั่นคือกับดักของมันเลย
+วันนั้น: วัดคุกกี้ของ `academy.taitam-d.com` ใหม่บน production → แก้ถ้อยคำ → **ผ่าน Legal ก่อนขึ้น**
+
+### ✅ ปิดแล้ว — ลิงก์ Academy ชี้ `academy.taitam-d.com` (เจ้าของเคาะ 2026-08-09)
+
+โดเมนเก่า `taitamd-beautyacademy.com` **เราถือเองบน Hostinger** (ไม่ใช่ทรัพย์สินหลุดมือ) **และจะถูกยกเลิกทั้งหมด**
+⇒ ลิงก์เดิมจะพังแน่นอน ไม่ใช่แค่ชี้ผิดชื่อ · แก้ **ค่าเดียว** `SITE.academy` ครอบคลุมทั้ง 9 จุด
 
 ### 🔴 ของที่เหลือจากการค้นครั้งนั้น — ส่ง Legal แล้ว ไม่ใช่งานเว็บ
 

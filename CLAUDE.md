@@ -7,7 +7,7 @@ Deploy: push เข้า `main` → GitHub Actions → GitHub Pages (อัต�
 - เนื้อหาธุรกิจทั้งหมดรวมศูนย์ที่ [`lib/site.ts`](lib/site.ts) — แก้ที่นี่ที่เดียว
 - หน้าเว็บ: Home · Services · Story · Book · Contact · Cookies
 - Booking เป็น WhatsApp-first (ข้อความสำเร็จรูปอยู่ใน `lib/site.ts`)
-- Academy เป็นคนละเว็บ: https://taitamd-beautyacademy.com/
+- Academy เป็นคนละเว็บ: https://academy.taitam-d.com/ (โดเมนเก่า `taitamd-beautyacademy.com` กำลังถูกยกเลิก — เจ้าของเคาะ 2026-08-09)
 
 ## เจ้าของงาน
 

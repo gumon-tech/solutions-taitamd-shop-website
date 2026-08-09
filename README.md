@@ -31,7 +31,7 @@ Update:
 
 ## Notes
 - Promotions are presented from the campaign artwork in `public/images/campaigns` and reservations open WhatsApp.
-- Academy remains a separate site: `https://taitamd-beautyacademy.com/`
+- Academy remains a separate site: `https://academy.taitam-d.com/`
 
 
 ## Image credits
