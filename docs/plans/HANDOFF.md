@@ -81,6 +81,14 @@ curl -s -o /dev/null -w "%{http_code}\n" https://taitam-d.com/   # คาดห�
 โปสเตอร์หน้าร้าน SINCE 2013 ยังไม่มีคำอธิบาย **แต่ไม่กระทบเว็บ** และไม่ใช่เรื่องของห้องนี้
 📄 ที่มาและขอบเขตการค้นอยู่ใน [`RESEARCH-2026-08-09-founding-year.md`](RESEARCH-2026-08-09-founding-year.md)
 
+### 🔴 ด่วนที่สุดตอนนี้ — W-14 ลิงก์ Academy ชี้คนละโดเมนกับที่นโยบายคุกกี้เราเขียน
+
+ลิงก์ "Academy" **9 จุด** (navbar + footer อยู่ทุกหน้า) ชี้ไป `taitamd-beautyacademy.com` = **WordPress**
+title `Taitam-D Beauty Academy` (**ชื่อที่เจ้าของเลิกใช้แล้ว**) · แต่ [`app/cookies/page.tsx`](../../app/cookies/page.tsx)
+บอกผู้ใช้ว่าเว็บ Academy ของเราคือ `academy.taitam-d.com` = **Next.js** title `Taitam-D Academy London`
+⇒ **เอกสารกับลิงก์ขัดกันเองบน production** · Platform บอกว่าโดเมน WordPress ไม่มีในรีโปเขาเลย · Legal กำลังตรวจว่าใครถือ
+🔒 **ห้ามสลับลิงก์เอง** — ย้ายปลายทางทราฟฟิกลูกค้าจริงเป็นการตัดสินใจเชิงธุรกิจ · **Academy launch 16 ส.ค. ⇒ ต้องได้คำตอบก่อน**
+
 ### 🔴 ของที่เหลือจากการค้นครั้งนั้น — ส่ง Legal แล้ว ไม่ใช่งานเว็บ
 
 **`TAI TAM-D ACADEMY LTD` เลิกกิจการตั้งแต่ 8 มี.ค. 2022** ⇒ `Taitam-D Academy London` เป็น **ชื่อทางการค้า
