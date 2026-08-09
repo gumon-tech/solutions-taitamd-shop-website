@@ -95,7 +95,7 @@ export default function Navbar() {
             <Link href="/" className="flex items-center gap-3">
               <Image
                 src="/images/logo.png"
-                alt="TaiTam-D"
+                alt="Taitam-D"
                 width={44}
                 height={44}
                 priority
@@ -258,7 +258,7 @@ export default function Navbar() {
                   </a>
 
                   <a
-                    href={buildWhatsAppLink("Hi TaiTam-D, I have a quick question.")}
+                    href={buildWhatsAppLink("Hi Taitam-D, I have a quick question.")}
                     target="_blank"
                     rel="noreferrer"
                     className={drawerItemCls(false)}

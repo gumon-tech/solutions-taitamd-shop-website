@@ -105,7 +105,7 @@ export default function LocationBlock() {
                 <div className="relative aspect-[21/9] sm:aspect-[3/2] md:aspect-[21/9]">
                   <Image
                     src="/images/contact/storefront-21x9-1680x720.webp"
-                    alt="TaiTam-D storefront on Caledonian Road"
+                    alt="Taitam-D storefront on Caledonian Road"
                     fill
                     className="object-cover"
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 58vw, 680px"

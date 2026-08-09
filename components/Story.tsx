@@ -22,7 +22,7 @@ export default function Story() {
           <div className="relative aspect-[16/7]">
             <Image
               src="/images/story/interior-1600x900.jpg"
-              alt="TaiTam-D interior atmosphere"
+              alt="Taitam-D interior atmosphere"
               fill
               priority
               className="object-cover"
@@ -101,7 +101,7 @@ export default function Story() {
             <div className="relative aspect-[4/5]">
               <Image
                 src="/images/story/founder-860x1075.jpg"
-                alt="Thanyarat Phomnongsan (Kru Nok), Founder of TaiTam-D"
+                alt="Thanyarat Phomnongsan (Kru Nok), Founder of Taitam-D"
                 fill
                 className="object-cover object-[50%_18%]"
               />
@@ -118,11 +118,11 @@ export default function Story() {
               <h2 className="mt-3 text-2xl md:text-3xl font-semibold">The standard begins with her</h2>
               <div className="mt-3 space-y-1">
                 <div className="text-lg md:text-xl font-semibold text-ink/95">Thanyarat Phomnongsan <span className="text-mist font-medium">(Kru Nok)</span></div>
-                <div className="text-sm text-ink/78">CEO &amp; Founder, TaiTam-D Group • TaiTam-D Beauty Academy</div>
+                <div className="text-sm text-ink/78">CEO &amp; Founder, Taitam-D Group • Taitam-D Beauty Academy</div>
                 <div className="text-sm text-ink/78">Beauty Mentor • Certified NLP Master</div>
               </div>
               <p className="mt-4 text-sm md:text-base text-ink/80 leading-relaxed max-w-2xl">
-                TaiTam-D was created to elevate Thai craftsmanship through modern structure. From treatment protocols to curriculum design,
+                Taitam-D was created to elevate Thai craftsmanship through modern structure. From treatment protocols to curriculum design,
                 every detail follows one principle: technique first, detail always — no shortcuts.
               </p>
 
@@ -166,7 +166,7 @@ export default function Story() {
             <div className="relative h-full min-h-[260px]">
               <Image
                 src="/images/gallery/spa-1200x800.jpg"
-                alt="Thai-inspired detail at TaiTam-D"
+                alt="Thai-inspired detail at Taitam-D"
                 fill
                 className="object-cover"
               />

@@ -42,7 +42,7 @@ export default function ServicesGrid() {
                 {/* Footer is pinned to the bottom for perfect alignment */}
                 <div className="mt-6 pt-4 border-t border-ink/10 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
                   <Link
-                    href={buildWhatsAppLink(`Hi TaiTam-D, I’m interested in ${c.title}. Please share availability and prices.`)}
+                    href={buildWhatsAppLink(`Hi Taitam-D, I’m interested in ${c.title}. Please share availability and prices.`)}
                     target="_blank"
                     rel="noreferrer"
                     className="btn-shine inline-flex items-center justify-center gap-2 rounded-xl bg-ink/5 border border-ink/12 px-4 py-2.5 text-sm font-semibold hover:bg-ink/8 transition"

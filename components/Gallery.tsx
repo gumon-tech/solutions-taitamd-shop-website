@@ -59,7 +59,7 @@ const TILES: Tile[] = [
   {
     variant: "e",
     src: "/images/gallery/our-story-1200x800.jpg",
-    alt: "Inside TaiTam-D — calm, curated space",
+    alt: "Inside Taitam-D — calm, curated space",
     kicker: "Our Story",
     title: "Rooted in Thai tradition — refined in London.",
     href: "/story",
@@ -128,7 +128,7 @@ export default function Gallery() {
       <Reveal>
         <div className="flex items-end justify-between gap-6">
           <div>
-            <p className="text-xs tracking-[0.28em] uppercase text-mist">Inside TaiTam-D</p>
+            <p className="text-xs tracking-[0.28em] uppercase text-mist">Inside Taitam-D</p>
             <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-[-0.01em] text-ink leading-tight">
               A calm, curated <span className="text-gold">beauty ritual</span>.
             </h2>

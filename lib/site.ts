@@ -1,6 +1,6 @@
 export const SITE = {
   baseUrl: "https://taitam-d.com",
-  name: "Taitam‑D Beauty & Spa",
+  name: "Taitam-D Beauty & Spa",
   legalName: "Taitam-D Beauty & Spa",
   tagline: "Relax • Refresh • Recharge",
   description:
@@ -35,9 +35,9 @@ export const SITE = {
   // Prefilled WhatsApp messages (lead capture)
   whatsappTemplates: {
     giftCard:
-      "Hi Taitam‑D, I’d like to order a Gift Card.\n\nRecipient name: ___\nAmount: ___\nMessage on card: ___\nPreferred date: ___\n\nThank you!",
+      "Hi Taitam-D, I’d like to order a Gift Card.\n\nRecipient name: ___\nAmount: ___\nMessage on card: ___\nPreferred date: ___\n\nThank you!",
     academyGeneral:
-      "Hi Taitam‑D Academy, I’m interested in training courses.\n\nCourse: ___\nPreferred dates: ___\nExperience level: ___\n\nPlease share details & availability. Thank you!",
+      "Hi Taitam-D Academy, I’m interested in training courses.\n\nCourse: ___\nPreferred dates: ___\nExperience level: ___\n\nPlease share details & availability. Thank you!",
   },
 };
 

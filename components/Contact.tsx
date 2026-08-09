@@ -14,7 +14,7 @@ export default function Contact() {
     <section className="pt-8 md:pt-10">
       <Reveal>
         <div className="grid items-end gap-6 lg:grid-cols-[1fr_360px]">
-          <div><p className="text-xs uppercase tracking-[0.28em] text-mist">Contact TaiTam-D</p><h1 className="mt-3 max-w-3xl text-4xl font-semibold leading-[1.02] md:text-6xl">Make time for your <span className="text-gold">reset.</span></h1><p className="mt-5 max-w-2xl text-sm leading-relaxed text-mist md:text-base">Tell us what you need, and our team will help you choose the right treatment and time. WhatsApp is the quickest way to reach us.</p></div>
+          <div><p className="text-xs uppercase tracking-[0.28em] text-mist">Contact Taitam-D</p><h1 className="mt-3 max-w-3xl text-4xl font-semibold leading-[1.02] md:text-6xl">Make time for your <span className="text-gold">reset.</span></h1><p className="mt-5 max-w-2xl text-sm leading-relaxed text-mist md:text-base">Tell us what you need, and our team will help you choose the right treatment and time. WhatsApp is the quickest way to reach us.</p></div>
           <a href={SITE.whatsappLink} target="_blank" rel="noreferrer" className="btn-shine inline-flex items-center justify-center gap-2 rounded-2xl px-5 py-3.5 text-sm font-semibold"><MessageCircle className="h-4 w-4" /> Start on WhatsApp <ArrowUpRight className="h-4 w-4" /></a>
         </div>
         <div className="mt-6"><FollowUs /></div>
@@ -33,14 +33,14 @@ export default function Contact() {
             <p className="text-[10px] font-semibold uppercase tracking-[0.26em] text-[#947239]">Scan to connect</p>
             <h2 className="mt-3 text-3xl font-semibold leading-tight">Your next treatment is one message away.</h2>
             <p className="mt-3 text-sm leading-relaxed text-[#5a6c61]">Scan the QR code or tap WhatsApp. Ask about the comeback offers, availability or the best treatment for you.</p>
-            <div className="mx-auto mt-6 max-w-[220px] rounded-[24px] bg-white p-3 shadow-[0_10px_24px_rgba(24,59,43,0.14)]"><Image src={SITE.whatsappQr} alt="WhatsApp QR code for TaiTam-D" width={380} height={380} className="h-auto w-full rounded-xl" /></div>
+            <div className="mx-auto mt-6 max-w-[220px] rounded-[24px] bg-white p-3 shadow-[0_10px_24px_rgba(24,59,43,0.14)]"><Image src={SITE.whatsappQr} alt="WhatsApp QR code for Taitam-D" width={380} height={380} className="h-auto w-full rounded-xl" /></div>
             <a href={SITE.whatsappLink} target="_blank" rel="noreferrer" className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#183d2d] px-5 py-3 text-sm font-semibold text-[#f7f3e9] transition hover:bg-[#25563e]"><MessageCircle className="h-4 w-4 text-[#d7b874]" /> Open WhatsApp <ArrowUpRight className="h-4 w-4 text-[#d7b874]" /></a>
             <p className="mt-3 text-center text-xs text-[#6d7b72]">{SITE.whatsappDisplay} · {SITE.email}</p>
           </div>
         </Reveal>
       </div>
 
-      <Reveal className="mt-6"><div className="glass overflow-hidden rounded-[30px] border border-ink/10"><iframe title="TaiTam-D location map" src={mapSrc} className="map-tint__frame block h-[300px] w-full md:h-[360px]" loading="lazy" referrerPolicy="no-referrer-when-downgrade" /></div></Reveal>
+      <Reveal className="mt-6"><div className="glass overflow-hidden rounded-[30px] border border-ink/10"><iframe title="Taitam-D location map" src={mapSrc} className="map-tint__frame block h-[300px] w-full md:h-[360px]" loading="lazy" referrerPolicy="no-referrer-when-downgrade" /></div></Reveal>
       <div className="mt-10"><CTA /></div>
     </section>
   );

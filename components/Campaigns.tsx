@@ -12,7 +12,7 @@ const campaigns = [
     detail: "A scalp massage, nano steam, mask and blow dry in one restorative ritual.",
     prices: ["Men £40", "Short £59", "Medium £69", "Long £79"],
     offer: "Save £10 on the full Hair Spa package",
-    message: "Hi TaiTam-D, I’m interested in the Hair Spa & Detox comeback offer. Please share availability.",
+    message: "Hi Taitam-D, I’m interested in the Hair Spa & Detox comeback offer. Please share availability.",
   },
   {
     image: "/images/campaigns/promo-spa-ritual-gemini-v3.jpg",
@@ -21,7 +21,7 @@ const campaigns = [
     detail: "Small, focused rituals for hair, face, hands and feet — designed to leave you refreshed.",
     prices: ["Hair Spa from £40", "Face Spa £30", "Hand Spa £20", "Foot Spa £30"],
     offer: "Enjoy £10 off when you choose the full package",
-    message: "Hi TaiTam-D, I’d like to ask about the Hair Spa, Face Spa, Hand Spa and Foot Spa comeback offers.",
+    message: "Hi Taitam-D, I’d like to ask about the Hair Spa, Face Spa, Hand Spa and Foot Spa comeback offers.",
   },
 ];
 
