@@ -49,7 +49,8 @@ curl -s -o /dev/null -w "%{http_code}\n" https://taitam-d.com/   # คาดห�
 
 ### 🟡 W-7 · W-8 — คิวปัจจุบัน (ทั้งคู่ไม่ด่วน ไม่มีอะไรพังอยู่)
 
-- **W-7** workflow pin `node-version: "20"` · GitHub บังคับรันบน 24 ให้แล้วและขึ้น deprecation annotation ทุก run
+- **W-7** annotation "Node.js 20 is deprecated" ทุก run — **เป็นเรื่อง runtime ของตัว action ไม่ใช่ `node-version`**
+  ต้องยกเวอร์ชัน action ทั้งชุด (รายการอยู่ในคิว) · **W-9** CI build ด้วย Node 20 แต่เครื่องเรา Node 22 (ญาติของ D-W8 คนละชั้น)
 - **W-8** `npm audit` 10 รายการ (9 high — `sharp`/libvips · `postcss`) · **อ่านหมายเหตุในคิวก่อนลงมือ** —
   เว็บเป็น static export ไม่มี server runtime และ `images.unoptimized = true` ⇒ `sharp` ไม่ได้ถูกเรียกด้วยซ้ำ
   ความเสี่ยงจริงต่ำกว่าตัวเลข severity มาก · `npm audit fix` อาจดัน transitive ของ `next`
