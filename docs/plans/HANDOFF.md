@@ -47,11 +47,15 @@ curl -s -o /dev/null -w "%{http_code}\n" https://taitam-d.com/   # คาดห�
 
 ## 3 · งานค้าง
 
-### 🟡 W-3 — ย้าย lint จาก `next lint` ไป ESLint CLI (งานเดียวที่ค้างจริง)
+### 🟡 W-7 · W-8 — คิวปัจจุบัน (ทั้งคู่ไม่ด่วน ไม่มีอะไรพังอยู่)
 
-`next lint` deprecated **จะถูกถอดใน Next 16** ⇒ verify gate ตาม D-W4 (`npm run build && npm run lint`) จะพังเงียบตอน upgrade
-ตอนนี้ยังเขียวอยู่ **ไม่ด่วน** แต่ต้องทำ **ก่อน** แตะ Next major
-codemod: `npx @next/codemod@canary next-lint-to-eslint-cli .`
+- **W-7** workflow pin `node-version: "20"` · GitHub บังคับรันบน 24 ให้แล้วและขึ้น deprecation annotation ทุก run
+- **W-8** `npm audit` 10 รายการ (9 high — `sharp`/libvips · `postcss`) · **อ่านหมายเหตุในคิวก่อนลงมือ** —
+  เว็บเป็น static export ไม่มี server runtime และ `images.unoptimized = true` ⇒ `sharp` ไม่ได้ถูกเรียกด้วยซ้ำ
+  ความเสี่ยงจริงต่ำกว่าตัวเลข severity มาก · `npm audit fix` อาจดัน transitive ของ `next`
+
+**W-3 (ESLint CLI) เสร็จแล้ว** — `next lint` หายไปจาก repo แล้ว ตอนนี้ gate คือ `eslint . --max-warnings=0`
+ตาม [D-W9](DECISIONS-BOARD.md) · 🔑 **warning = ตก gate** อย่าปล่อยผ่านเพราะเห็น exit code 0
 
 ### ⏸ รอเจ้าของ — D-W1 "Since 2009"
 
