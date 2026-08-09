@@ -92,6 +92,19 @@ export default function CookiesPage() {
               </tbody>
             </table>
           </div>
+          {/*
+            This paragraph deliberately says nothing about which cookies the
+            Academy sets. An earlier version claimed it set none, which was
+            false; the version after that listed what it did set, which was
+            true for about half a day. The Academy is a system we do not
+            control, so any inventory we write here goes stale without anyone
+            telling us — and it goes stale inside a legal page.
+
+            So it links to their policy instead. Adding "the Academy sets no
+            analytics cookies" back, however true it looks on the day, puts the
+            time bomb back. If someone asks for that detail, it belongs on
+            their page, not ours.
+          */}
           <p className="mt-3 text-mist">
             Both analytics cookies are set for <span className="text-ink">this
             website only</span>. They are <span className="text-ink">not shared
