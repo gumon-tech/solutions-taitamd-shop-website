@@ -17,7 +17,10 @@ lsof -nP -iTCP:3300 -iTCP:3301 -sTCP:LISTEN               # คาดหวั�
 curl -s -o /dev/null -w "%{http_code}\n" https://taitam-d.com/   # คาดหวัง: 200
 ```
 
-**ณ เวลาที่เขียน:** working tree clean · ตรง `origin/main` · HEAD = `726e4d2` · ไม่มี dev server ค้าง · `next-env.d.ts` กับ `tsconfig.json` สะอาด · เว็บ live 200 ทุกหน้า
+**ณ เวลาที่เขียน:** working tree clean · ตรง `origin/main` · ไม่มี dev server ค้าง · `next-env.d.ts` กับ `tsconfig.json` สะอาด · เว็บ live 200 ทุกหน้า
+
+> ไม่ปักหมายเลข commit ไว้ที่นี่อีกแล้ว — ปักเมื่อไรก็ล้าสมัยทันทีที่ commit ถัดไปลง
+> (รอบแรกล้าสมัยตั้งแต่ commit ตัวเอกสารนี้เอง) · ดูของจริงจาก `git log` ในบล็อกข้างบน
 
 ---
 
@@ -57,7 +60,24 @@ codemod: `npx @next/codemod@canary next-lint-to-eslint-cli .`
 
 ### ❌ ไม่มีงานค้างจากห้องอื่น
 
-Marketing ไม่มีงานเว็บค้าง (ยืนยันแล้ว) · Academy launch 16 ส.ค. ยังไม่มีทราฟฟิกมาฝั่งเว็บร้าน
+Academy launch 16 ส.ค. ยังไม่มีทราฟฟิกมาฝั่งเว็บร้าน
+
+**Marketing audit 2026-08-09 — ปิดครบแล้ว ไม่มีอะไรค้าง** แต่มีสองข้อที่ต้องรู้ไว้กันไล่ผี:
+
+- 🔑 **`phone_click` / `whatsapp_click` ไม่ได้พัง ห้ามไป "แก้"** — Marketing ยิง synthesised click
+  บน production แล้วทั้งคู่ยิง event ครบพร้อม parameter · ที่ไม่โผล่ในคอนโซล Google Ads
+  คือ **ยังไม่มีใครกดจริง** ไม่ใช่บั๊กในโค้ด ([`components/Analytics.tsx:108`](../../components/Analytics.tsx))
+- 🔑 **แอดหยุดวิ่งเพราะบัตรเครดิตถูก declined** (ค้าง £10.25 เจ้าของจัดการเอง) ไม่ใช่เรื่องของเว็บ ⇒
+  ทราฟฟิกหายช่วงนี้ **ห้ามไปหาสาเหตุในโค้ด** (ก่อนหยุด: 242 impressions · 13 clicks · CTR 5.37% · £10.04)
+
+**ค้างที่ฝั่ง Marketing (เขาถือเอง ไม่ใช่ของเรา):** เว็บไม่มี Meta Pixel และไม่มี Google Ads
+remarketing tag (`AW-`) — **โดยตั้งใจ ยังไม่ต้องติดตั้ง** รอเจ้าของเคาะก่อนว่าจะยิง Meta ads หรือไม่
+เราตอบประเมินไปแล้ว: `AW-` ~1 บรรทัดต่อจาก [`Analytics.tsx:74`](../../components/Analytics.tsx)
+(ขี่ `gtag` เดิม เคารพ Consent Mode อัตโนมัติ) · **Meta Pixel ครึ่งวัน–1 วัน** เพราะ `fbq`
+ไม่รู้จัก Consent Mode ต้องเดินสาย consent เองและกันไม่ให้ `_fbp` รั่วลง academy
+🔴 **ต้นทุนจริงอยู่ที่เอกสาร ไม่ใช่โค้ด** — ทั้งคู่เพิ่มคุกกี้ ⇒ กฎข้อ 2 บังคับให้วัดทะเบียนใหม่บน
+production แล้วแก้ [`app/cookies/page.tsx`](../../app/cookies/page.tsx) + ข้อความ banner (ตอนนี้เขียนแค่
+"Google Analytics & Google Ads") ⇒ **ต้องผ่านห้อง Legal ก่อนขึ้นจริง**
 
 ---
 
@@ -79,6 +99,11 @@ Marketing ไม่มีงานเว็บค้าง (ยืนยัน�
 3. **ไม่มี test runner** ⇒ `npm run build && npm run lint` + **visual gate** คือทั้งหมดที่มี ตาคือด่านสุดท้ายจริง
 4. **ห้าม `git add -A`** — repo มี `.env` · `out/` · `.next*` อยู่ในเครื่อง stage เป็นราย path เสมอ
 5. **ห้ามคัดตารางพอร์ตมาเก็บใน repo นี้** — แหล่งจริงคือ `gumon-localdev/registry.json → devServerPorts`
+6. **`NEXT_DIST_DIR` ทำให้ผลลัพธ์ static export ไม่ลง `out/`** — มันไปกองอยู่ใน distDir นั้นแทน
+   (`.next-claude/index.html`, `.next-claude/sitemap.xml`, …) ⇒ **`out/` ในเครื่องจะเป็นของเก่าค้างและหลอกตา**
+   เจอจริงตอน W-5: build เขียวแล้วแต่ `cat out/sitemap.xml` ยังโชว์ของเดิม เกือบสรุปว่าแก้ไม่ติด
+   CI ไม่ตั้ง env นี้ (`next build` เปล่า ๆ แล้ว upload `./out`) ⇒ **ของขึ้นเว็บถูกต้อง** แต่เวลา verify ในเครื่อง
+   ให้อ่านจาก distDir ที่ตัวเองตั้ง ไม่ใช่ `out/`
 
 ---
 
