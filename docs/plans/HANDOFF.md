@@ -58,6 +58,12 @@ curl -s -o /dev/null -w "%{http_code}\n" https://taitam-d.com/   # คาดห�
 **W-3 (ESLint CLI) เสร็จแล้ว** — `next lint` หายไปจาก repo แล้ว ตอนนี้ gate คือ `eslint . --max-warnings=0`
 ตาม [D-W9](DECISIONS-BOARD.md) · 🔑 **warning = ตก gate** อย่าปล่อยผ่านเพราะเห็น exit code 0
 
+### ⏸ รอเจ้าของ — D-W10 สะกดชื่อผู้ก่อตั้ง
+
+เว็บเขียน `Thanyarat Phomnongsan` · เจ้าของเขียนเองว่า `Thanyarat Pomnongsan` · ไทยคือ ธัญรัศม์ พรหมหนองแสน
+อยู่ที่ [`components/Story.tsx`](../../components/Story.tsx) 3 จุด **ขึ้น production อยู่แล้ว** (เฉพาะหน้า `/story/`)
+🔑 **ชื่อคน = ของเจ้าของ ห้ามแก้เอง** แม้จะรู้สึกว่าเห็นชัดว่าอันไหนถูก · ชื่อ/ภาพครูท่านอื่นยึด consent เหมือนเดิม
+
 ### ⏸ รอเจ้าของ — D-W1 "Since 2009"
 
 **เจ้าของสั่งว่าไม่ต้องแก้** · Legal เคยแนะนำให้สลับถ้อยคำ (โปสเตอร์หน้าร้านเขียน SINCE 2013)
