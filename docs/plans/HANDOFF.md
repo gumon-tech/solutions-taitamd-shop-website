@@ -100,7 +100,10 @@ production แล้วแก้ [`app/cookies/page.tsx`](../../app/cookies/page
 3. **ไม่มี test runner** ⇒ `npm run build && npm run lint` + **visual gate** คือทั้งหมดที่มี ตาคือด่านสุดท้ายจริง
 4. **ห้าม `git add -A`** — repo มี `.env` · `out/` · `.next*` อยู่ในเครื่อง stage เป็นราย path เสมอ
 5. **ห้ามคัดตารางพอร์ตมาเก็บใน repo นี้** — แหล่งจริงคือ `gumon-localdev/registry.json → devServerPorts`
-6. **`NEXT_DIST_DIR` ทำให้ผลลัพธ์ static export ไม่ลง `out/`** — มันไปกองอยู่ใน distDir นั้นแทน
+6. **ใช้ `npm` เท่านั้น ห้าม `pnpm install` ในรีโปนี้** — CI ตรวจ package manager แบบ
+   "มี `yarn.lock` ไหม ถ้าไม่มีก็ `npm ci`" ⇒ **มันไม่รู้จัก pnpm** · ถ้าใครลง dep ด้วย pnpm
+   `package-lock.json` จะไม่ขยับตาม แล้ว CI จะ build ด้วยของคนละชุดกับที่เรา verify (เคยแตกมาแล้ว ดู D-W8)
+7. **`NEXT_DIST_DIR` ทำให้ผลลัพธ์ static export ไม่ลง `out/`** — มันไปกองอยู่ใน distDir นั้นแทน
    (`.next-claude/index.html`, `.next-claude/sitemap.xml`, …) ⇒ **`out/` ในเครื่องจะเป็นของเก่าค้างและหลอกตา**
    เจอจริงตอน W-5: build เขียวแล้วแต่ `cat out/sitemap.xml` ยังโชว์ของเดิม เกือบสรุปว่าแก้ไม่ติด
    CI ไม่ตั้ง env นี้ (`next build` เปล่า ๆ แล้ว upload `./out`) ⇒ **ของขึ้นเว็บถูกต้อง** แต่เวลา verify ในเครื่อง
