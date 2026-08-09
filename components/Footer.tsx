@@ -51,7 +51,7 @@ export default function Footer() {
               <ul className="space-y-1 text-mist">
                 <li>
                   <a href={SITE.academy} target="_blank" rel="noreferrer" className="hover:text-ink">
-                    Taitam-D Beauty Academy
+                    Taitam-D Academy London
                   </a>
                 </li>
               </ul>

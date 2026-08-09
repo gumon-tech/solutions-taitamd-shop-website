@@ -65,7 +65,7 @@ export default function Story() {
         <Reveal className="lg:col-span-5" delay={0.06}>
           <div className="glass rounded-[28px] p-7 md:p-9 h-full">
             <p className="text-xs tracking-[0.28em] uppercase text-mist">Good to know</p>
-            <h3 className="mt-3 text-2xl font-semibold">Beauty Academy</h3>
+            <h3 className="mt-3 text-2xl font-semibold">Taitam-D Academy London</h3>
             <p className="mt-3 text-sm text-ink/80 leading-relaxed">
               Our professional training lives on a dedicated site, keeping this space focused and refined — while holding education to the same standard.
             </p>
@@ -83,7 +83,7 @@ export default function Story() {
               rel="noreferrer"
               className="mt-6 inline-flex items-center justify-center rounded-2xl bg-ink/5 border border-ink/12 px-5 py-3 text-sm font-semibold hover:bg-ink/8 transition w-full"
             >
-              Visit Beauty Academy
+              Visit the Academy
             </a>
 
             <div className="mt-8 rounded-2xl bg-ink/5 border border-ink/10 p-5">
@@ -118,7 +118,7 @@ export default function Story() {
               <h2 className="mt-3 text-2xl md:text-3xl font-semibold">The standard begins with her</h2>
               <div className="mt-3 space-y-1">
                 <div className="text-lg md:text-xl font-semibold text-ink/95">Thanyarat Pomnongsan <span className="text-mist font-medium">(Kru Nok)</span></div>
-                <div className="text-sm text-ink/78">CEO &amp; Founder, Taitam-D Group • Taitam-D Beauty Academy</div>
+                <div className="text-sm text-ink/78">CEO &amp; Founder, Taitam-D Group • Taitam-D Academy London</div>
                 <div className="text-sm text-ink/78">Beauty Mentor • Certified NLP Master</div>
               </div>
               <p className="mt-4 text-sm md:text-base text-ink/80 leading-relaxed max-w-2xl">
