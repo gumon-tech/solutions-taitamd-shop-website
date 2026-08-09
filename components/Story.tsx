@@ -101,7 +101,7 @@ export default function Story() {
             <div className="relative aspect-[4/5]">
               <Image
                 src="/images/story/founder-860x1075.jpg"
-                alt="Thanyarat Phomnongsan (Kru Nok), Founder of Taitam-D"
+                alt="Thanyarat Pomnongsan (Kru Nok), Founder of Taitam-D"
                 fill
                 className="object-cover object-[50%_18%]"
               />
@@ -117,7 +117,7 @@ export default function Story() {
               <p className="text-xs tracking-[0.28em] uppercase text-mist">Founder-led</p>
               <h2 className="mt-3 text-2xl md:text-3xl font-semibold">The standard begins with her</h2>
               <div className="mt-3 space-y-1">
-                <div className="text-lg md:text-xl font-semibold text-ink/95">Thanyarat Phomnongsan <span className="text-mist font-medium">(Kru Nok)</span></div>
+                <div className="text-lg md:text-xl font-semibold text-ink/95">Thanyarat Pomnongsan <span className="text-mist font-medium">(Kru Nok)</span></div>
                 <div className="text-sm text-ink/78">CEO &amp; Founder, Taitam-D Group • Taitam-D Beauty Academy</div>
                 <div className="text-sm text-ink/78">Beauty Mentor • Certified NLP Master</div>
               </div>
@@ -128,7 +128,7 @@ export default function Story() {
 
               <div className="mt-6 rounded-2xl bg-ink/5 border border-ink/10 p-5">
                 <div className="text-sm font-semibold text-ink/95">“Luxury is not decoration. It is discipline.”</div>
-                <div className="mt-1.5 text-sm text-ink/78">— Thanyarat Phomnongsan (Kru Nok), Founder</div>
+                <div className="mt-1.5 text-sm text-ink/78">— Thanyarat Pomnongsan (Kru Nok), Founder</div>
               </div>
 
               <div className="mt-6 grid sm:grid-cols-3 gap-3 text-sm text-ink/78">
