@@ -120,7 +120,7 @@ npm run build && npm run lint
 (ห้อง **Gumon Workspace Lead** ถือ · เดิมชื่อ Local Dev Lead / `~/dev/gumon-localdev` — rename 2026-08-09
 path เก่าเป็น symlink ยังใช้ได้ แต่ไฟล์ย้ายลง `machines/<id>/` แล้ว ไม่อยู่ที่ root อีก · ยืนยัน 2026-08-10)
 อย่าคัดตารางพอร์ตมาไว้ที่นี่ — สำเนาสองใบจะขยับไม่พร้อมกัน · อยากได้พอร์ตเพิ่ม **ไปขอที่ห้องนั้น อย่าจองเอง**
-(§4.1 ของกติกากลางที่ platform เห็นแค่ฝั่ง Taitam-D จึงไม่ใช่แหล่งจริง — Local Dev Lead กำลังแก้ให้เป็นตัวชี้)
+(§4.1 ของกติกากลางที่ platform เห็นแค่ฝั่ง Taitam-D จึงไม่ใช่แหล่งจริง — **Gumon Workspace Lead** รับไปแก้ให้เป็นตัวชี้)
 
 รันผ่าน [`.claude/launch.json`](.claude/launch.json) ด้วย `preview_start` เท่านั้น ห้าม spawn ดิบผ่าน shell
 พอร์ตใน band ตัวเองไม่ว่าง = **สันนิษฐานว่าเป็น session อื่นของเราเอง ห้าม kill** — ใช้เลขถัดไปหรือ attach ของเดิม

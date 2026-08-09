@@ -26,7 +26,11 @@
 
 ---
 
-## 0 · ตรวจก่อนเชื่อ (รันก่อนทำอะไรทั้งสิ้น)
+## Verify — ตรวจก่อนเชื่อ (รันก่อนทำอะไรทั้งสิ้น · charter ข้อ 7)
+
+> หัวข้อนี้ชื่อ `## Verify` ตรงตัวโดยตั้งใจ — ขั้นที่ 2 ของ `WORKSPACE-RESUME` และ verify block
+> ของใบคิวกลางค้นด้วย `grep '^## Verify'` ⇒ **เปลี่ยนชื่อหัวข้อเมื่อไร ขั้นวัดของจริงจะถูกข้ามเงียบ**
+> (เดิมชื่อ "0 · ตรวจก่อนเชื่อ" ซึ่งมีเนื้อครบแต่ grep หาไม่เจอ — แก้ 2026-08-10)
 
 ```bash
 git -C ~/dev/solutions-taitamd-shop-website status -sb   # คาดหวัง: clean · ตรง origin/main
@@ -34,9 +38,21 @@ git -C ~/dev/solutions-taitamd-shop-website log --oneline -3
 gh run list --limit 3                                     # คาดหวัง: 1 run ต่อ push ทุกครั้ง
 lsof -nP -iTCP:3300 -iTCP:3301 -sTCP:LISTEN               # คาดหวัง: ว่าง
 curl -s -o /dev/null -w "%{http_code}\n" https://taitam-d.com/   # คาดหวัง: 200
+ls ~/dev/gumon-workspace/machines/*/queue/SHOP/           # คาดหวัง: มีแค่ README.md ถ้าไม่มีใบใหม่
 ```
 
-**ณ เวลาที่เขียน:** working tree clean · ตรง `origin/main` · ไม่มี dev server ค้าง · `next-env.d.ts` กับ `tsconfig.json` สะอาด · เว็บ live 200 ทุกหน้า
+**ถ้าไม่ตรง แปลว่าอะไร:**
+
+| อาการ | แปลว่า | ทำอะไรต่อ |
+|---|---|---|
+| tree ไม่ clean · มี `next-env.d.ts` / `tsconfig.json` โผล่ | มี session ที่รัน dev server แล้วไม่ได้คืนไฟล์ | `git checkout -- next-env.d.ts tsconfig.json` **ก่อน** ทำอะไรทั้งสิ้น — ถ้าหลุดขึ้นไป build ฝั่ง human พัง (กับดักข้อ 1) |
+| ahead `origin/main` | มี commit ที่ verify แล้วแต่ **ยังไม่ขึ้นเว็บ** | ตรวจว่า gate เขียวแล้วค่อย push · ที่นี่ push = deploy |
+| `gh run list` มี run ล้มเหลว หรือ 2 run ต่อ 1 push | deploy พัง หรือ workflow ซ้ำกลับมา (เคยเป็น ดู W-4) | ดู log จริง **อย่าเดาจากไฟล์ workflow** |
+| พอร์ต 3300/3301 ไม่ว่าง | **สันนิษฐานว่าเป็น session อื่นของเรา — ห้าม kill** | ใช้เลขถัดไปใน band หรือ attach ของเดิม |
+| เว็บไม่ 200 | ของจริงพัง สำคัญกว่าทุกงานในคิว | หยุดคิว แล้วไล่จาก run ล่าสุดที่ deploy |
+| ตู้ `SHOP/` มีใบใหม่ | มีงานเข้า จบ standby | อ่านใบ → ตอบในใบ + commit (state เดินทางด้วย commit ไม่ใช่ข้อความ) |
+
+**ณ เวลาที่เขียน (2026-08-10):** ทุกข้อตรง · tree clean · ไม่มี dev server ค้าง · เว็บ 200 ทั้ง 6 หน้า
 
 > ไม่ปักหมายเลข commit ไว้ที่นี่อีกแล้ว — ปักเมื่อไรก็ล้าสมัยทันทีที่ commit ถัดไปลง
 > (รอบแรกล้าสมัยตั้งแต่ commit ตัวเอกสารนี้เอง) · ดูของจริงจาก `git log` ในบล็อกข้างบน
