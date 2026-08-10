@@ -4,9 +4,17 @@ import Reveal from "./Reveal";
 import { SITE } from "@/lib/site";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
 
+// `illustrative` marks artwork that depicts a room and a therapist without being a
+// photograph of ours. Legal's test is not whether an image was AI-generated but whether
+// it misleads on something material, and the material claim here is "this is our salon".
+// A still life of towels does not make that claim; a treatment in progress does.
+// Never carry this label onto pages about our premises, our team, or before-and-after
+// results — there the picture is the claim, and a caption does not rescue it (Q-MKT/LAW
+// ruling 2026-08-10, recorded in docs/plans/DECISIONS-BOARD.md D-W22).
 const campaigns = [
   {
     image: "/images/campaigns/promo-hair-spa-gemini-v2.jpg",
+    illustrative: true,
     eyebrow: "Comeback offer · Hair care",
     title: "Hair Spa & Detox",
     detail: "A scalp massage, nano steam, mask and blow dry in one restorative ritual.",
@@ -44,7 +52,7 @@ export default function Campaigns() {
               <Reveal key={campaign.title} delay={index * 0.08}>
                 <article className="overflow-hidden rounded-[26px] border border-[#dbcba9] bg-[#fffdf8] shadow-[0_14px_36px_rgba(27,58,42,0.1)]">
                   <div className="relative aspect-[4/3] overflow-hidden">
-                    <Image src={campaign.image} alt={`${campaign.title} promotion`} fill className="object-cover transition duration-700 hover:scale-[1.03]" sizes="(max-width: 1024px) 100vw, 50vw" />
+                    <Image src={campaign.image} alt={campaign.illustrative ? `${campaign.title} promotion — illustrative image` : `${campaign.title} promotion`} fill className="object-cover transition duration-700 hover:scale-[1.03]" sizes="(max-width: 1024px) 100vw, 50vw" />
                     <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[#173b2c]/65 to-transparent" />
                     <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between gap-4 text-white">
                       <div><div className="text-[10px] uppercase tracking-[0.25em] text-[#eed59a]">{campaign.eyebrow}</div><h3 className="mt-2 text-2xl font-semibold tracking-[-0.02em] md:text-3xl">{campaign.title}</h3></div>
@@ -52,6 +60,7 @@ export default function Campaigns() {
                     </div>
                   </div>
                   <div className="p-5 md:p-6">
+                    {campaign.illustrative && <p className="mb-2 text-[11px] uppercase tracking-[0.18em] text-[#8a9a8f]">Illustrative image</p>}
                     <p className="text-sm leading-relaxed text-[#52655a]">{campaign.detail}</p>
                     <div className="mt-4 grid grid-cols-2 gap-2">{campaign.prices.map((price) => <div key={price} className="rounded-xl bg-[#f3eee5] px-3 py-2 text-xs font-semibold text-[#284b39]">{price}</div>)}</div>
                     <div className="mt-5 flex flex-col gap-4 border-t border-[#e7dece] pt-5 sm:flex-row sm:items-center sm:justify-between"><div className="text-sm font-semibold text-[#8d6c2c]">{campaign.offer}</div><a href={buildWhatsAppLink(campaign.message)} target="_blank" rel="noreferrer" className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-[#183d2d] px-4 py-2.5 text-xs font-semibold text-[#f7f3e9] transition hover:bg-[#25563e]"><MessageCircle className="h-4 w-4 text-[#d7b874]" /> Reserve offer</a></div>
