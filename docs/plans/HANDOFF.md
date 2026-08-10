@@ -263,7 +263,14 @@ production แล้วแก้ [`app/cookies/page.tsx`](../../app/cookies/page
 6. **ใช้ `npm` เท่านั้น ห้าม `pnpm install` ในรีโปนี้** — CI ตรวจ package manager แบบ
    "มี `yarn.lock` ไหม ถ้าไม่มีก็ `npm ci`" ⇒ **มันไม่รู้จัก pnpm** · ถ้าใครลง dep ด้วย pnpm
    `package-lock.json` จะไม่ขยับตาม แล้ว CI จะ build ด้วยของคนละชุดกับที่เรา verify (เคยแตกมาแล้ว ดู D-W8)
-7. **`NEXT_DIST_DIR` ทำให้ผลลัพธ์ static export ไม่ลง `out/`** — มันไปกองอยู่ใน distDir นั้นแทน
+7. **`info@taitam-d.com` เป็น *กลุ่ม* ไม่ใช่ *บัญชี*** (มติ komphet 2026-08-10) — **ส่งถึงได้ แต่ login ไม่ได้**
+   บัญชีจริงที่ล็อกอินได้คือ `thanyarat.po@taitam-d.com` (Admin สูงสุดของ Google Workspace)
+   ✅ **ที่เว็บใช้อยู่ 2 จุดถูกต้องแล้ว ไม่ต้องแก้** — [`lib/site.ts`](../../lib/site.ts) (`email` → ไหลเข้า JSON-LD)
+   และ [`app/cookies/page.tsx`](../../app/cookies/page.tsx) (ที่อยู่ติดต่อเรื่องความเป็นส่วนตัว) — **ทั้งคู่เป็นการ *รับเมล* ล้วน**
+   🔑 **ที่อยู่ติดต่อบนหน้านโยบาย *ควร* เป็นกลุ่ม ไม่ใช่เมลส่วนตัว** — กลุ่มอยู่ต่อได้เมื่อคนเปลี่ยน
+   ⇒ ห้ามใครไป "แก้ให้เป็นเมลจริง" ภายหลัง · 🔴 **แต่ถ้าวันไหนต้องสมัคร/ล็อกอินบริการแทนเว็บนี้**
+   (Search Console · analytics · โฮสต์ · โดเมน) **ต้องใช้ `thanyarat.po@` — `info@` จะล็อกอินไม่ได้**
+8. **`NEXT_DIST_DIR` ทำให้ผลลัพธ์ static export ไม่ลง `out/`** — มันไปกองอยู่ใน distDir นั้นแทน
    (`.next-claude/index.html`, `.next-claude/sitemap.xml`, …) ⇒ **`out/` ในเครื่องจะเป็นของเก่าค้างและหลอกตา**
    เจอจริงตอน W-5: build เขียวแล้วแต่ `cat out/sitemap.xml` ยังโชว์ของเดิม เกือบสรุปว่าแก้ไม่ติด
    CI ไม่ตั้ง env นี้ (`next build` เปล่า ๆ แล้ว upload `./out`) ⇒ **ของขึ้นเว็บถูกต้อง** แต่เวลา verify ในเครื่อง
