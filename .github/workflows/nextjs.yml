@@ -73,6 +73,11 @@ jobs:
             ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
+      # Runs before the build so a new orphan stops the deploy rather than shipping and
+      # waiting for someone to notice. Fails only on files not already in the baseline,
+      # so it enforces "no new orphans" without blocking on the thirty already there.
+      - name: Check for unreferenced files in public/
+        run: node scripts/check-orphan-assets.mjs
       - name: Build with Next.js
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
       - name: Upload artifact
