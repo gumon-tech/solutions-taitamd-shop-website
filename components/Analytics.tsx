@@ -160,13 +160,23 @@ export default function Analytics() {
 
   if (consent !== null) return null;
 
+  // Compact on phones on purpose. Legal's wording is unchanged; only the footprint
+  // shrank. At the previous size this sheet covered roughly a third of a 375px screen,
+  // which on the Signature landing page put the Book on WhatsApp button behind it before
+  // the visitor had answered anything.
+  // Legal's ruling (2026-08-11): PECR reg 6 forbids setting non-essential cookies before
+  // consent — it does not ask us to obscure the page, and a banner covering the only
+  // route to contact us pushes the consent itself toward a cookie wall.
+  // Consent behaviour is untouched: every storage type still starts denied, clicks travel
+  // as cookieless pings until accepted, the banner stays answerable, and using the site is
+  // never treated as agreement.
   return (
     <div
       role="dialog"
       aria-label="Cookie consent"
-      className="fixed inset-x-3 bottom-20 md:bottom-4 md:left-auto md:right-4 md:max-w-sm z-[70] rounded-2xl border border-gold/30 bg-bg1/95 backdrop-blur p-4 shadow-2xl"
+      className="fixed inset-x-3 bottom-20 md:bottom-4 md:left-auto md:right-4 md:max-w-sm z-[70] rounded-2xl border border-gold/30 bg-bg1/95 backdrop-blur p-3 md:p-4 shadow-2xl"
     >
-      <p className="text-sm text-ink/90 leading-relaxed">
+      <p className="text-xs leading-relaxed text-ink/90 md:text-sm">
         We&apos;d like to use optional analytics cookies (Google Analytics &amp; Google
         Ads) to understand visits and improve how we welcome you. If you decline,
         no cookies are stored on your device.{" "}
@@ -174,7 +184,7 @@ export default function Analytics() {
           Cookie policy
         </Link>
       </p>
-      <div className="mt-3 flex gap-2">
+      <div className="mt-2.5 flex gap-2 md:mt-3">
         <button
           onClick={() => decide("granted")}
           className="flex-1 rounded-full bg-gold text-bg0 text-sm font-medium px-4 py-2 hover:bg-gold2 transition"

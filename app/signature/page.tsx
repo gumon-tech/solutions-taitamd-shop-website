@@ -175,9 +175,12 @@ export default function SignaturePage() {
               <span className="text-base font-semibold sm:text-lg md:text-xl">{SITE.signaturePrice}</span>
             </div>
 
-            <p className="mt-7 max-w-2xl text-sm leading-relaxed text-[#5b6d62] md:text-base">{DESCRIPTION}</p>
-
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            {/* Buttons come before the description, not after. On a 375px screen the
+                consent sheet occupies the lower third until it is answered, and with the
+                paragraph first the primary CTA rendered behind it — measured with a hit
+                test, which returned the banner rather than the link. Price, then the way
+                to act on it, then the detail. */}
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row md:mt-8">
               <a
                 href={buildWhatsAppLink(SITE.whatsappTemplates.signature)}
                 target="_blank"
@@ -197,7 +200,9 @@ export default function SignaturePage() {
               </a>
             </div>
 
-            <div className="mt-10 grid gap-3 sm:grid-cols-3">
+            <p className="mt-6 max-w-2xl text-sm leading-relaxed text-[#5b6d62] md:mt-7 md:text-base">{DESCRIPTION}</p>
+
+            <div className="mt-8 grid gap-3 sm:grid-cols-3 md:mt-10">
               <div className="rounded-2xl bg-[#ebe3d4] p-4">
                 <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.18em] text-[#927039]">
                   <Clock className="h-3.5 w-3.5" /> Duration
