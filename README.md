@@ -35,9 +35,14 @@ Update:
 
 
 ## Image credits
-Stock images are downloaded from Unsplash under the Unsplash License (free photos):
-- /public/images/stock/spa-room.jpg
-- /public/images/stock/waiting-area.jpg
-- /public/images/stock/candle-bath.jpg
-- /public/images/stock/candles-table.jpg
-- /public/images/stock/white-candle.jpg
+No third-party stock photography ships with the site. The Unsplash images this section
+used to credit were removed on 2026-08-12: no page had referenced them, and they were
+untouched originals of 5000-6000px on a site that serves images raw and never renders
+above 1600 (see docs/plans/ORPHANED-ASSETS.md).
+
+Two notes for whoever adds the next credit here. Credit the file when it goes in, not
+after — and delete the credit when the file goes, or it points at nothing. And be aware
+that this section is deliberately outside the scope of scripts/check-orphan-assets.mjs:
+while it was in scope, listing those five files to credit them was enough to make the
+scanner report them as in use. A page that records where an image came from is not
+evidence that anything uses it.
