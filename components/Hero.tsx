@@ -91,6 +91,18 @@ export default function Hero() {
                     Thai + Deep Tissue + Aromatherapy blends — tailored to your body. Clean, modern interiors inspired by Thai tradition.
                   </p>
 
+                  {/* This card has said "Signature experience" since long before the
+                      treatment had a page. Now that it has one, the label is a way in
+                      rather than a dead end — the page was otherwise reachable only from
+                      the ad. */}
+                  <Link
+                    href="/signature"
+                    className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-gold transition hover:text-ink"
+                  >
+                    Taitam-D Signature — £69 / 60 min
+                    <ArrowUpRight className="h-4 w-4" />
+                  </Link>
+
                   <div className="mt-6 grid grid-cols-2 gap-3">
                     {[
                       { k: "Since", v: "2009" },
