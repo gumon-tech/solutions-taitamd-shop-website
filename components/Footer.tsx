@@ -68,7 +68,20 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 flex flex-col md:flex-row gap-3 md:items-center md:justify-between text-xs text-mist">
+        {/* Trading disclosure. Companies (Trading Disclosures) Regulations 2015 reg 25–26
+            require the registered name, number, jurisdiction and registered office on the
+            site — it carries a fine, so this is not decoration. Wording supplied verbatim
+            by Legal (2026-08-11) after checking Companies House; do not paraphrase it, and
+            keep the registered office labelled as such so it stays distinct from the shop
+            address shown above. */}
+        <p className="mt-10 text-xs leading-relaxed text-mist">
+          {SITE.name} is a trading name of {SITE.legalName}, a company registered in{" "}
+          {SITE.jurisdiction}, company number {SITE.companyNumber}.
+          <br />
+          Registered office: {SITE.registeredOffice}.
+        </p>
+
+        <div className="mt-6 flex flex-col md:flex-row gap-3 md:items-center md:justify-between text-xs text-mist">
           <span>© {new Date().getFullYear()} {SITE.name}. All rights reserved.</span>
           <span className="opacity-80">Bookings via WhatsApp · {SITE.whatsappDisplay}</span>
         </div>

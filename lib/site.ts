@@ -1,7 +1,21 @@
 export const SITE = {
   baseUrl: "https://taitam-d.com",
   name: "Taitam-D Beauty & Spa",
-  legalName: "Taitam-D Beauty & Spa",
+  // The registered company, not the brand. These are two different things and the
+  // field name is the only thing that says which is which — `legalName` held the
+  // trading name until 2026-08-11, so JSON-LD was declaring a company that does not
+  // exist under that name. Verified by Legal against Companies House: 11141046,
+  // active, England and Wales.
+  // ⛔ Never translate or transliterate this, the jurisdiction, or the registered
+  // address — a registered name is a legal identifier, not a piece of copy.
+  legalName: "TAITAM-D MANAGEMENT LTD",
+  companyNumber: "11141046",
+  jurisdiction: "England and Wales",
+  // Deliberately different from `address` above: the shop occupies 72-74, the
+  // registered office is 72. Both are correct and they must stay separately
+  // labelled — merging them would leave a reader unable to tell where statutory
+  // post has to go, which is the one question a registered office answers.
+  registeredOffice: "72 Caledonian Road, London, England, N1 9DN",
   tagline: "Relax • Refresh • Recharge",
   description:
     "Thai‑inspired beauty & wellness in King’s Cross, London — massage, hair, nails, waxing, facials & more. Established in 2009. Message us on WhatsApp to reserve your treatment.",
@@ -38,8 +52,18 @@ export const SITE = {
       "https://www.google.com/maps?q=72-74%20Caledonian%20Road%2C%20King%27s%20Cross%2C%20London%2C%20N1%209DN",
   },
 
+  // The price is fixed, not a starting point (owner ruling via Marketing, 2026-08-11).
+  // It is written as one string bound to the product name because Google compares the
+  // price in an ad against the landing page, and because £69 also appears on the home
+  // page as the medium-hair Hair Spa tier — a bare "£69" here would sit next to an
+  // unrelated £69 with nothing saying which treatment it belongs to.
+  // ⛔ Never render this as "from £69".
+  signaturePrice: "Taitam-D Signature — £69 / 60 minutes",
+
   // Prefilled WhatsApp messages (lead capture)
   whatsappTemplates: {
+    signature:
+      "Hi Taitam-D, I’d like to book the Taitam-D Signature (£69 / 60 minutes). Please share availability.",
     giftCard:
       "Hi Taitam-D, I’d like to order a Gift Card.\n\nRecipient name: ___\nAmount: ___\nMessage on card: ___\nPreferred date: ___\n\nThank you!",
     academyGeneral:
