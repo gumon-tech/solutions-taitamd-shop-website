@@ -36,7 +36,7 @@ const ALLOWLIST = new Set([
 // a clean result just as confidently as one that works.
 const SELF_TEST = [
   "public/images/logo.png",
-  "public/images/signature/hero-1600.jpg",
+  "public/images/shop/treatment-room-couples.jpg",
   "public/images/story/founder-860x1075.jpg",
   "public/favicon.ico",
 ];

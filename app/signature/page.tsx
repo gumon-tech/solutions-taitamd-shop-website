@@ -19,6 +19,37 @@ import type { Metadata } from "next";
 const DESCRIPTION =
   "60 minutes. Master-level assessment first, then a blend chosen for your condition — traditional Thai, stretching, deep tissue, Swedish, sports, aromatherapy, Thai yoga.";
 
+// Kru Nok wrote this block herself and asked for it at the top of the page, verbatim
+// (voice note, 2026-08-12: "ใส่คำที่พี่นกจั่วหัวให้"). She also said the rest of the page
+// was fine, so this is an addition and not a rewrite. Do not paraphrase these lines —
+// they are the owner's brand wording, which is hers to set and not this room's to edit.
+const OWNER_COPY = {
+  eyebrow: "Taitam-D Signature",
+  heading: "Nuad Thai Heritage Massage",
+  tagline: "A Thai tradition. A Master’s touch. Designed for you.",
+  heritage:
+    "Rooted in the tradition of Nuad Thai — recognised by UNESCO as Intangible Cultural Heritage of Humanity.",
+  consult:
+    "Before your treatment begins, our experienced therapist will consult with you, observe your needs and select the most suitable techniques for your body.",
+  modalities: "Traditional Thai • Stretching • Deep Tissue • Swedish • Sports • Aromatherapy • Thai Yoga",
+  price: "£69 / 60 Minutes",
+  closer: "One body. One session. One treatment designed around you.",
+  poweredBy: "Powered by Taitam-D Academy London",
+};
+
+// Transcribed from the "Taitam-D Specialist Team" board that hangs in the shop, from the
+// photograph Kru Nok took on 2026-08-12. Kom approved publishing both the board and the
+// text (2026-08-13). Kept as text as well as an image because text can be read by a
+// screen reader, translated, and corrected — a photograph of a board can do none of that.
+const TEAM = [
+  { name: "Nok", role: "NVQ Assessor · Team Leader & Manager", detail: "More than 25 years in the beauty industry." },
+  { name: "Elisa", role: "VTCT Level 3 Massage Specialist", detail: "Therapeutics and pain relief — Thai, deep tissue, Swedish, aromatherapy. More than 25 years." },
+  { name: "Eddie", role: "HCPC registered physiotherapist (PH112704)", detail: "Physiotherapy master with more than 20 years of experience." },
+  { name: "Irena", role: "Thai Massage Expert", detail: "Traditional Thai, Swedish and Thai combination massage." },
+  { name: "Dom", role: "ITEC Level 3 Thai Massage Expert", detail: "Holistic traditional Thai, Swedish, Thai combination, aromatherapy and sports massage." },
+  { name: "Evelyn · Ajda · Vero", role: "Beauty & body experts", detail: "Nails, facials and skincare, hair removal and massage. Vero is also our makeup artist." },
+];
+
 const BLEND = [
   { name: "Traditional Thai", note: "Energy-line work along the body, unhurried and rhythmic." },
   { name: "Stretching", note: "Assisted movement that opens the hips, back and shoulders." },
@@ -125,15 +156,10 @@ const jsonLd = {
   ],
 };
 
-// Images are AI-generated. None of them contains readable text (checked frame by frame,
-// D-W22). The three showing people carry a caption, because on a page selling a
-// treatment a reader could otherwise take them for our team or for real clients — and
-// that, not how the picture was made, is the thing that would mislead.
-const AI_CAPTION = "Illustrative image — not a photograph of our team or of a client.";
-
-function Caption() {
-  return <p className="mt-2 text-[11px] leading-relaxed text-mist">{AI_CAPTION}</p>;
-}
+// Every photograph on this page is of the shop itself, taken by Kru Nok on 2026-08-12
+// after the refit. The AI images that stood here until now are gone: she asked for the
+// real rooms, and D-W22 forbids synthetic imagery where a page depicts our premises.
+// If anything here is ever replaced with generated artwork, that rule comes back.
 
 export default function SignaturePage() {
   return (
@@ -143,36 +169,24 @@ export default function SignaturePage() {
       {/* Hero */}
       <section className="pt-8 md:pt-12">
         <div className="overflow-hidden rounded-[32px] border border-[#d6c198] bg-[#f5efe3] text-[#183b2d] shadow-[0_24px_60px_rgba(12,51,30,0.22)]">
-          {/* Shorter on phones on purpose. Ad traffic lands mostly on mobile, and every
-              pixel the picture takes here pushes the price below the fold — measured: at
-              21/9 the price sat under the consent banner on a 375px screen. */}
-          <div className="relative aspect-[3/1] w-full sm:aspect-[21/9] md:aspect-[21/8]">
-            <Image
-              src="/images/signature/hero-1600.jpg"
-              alt="A Thai massage treatment room with a floor mattress, cream linen and a lit candle"
-              fill
-              priority
-              sizes="(max-width: 1024px) 100vw, 1200px"
-              className="object-cover"
-            />
-          </div>
+          <div className="grid lg:grid-cols-[1.05fr_0.95fr]">
+            <div className="px-5 pb-6 pt-5 md:p-12">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[#95743a] md:text-xs">{OWNER_COPY.eyebrow}</p>
 
-          <div className="px-5 pb-6 pt-5 md:p-12">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[#95743a] md:text-xs">Taitam-D Signature</p>
-
-            <h1 className="mt-2 max-w-3xl text-[1.75rem] font-semibold leading-[1.06] tracking-[-0.04em] sm:text-4xl md:mt-4 md:text-6xl">
-              Taitam-D Signature <span className="text-[#a37d37]">Thai Massage</span>
+            <h1 className="mt-2 max-w-3xl text-[1.75rem] font-semibold uppercase leading-[1.06] tracking-[-0.02em] sm:text-4xl md:mt-4 md:text-5xl">
+              Nuad Thai <span className="text-[#a37d37]">Heritage Massage</span>
             </h1>
 
-            <p className="mt-2 max-w-2xl text-sm text-[#4c6154] sm:text-base md:mt-4 md:text-lg">
-              Master-level assessment &amp; bespoke therapy
-            </p>
+            <p className="mt-3 max-w-2xl text-sm text-[#4c6154] sm:text-base md:mt-4 md:text-lg">{OWNER_COPY.tagline}</p>
+
+            <p className="mt-4 max-w-xl text-xs leading-relaxed text-[#5b6d62] md:text-sm">{OWNER_COPY.heritage}</p>
 
             {/* The price sits above the fold and carries the treatment name with it. An ad
-                quoting £69 has to find £69 here, unqualified by any "from". */}
-            <div className="mt-5 inline-flex flex-wrap items-center gap-3 rounded-2xl border border-[#cdb887] bg-[#fffdf8] px-4 py-3.5 md:mt-7 md:px-5 md:py-4">
+                quoting £69 has to find £69 here, unqualified by any "from". The eyebrow and
+                heading name the treatment directly above, so the figure is never orphaned. */}
+            <div className="mt-5 inline-flex flex-wrap items-center gap-3 rounded-2xl border border-[#cdb887] bg-[#fffdf8] px-4 py-3.5 md:mt-6 md:px-5 md:py-4">
               <Sparkles className="h-5 w-5 shrink-0 text-[#a37d37]" />
-              <span className="text-base font-semibold sm:text-lg md:text-xl">{SITE.signaturePrice}</span>
+              <span className="text-lg font-semibold md:text-xl">{OWNER_COPY.price}</span>
             </div>
 
             {/* Buttons come before the description, not after. On a 375px screen the
@@ -200,9 +214,15 @@ export default function SignaturePage() {
               </a>
             </div>
 
-            <p className="mt-6 max-w-2xl text-sm leading-relaxed text-[#5b6d62] md:mt-7 md:text-base">{DESCRIPTION}</p>
+            <p className="mt-6 max-w-2xl text-sm leading-relaxed text-[#5b6d62] md:mt-7 md:text-base">{OWNER_COPY.consult}</p>
 
-            <div className="mt-8 grid gap-3 sm:grid-cols-3 md:mt-10">
+            <p className="mt-4 max-w-2xl text-xs font-semibold uppercase tracking-[0.12em] text-[#8d6c2c] md:text-sm">
+              {OWNER_COPY.modalities}
+            </p>
+
+            <p className="mt-5 max-w-xl text-base font-semibold text-[#274a38] md:text-lg">{OWNER_COPY.closer}</p>
+
+            <div className="mt-8 grid gap-3 sm:grid-cols-3">
               <div className="rounded-2xl bg-[#ebe3d4] p-4">
                 <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.18em] text-[#927039]">
                   <Clock className="h-3.5 w-3.5" /> Duration
@@ -219,6 +239,28 @@ export default function SignaturePage() {
                 <div className="text-[10px] uppercase tracking-[0.18em] text-[#927039]">Open</div>
                 <div className="mt-2 text-sm font-semibold">{SITE.hours}</div>
               </div>
+            </div>
+
+            <p className="mt-8 text-xs uppercase tracking-[0.2em] text-[#95743a]">{OWNER_COPY.poweredBy}</p>
+          </div>
+
+            {/* The room this treatment happens in, photographed by Kru Nok on 2026-08-12
+                after the refit. It replaces an AI image of a room that does not exist —
+                which is both what she asked for and what D-W22 requires of a page that
+                depicts our premises. */}
+            {/* Text first on phones, picture second. Ad traffic is mostly mobile and the
+                price has to clear the consent sheet — with the photograph on top it landed
+                at 725px against a banner starting at 580. On desktop the two sit side by
+                side and the order stops mattering. */}
+            <div className="relative aspect-[4/3] w-full sm:aspect-[16/9] lg:aspect-auto lg:min-h-full">
+              <Image
+                src="/images/shop/treatment-room-couples.jpg"
+                alt="The couples treatment room at Taitam-D: two massage beds dressed in purple with Thai gold brocade runners, against a painted lagoon mural"
+                fill
+                priority
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover"
+              />
             </div>
           </div>
         </div>
@@ -245,14 +287,13 @@ export default function SignaturePage() {
             <div>
               <div className="relative aspect-[3/2] overflow-hidden rounded-[26px] border border-ink/10">
                 <Image
-                  src="/images/signature/assessment-1200.jpg"
-                  alt="A therapist's hands resting on a client's back at the start of a treatment"
+                  src="/images/shop/salon-lavender.jpg"
+                  alt="A treatment area at Taitam-D, with a lavender-field mural, styling chair and facial bed"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   className="object-cover"
                 />
               </div>
-              <Caption />
             </div>
           </div>
         </section>
@@ -278,26 +319,24 @@ export default function SignaturePage() {
             <div>
               <div className="relative aspect-[3/2] overflow-hidden rounded-[26px] border border-ink/10">
                 <Image
-                  src="/images/signature/stretch-1200.jpg"
-                  alt="An assisted Thai stretch on a floor mattress in a bright room"
+                  src="/images/shop/reception-tropical.jpg"
+                  alt="The Taitam-D waiting area, with a painted beach mural, armchairs and a low table"
                   fill
                   sizes="(max-width: 640px) 100vw, 50vw"
                   className="object-cover"
                 />
               </div>
-              <Caption />
             </div>
             <div>
               <div className="relative aspect-[3/2] overflow-hidden rounded-[26px] border border-ink/10">
                 <Image
-                  src="/images/signature/detail-1000.jpg"
-                  alt="Warm massage oil poured from an unlabelled amber bottle into an open palm"
+                  src="/images/shop/reception-wide.jpg"
+                  alt="The front of the Taitam-D salon, with fresh flowers on the console and seating beyond"
                   fill
                   sizes="(max-width: 640px) 100vw, 50vw"
                   className="object-cover"
                 />
               </div>
-              <Caption />
             </div>
           </div>
         </section>
@@ -330,8 +369,8 @@ export default function SignaturePage() {
             <div>
               <div className="relative aspect-[4/5] overflow-hidden rounded-[26px] border border-ink/10">
                 <Image
-                  src="/images/signature/oils-1200.jpg"
-                  alt="Aromatherapy oils in unlabelled amber bottles, a herbal compress and a folded towel"
+                  src="/images/shop/treatment-room-couples.jpg"
+                  alt="Two massage beds dressed in purple with Thai gold brocade runners"
                   fill
                   sizes="(max-width: 1024px) 100vw, 420px"
                   className="object-cover"
@@ -375,13 +414,56 @@ export default function SignaturePage() {
               </div>
               <div className="relative aspect-[4/3] overflow-hidden rounded-[26px] border border-ink/10">
                 <Image
-                  src="/images/signature/room-1200.jpg"
-                  alt="A calm spa interior with green marble, brass fittings, white orchids and folded towels"
+                  src="/images/shop/reception-wide.jpg"
+                  alt="Fresh flowers and seating in the Taitam-D reception area"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   className="object-cover"
                 />
               </div>
+            </div>
+          </div>
+        </section>
+      </Reveal>
+
+      {/* Team & credentials */}
+      <Reveal>
+        <section className="ui-section">
+          <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:gap-14">
+            <div>
+              <div className="relative aspect-[3/4] overflow-hidden rounded-[26px] border border-ink/10">
+                <Image
+                  src="/images/shop/team-board.jpg"
+                  alt="The Taitam-D specialist team board in the shop, listing each therapist and their qualifications, with awards displayed below"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 40vw"
+                  className="object-cover"
+                />
+              </div>
+              <p className="mt-2 text-[11px] leading-relaxed text-mist">
+                The team board in the shop. The names and qualifications beside it are transcribed from it.
+              </p>
+            </div>
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-gold">Who will treat you</p>
+              <h2 className="mt-3 text-3xl font-semibold leading-tight tracking-[-0.03em] md:text-4xl">
+                A master-level assessment means <span className="text-gold">someone qualified to make it.</span>
+              </h2>
+              <p className="mt-4 max-w-xl text-sm leading-relaxed text-mist md:text-base">
+                The assessment at the start of the Signature is only worth having if the person doing it can read a
+                body. These are the people in the room.
+              </p>
+              <ul className="mt-6 space-y-3">
+                {TEAM.map((m) => (
+                  <li key={m.name} className="rounded-2xl border border-ink/10 bg-ink/5 p-4">
+                    <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                      <span className="font-semibold">{m.name}</span>
+                      <span className="text-xs font-semibold uppercase tracking-[0.14em] text-gold">{m.role}</span>
+                    </div>
+                    <p className="mt-1.5 text-sm leading-relaxed text-mist">{m.detail}</p>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </section>
