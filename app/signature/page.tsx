@@ -156,10 +156,16 @@ const jsonLd = {
   ],
 };
 
-// Every photograph on this page is of the shop itself, taken by Kru Nok on 2026-08-12
-// after the refit. The AI images that stood here until now are gone: she asked for the
-// real rooms, and D-W22 forbids synthetic imagery where a page depicts our premises.
-// If anything here is ever replaced with generated artwork, that rule comes back.
+// Every room on this page is the real shop, photographed by Kru Nok on 2026-08-12 after
+// the refit. Two generated still lifes remain as decoration — oils on a table, oil poured
+// into a palm — which Kom allowed on 2026-08-13 ("ภาพ AI บ้างสำหรับตกแต่งได้").
+//
+// The split is not arbitrary and is the line D-W22 draws: a picture of a room is a claim
+// about our premises, and a bottle on a table is not. So rooms are photographs, always,
+// and generated artwork never carries a room, a member of staff or a client.
+//
+// The other rule here is that no image appears twice, and no two show the same corner
+// from the same angle — that is what this page had before and it read as padding.
 
 export default function SignaturePage() {
   return (
@@ -330,8 +336,8 @@ export default function SignaturePage() {
             <div>
               <div className="relative aspect-[3/2] overflow-hidden rounded-[26px] border border-ink/10">
                 <Image
-                  src="/images/shop/reception-wide.jpg"
-                  alt="The front of the Taitam-D salon, with fresh flowers on the console and seating beyond"
+                  src="/images/signature/detail-1000.jpg"
+                  alt="Warm massage oil poured from an unlabelled amber bottle into an open palm"
                   fill
                   sizes="(max-width: 640px) 100vw, 50vw"
                   className="object-cover"
@@ -369,8 +375,8 @@ export default function SignaturePage() {
             <div>
               <div className="relative aspect-[4/5] overflow-hidden rounded-[26px] border border-ink/10">
                 <Image
-                  src="/images/shop/treatment-room-couples.jpg"
-                  alt="Two massage beds dressed in purple with Thai gold brocade runners"
+                  src="/images/signature/oils-1200.jpg"
+                  alt="Aromatherapy oils in unlabelled amber bottles, a herbal compress and a folded towel"
                   fill
                   sizes="(max-width: 1024px) 100vw, 420px"
                   className="object-cover"
@@ -414,8 +420,8 @@ export default function SignaturePage() {
               </div>
               <div className="relative aspect-[4/3] overflow-hidden rounded-[26px] border border-ink/10">
                 <Image
-                  src="/images/shop/reception-wide.jpg"
-                  alt="Fresh flowers and seating in the Taitam-D reception area"
+                  src="/images/shop/footspa-row.jpg"
+                  alt="The foot treatment room at Taitam-D, with reclining chairs along a stone-clad wall"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   className="object-cover"
