@@ -45,10 +45,18 @@ GA default คือ `auto` ⇒ เขียนคุกกี้ที่ `.tai
 กระทบ Quality Score ของ Google Ads โดยตรง — ตอนนี้ PMax ยิงเงินมาที่ apex `https://taitam-d.com/` อยู่
 
 **4. "Since 2009" ห้ามแตะจนกว่าเจ้าของจะเคาะ**
-ปรากฏใน `app/story/page.tsx` · `components/Hero.tsx` · `components/Story.tsx` ·
-`components/Awards.tsx` · `lib/site.ts` (`description` + `foundingDate` ที่ป้อน structured data)
+ปรากฏใน **6 ไฟล์** — `app/story/page.tsx` · `app/signature/page.tsx` · `components/Hero.tsx` ·
+`components/Story.tsx` · `components/Awards.tsx` · `lib/site.ts` (`description` + `foundingDate` ที่ป้อน structured data)
 Legal แนะนำให้สลับถ้อยคำ (โปสเตอร์หน้าร้านเขียน SINCE 2013) แต่ **เจ้าของสั่งว่าไม่ต้องแก้** —
 ถ้อยคำแบรนด์เป็นการตัดสินใจของเจ้าของ Legal ให้ได้แค่ความเห็น
+
+⚠️ **`app/signature/page.tsx` เพิ่งเข้ารายการ 2026-08-14** — หน้านี้ขึ้น 13 ส.ค. พร้อมประโยค
+*"in a room we have run in King's Cross since 2009"* ([บรรทัด 290](app/signature/page.tsx)) โดยรายการข้างบนยังเป็น 5 ไฟล์อยู่ 1 วัน
+🔑 **กฎที่แจกแจงรายไฟล์จะพังเงียบทุกครั้งที่มีหน้าใหม่** — คนที่จะแก้ถ้อยคำนี้ในอนาคตจะ grep ตามรายการ ไม่ใช่ grep คำ
+⇒ **เพิ่มหน้าใหม่ที่พูดถึงปีก่อตั้งเมื่อไร ต้องมาต่อรายการนี้ด้วย** · ตรวจของจริงเสมอด้วย:
+```bash
+grep -rln "2009" app components lib
+```
 
 ## 🔑 เริ่ม session ใหม่อ่านตรงนี้ก่อน
 
