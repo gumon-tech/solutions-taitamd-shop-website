@@ -37,17 +37,30 @@ const OWNER_COPY = {
   poweredBy: "Powered by Taitam-D Academy London",
 };
 
-// Transcribed from the "Taitam-D Specialist Team" board that hangs in the shop, from the
-// photograph Kru Nok took on 2026-08-12. Kom approved publishing both the board and the
-// text (2026-08-13). Kept as text as well as an image because text can be read by a
-// screen reader, translated, and corrected — a photograph of a board can do none of that.
+// The people, from the shop's own booking system — not from the board on the wall.
+//
+// The earlier version of this list was transcribed from the "Taitam-D Specialist Team"
+// board (photograph, 2026-08-12). Kru Nok's brief of 2026-08-13/14 established that four
+// of those names had left the business, and asked for the current team to take their
+// places. She proposed keeping each departed person's biography and swapping only the
+// name over it. Kom decided against that on 2026-08-15: a qualification is a statement
+// about a named individual, so it moves with the person, not with the slot.
+//
+// So each line here carries only what the shop's own booking system records for that
+// person — Key: "Beauty & Massage Therapy", Kanya: "Physiotherapist", Pranee: "Massage
+// therapist" — plus the treatments they give. Awarding-body levels ("VTCT Level 3",
+// "ITEC Level 3"), the HCPC registration number PH112704 and the "more than N years"
+// counts all belonged to people who have left, and are gone with them.
+//
+// 🔴 Do not re-attach a credential here from memory or from an older revision of this
+// file. Anything added back needs a source naming *this* person — the register entry,
+// the certificate, or Kru Nok confirming it of them by name.
 const TEAM = [
   { name: "Nok", role: "NVQ Assessor · Team Leader & Manager", detail: "More than 25 years in the beauty industry." },
-  { name: "Elisa", role: "VTCT Level 3 Massage Specialist", detail: "Therapeutics and pain relief — Thai, deep tissue, Swedish, aromatherapy. More than 25 years." },
-  { name: "Eddie", role: "HCPC registered physiotherapist (PH112704)", detail: "Physiotherapy master with more than 20 years of experience." },
-  { name: "Irena", role: "Thai Massage Expert", detail: "Traditional Thai, Swedish and Thai combination massage." },
-  { name: "Dom", role: "ITEC Level 3 Thai Massage Expert", detail: "Holistic traditional Thai, Swedish, Thai combination, aromatherapy and sports massage." },
-  { name: "Evelyn · Ajda · Vero", role: "Beauty & body experts", detail: "Nails, facials and skincare, hair removal and massage. Vero is also our makeup artist." },
+  { name: "Key", role: "Beauty & massage therapy", detail: "Massage and beauty treatments — Thai, deep tissue, Swedish and aromatherapy." },
+  { name: "Kanya", role: "Physiotherapist", detail: "Physiotherapy alongside therapeutic massage for pain and recovery." },
+  { name: "Tip", role: "Massage therapist", detail: "Therapeutics and pain relief — Thai, deep tissue, Swedish and aromatherapy." },
+  { name: "Sue · Pranee · Veronica", role: "Beauty & body experts", detail: "Nails, facials and skincare, hair removal and massage." },
 ];
 
 const BLEND = [
@@ -438,16 +451,20 @@ export default function SignaturePage() {
           <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:gap-14">
             <div>
               <div className="relative aspect-[3/4] overflow-hidden rounded-[26px] border border-ink/10">
+                {/* Was a photograph of the team board on the shop wall. That board still
+                    lists four people who have left, with their qualifications beside their
+                    names, so it can no longer sit next to the current team. Replaced with the
+                    room the assessment actually happens in. */}
                 <Image
-                  src="/images/shop/team-board.jpg"
-                  alt="The Taitam-D specialist team board in the shop, listing each therapist and their qualifications, with awards displayed below"
+                  src="/images/tour/consultation-desk.jpg"
+                  alt="The consultation desk at Taitam-D, with a ring light and magnifying lamp against a stone wall"
                   fill
                   sizes="(max-width: 1024px) 100vw, 40vw"
                   className="object-cover"
                 />
               </div>
               <p className="mt-2 text-[11px] leading-relaxed text-mist">
-                The team board in the shop. The names and qualifications beside it are transcribed from it.
+                The consultation desk, where the assessment at the start of the Signature is done.
               </p>
             </div>
             <div>

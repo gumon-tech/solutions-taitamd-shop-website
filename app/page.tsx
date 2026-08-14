@@ -2,6 +2,7 @@ import Hero from "@/components/Hero";
 import LuxeBento from "@/components/LuxeBento";
 import ServicesPreview from "@/components/ServicesPreview";
 import Gallery from "@/components/Gallery";
+import ShopTour from "@/components/ShopTour";
 import Awards from "@/components/Awards";
 import LocationBlock from "@/components/LocationBlock";
 import CTA from "@/components/CTA";
@@ -16,6 +17,7 @@ export default function Home() {
       <LuxeBento />
       <ServicesPreview />
       <Gallery />
+      <ShopTour />
       <Awards />
       <AcademyPromo />
       <LocationBlock />
