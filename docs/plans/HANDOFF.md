@@ -61,8 +61,11 @@ lsof -nP -iTCP:3300 -iTCP:3301 -sTCP:LISTEN               # คาดหวั�
 curl -s -o /dev/null -w "%{http_code}\n" https://taitam-d.com/   # คาดหวัง: 200
 grep -H '^status:' ~/dev/gumon-workspace/machines/*/queue/SHOP/Q-*.md   # คาดหวัง: ไม่มีใบไหน open
 # 🔴 บรรทัดข้างบน **ไม่พอ** — ใบที่จ่าหน้าหลายห้องถูกเก็บใน**ตู้ของผู้ออก** ⇒ ตู้ SHOP/ มองไม่เห็น
-cd ~/dev/gumon-workspace && git pull --rebase -q && cd machines/*/queue/ && \
-  grep -rl '^to:.*\bSHOP\b' --include='*.md' . | xargs grep -l '^status: open'
+# ⛔ และ **ห้ามใช้ `git pull`** ที่นี่ — working tree ของ workspace เป็นของกลาง ห้องอื่นมีงานค้างได้ตลอด
+#    ⇒ pull ล้ม แต่ grep รันต่อบนสำเนาเก่า **โดยคืนผลลัพธ์หน้าตาปกติ** (วัดเจอ 14 ส.ค. 09:37Z · Q-SHOP-008)
+cd ~/dev/gumon-workspace && git fetch -q origin && \
+  for f in $(git grep -l '^to:.*\bSHOP\b' origin/main -- 'machines/komphet-mac/queue/*/*.md' | sed 's|^origin/main:||'); do \
+    git show "origin/main:$f" 2>/dev/null | grep -q '^status: open' && echo "OPEN: $f"; done
 ```
 
 ⚠️ **บรรทัด `grep -rl` เพิ่ม 2026-08-14 เพราะมันจับของจริงได้ทันทีที่เพิ่ม** — ตอนนั้นมีใบ `open`
@@ -71,7 +74,7 @@ cd ~/dev/gumon-workspace && git pull --rebase -q && cd machines/*/queue/ && \
 หรือแปลว่ามองไม่เห็น*** — และสองอย่างนี้หน้าตาเหมือนกันทุกประการ
 
 🔔 **ห้องนี้ปลุกตัวเองด้วย cron** (ใบ `SETUP-self-wake` · ตอบแล้ว 14 ส.ค.) — `CronCreate`
-**`37 * * * *` (รอบ 60 นาที เพราะห้องนี้ถูกพัก · `Q-WS-116` กำหนด)** รันบล็อก `grep -rl` ข้างบน
+**`37 * * * *` (รอบ 60 นาที เพราะห้องนี้ถูกพัก · `Q-WS-116` กำหนด)** รันบล็อก **fetch-based** ข้างบน
 ⚠️ **cron ตายพร้อม session และหมดอายุเองใน 7 วัน** ⇒ **เปิดห้องใหม่เมื่อไร ต้องตั้งใหม่ทุกครั้ง**
 
 🔴 **พรอมป์ cron ต้องมีเงื่อนไขพักเขียนอยู่ในตัวมันเอง** (`Q-WS-116` · ข้อสังเกตของ `SUN`)
