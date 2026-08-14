@@ -450,21 +450,34 @@ export default function SignaturePage() {
         <section className="ui-section">
           <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:gap-14">
             <div>
-              <div className="relative aspect-[3/4] overflow-hidden rounded-[26px] border border-ink/10">
+              {/* 4/3, not the 3/4 the board photo used: this is seven people standing in a
+                  row, and a portrait crop takes the ones on each end out of the picture. */}
+              <div className="relative aspect-[4/3] overflow-hidden rounded-[26px] border border-ink/10">
                 {/* Was a photograph of the team board on the shop wall. That board still
                     lists four people who have left, with their qualifications beside their
-                    names, so it can no longer sit next to the current team. Replaced with the
-                    room the assessment actually happens in. */}
+                    names, so it could not stay next to the current team.
+
+                    This is the picture Kru Nok asked for in its place. She made it herself
+                    and said how: she took each person's profile photograph out of the shop's
+                    booking system and had an image model place them together in green
+                    uniforms in front of the logo wall — "พี่ใช้ AI แต่ง แล้วก็มีหัวโตบ้าง
+                    อะไรบ้าง แต่พี่ว่ามันถือว่าโอเคแหละ ใส่ไปก่อน ให้มันครบ".
+
+                    D-W22 forbids AI imagery on a team page. Kom was asked before this went
+                    up and ruled that Kru Nok's wish governs and that she carries the risk
+                    (2026-08-15) — recorded on the board as D-W22 AMENDED. The decision is
+                    made; do not reopen it. What D-W22 still governs is untouched: /tour is
+                    photographs only, no legible text in generated images, no before-and-after. */}
                 <Image
-                  src="/images/tour/consultation-desk.jpg"
-                  alt="The consultation desk at Taitam-D, with a ring light and magnifying lamp against a stone wall"
+                  src="/images/tour/team-group.jpg"
+                  alt="The Taitam-D team of seven in green uniforms, standing together in front of the Taitam-D Beauty & Spa Centre logo wall"
                   fill
                   sizes="(max-width: 1024px) 100vw, 40vw"
                   className="object-cover"
                 />
               </div>
               <p className="mt-2 text-[11px] leading-relaxed text-mist">
-                The consultation desk, where the assessment at the start of the Signature is done.
+                The team, in a composed portrait — the faces are ours, the setting was put together for it.
               </p>
             </div>
             <div>
