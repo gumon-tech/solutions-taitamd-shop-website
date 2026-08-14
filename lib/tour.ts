@@ -61,18 +61,6 @@ export const TOUR: TourZone[] = [
         orientation: "landscape",
       },
       {
-        src: "/images/tour/lounge-armchair-lagoon.jpg",
-        alt: "A leather Chesterfield armchair and footstool in front of the painted beach mural",
-        caption: "A leather armchair and footstool under the mural.",
-        orientation: "portrait",
-      },
-      {
-        src: "/images/tour/lounge-relax-corner.jpg",
-        alt: "Two armchairs with embroidered cushions, one reading Relax, beside a small gold side table",
-        caption: "One of the cushions reads Relax. It is not subtle.",
-        orientation: "portrait",
-      },
-      {
         src: "/images/tour/corridor-orchids.jpg",
         alt: "White orchids on a stand at the turn from the lounge into the treatment corridor",
         caption: "White orchids at the turn into the corridor.",
@@ -94,21 +82,9 @@ export const TOUR: TourZone[] = [
         orientation: "portrait",
       },
       {
-        src: "/images/tour/thai-room-lagoon-mural.jpg",
-        alt: "The twin-bed massage room seen from the doorway, beneath a painted lagoon and cave mural",
-        caption: "The same room from the doorway, under a painted lagoon.",
-        orientation: "portrait",
-      },
-      {
         src: "/images/tour/treatment-room-wood-warm.jpg",
         alt: "A single treatment room panelled in dark wood with a warm lamp on the side table",
         caption: "A single room in dark wood, one warm lamp.",
-        orientation: "portrait",
-      },
-      {
-        src: "/images/tour/treatment-room-wood-green.jpg",
-        alt: "A wood-panelled treatment room with green towels laid on the bed and a salt lamp on the trolley",
-        caption: "Green towels laid out, salt lamp on the trolley.",
         orientation: "portrait",
       },
       {
@@ -160,12 +136,6 @@ export const TOUR: TourZone[] = [
         orientation: "portrait",
       },
       {
-        src: "/images/tour/pedicure-recliners-detail.jpg",
-        alt: "Two white reclining chairs with folded towels, tools and a small plant on the tray between them",
-        caption: "Towels and tools set out before a treatment.",
-        orientation: "portrait",
-      },
-      {
         src: "/images/tour/pedicure-room-daylight.jpg",
         alt: "The front pedicure room with white reclining chairs, daylight through the window onto the street, flowers in the foreground",
         caption: "The front room, with daylight off the street.",
@@ -191,7 +161,7 @@ export const TOUR: TourZone[] = [
     id: "through",
     kicker: "In between",
     title: "The way through",
-    intro: "Stone underfoot, wood along the walls, and the stairs to the rooms upstairs.",
+    intro: "Stone underfoot, a mural along the wall, and the stairs to the rooms above.",
     shots: [
       {
         src: "/images/tour/infrared-sauna.jpg",
@@ -203,12 +173,6 @@ export const TOUR: TourZone[] = [
         src: "/images/tour/hallway-stairs-mural.jpg",
         alt: "A hallway with a stone floor, a painted sea mural along one wall and stairs leading up",
         caption: "Stone floor, mural, stairs up.",
-        orientation: "portrait",
-      },
-      {
-        src: "/images/tour/corridor-treatment-doors.jpg",
-        alt: "A wood-panelled corridor with treatment room doors on one side and the staircase at the end",
-        caption: "Treatment room doors along the corridor.",
         orientation: "portrait",
       },
     ],

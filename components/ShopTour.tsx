@@ -18,9 +18,12 @@ const PREVIEW = [
     span: true,
   },
   {
-    src: "/images/tour/thai-room-twin-beds.jpg",
-    alt: "The couples' Thai massage room with twin beds, purple covers and gold Thai silk runners",
-    label: "The couples' room",
+    // Not the couples' room, tempting as it is: the Gallery tile directly above this
+    // section on the home page already shows it. Two photographs of one room on one
+    // page is the repetition this section exists to argue against.
+    src: "/images/tour/treatment-room-forest-mural.jpg",
+    alt: "A treatment room with a stone wall and a mural of an autumn forest behind the bed",
+    label: "The forest room",
   },
   {
     src: "/images/tour/pedicure-spa-chairs.jpg",
