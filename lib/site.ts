@@ -6,7 +6,7 @@ export const SITE = {
   // trading name until 2026-08-11, so JSON-LD was declaring a company that does not
   // exist under that name. Verified by Legal against Companies House: 11141046,
   // active, England and Wales.
-  // ⛔ Never translate or transliterate this, the jurisdiction, or the registered
+  // Never translate or transliterate this, the jurisdiction, or the registered
   // address — a registered name is a legal identifier, not a piece of copy.
   legalName: "TAITAM-D MANAGEMENT LTD",
   companyNumber: "11141046",
@@ -57,7 +57,7 @@ export const SITE = {
   // price in an ad against the landing page, and because £69 also appears on the home
   // page as the medium-hair Hair Spa tier — a bare "£69" here would sit next to an
   // unrelated £69 with nothing saying which treatment it belongs to.
-  // ⛔ Never render this as "from £69".
+  // Never render this as "from £69".
   signaturePrice: "Taitam-D Signature — £69 / 60 minutes",
 
   // Prefilled WhatsApp messages (lead capture)

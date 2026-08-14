@@ -5,13 +5,13 @@
 // feels like. The shop is on the ground floor of a terrace on Caledonian Road, and you
 // cannot see in from the pavement, so this page does the job the window cannot.
 //
-// 🔴 Every photograph here is a real photograph of these rooms. D-W22 (Legal, 2026-08-10)
+// Every photograph here is a real photograph of these rooms. D-W22 (Legal, 2026-08-10)
 // forbids AI imagery anywhere the picture is a factual claim about the premises or the
 // people — a venue gallery is the clearest case of that there is. Nothing on this page
 // may be generated, extended, or have its contents altered. Adjusting exposure, contrast
 // and sharpness is fine; adding, removing or inventing anything in the frame is not.
 //
-// 🔴 Captions describe what is actually in the frame. No "the most luxurious in King's
+// Captions describe what is actually in the frame. No "the most luxurious in King's
 // Cross", no review quotes, no star ratings — there is no source to point at for any of
 // it. If Marketing supplies sourced quotes later, they go somewhere else, not here.
 

@@ -1,7 +1,7 @@
 // app/robots.ts
 import type { MetadataRoute } from "next";
 
-// ✅ Required for `output: "export"` (static HTML export)
+// Required for `output: "export"` (static HTML export)
 export const dynamic = "force-static";
 
 import { SITE } from "@/lib/site";

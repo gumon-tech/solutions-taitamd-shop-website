@@ -52,7 +52,7 @@ const OWNER_COPY = {
 // "ITEC Level 3"), the HCPC registration number PH112704 and the "more than N years"
 // counts all belonged to people who have left, and are gone with them.
 //
-// 🔴 Do not re-attach a credential here from memory or from an older revision of this
+// Do not re-attach a credential here from memory or from an older revision of this
 // file. Anything added back needs a source naming *this* person — the register entry,
 // the certificate, or Kru Nok confirming it of them by name.
 const TEAM = [

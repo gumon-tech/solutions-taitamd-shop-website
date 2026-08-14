@@ -6,10 +6,10 @@ import { TOUR_SHOT_COUNT } from "@/lib/tour";
 
 // Kru Nok asked for the shop itself on the front page (brief of 2026-08-14): people
 // walking past cannot see in, and the photographs were doing nothing while they sat in
-// a folder. This is the doorway to /tour, not the tour — four rooms that look nothing
+// a folder. This is the doorway to /tour, not the tour — five rooms that look nothing
 // like each other, which is the thing worth noticing about the place.
 //
-// 🔴 Real photographs only, per D-W22. Do not swap any of these for a generated image.
+// Real photographs only, per D-W22. Do not swap any of these for a generated image.
 const PREVIEW = [
   {
     src: "/images/tour/lounge-beach-mural-wide.jpg",
