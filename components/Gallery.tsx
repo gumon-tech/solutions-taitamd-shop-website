@@ -55,7 +55,7 @@ const TILES: Tile[] = [
     href: "/services",
   },
 
-  // Row 3: 6 | 6  (close story → close action)
+  // Row 3: 6 | 6  (close story, then close action)
   {
     variant: "e",
     src: "/images/gallery/our-story-1200x800.jpg",
