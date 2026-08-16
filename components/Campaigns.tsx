@@ -11,10 +11,28 @@ import { buildWhatsAppLink } from "@/lib/whatsapp";
 // Never carry this label onto pages about our premises, our team, or before-and-after
 // results — there the picture is the claim, and a caption does not rescue it (Q-MKT/LAW
 // ruling 2026-08-10, recorded in docs/plans/DECISIONS-BOARD.md D-W22).
-const campaigns = [
+//
+// No card carries the flag today. It stays declared because the label is the mechanism
+// that ruling created, and deleting it the moment it happens to be unused is how a guard
+// disappears years before the risk does.
+type Campaign = {
+  image: string;
+  illustrative?: boolean;
+  eyebrow: string;
+  title: string;
+  detail: string;
+  prices: string[];
+  offer: string;
+  message: string;
+};
+
+const campaigns: Campaign[] = [
   {
-    image: "/images/campaigns/promo-hair-spa-gemini-v2.jpg",
-    illustrative: true,
+    // Swapped off the generated artwork 2026-08-16 (Q-SHOP-020, ruled by WS): the old
+    // picture showed a wash room with a therapist in it, which reads as a claim about
+    // our premises and our people — exactly what D-W22 forbids. This is the real salon
+    // room, so the `illustrative` label comes off with it.
+    image: "/images/tour/salon-lavender-mural.jpg",
     eyebrow: "Comeback offer · Hair care",
     title: "Hair Spa & Detox",
     detail: "A scalp massage, nano steam, mask and blow dry in one restorative ritual.",
