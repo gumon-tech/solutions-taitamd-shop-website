@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import ManageConsent from "@/components/ManageConsent";
+import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Cookie Policy",
@@ -110,8 +111,14 @@ export default function CookiesPage() {
             website only</span>. They are <span className="text-ink">not shared
             with our Academy site</span> at academy.taitam-d.com — that is a
             separate site, and whatever it stores on your device is covered by{" "}
+            {/* Built from SITE.academy rather than typed out, because this was the
+                one Academy link on the site that a domain change would leave behind.
+                The other nine all read the central value; this one did not, and the
+                handoff had been claiming for days that changing one value covered
+                every link. Rendered output is byte-identical, so the wording Legal
+                signed off on is untouched. */}
             <a
-              href="https://academy.taitam-d.com/en/policies/cookie-policy"
+              href={`${SITE.academy}en/policies/cookie-policy`}
               target="_blank"
               rel="noreferrer"
               className="underline text-gold hover:text-gold2"
