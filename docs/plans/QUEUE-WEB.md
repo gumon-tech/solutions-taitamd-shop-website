@@ -59,12 +59,30 @@
 ทั้งที่มันเสร็จแล้ว — และห้องถัดไปจะสร้างหน้าซ้ำโดยเชื่อว่ากำลังเดินตามแผน***
 ⇒ **ปิดแถวด้วยชื่อไฟล์ที่ส่งจริงเสมอ ไม่ใช่ชื่อในบรีฟ**
 
-**ภาพ AI ที่ยังเหลือ (ข้อ ②)**
+**ภาพ AI ที่ยังเหลือ (ข้อ ②) — วัด 2026-08-16T02:4xZ ได้ 4 ใบ รวม 2376 KB**
 ```
-components/Hero.tsx        → /images/hero/taitamd-gemini-hero.jpg   (ภาพ AI ห้องที่ไม่มีอยู่จริง)
-components/Campaigns.tsx   → promo-hair-spa-gemini-v2.jpg  ← 🔴 ภาพห้องสระผม+คน สื่อว่าเป็นร้านเรา
-                           → promo-spa-ritual-gemini-v3.jpg (ภาพนิ่ง ไม่ได้สื่อสถานที่ ความเร่งต่ำกว่า)
+public/images/campaigns/promo-hair-spa-gemini-v2.jpg     756 KB  components/Campaigns.tsx
+    ภาพห้องสระผมมีคน สื่อว่าเป็นร้านเรา  เสี่ยงสุด ขัด D-W22 ตรงตัว
+public/images/campaigns/promo-spa-ritual-gemini-v3.jpg   764 KB  components/Campaigns.tsx
+    ภาพนิ่ง ไม่ได้สื่อสถานที่ ความเร่งต่ำกว่า
+public/images/contact/contact-ritual-gemini.jpg          692 KB  components/Contact.tsx
+public/images/hero/taitamd-gemini-hero.jpg               164 KB  components/Hero.tsx
+    ภาพห้องที่ไม่มีอยู่จริง
 ```
+
+🔴 **รายการนี้เคยจดไว้ 3 ใบ และตก `contact-ritual-gemini.jpg` ไป — แก้ 2026-08-16**
+🔑 ***รายการที่แจกแจงรายไฟล์ด้วยมือ จะตกหล่นเงียบทุกครั้งที่มีไฟล์เพิ่ม
+และคนรอบหน้าจะ grep ตามรายการ ไม่ใช่ grep คำว่า gemini***
+📌 คลาสเดียวกับกฎ "Since 2009" ที่เคยตก `app/signature/page.tsx` ไป 1 วันเต็ม
+▶️ **ห้ามเชื่อรายการข้างบน ให้วัดเองทุกครั้งด้วยคำสั่งนี้**
+```bash
+grep -rl gemini components app
+find public/images -name '*gemini*' -exec du -k {} + | sort -rn
+```
+
+**สถานะ** รอ `WS` ตัดสินในใบ `Q-SHOP-020` ว่าจะเปลี่ยนทั้ง 4 ใบ หรือเฉพาะใบเสี่ยง หรือยังไม่ต้อง
+เหตุที่ห้องนี้ไม่ตัดสินเอง หน้าแรกมีงบ PMax ยิงอยู่ และเจ้าของยกอำนาจให้ `WS` เมื่อ 2026-08-16
+รูปจริงที่พร้อมแทนอยู่ที่ `public/images/tour/` 15 ไฟล์ ใหญ่สุด 196 KB
 
 **ทำไปแล้วครึ่งทางตรงไหน** — ใช้รูปจริงแล้ว 5 ใบจาก 24 · **เปิดดูด้วยตาจริงแค่ 8 ใบ · อีก 16 ใบยังไม่เคยเห็น**
 ⚠️ **หน้า Signature แก้รอบสองแล้ว** (`b233e3e`) — เดิมมีภาพซ้ำ 2 คู่ ตอนนี้ 7 สลอต 7 ภาพไม่ซ้ำ
