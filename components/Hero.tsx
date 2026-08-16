@@ -80,7 +80,12 @@ export default function Hero() {
           >
             <div className="glass rounded-[28px] p-5 shadow-glow overflow-hidden">
               <div className="relative rounded-[22px] overflow-hidden border border-ink/10">
-                <Image src="/images/hero/taitamd-gemini-hero.jpg" alt="Serene Taitam-D massage room with warm natural light" fill priority className="object-cover opacity-[0.78]" />
+                {/* The picture behind this card is generated artwork, not one of our rooms.
+                    Its alt text used to read "Serene Taitam-D massage room", which asserted
+                    the opposite in the one layer nobody looks at — D-W22 forbids exactly that
+                    claim. The image itself stays until a real photograph replaces it
+                    (Q-SHOP-020, ruled by WS); the false claim did not have to wait. */}
+                <Image src="/images/hero/taitamd-gemini-hero.jpg" alt="Softly lit massage room with warm natural light" fill priority className="object-cover opacity-[0.78]" />
                 <div className="absolute inset-0 bg-[radial-gradient(700px_420px_at_20%_10%,rgba(200,176,124,0.2),rgba(0,0,0,0)),radial-gradient(600px_420px_at_85%_25%,rgba(127,155,82,0.16),rgba(0,0,0,0)),linear-gradient(135deg,rgba(15,51,20,0.62),rgba(11,42,16,0.38))]" />
                 <div className="relative p-6 md:p-7">
                   <div className="text-xs tracking-[0.32em] uppercase text-ink/72">Signature experience</div>
