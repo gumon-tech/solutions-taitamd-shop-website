@@ -23,7 +23,14 @@ export default function Contact() {
       <div className="mt-10 grid gap-6 lg:grid-cols-12">
         <Reveal className="lg:col-span-7">
           <div className="glass overflow-hidden rounded-[30px] border border-gold/20 shadow-glow">
-            <div className="relative aspect-[16/9]"><Image src="/images/contact/contact-ritual-gemini.jpg" alt="Calm spa ritual with towels, frangipani and an emerald bowl" fill className="object-cover" priority /><div className="absolute inset-0 bg-gradient-to-t from-[#082f20]/70 via-transparent to-transparent" /><div className="absolute bottom-5 left-5 right-5 text-white"><p className="text-[10px] uppercase tracking-[0.25em] text-[#e8cf90]">King’s Cross · London</p><p className="mt-2 text-xl font-semibold md:text-2xl">A calm welcome, five minutes from the station.</p></div></div>
+            {/* The two lines below used to sit on top of this picture. Both are true —
+                the shop really is a few minutes from King's Cross — but the picture is
+                generated artwork, and a place name laid over an image reads as a caption
+                for it. Moving the words under the frame keeps every word and drops the
+                claim (Q-MKT-035, ruled by Marketing, who own this copy). The gradient
+                went with them: its only job was making white text legible on the photo. */}
+            <div className="relative aspect-[16/9]"><Image src="/images/contact/contact-ritual-gemini.jpg" alt="Calm spa ritual with towels, frangipani and an emerald bowl" fill className="object-cover" priority /></div>
+            <div className="px-5 pt-5 md:px-6"><p className="text-[10px] uppercase tracking-[0.25em] text-mist">King’s Cross · London</p><p className="mt-2 text-xl font-semibold md:text-2xl">A calm welcome, five minutes from the station.</p></div>
             <div className="grid gap-3 p-5 sm:grid-cols-2 md:p-6"><div className="rounded-2xl bg-ink/5 p-4"><div className="flex items-center gap-2 text-xs uppercase tracking-[0.18em] text-mist"><MapPin className="h-4 w-4 text-gold" /> Visit us</div><p className="mt-2 text-sm leading-relaxed">{SITE.address}</p><Link href={SITE.social.googleMaps} target="_blank" rel="noreferrer" className="mt-3 inline-flex items-center gap-1 text-xs text-gold underline underline-offset-4">Get directions <ArrowUpRight className="h-3 w-3" /></Link></div><div className="rounded-2xl bg-ink/5 p-4"><div className="flex items-center gap-2 text-xs uppercase tracking-[0.18em] text-mist"><Clock3 className="h-4 w-4 text-gold" /> Open daily</div><p className="mt-2 text-sm leading-relaxed">{SITE.hours}</p><Link href={`tel:${SITE.phone}`} className="mt-3 inline-flex items-center gap-1 text-xs text-gold underline underline-offset-4">Call {SITE.phone} <Phone className="h-3 w-3" /></Link></div></div>
           </div>
         </Reveal>
