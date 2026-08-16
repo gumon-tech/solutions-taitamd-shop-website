@@ -1,6 +1,8 @@
 import { Metadata } from "next";
+import Link from "next/link";
 import ServicesGrid from "@/components/ServicesGrid";
 import CTA from "@/components/CTA";
+import { TOUR_SHOT_COUNT } from "@/lib/tour";
 
 export const metadata: Metadata = {
   title: "Massage, Hair, Nails & Beauty Services in King's Cross",
@@ -57,6 +59,27 @@ export default function ServicesPage() {
           }}
         />
       </section>
+
+      <Link
+        href="/tour"
+        className="group mt-4 block rounded-[28px] border border-ink/10 bg-ink/5 p-7 transition-colors hover:border-gold/40 md:p-9"
+      >
+        <p className="text-xs tracking-[0.28em] uppercase text-mist">Before you book</p>
+        <h2 className="mt-3 text-2xl font-semibold md:text-3xl">
+          See the rooms <span className="text-gold">before you choose one.</span>
+        </h2>
+        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-ink/75">
+          You cannot see in from the pavement, so we photographed the whole place — {TOUR_SHOT_COUNT} pictures,
+          room by room, in the order you meet them walking in.
+        </p>
+        <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-gold">
+          Take the tour
+          <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">
+            &rarr;
+          </span>
+        </span>
+      </Link>
+
       <div className="h-4 md:h-6" />
       <CTA />
       <div className="h-10 md:h-12" />
