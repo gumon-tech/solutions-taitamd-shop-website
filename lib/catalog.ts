@@ -18,10 +18,11 @@
 //              = may carry price + time, but MUST show the mandatory wording (18+,
 //              results vary, consultation first) and microblading / tattoo removal
 //              book a consultation + patch test, not the treatment.
-//   Groups 2 and 3 additionally require the OWNER to confirm registration, prescriber,
-//   local special-treatment licence and insurance (Q-LAW-046 clause E) before publish.
-//   Until the owner confirms, ONLY group 4 (non-medical) is exported in CATALOG below.
-//   Group 3 data is staged in CATALOG_MEDICAL_G3 (not rendered) so it can go live fast.
+//   Clause E (registration / prescriber / local licence / insurance): the OWNER
+//   confirmed on 2026-08-18 that the licence is held and displayed in the shop, and
+//   ruled it need not be published on the site — the site says "verify in store".
+//   So: group 3 renders WITH prices + the mandatory notice; group 2 renders as
+//   consultation-only (no price, no book button); group 1 is never rendered.
 // - Internal "NOT ON TREATWELL / NOT ON WIDGET" rows are excluded on purpose
 //   (Bupa massages, internal body waxing, internal eyelash perming, free henna).
 
@@ -395,14 +396,34 @@ export const CATALOG: CatalogCategory[] = [
 
 
 // ---------------------------------------------------------------------------
-// STAGED — NOT RENDERED. Group 3 per Q-LAW-046. Wire into ServiceMenu only after the
-// owner confirms clause E (licence + insurance). Must render with the mandatory
-// wording in MEDICAL_G3_NOTICE and a "book a consultation" button, never "book now".
+// Group 3 per Q-LAW-046 — rendered WITH prices, under MEDICAL_NOTICE, and the button
+// books a CONSULTATION, never the treatment. Owner confirmed clause E 2026-08-18.
 // ---------------------------------------------------------------------------
-export const MEDICAL_G3_NOTICE =
-  "For clients aged 18 and over. Results vary from person to person. Every treatment starts with a consultation to assess suitability; microblading and tattoo removal begin with a consultation and patch test.";
+export const MEDICAL_NOTICE =
+  "For clients aged 18 and over. Results vary from person to person. Every treatment begins with a consultation to assess suitability; microblading and tattoo removal start with a consultation and patch test. Our practitioner licence is displayed in the shop and can be inspected on your visit.";
 
-export const CATALOG_MEDICAL_G3: CatalogCategory[] = [
+// Group 2 per Q-LAW-046 — consultation-only. NO price, NO instant-book. Fillers,
+// injectable vitamins and PRP. Listed by name only; the single button asks for a
+// consultation. Anti-Wrinkle Injections (group 1) are deliberately ABSENT — do not add.
+export const CONSULTATION_ONLY: { title: string; blurb: string; items: string[] } = {
+  title: "Advanced Aesthetics — by consultation",
+  blurb:
+    "These treatments are only offered after a one-to-one consultation with our practitioner. We do not publish prices for them; message us and we will arrange a consultation to discuss suitability, options and cost.",
+  items: [
+    "Lip enhancement",
+    "Cheek and under-eye lifting",
+    "Nose enhancement",
+    "Smile-line lifting",
+    "Chin and jawline strengthening",
+    "Lumi eye lifting and wrinkle correction",
+    "PRP — Vampire Facial",
+    "PRP — hair growth (biotin)",
+    "PRP — hand or neck collagen reboot",
+    "Vitamin injections and IV drip (biotin, glutathione, vitamin B & C)",
+  ],
+};
+
+export const CATALOG_MEDICAL: CatalogCategory[] = [
   {
     slug: "hifu",
     title: "HIFU & Skin Treatments",
