@@ -3,6 +3,7 @@ import Link from "next/link";
 import ServiceMenu from "@/components/ServiceMenu";
 import CTA from "@/components/CTA";
 import { TOUR_SHOT_COUNT } from "@/lib/tour";
+import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Massage, Hair, Nails & Beauty Services in King's Cross",
