@@ -61,7 +61,7 @@ export default function ServiceMenu() {
             <header className="border-b border-ink/10 pb-4">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={`/images/services/${cat.slug}.jpg`}
+                src={cat.image}
                 alt={`${cat.title} treatments at Taitam-D`}
                 loading="lazy"
                 width={900}

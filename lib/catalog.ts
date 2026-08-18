@@ -50,6 +50,8 @@ export type CatalogCategory = {
   slug: string;
   title: string;
   blurb: string;
+  /** Header image path (public/). Literal so the orphan-asset check can see it. */
+  image?: string;
   services: Service[];
 };
 
@@ -79,6 +81,7 @@ export function serviceEnquiryLabel(service: string, v: Variant): string {
 export const CATALOG: CatalogCategory[] = [
   {
     slug: "massage",
+    image: "/images/services/massage.jpg",
     title: "Massage",
     blurb: "Thai, deep tissue, Swedish, aromatherapy, hot stone and targeted therapeutic work.",
     services: [
@@ -158,6 +161,7 @@ export const CATALOG: CatalogCategory[] = [
 
   {
     slug: "hair",
+    image: "/images/services/hair.jpg",
     title: "Hair",
     blurb: "Cut, colour, highlights, balayage, keratin and Japanese straightening — priced by hair length.",
     services: [
@@ -240,6 +244,7 @@ export const CATALOG: CatalogCategory[] = [
 
   {
     slug: "nails",
+    image: "/images/services/nails.jpg",
     title: "Nails",
     blurb: "Classic and spa manicures & pedicures, gel, and acrylic or fibre-gel extensions.",
     services: [
@@ -281,6 +286,7 @@ export const CATALOG: CatalogCategory[] = [
 
   {
     slug: "facials",
+    image: "/images/services/facials.jpg",
     title: "Facials",
     blurb: "Deep-cleansing, lifting and anti-ageing facials, including the Eberlin package range.",
     services: [
@@ -296,6 +302,7 @@ export const CATALOG: CatalogCategory[] = [
 
   {
     slug: "body",
+    image: "/images/services/body.jpg",
     title: "Body & Spa",
     blurb: "Detox, rebalancing and exfoliation programmes for the whole body.",
     services: [
@@ -309,6 +316,7 @@ export const CATALOG: CatalogCategory[] = [
 
   {
     slug: "waxing",
+    image: "/images/services/waxing.jpg",
     title: "Waxing",
     blurb: "Gentle, hygienic waxing for face and body — for women and men.",
     services: [
@@ -342,6 +350,7 @@ export const CATALOG: CatalogCategory[] = [
 
   {
     slug: "lashes",
+    image: "/images/services/lashes.jpg",
     title: "Eyelash Extensions",
     blurb: "Classic, hybrid and Russian volume lash extensions, plus infills and removal.",
     services: [
@@ -357,6 +366,7 @@ export const CATALOG: CatalogCategory[] = [
 
   {
     slug: "brows",
+    image: "/images/services/brows.jpg",
     title: "Brows, Lashes & Threading",
     blurb: "Threading, tinting, brow shaping and lash lifts.",
     services: [
@@ -383,6 +393,7 @@ export const CATALOG: CatalogCategory[] = [
 
   {
     slug: "sauna",
+    image: "/images/services/sauna.jpg",
     title: "Infrared Sauna",
     blurb: "Far-infrared sauna sessions — please book at least 45 minutes before arrival.",
     services: [
