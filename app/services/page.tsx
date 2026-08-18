@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import ServicesGrid from "@/components/ServicesGrid";
+import ServiceMenu from "@/components/ServiceMenu";
 import CTA from "@/components/CTA";
 import { TOUR_SHOT_COUNT } from "@/lib/tour";
 
@@ -25,11 +25,12 @@ export default function ServicesPage() {
           Everything you need — <span className="text-gold">crafted</span> with precision.
         </h1>
         <p className="mt-5 max-w-2xl text-ink/80">
-          Browse categories, then message us on WhatsApp for availability, advice and the latest promotions.
+          Our full menu with prices and treatment times. Tap any price to message us on WhatsApp —
+          the treatment, time and price come pre-filled, so we know exactly what you are after.
         </p>
       </header>
 
-      <ServicesGrid />
+      <ServiceMenu />
       <section className="mt-4 rounded-[28px] border border-ink/10 bg-ink/5 p-7 md:p-9" aria-labelledby="services-faq">
         <p className="text-xs tracking-[0.28em] uppercase text-mist">Helpful answers</p>
         <h2 id="services-faq" className="mt-3 text-2xl md:text-3xl font-semibold">Frequently asked questions</h2>
