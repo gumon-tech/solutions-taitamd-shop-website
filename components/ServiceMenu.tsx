@@ -59,6 +59,15 @@ export default function ServiceMenu() {
         {CATALOG.map((cat) => (
           <div key={cat.slug} id={`cat-${cat.slug}`} className="scroll-mt-28">
             <header className="border-b border-ink/10 pb-4">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={`/images/services/${cat.slug}.jpg`}
+                alt={`${cat.title} treatments at Taitam-D`}
+                loading="lazy"
+                width={900}
+                height={900}
+                className="mb-4 h-40 w-full rounded-[18px] object-cover md:h-52"
+              />
               <h2 className="text-2xl font-semibold md:text-3xl">{cat.title}</h2>
               <p className="mt-2 max-w-2xl text-sm leading-relaxed text-ink/70">{cat.blurb}</p>
             </header>
@@ -117,6 +126,15 @@ export default function ServiceMenu() {
             notice (button = consultation); group 2 by name only, no price. */}
         <div id="aesthetics" className="scroll-mt-28">
           <header className="border-b border-ink/10 pb-4">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/services/aesthetics.jpg"
+              alt="Advanced aesthetics treatments at Taitam-D"
+              loading="lazy"
+              width={900}
+              height={900}
+              className="mb-4 h-40 w-full rounded-[18px] object-cover md:h-52"
+            />
             <h2 className="text-2xl font-semibold md:text-3xl">Advanced Aesthetics</h2>
             <p className="mt-2 max-w-2xl text-sm leading-relaxed text-ink/70">
               Skin, brow and lip treatments delivered by our qualified practitioner.
@@ -207,6 +225,15 @@ export default function ServiceMenu() {
         {/* Retail products */}
         <div id="products" className="scroll-mt-28">
           <header className="border-b border-ink/10 pb-4">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/services/products.jpg"
+              alt="Retail beauty products at Taitam-D"
+              loading="lazy"
+              width={900}
+              height={900}
+              className="mb-4 h-40 w-full rounded-[18px] object-cover md:h-52"
+            />
             <h2 className="text-2xl font-semibold md:text-3xl">Products</h2>
             <p className="mt-2 max-w-2xl text-sm leading-relaxed text-ink/70">
               A few things to take home. Tap to ask us on WhatsApp.
