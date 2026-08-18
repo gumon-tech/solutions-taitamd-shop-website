@@ -950,3 +950,41 @@ Q-WS-242                repo office สร้างแล้ว  ack แล้�
 เสร็จปิดแล้ว  Q-LAW-046  ปิดฝั่ง SHOP รอบนี้ (cc9db52) ขึ้นเว็บครบ verify แล้ว
 ```
 รอเจ้าของเคาะ (ไม่ใช่ใบคิว ไม่บล็อกด่าน): ช่องติ๊ก accept policy ตอนจอง (OFFICE เสนอ)
+
+---
+
+# Service menu + images shipped · 2026-08-18T22:0xZ
+
+## ทำอะไรไปแล้ว (live บน production ทั้งหมด verify แล้ว)
+
+```
+lib/catalog.ts           แหล่งกลางบริการ+สินค้า ดูดจาก Treatwell Connect (venue 287555)
+components/ServiceMenu.tsx  render เมนูเต็ม ราคา เวลา ปุ่ม WhatsApp เติมข้อความต่อ variant
+app/services/page.tsx     ใช้ ServiceMenu แทน ServicesGrid เดิม
+public/images/services/   รูปหมวด 11 ใบ Gemini gemini-3-pro-image โทนแบรนด์ 72-112KB lazy
+deploy ล่าสุดเขียว        b6a5b0b (asset fix) · commit เนื้อ 645470e 966c8f7
+```
+
+## กติกา Legal ที่ฝังในโค้ด (Q-LAW-046) — ห้ามย้อน
+
+```
+กลุ่ม 1 Anti-Wrinkle/botulinum   ไม่ขึ้นเว็บเลย ห้ามคำว่า Botox  (CATALOG ไม่มี)
+กลุ่ม 2 filler PRP วิตามินฉีด      ขึ้นแค่ชื่อ ไม่มีราคา ปุ่มเดียว = ปรึกษา  (CONSULTATION_ONLY)
+กลุ่ม 3 HIFU เมโส microblading ลบรอยสัก  ราคาได้ ใต้ MEDICAL_NOTICE ปุ่ม = consultation  (CATALOG_MEDICAL)
+เจ้าของเคาะข้อ E 2026-08-18 ใบอนุญาตมีจริงแสดงที่ร้าน ไม่ต้องขึ้นเว็บ เว็บใช้คำ verify in store
+```
+
+## สถานะใบที่ค้าง (ฝั่ง SHOP ทำครบ)
+
+```
+Q-OFFICE-002  ปิด เจ้าของเลือกไม่ทำช่องติ๊ก standardsNotice คงไว้ 4 จุด live แล้ว
+Q-LAW-046     done กติกากลุ่มการแพทย์ฝังในโค้ดแล้ว
+Q-LAW-045     รอเจ้าของ+นักกฎหมายจริงเคาะฐานกฎหมายก่อนดูด Clients/Reports — ไม่ใช่งานเว็บ
+              SHOP compliant แล้ว ไม่มี PII ใน git ทั้ง 2 repo
+Q-WS-242      ack_SHOP ลงแล้ว WS ถือการปิด (ทะเบียน repo + ชื่อห้อง)
+```
+
+## งานบริหารร้านเต็มรูป (Clients/Reports/Pay)
+
+อยู่ repo private solution-taitamd-shop-office ห้อง OFFICE ถือ · บล็อกด้วย Q-LAW-045
+ห้ามดูด PII เข้า git · ต้องออกแบบฐานข้อมูลจริงก่อน (งานห้อง OFFICE ไม่ใช่ SHOP)
