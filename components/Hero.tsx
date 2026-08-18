@@ -48,6 +48,8 @@ export default function Hero() {
             </Link>
           </div>
 
+          <p className="mt-3 text-xs leading-relaxed text-mist">{SITE.standardsNotice}</p>
+
           <div className="mt-8 grid sm:grid-cols-3 gap-3">
             {[
               { icon: MapPin, label: "Address", value: SITE.address },

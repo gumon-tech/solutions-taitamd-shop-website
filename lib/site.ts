@@ -60,6 +60,21 @@ export const SITE = {
   // Never render this as "from £69".
   signaturePrice: "Taitam-D Signature — £69 / 60 minutes",
 
+  // Salon standards notice (Q-OFFICE-002, owner-approved 2026-08-18). Verbatim — do not
+  // reword, and never add sexual-service keywords anywhere on the site, even as a denial:
+  // search engines would index the term and route those searches here (the opposite of intent).
+  // Only neutral words are allowed: professional · therapeutic · non-sexual.
+  standardsNotice:
+    "Taitam-D is a professional therapeutic massage and beauty salon. All treatments are non-sexual.",
+  massageExpectationFaq: {
+    q: "What should I expect during a massage?",
+    a: [
+      "Taitam-D is a professional therapeutic massage and beauty salon. All treatments are non-sexual.",
+      "You will be given privacy to undress. Underwear is worn throughout, and you are covered with a towel at all times, with only the area being worked on uncovered. Our therapists do not treat intimate areas.",
+      "If you have pain or a medical condition, please tell your therapist before the treatment starts so they can adjust the pressure and the areas they work on.",
+    ],
+  },
+
   // Prefilled WhatsApp messages (lead capture)
   whatsappTemplates: {
     signature:

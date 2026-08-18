@@ -49,6 +49,10 @@ export default function CTA() {
                 Gift card via WhatsApp →
               </a>
             </div>
+
+            <p className="md:col-span-12 text-xs leading-relaxed text-mist">
+              {SITE.standardsNotice}
+            </p>
           </div>
         </div>
       </Reveal>

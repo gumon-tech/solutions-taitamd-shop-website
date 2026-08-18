@@ -39,6 +39,7 @@ export default function ServicesPage() {
           <div><h3 className="font-semibold">How do I book a treatment?</h3><p className="mt-2 text-sm leading-relaxed text-ink/75">Message us on WhatsApp for availability, treatment advice and current offers. Our team will help you choose the right service and time.</p></div>
           <div><h3 className="font-semibold">What treatments are available?</h3><p className="mt-2 text-sm leading-relaxed text-ink/75">Our menu includes Thai, deep tissue and aromatherapy massage, hair, facials, nails, waxing, eyelash services, micropigmentation and aesthetic injections.</p></div>
           <div><h3 className="font-semibold">When are you open?</h3><p className="mt-2 text-sm leading-relaxed text-ink/75">We are open daily from 10:30am to 9:00pm. Availability can change, so please contact us before visiting.</p></div>
+          <div className="md:col-span-2"><h3 className="font-semibold">{SITE.massageExpectationFaq.q}</h3>{SITE.massageExpectationFaq.a.map((para, i) => (<p key={i} className="mt-2 text-sm leading-relaxed text-ink/75">{para}</p>))}</div>
         </div>
         <script
           type="application/ld+json"
@@ -51,6 +52,7 @@ export default function ServicesPage() {
                 ["How do I book a treatment?", "Message us on WhatsApp for availability, treatment advice and current offers. Our team will help you choose the right service and time."],
                 ["What treatments are available?", "Our menu includes Thai, deep tissue and aromatherapy massage, hair, facials, nails, waxing, eyelash services, micropigmentation and aesthetic injections."],
                 ["When are you open?", "We are open daily from 10:30am to 9:00pm. Availability can change, so please contact us before visiting."],
+                [SITE.massageExpectationFaq.q, SITE.massageExpectationFaq.a.join(" ")],
               ].map(([name, text]) => ({
                 "@type": "Question",
                 name,
