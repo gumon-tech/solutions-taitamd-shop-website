@@ -6,10 +6,22 @@
 // Rules baked in here:
 // - `wasGbp` is the pre-discount price (struck through). `gbp` is what is charged now.
 // - Never render a variant price as "from £X" (SITE philosophy: prices are fixed).
-// - MEDICAL / injectable / tattoo-removal / cosmetic-tattoo services are HELD OUT
-//   pending Legal sign-off (Q-SHOP-027): HIFU, Semi-Permanent Make-up / Microblading,
-//   No-Needle Mesotherapy, Cosmetic Injectables, IM, PRP, IV, Tattoo Removal.
-//   Do NOT add them here until LAW rules.
+// - MEDICAL / aesthetic services — Legal ruled on 2026-08-18 (Q-LAW-046). The ruling
+//   is binding and lives in the workspace repo; the short form:
+//     Group 1  Anti-Wrinkle Injections (botulinum toxin)  = NEVER on the public site.
+//              Prescription-only medicine — advertising it to the public is unlawful
+//              (Human Medicines Regulations 2012 reg. 280). No price, no booking button,
+//              and the word "Botox" must not appear anywhere on the site.
+//     Group 2  Fillers · vitamin injections (IV/IM) · PRP  = consultation-only listing.
+//              May be mentioned, but with NO price and NO instant-book WhatsApp button.
+//     Group 3  HIFU · no-needle mesotherapy · microblading/SPMU · tattoo removal
+//              = may carry price + time, but MUST show the mandatory wording (18+,
+//              results vary, consultation first) and microblading / tattoo removal
+//              book a consultation + patch test, not the treatment.
+//   Groups 2 and 3 additionally require the OWNER to confirm registration, prescriber,
+//   local special-treatment licence and insurance (Q-LAW-046 clause E) before publish.
+//   Until the owner confirms, ONLY group 4 (non-medical) is exported in CATALOG below.
+//   Group 3 data is staged in CATALOG_MEDICAL_G3 (not rendered) so it can go live fast.
 // - Internal "NOT ON TREATWELL / NOT ON WIDGET" rows are excluded on purpose
 //   (Bupa massages, internal body waxing, internal eyelash perming, free henna).
 
@@ -376,6 +388,61 @@ export const CATALOG: CatalogCategory[] = [
         { option: "30 min · 2 people", minutes: 30, price: { gbp: 40, wasGbp: 50 } },
         { option: "1 hour · 1 person", minutes: 60, price: { gbp: 50, wasGbp: 60 } },
         { option: "1 hour · 2 people", minutes: 60, price: { gbp: 60, wasGbp: 70 } },
+      ]},
+    ],
+  },
+];
+
+
+// ---------------------------------------------------------------------------
+// STAGED — NOT RENDERED. Group 3 per Q-LAW-046. Wire into ServiceMenu only after the
+// owner confirms clause E (licence + insurance). Must render with the mandatory
+// wording in MEDICAL_G3_NOTICE and a "book a consultation" button, never "book now".
+// ---------------------------------------------------------------------------
+export const MEDICAL_G3_NOTICE =
+  "For clients aged 18 and over. Results vary from person to person. Every treatment starts with a consultation to assess suitability; microblading and tattoo removal begin with a consultation and patch test.";
+
+export const CATALOG_MEDICAL_G3: CatalogCategory[] = [
+  {
+    slug: "hifu",
+    title: "HIFU & Skin Treatments",
+    blurb: "Non-surgical skin tightening and rejuvenation. Consultation first.",
+    services: [
+      { name: "HIFU — Full Face", variants: [{ minutes: 45, price: { gbp: 299, wasGbp: 349 } }]},
+      { name: "HIFU — Face & Neck", variants: [{ minutes: 60, price: { gbp: 399, wasGbp: 449 } }]},
+      { name: "HIFU — Abdomen", variants: [{ minutes: 30, price: { gbp: 249, wasGbp: 299 } }]},
+      { name: "HIFU — Inner or Outer Thighs", variants: [{ minutes: 30, price: { gbp: 249, wasGbp: 299 } }]},
+      { name: "HIFU — Upper Arms", variants: [{ minutes: 25, price: { gbp: 199, wasGbp: 249 } }]},
+      { name: "3D Digital Skin Analysis", variants: [{ minutes: 15, price: { gbp: 40, wasGbp: 75 } }]},
+      { name: "No-Needle Mesotherapy — Skin Reboot", variants: [{ minutes: 90, price: { gbp: 120 } }]},
+      { name: "No-Needle Mesotherapy — Skin Reboot Package (buy 4, get 1 free)", variants: [{ minutes: 90, price: { gbp: 480 } }]},
+    ],
+  },
+  {
+    slug: "spmu",
+    title: "Semi-Permanent Make-up",
+    blurb: "Microblading and cosmetic tattooing for brows, eyeliner and lips. Consultation and patch test first.",
+    services: [
+      { name: "Microblading — Eyebrow", variants: [{ minutes: 90, price: { gbp: 199, wasGbp: 250 } }]},
+      { name: "Microblading — Eyeliner", variants: [{ minutes: 90, price: { gbp: 199, wasGbp: 250 } }]},
+      { name: "Microblading — Lip Liner", variants: [{ minutes: 90, price: { gbp: 249, wasGbp: 300 } }]},
+      { name: "Microblading — Full Lip Colour", variants: [{ minutes: 90, price: { gbp: 299, wasGbp: 400 } }]},
+      { name: "Microblading — Eyebrow + Eyeliner", variants: [{ minutes: 90, price: { gbp: 369, wasGbp: 500 } }]},
+      { name: "Microblading Top-Up (within 3 months)", variants: [{ minutes: 45, price: { gbp: 60 } }]},
+      { name: "Semi-Permanent Make-up — Eyebrows", variants: [{ minutes: 90, price: { gbp: 199, wasGbp: 299 } }]},
+      { name: "Semi-Permanent Make-up — Eyeliner", variants: [{ minutes: 90, price: { gbp: 199, wasGbp: 299 } }]},
+      { name: "Semi-Permanent Make-up — Lip Colour", variants: [{ minutes: 90, price: { gbp: 199, wasGbp: 399 } }]},
+    ],
+  },
+  {
+    slug: "tattoo-removal",
+    title: "Tattoo Removal",
+    blurb: "Laser tattoo removal. Consultation and patch test before any session.",
+    services: [
+      { name: "Tattoo Removal", variants: [
+        { option: "Small", minutes: 60, price: { gbp: 49 } },
+        { option: "Medium", minutes: 60, price: { gbp: 99 } },
+        { option: "Large", minutes: 60, price: { gbp: 199 } },
       ]},
     ],
   },
