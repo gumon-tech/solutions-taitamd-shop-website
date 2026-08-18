@@ -40,6 +40,8 @@ export type Variant = {
 export type Service = {
   name: string;
   variants: Variant[];
+  /** One-line description, only for services whose name is not self-explanatory. */
+  desc?: string;
   note?: string;
   featured?: boolean;
 };
@@ -86,13 +88,13 @@ export const CATALOG: CatalogCategory[] = [
         { minutes: 90, price: { gbp: 99, wasGbp: 109 } },
         { minutes: 120, price: { gbp: 129, wasGbp: 139 } },
       ]},
-      { name: "Aromatherapy Massage", variants: [
+      { name: "Aromatherapy Massage", desc: "Flowing, gentle massage with essential oils chosen to calm or uplift.", variants: [
         { minutes: 30, price: { gbp: 39, wasGbp: 45 } },
         { minutes: 60, price: { gbp: 69, wasGbp: 79 } },
         { minutes: 90, price: { gbp: 99, wasGbp: 109 } },
         { minutes: 120, price: { gbp: 129, wasGbp: 139 } },
       ]},
-      { name: "Hot Stone Massage", variants: [
+      { name: "Hot Stone Massage", desc: "Warm basalt stones melt deep tension and ease circulation.", variants: [
         { minutes: 60, price: { gbp: 74, wasGbp: 89 } },
         { minutes: 90, price: { gbp: 109, wasGbp: 119 } },
         { minutes: 120, price: { gbp: 139, wasGbp: 149 } },
@@ -103,7 +105,7 @@ export const CATALOG: CatalogCategory[] = [
         { minutes: 90, price: { gbp: 89, wasGbp: 99 } },
         { minutes: 120, price: { gbp: 109, wasGbp: 119 } },
       ]},
-      { name: "Thai Combination Massage", variants: [
+      { name: "Thai Combination Massage", desc: "Thai stretching and energy-line work combined with flowing oil massage.", variants: [
         { minutes: 30, price: { gbp: 39, wasGbp: 45 } },
         { minutes: 60, price: { gbp: 69, wasGbp: 79 } },
         { minutes: 90, price: { gbp: 99, wasGbp: 109 } },
@@ -113,11 +115,11 @@ export const CATALOG: CatalogCategory[] = [
         { minutes: 30, price: { gbp: 35, wasGbp: 45 } },
         { minutes: 60, price: { gbp: 59, wasGbp: 75 } },
       ]},
-      { name: "Pain Relief Massage", variants: [
+      { name: "Pain Relief Massage", desc: "Focused pressure on the areas that ache the most.", variants: [
         { minutes: 30, price: { gbp: 44, wasGbp: 55 } },
         { minutes: 60, price: { gbp: 79, wasGbp: 89 } },
       ]},
-      { name: "Therapeutic Massage", variants: [
+      { name: "Therapeutic Massage", desc: "A treatment tailored around your specific tension and needs.", variants: [
         { minutes: 30, price: { gbp: 44, wasGbp: 60 } },
         { minutes: 60, price: { gbp: 79, wasGbp: 99 } },
       ]},
@@ -142,7 +144,7 @@ export const CATALOG: CatalogCategory[] = [
       { name: "Foot Massage Express", variants: [
         { minutes: 20, price: { gbp: 20, wasGbp: 25 } },
       ]},
-      { name: "Thai Remedy", variants: [
+      { name: "Thai Remedy", desc: "Our signature remedial blend of Thai techniques for deep, lasting relief.", variants: [
         { minutes: 60, price: { gbp: 74, wasGbp: 89 } },
         { minutes: 90, price: { gbp: 104, wasGbp: 119 } },
         { minutes: 120, price: { gbp: 129, wasGbp: 139 } },
@@ -222,7 +224,7 @@ export const CATALOG: CatalogCategory[] = [
         { option: "Medium hair", minutes: 35, price: { gbp: 25 } },
         { option: "Long hair", minutes: 40, price: { gbp: 30 } },
       ]},
-      { name: "Nano Hair Spa", variants: [
+      { name: "Nano Hair Spa", desc: "An intensive scalp-and-hair conditioning ritual for softness and shine.", variants: [
         { option: "Short hair", minutes: 60, price: { gbp: 79 } },
         { option: "Medium hair", minutes: 60, price: { gbp: 84 } },
         { option: "Long hair", minutes: 60, price: { gbp: 89 } },
@@ -282,13 +284,13 @@ export const CATALOG: CatalogCategory[] = [
     title: "Facials",
     blurb: "Deep-cleansing, lifting and anti-ageing facials, including the Eberlin package range.",
     services: [
-      { name: "Luxury Facial", variants: [{ minutes: 60, price: { gbp: 69, wasGbp: 79 } }]},
-      { name: "Non-Surgical Face Lift Facial", variants: [{ minutes: 60, price: { gbp: 89, wasGbp: 99 } }]},
-      { name: "Anti-Ageing Facial", variants: [{ minutes: 90, price: { gbp: 120, wasGbp: 129 } }]},
-      { name: "Eberlin Facial — Equilibrium Package", variants: [{ minutes: 65, price: { gbp: 89, wasGbp: 99 } }]},
-      { name: "Eberlin Facial — Infinity Package", variants: [{ minutes: 65, price: { gbp: 99, wasGbp: 119 } }]},
-      { name: "Eberlin Facial — White Package", variants: [{ minutes: 65, price: { gbp: 99, wasGbp: 119 } }]},
-      { name: "Eberlin Facial — Gold Package", variants: [{ minutes: 95, price: { gbp: 120, wasGbp: 139 } }]},
+      { name: "Luxury Facial", desc: "A relaxing deep-cleanse and deep-hydration facial.", variants: [{ minutes: 60, price: { gbp: 69, wasGbp: 79 } }]},
+      { name: "Non-Surgical Face Lift Facial", desc: "Lifting and firming techniques for a toned, refreshed look.", variants: [{ minutes: 60, price: { gbp: 89, wasGbp: 99 } }]},
+      { name: "Anti-Ageing Facial", desc: "Intensive nourishing care that targets the look of fine lines.", variants: [{ minutes: 90, price: { gbp: 120, wasGbp: 129 } }]},
+      { name: "Eberlin Facial — Equilibrium Package", desc: "Professional Eberlin skincare to rebalance and calm the skin.", variants: [{ minutes: 65, price: { gbp: 89, wasGbp: 99 } }]},
+      { name: "Eberlin Facial — Infinity Package", desc: "Professional Eberlin skincare for deep hydration and glow.", variants: [{ minutes: 65, price: { gbp: 99, wasGbp: 119 } }]},
+      { name: "Eberlin Facial — White Package", desc: "Professional Eberlin brightening skincare for a more even tone.", variants: [{ minutes: 65, price: { gbp: 99, wasGbp: 119 } }]},
+      { name: "Eberlin Facial — Gold Package", desc: "Our most indulgent Eberlin facial, for radiance and firmness.", variants: [{ minutes: 95, price: { gbp: 120, wasGbp: 139 } }]},
     ],
   },
 
@@ -297,11 +299,11 @@ export const CATALOG: CatalogCategory[] = [
     title: "Body & Spa",
     blurb: "Detox, rebalancing and exfoliation programmes for the whole body.",
     services: [
-      { name: "Body Detox / Weight-Loss Program", variants: [{ minutes: 60, price: { gbp: 69, wasGbp: 89 } }]},
-      { name: "Facial & Body Treatment", variants: [{ minutes: 60, price: { gbp: 79, wasGbp: 99 } }]},
-      { name: "Body Rebalance", variants: [{ minutes: 60, price: { gbp: 69, wasGbp: 89 } }]},
-      { name: "Mind & Body", variants: [{ minutes: 60, price: { gbp: 69, wasGbp: 84 } }]},
-      { name: "Body Exfoliation Treatment", variants: [{ minutes: 25, price: { gbp: 35 } }]},
+      { name: "Body Detox / Weight-Loss Program", desc: "A stimulating body treatment to de-bloat and reset.", variants: [{ minutes: 60, price: { gbp: 69, wasGbp: 89 } }]},
+      { name: "Facial & Body Treatment", desc: "Face and body cared for together in a single visit.", variants: [{ minutes: 60, price: { gbp: 79, wasGbp: 99 } }]},
+      { name: "Body Rebalance", desc: "A full-body treatment to restore balance and ease tension.", variants: [{ minutes: 60, price: { gbp: 69, wasGbp: 89 } }]},
+      { name: "Mind & Body", desc: "A calming session pairing bodywork with deep relaxation.", variants: [{ minutes: 60, price: { gbp: 69, wasGbp: 84 } }]},
+      { name: "Body Exfoliation Treatment", desc: "A full-body scrub that smooths and renews the skin.", variants: [{ minutes: 25, price: { gbp: 35 } }]},
     ],
   },
 
