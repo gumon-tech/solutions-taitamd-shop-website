@@ -21,7 +21,7 @@ export default function Story() {
         <div className="glass rounded-[28px] overflow-hidden shadow-glow border border-ink/10">
           <div className="relative aspect-[16/7]">
             <Image
-              src="/images/story/interior-1600x900.jpg"
+              src="/images/tour/lounge-beach-mural-wide.jpg"
               alt="Taitam-D interior atmosphere"
               fill
               priority
