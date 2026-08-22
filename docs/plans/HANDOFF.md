@@ -74,8 +74,12 @@
 ```bash
 git -C ~/dev/solutions-taitamd-shop-website status -sb   # คาดหวัง: clean · ตรง origin/main
 git -C ~/dev/solutions-taitamd-shop-website log --oneline -3
-# 🔴 `gh` ไม่ได้ติดตั้งบนเครื่องนี้ (วัด 2026-08-23: `which gh` = not found) และรีโปเป็น private
-#    ⇒ GitHub API แบบไม่ล็อกอินคืน 404 · ตัววัด deploy ที่ใช้ได้จริงคือ **เทียบของบน production กับ HEAD**
+# 📌 `gh` ลงแล้ว 2026-08-23 (v2.98.0 ที่ `~/.local/bin/gh`) แต่ **shell ของ agent ไม่ source โปรไฟล์**
+#    ⇒ ต้อง export PATH เองก่อน ไม่งั้นได้ command not found แล้วบล็อกเดินต่อเหมือนผ่าน
+export PATH="$HOME/.local/bin:$HOME/.nvm/versions/node/v24.19.0/bin:$PATH"   # gh + npm/node
+gh auth status >/dev/null 2>&1 && gh run list --limit 3 \
+  || echo "⚠️ gh ยังไม่ได้ล็อกอิน (เจ้าของรัน `gh auth login` เอง) — ข้ามไปวัด deploy ด้วยของจริงข้างล่าง"
+#    รีโปเป็น private ⇒ GitHub API แบบไม่ล็อกอินคืน 404 · **ตัววัด deploy ที่ไม่ต้องพึ่ง gh เลยคือเทียบ production กับ HEAD**
 IMG=$(grep -o '"/images/[a-z0-9/_-]*\.\(webp\|jpg\|png\)"' ~/dev/solutions-taitamd-shop-website/lib/catalog.ts | head -1 | tr -d '"')
 curl -s https://taitam-d.com/services/ | grep -c "$IMG"          # คาดหวัง: 1 (หน้าจริงอ้างรูปเดียวกับ HEAD)
 curl -s -o /dev/null -w "%{http_code}\n" "https://taitam-d.com$IMG"   # คาดหวัง: 200
@@ -1142,15 +1146,39 @@ Q-TWS-002  ถ่ายทอดมติจาก C2Tech ให้ห้อง�
                   ⇒ บล็อก Verify จึงสแกนเฉพาะ machines/komphet-mac/ ตามเดิม
 ```
 
-## ที่เก็บความจำของโปรเจกต์นี้ว่างเปล่า ไม่ใช่ว่าตรวจแล้วผ่าน
+## 🔴 แก้คำที่ผมเขียนผิดในหัวข้อนี้เอง — ความจำไม่ได้หาย มันอยู่ในรีโปมาตลอด
 
 ```
-วัด  ls ~/.claude/projects/-Users-komphet-dev-solutions-taitamd-shop-website/memory/ = ว่าง 0 ไฟล์ ไดเรกทอรีสร้างวันนี้
-     ไม่มี MEMORY.md ทั้งในไดเรกทอรีนั้นและในรีโป
-เทียบ  บันทึก 2026-08-21 เขียนว่า MEMORY.md ตรวจครบ ยังจริงทุกข้อ ⇒ ของเดิมหายไปพร้อมการเปลี่ยนบัญชีหรือย้ายเครื่อง
-ทำแล้ว  ข้อเท็จจริงที่ MEMORY.md เคยถือ ทั้งหมดอยู่ใน CLAUDE.md กฎ 4 ข้ออยู่แล้ว และวัดซ้ำในเทิร์นนี้ว่ายังจริง
-       ⇒ ไม่สร้างสำเนาที่สอง เขียนแค่ตัวชี้ว่าความจำจริงของห้องนี้คือไฟล์นี้กับตู้คิว
+ที่เขียนไว้ตอนแรก  ที่เก็บความจำว่างเปล่า ของเดิมหายไปพร้อมการเปลี่ยนบัญชี
+ที่จริง            ไดเรกทอรี memory ว่างจริง แต่นั่นคือ สภาพปกติของเครื่องใหม่
+                  ต้นทางชื่อ docs/MEMORY-shop.md 77 บรรทัด คัดเข้ารีโปตั้งแต่ 2026-08-11
+                  ตาม gumon-workspace/docs/machine-handover.md ถัง A เพราะ memory ไม่ไปกับเครื่อง
+ทำไมถึงพลาด        ค้นด้วย find -iname 'MEMORY.md' ซึ่งไม่แมตช์ชื่อ MEMORY-shop.md
 ```
 
-🔑 *ขั้นที่ 4 ของ WORKSPACE-RESUME สั่งให้อ่าน MEMORY.md แล้วตรวจว่ายังจริง — คำสั่งนั้น**ไม่มีทางออกสำหรับกรณีไฟล์หาย***
-⇒ ห้องที่เจอไฟล์หายจะรายงานว่า ตรวจแล้ว โดยไม่ได้ตรวจอะไรเลย · เขียนไว้ตรงนี้เพื่อให้ห้องถัดไปอ่านออก
+🔑 *ค้นด้วยชื่อไฟล์ที่เอกสารบอก จะมองไม่เห็นไฟล์ที่ถูกตั้งชื่อใหม่ตอนคัดลอก* ⇒ ใช้ `-iname '*MEMORY*'`
+เขียน memory ใหม่ครบ 6 ใบจากไฟล์นั้นแล้ว โดยตัดข้อ 5-10 ที่ซ้ำกับ `CLAUDE.md` ออก
+
+## 🔴 และรหัสห้องบนเครื่องนี้ไม่ใช่ `SHOP` — `KWS` แจ้งเข้ามาและวัดยืนยันแล้ว
+
+```
+วัด        hw.model = Mac16,12 · hostname MacBook-Air-khxng-Komphet ⇒ เครื่องนี้คือ komphet-air
+รหัสห้อง    บนเครื่องนี้คือ KWEB · ตู้ machines/komphet-air/queue/KWEB/
+           SHOP เป็นรหัสของห้องเดียวกันบน komphet-mac ที่ยังเดินอยู่ รหัสห้ามซ้ำข้ามเครื่อง
+ผลย้อนหลัง  ack_SHOP ที่ da930167 ลงตู้ komphet-mac ไม่ผิด เพราะใบ Q-WS-256 จ่าหน้าถึง SHOP จริง
+           แต่ใบที่ ออกจากเครื่องนี้ ต่อจากนี้ต้องเซ็น from: KWEB และเดินเลขเขต KWEB
+```
+
+⚠️ **`CLAUDE.md` และ `docs/MEMORY-shop.md` เขียนว่าห้องนี้คือ `SHOP`** ซึ่งจริงเฉพาะบน `komphet-mac`
+🔑 *เอกสารประจำรีโปพูดถึงห้องเป็นชื่อเดียว แต่รีโปเดินได้พร้อมกันหลายเครื่อง ⇒ ชื่อห้องเป็นของ **เครื่อง+รีโป** ไม่ใช่ของรีโป*
+
+## `gh` ลงแล้ว v2.98.0 · ยังไม่ล็อกอิน
+
+```
+ที่มา     github.com/cli/cli release v2.98.0 zip macOS arm64 13,938,611 ไบต์
+         sha256 8cfb027cc5310675f2b830eac8f9865c1155a45ffcf9757f699fdd5a22046ca4 ตรงกับ checksums.txt ที่ประกาศ
+ที่อยู่    ~/.local/bin/gh (เครื่องนี้ไม่มี Homebrew ⇒ ลงจาก release ตรง ๆ ไม่ต้อง sudo)
+         ~/.local/bin อยู่ใน PATH ของ zsh อยู่แล้ว (.zshrc และ .zprofile บรรทัด 2)
+สถานะ     gh auth status = not logged into any GitHub hosts
+         การล็อกอินเป็นของเจ้าของ agent ห้ามกรอก credential หรือ token เอง
+```
