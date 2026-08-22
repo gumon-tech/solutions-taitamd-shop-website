@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { SITE } from "@/lib/site";
-import { buildWhatsAppLink } from "@/lib/whatsapp";
+import { buildWhatsAppLink, SOURCE_GIFT } from "@/lib/whatsapp";
 import {
   ArrowUpRight,
   Menu,
@@ -248,7 +248,7 @@ export default function Navbar() {
                   </a>
 
                   <a
-                    href={buildWhatsAppLink(SITE.whatsappTemplates.giftCard)}
+                    href={buildWhatsAppLink(SITE.whatsappTemplates.giftCard, SOURCE_GIFT)}
                     target="_blank"
                     rel="noreferrer"
                     className={drawerItemCls(false)}

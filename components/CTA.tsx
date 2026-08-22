@@ -1,5 +1,5 @@
 import Reveal from "./Reveal";
-import { buildWhatsAppLink } from "@/lib/whatsapp";
+import { buildWhatsAppLink, SOURCE_GIFT } from "@/lib/whatsapp";
 import { ArrowUpRight } from "lucide-react";
 import { SITE } from "@/lib/site";
 
@@ -41,7 +41,7 @@ export default function CTA() {
 
               {/* Optional: gift-card CTA (ใช้ template ที่คุณมีอยู่แล้ว) */}
               <a
-                href={buildWhatsAppLink(SITE.whatsappTemplates.giftCard)}
+                href={buildWhatsAppLink(SITE.whatsappTemplates.giftCard, SOURCE_GIFT)}
                 target="_blank"
                 rel="noreferrer"
                 className="text-[11px] tracking-[0.18em] uppercase text-ink/72 hover:text-ink transition md:text-right"

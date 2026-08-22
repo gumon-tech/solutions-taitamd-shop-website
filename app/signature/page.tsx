@@ -2,7 +2,7 @@ import Image from "next/image";
 import { ArrowUpRight, MessageCircle, Clock, MapPin, Sparkles, Check } from "lucide-react";
 import Reveal from "@/components/Reveal";
 import { SITE } from "@/lib/site";
-import { buildWhatsAppLink } from "@/lib/whatsapp";
+import { buildWhatsAppLink, SOURCE_SIGNATURE } from "@/lib/whatsapp";
 import type { Metadata } from "next";
 
 // Landing page for the Taitam-D Signature ad. It exists before the campaign runs on
@@ -215,7 +215,7 @@ export default function SignaturePage() {
                 to act on it, then the detail. */}
             <div className="mt-6 flex flex-col gap-3 sm:flex-row md:mt-8">
               <a
-                href={buildWhatsAppLink(SITE.whatsappTemplates.signature)}
+                href={buildWhatsAppLink(SITE.whatsappTemplates.signature, SOURCE_SIGNATURE)}
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center justify-center gap-2 rounded-full bg-[#183d2d] px-5 py-3.5 text-sm font-semibold text-[#f7f3e9] transition hover:bg-[#25563e]"
@@ -422,7 +422,7 @@ export default function SignaturePage() {
                   the right thing than sell you the wrong hour.
                 </p>
                 <a
-                  href={buildWhatsAppLink(SITE.whatsappTemplates.signature)}
+                  href={buildWhatsAppLink(SITE.whatsappTemplates.signature, SOURCE_SIGNATURE)}
                   target="_blank"
                   rel="noreferrer"
                   className="mt-7 inline-flex items-center justify-center gap-2 rounded-full bg-[#183d2d] px-5 py-3.5 text-sm font-semibold text-[#f7f3e9] transition hover:bg-[#25563e]"
@@ -535,7 +535,7 @@ export default function SignaturePage() {
             </p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
               <a
-                href={buildWhatsAppLink(SITE.whatsappTemplates.signature)}
+                href={buildWhatsAppLink(SITE.whatsappTemplates.signature, SOURCE_SIGNATURE)}
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center justify-center gap-2 rounded-full bg-[#183d2d] px-5 py-3.5 text-sm font-semibold text-[#f7f3e9] transition hover:bg-[#25563e]"

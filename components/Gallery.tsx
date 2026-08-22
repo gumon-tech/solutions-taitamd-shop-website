@@ -5,7 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import Reveal from "./Reveal";
 import { SITE } from "@/lib/site";
-import { buildWhatsAppLink } from "@/lib/whatsapp";
+import { buildWhatsAppLink, SOURCE_GIFT } from "@/lib/whatsapp";
 import { ArrowUpRight } from "lucide-react";
 
 type Tile = {
@@ -70,7 +70,7 @@ const TILES: Tile[] = [
     alt: "Gift card",
     kicker: "Gift Card",
     title: "Personalised via WhatsApp — ready in minutes.",
-    href: buildWhatsAppLink(SITE.whatsappTemplates.giftCard),
+    href: buildWhatsAppLink(SITE.whatsappTemplates.giftCard, SOURCE_GIFT),
     external: true,
   },
 ];

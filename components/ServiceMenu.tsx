@@ -9,7 +9,12 @@ import {
   serviceEnquiryLabel,
   type Variant,
 } from "@/lib/catalog";
-import { buildWhatsAppLink } from "@/lib/whatsapp";
+import {
+  buildWhatsAppLink,
+  sourceForSlug,
+  SOURCE_PRODUCT,
+  SOURCE_BY_SLUG,
+} from "@/lib/whatsapp";
 
 function bookMessage(service: string, v: Variant) {
   return `Hi Taitam-D, I’d like to book ${serviceEnquiryLabel(service, v)}. Please share availability.`;
@@ -93,7 +98,7 @@ export default function ServiceMenu() {
                     {svc.variants.map((v, i) => (
                       <li key={i}>
                         <a
-                          href={buildWhatsAppLink(bookMessage(svc.name, v))}
+                          href={buildWhatsAppLink(bookMessage(svc.name, v), sourceForSlug(cat.slug))}
                           target="_blank"
                           rel="noreferrer"
                           className="group -mx-2 flex items-center justify-between gap-3 rounded-lg px-2 py-2.5 transition-colors hover:bg-gold/[0.07]"
@@ -161,7 +166,7 @@ export default function ServiceMenu() {
                         {svc.variants.map((v, i) => (
                           <li key={i}>
                             <a
-                              href={buildWhatsAppLink(consultMessage(svc.name, v))}
+                              href={buildWhatsAppLink(consultMessage(svc.name, v), sourceForSlug(cat.slug))}
                               target="_blank"
                               rel="noreferrer"
                               className="group -mx-2 flex items-center justify-between gap-3 rounded-lg px-2 py-2.5 transition-colors hover:bg-gold/[0.07]"
@@ -210,6 +215,7 @@ export default function ServiceMenu() {
               <a
                 href={buildWhatsAppLink(
                   "Hi Taitam-D, I’d like to book a consultation about your advanced aesthetics treatments. Please share availability.",
+                  SOURCE_BY_SLUG.hifu,
                 )}
                 target="_blank"
                 rel="noreferrer"
@@ -245,6 +251,7 @@ export default function ServiceMenu() {
                 <a
                   href={buildWhatsAppLink(
                     `Hi Taitam-D, I’d like to buy ${p.name} (£${p.gbp}). Is it in stock?`,
+                    SOURCE_PRODUCT,
                   )}
                   target="_blank"
                   rel="noreferrer"

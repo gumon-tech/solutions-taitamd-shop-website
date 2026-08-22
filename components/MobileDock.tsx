@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { SITE } from "@/lib/site";
-import { buildWhatsAppLink } from "@/lib/whatsapp";
+import { buildWhatsAppLink, SOURCE_GIFT } from "@/lib/whatsapp";
 import { cn } from "@/lib/utils";
 import { Home, Sparkles, GraduationCap, CalendarDays } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
@@ -72,7 +72,7 @@ export default function MobileDock() {
         {/* Small “Gift Card” nudge (optional, subtle) */}
         <div className="mt-2 flex justify-center">
           <a
-            href={buildWhatsAppLink(SITE.whatsappTemplates.giftCard)}
+            href={buildWhatsAppLink(SITE.whatsappTemplates.giftCard, SOURCE_GIFT)}
             target="_blank"
             rel="noreferrer"
             className="text-[11px] tracking-[0.18em] uppercase text-mist hover:text-ink transition"

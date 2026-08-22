@@ -2,7 +2,7 @@ import Image from "next/image";
 import { ArrowUpRight, MessageCircle, Sparkles } from "lucide-react";
 import Reveal from "./Reveal";
 import { SITE } from "@/lib/site";
-import { buildWhatsAppLink } from "@/lib/whatsapp";
+import { buildWhatsAppLink, SOURCE_OFFER } from "@/lib/whatsapp";
 
 // `illustrative` marks artwork that depicts a room and a therapist without being a
 // photograph of ours. Legal's test is not whether an image was AI-generated but whether
@@ -81,7 +81,7 @@ export default function Campaigns() {
                     {campaign.illustrative && <p className="mb-2 text-[11px] uppercase tracking-[0.18em] text-[#8a9a8f]">Illustrative image</p>}
                     <p className="text-sm leading-relaxed text-[#52655a]">{campaign.detail}</p>
                     <div className="mt-4 grid grid-cols-2 gap-2">{campaign.prices.map((price) => <div key={price} className="rounded-xl bg-[#f3eee5] px-3 py-2 text-xs font-semibold text-[#284b39]">{price}</div>)}</div>
-                    <div className="mt-5 flex flex-col gap-4 border-t border-[#e7dece] pt-5 sm:flex-row sm:items-center sm:justify-between"><div className="text-sm font-semibold text-[#8d6c2c]">{campaign.offer}</div><a href={buildWhatsAppLink(campaign.message)} target="_blank" rel="noreferrer" className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-[#183d2d] px-4 py-2.5 text-xs font-semibold text-[#f7f3e9] transition hover:bg-[#25563e]"><MessageCircle className="h-4 w-4 text-[#d7b874]" /> Reserve offer</a></div>
+                    <div className="mt-5 flex flex-col gap-4 border-t border-[#e7dece] pt-5 sm:flex-row sm:items-center sm:justify-between"><div className="text-sm font-semibold text-[#8d6c2c]">{campaign.offer}</div><a href={buildWhatsAppLink(campaign.message, SOURCE_OFFER)} target="_blank" rel="noreferrer" className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-[#183d2d] px-4 py-2.5 text-xs font-semibold text-[#f7f3e9] transition hover:bg-[#25563e]"><MessageCircle className="h-4 w-4 text-[#d7b874]" /> Reserve offer</a></div>
                   </div>
                 </article>
               </Reveal>
