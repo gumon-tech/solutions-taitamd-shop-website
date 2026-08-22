@@ -103,18 +103,43 @@ function denyConsent() {
   });
 }
 
-// Fire lead events for the site's two real conversion paths. Safe to attach
-// regardless of consent: while denied these travel as cookieless pings.
+// A wa.me link means one of two opposite things, and the difference is the whole
+// point of the number: a link with a path (/447882359499, /qr/XXXX) opens a chat
+// WITH US and is a lead; a bare wa.me/?text= opens the visitor's own contact list
+// so they can forward the page to a friend, and is not.
+// Matching on the hostname alone counted both as whatsapp_click (measured on
+// production 2026-08-23: clicking the footer share button emitted the same event
+// as the hero booking button, separable only by ep.link_url). Ads imports the
+// event NAME, so a shared name would have had the campaign bidding for sharers at
+// the price of bookers — Q-KMKT-001.
+const SHARE_HOSTS = new Set(["www.facebook.com", "facebook.com", "twitter.com", "x.com"]);
+
+function leadEventFor(href: string): string | null {
+  if (href.startsWith("tel:")) return "phone_click";
+  let u: URL;
+  try {
+    u = new URL(href, location.href);
+  } catch {
+    return null;
+  }
+  if (u.hostname === "wa.me") {
+    // Trailing slashes only, never a real path, on the share variant.
+    return u.pathname.replace(/^\/+|\/+$/g, "") ? "whatsapp_booking_click" : "social_share_click";
+  }
+  if (SHARE_HOSTS.has(u.hostname) && /sharer|intent/.test(u.pathname)) return "social_share_click";
+  return null;
+}
+
+// Fire lead events for the site's real conversion paths. Safe to attach regardless
+// of consent: while denied these travel as cookieless pings.
 function trackLeadClicks() {
   document.addEventListener("click", (e) => {
     if (!window.gtag) return;
     const a = (e.target as HTMLElement | null)?.closest?.("a");
     if (!a?.href) return;
-    if (a.href.includes("wa.me")) {
-      window.gtag("event", "whatsapp_click", { link_url: a.href, page_path: location.pathname });
-    } else if (a.href.startsWith("tel:")) {
-      window.gtag("event", "phone_click", { link_url: a.href, page_path: location.pathname });
-    }
+    const name = leadEventFor(a.href);
+    if (!name) return;
+    window.gtag("event", name, { link_url: a.href, page_path: location.pathname });
   });
 }
 
