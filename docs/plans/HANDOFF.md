@@ -1188,3 +1188,36 @@ Q-TWS-002  ถ่ายทอดมติจาก C2Tech ให้ห้อง�
 สถานะ     gh auth status = not logged into any GitHub hosts
          การล็อกอินเป็นของเจ้าของ agent ห้ามกรอก credential หรือ token เอง
 ```
+
+---
+
+# ตอบ KMKT เรื่อง tracking · 2026-08-22T18:39Z — วัดจาก production ทุกข้อ
+
+เจ้าของสั่ง `KMKT` (Marketing @komphet-air) ให้ลดงบ Google Ads หลังจ่ายไป 100 GBP และมีอีกร้อยกว่า
+เขาถามสถานะ tracking 5 ข้อ ผลวัดที่ตอบไป เก็บไว้ที่นี่เพราะเป็นของที่ห้องนี้ถือ
+
+```
+GA4              ติดจริง ฝังตรง ไม่ผ่าน GTM · G-R8SGQ58R5E ที่ components/Analytics.tsx:12
+                 วัดจากบันเดิลจริง /_next/static/chunks/app/layout-229ddf171071fc70.js ไม่ใช่จาก HTML
+                 เพราะเป็น client component ที่ inject script ตอน runtime
+Google Ads tag   ไม่มี · grep -rn 'AW-\|send_to' app components lib = 0 บรรทัด
+GA4 event        whatsapp_click และ phone_click ยิงจริงจาก Analytics.tsx:106-120
+consent          Consent Mode v2 advanced · tag โหลดทุก visit · storage denied จนกด Accept
+                 ระหว่าง denied ยิงเป็น cookieless ping ⇒ ไม่บล็อก แต่ ads_data_redaction=true ตัด click id
+โดเมน            apex 200 redirects=0 · www 200 redirects=1 ไป apex ⇒ ไม่มี redirect chain
+```
+
+## 🔴 ของที่เจอระหว่างวัด และยังไม่ได้แก้ — ตัวเลข whatsapp_click พองจากปุ่มแชร์
+
+ตัวดักคลิกที่ `Analytics.tsx:113` จับทุก `a[href]` ที่มีคำว่า `wa.me`
+แต่บนเว็บมี `wa.me` **3 รูป** และรูปที่ 3 ไม่ใช่การจอง
+
+```
+wa.me/447882359499        ปุ่มจอง พร้อมข้อความสำเร็จรูป  = conversion จริง
+wa.me/qr/YIN5KFQPKWI2F1   ลิงก์ QR ใน lib/site.ts:35       = conversion จริง
+wa.me/?text=              ปุ่มแชร์ใน SocialShareBar.tsx:81  = การแชร์ ไม่ใช่การจอง
+```
+
+🔑 *ตัวดักที่แมตช์ด้วยโดเมนของบริการ จะจับทุกอย่างที่บริการนั้นทำได้ ไม่ใช่เฉพาะสิ่งที่เราตั้งใจนับ*
+⇒ ถ้า `MKT` เอา `whatsapp_click` ไปตั้งเป็น conversion ใน Ads ตัวเลขจะพองด้วยจำนวนการกดแชร์
+**ยังไม่แก้เพราะการอ่านผล analytics เป็นเขตของ Marketing** — แจ้งไปแล้ว รอเขาบอกว่าจะแยก event หรือกรองที่คอนโซล
