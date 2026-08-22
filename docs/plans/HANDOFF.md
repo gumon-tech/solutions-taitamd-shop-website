@@ -1221,3 +1221,35 @@ wa.me/?text=              ปุ่มแชร์ใน SocialShareBar.tsx:81  
 🔑 *ตัวดักที่แมตช์ด้วยโดเมนของบริการ จะจับทุกอย่างที่บริการนั้นทำได้ ไม่ใช่เฉพาะสิ่งที่เราตั้งใจนับ*
 ⇒ ถ้า `MKT` เอา `whatsapp_click` ไปตั้งเป็น conversion ใน Ads ตัวเลขจะพองด้วยจำนวนการกดแชร์
 **ยังไม่แก้เพราะการอ่านผล analytics เป็นเขตของ Marketing** — แจ้งไปแล้ว รอเขาบอกว่าจะแยก event หรือกรองที่คอนโซล
+
+## ผลวัด network ของ 3 ปุ่ม บน production ทั้ง 2 สถานะ consent
+
+```
+ก่อนกด Accept   page_view · phone_click · whatsapp_click · whatsapp_click   gcs=G100  npa=1  cookie 0 ตัว
+หลังกด Accept   user_engagement · phone_click · whatsapp_click · whatsapp_click  gcs=G111  npa=0
+               cookie ที่โผล่  _ga  _ga_R8SGQ58R5E  _gcl_au
+ปลายทาง        google-analytics.com/g/collect ครบทุกครั้ง ทั้งก่อนและหลัง consent
+```
+
+🔴 **ตัวควบคุมเชิงลบได้ผลบวก** — ปุ่มแชร์ยิง `whatsapp_click` **ชื่อเดียวกับปุ่มจองเป๊ะ** ทั้ง 2 สถานะ
+แยกได้ทางเดียวคือดู `ep.link_url` ⇒ ตั้ง conversion จากชื่อ event เมื่อไร ตัวเลขพองแน่นอน
+
+📌 `_gcl_au` โผล่หลังกด Accept ทั้งที่ในโค้ด **ไม่มี `AW-` เลย** ⇒ มีการเชื่อม GA4 กับ Ads ที่ฝั่งคอนโซลอยู่แล้ว
+⇒ ถ้าจะทำ conversion อาจไม่ต้องแตะโค้ดเลย แค่ import key event — ส่งให้ `MKT` ตรวจฝั่งคอนโซล
+
+⚠️ **`read_network_requests` ของ browser pane จับเฉพาะ request ของ origin ตัวเอง** — คืนผลว่า "ไม่มี request"
+ทั้งที่ `window.google_tag_manager` มีคีย์ `G-R8SGQ58R5E` อยู่จริง ⇒ เชื่อมันแล้วจะรายงานผิดว่า tag ไม่ทำงาน
+**ท่าที่ใช้ได้คือ `performance.getEntriesByType('resource')`** ซึ่งเห็น cross-origin ครบ
+🔑 *เครื่องมือที่คืนคำว่า "ไม่มี" ต้องมีตัวควบคุมบวกเสมอ ไม่งั้นมันแยกไม่ออกว่าไม่มีของ หรือมองไม่เห็น*
+
+## ข้อเท็จจริงจากคอนโซล Ads ที่ `MKT` วัดมา — บันทึกไว้เพราะกระทบการตัดสินใจเรื่องเว็บ
+
+```
+conversion action ใน CID 658-484-0229   ไม่มีเลยแม้แต่ตัวเดียว (You're not measuring any goals here right now)
+แคมเปญที่วิ่งอยู่                        Performance Max ตัวเดียว
+6 วัน 16-21 ส.ค.                       7,610 คลิก · 121.59 GBP ≈ 0.016 GBP ต่อคลิก
+งบ                                     MKT ลดจาก 38 เหลือ 18 GBP ต่อวัน ตามคำสั่งเจ้าของ
+```
+
+🔑 *PMax optimize เข้าหา conversion signal ⇒ **PMax ที่ไม่มี conversion คือระบบที่ถูกออกแบบให้วิ่งเข้าเป้า
+แต่ไม่มีเป้าให้วิ่งเข้า** มันจะไปหาคลิกที่ถูกที่สุดแทน* — ค่าคลิก 0.016 GBP เป็นหลักฐานของอาการนั้น
