@@ -86,10 +86,11 @@ export default function PrivacyPage() {
           <h2 className="text-lg font-medium text-ink">Your choices</h2>
           <p className="mt-2 text-mist">
             Email {SITE.email} with &ldquo;stop advertising&rdquo; and we will
-            remove you from our advertising audiences within 7 days. This does not
-            affect your bookings or your treatment records. You can also ask what
-            we hold about you, ask us to correct it, or ask us to delete it where
-            the law allows. We reply within one month.
+            remove you from our advertising audiences — usually within a few days,
+            and in any case within one month. This does not affect your bookings or
+            your treatment records. You can also ask what we hold about you, ask us
+            to correct it, or ask us to delete it where the law allows. We reply
+            within one month.
           </p>
         </section>
 
@@ -106,12 +107,36 @@ export default function PrivacyPage() {
 
         <section>
           <h2 className="text-lg font-medium text-ink">How long we keep it</h2>
+          {/*
+            The first draft of this section said "3 years after your last visit".
+            The shop office then measured the customer file: 5,501 records created
+            in 2018 or earlier are still there, 2,740 of them people who came once
+            and never returned, and 155 date back to 2014. Treatwell Connect does
+            not delete inactive records and the shop has never deleted any by hand
+            (shop-office 81ce763, Q-LAW-047 ack). A person who came once in 2016
+            would have had to disappear in 2019 for the sentence to be true.
+
+            So the number came out and this says what is actually the case. A
+            softer draft — "we review our records periodically and remove what we
+            no longer need" — was cut for the same reason: that review does not
+            happen either, and a pleasant sentence that is not true is the same
+            defect as a precise one that is not true.
+
+            The years can come back when a real lawyer sets the period and a
+            deletion mechanism exists — both, not either.
+          */}
           <p className="mt-2 text-mist">
-            Contact details and appointment history: while you are a customer and
-            for 3 years after your last visit. Treatment records: as required by
-            our insurer and professional bodies, which is longer — ask us for the
-            current period. Advertising audiences: refreshed from our customer
-            list; removed within 7 days of your request.
+            Contact details and appointment history: we keep these while you remain
+            on our customer records.{" "}
+            <span className="text-ink">
+              We do not yet delete inactive records automatically
+            </span>
+            , so the surest way to have your details removed is to ask us — see
+            &ldquo;Your choices&rdquo;. Treatment records: as required by our
+            insurer and professional bodies — ask us for the current period.
+            Advertising audiences: built from our customer list; you are removed
+            when you ask — usually within a few days, and in any case within one
+            month.
           </p>
         </section>
 
