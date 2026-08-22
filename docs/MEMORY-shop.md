@@ -1,4 +1,11 @@
-# MEMORY ของห้อง Taitam-D Shop Lead — สำเนาเข้ารีโปเพื่อการส่งมอบเครื่อง
+# MEMORY ของห้อง Taitam-D Shop Website Lead — สำเนาเข้ารีโปเพื่อการส่งมอบเครื่อง
+
+> 🔴 **ไฟล์นี้บอก *บทบาท* ไม่ได้บอก *รหัสห้องบนเครื่องที่คุณยืนอยู่*** (`Q-KWS-004` ข้อ 3.1 และ 3.1.3)
+> รหัสอ่านจาก `machines/$(cat ~/dev/gumon-workspace/.machine-id)/queue/README.md` ที่เดียว
+> ตารางอ้างอิง: `SHOP` @komphet-mac · `KWEB` @komphet-air
+>
+> 🔑 ***ของที่คัดมาเพื่อ "ส่งมอบบทบาท" อ่านไม่ต่างจากของที่บอกว่า "คุณคือคนเดิม"***
+> เกิดจริง 2026-08-23: ห้องบน `komphet-air` อ่านไฟล์นี้แล้วสวมรหัส `SHOP` ของอีกเครื่องทั้งเทิร์น
 
 > คัดลอกจาก `~/.claude/projects/-Users-komphet-me-dev-solutions-taitamd-shop-website/memory/`
 > เมื่อ **2026-08-11** ตาม [`machine-handover.md`](../../gumon-workspace/docs/machine-handover.md) ถัง A
