@@ -103,7 +103,7 @@ export default function CookiesPage() {
                   deliberately absent — this table claims to be complete, so a row
                   we cannot reproduce would be a false claim in the other direction.
                 */}
-                <tr>
+                <tr className="border-b border-ink/10">
                   <td className="py-2 pr-4"><code>_gcl_aw</code></td>
                   <td className="py-2 pr-4">
                     Only if you accept — and only when you arrived from a Google ad
@@ -112,6 +112,31 @@ export default function CookiesPage() {
                     Google Ads — records which ad click brought you here, so that a
                     booking or enquiry can be counted against that ad. It does not
                     identify you.
+                  </td>
+                  <td className="py-2">90 days</td>
+                </tr>
+                {/*
+                  Found 2026-08-23, one day after _gcl_aw, by the same route and for
+                  the same reason: it only appears for someone who arrived from an
+                  advert and then accepted, and a plain visit never produces it. This
+                  one is not a cookie at all — it is a local storage entry, which is
+                  why a cookie-only check would not have found it either. The table
+                  already covers local storage (see ttd-consent), so it belongs here.
+
+                  The wording says "a copy of the same reference" on Legal's ruling:
+                  a reader must be able to see that this is the same ad click id
+                  written twice, not a second identifier, or the table reads as if we
+                  collect more than we do.
+                */}
+                <tr>
+                  <td className="py-2 pr-4"><code>_gcl_ls</code></td>
+                  <td className="py-2 pr-4">
+                    Only if you accept — and only when you arrived from a Google ad
+                  </td>
+                  <td className="py-2 pr-4">
+                    Google Ads — a copy of the same ad-click reference as{" "}
+                    <code>_gcl_aw</code>, kept in local storage (not a cookie) so it
+                    survives if the cookie is cleared. It does not identify you.
                   </td>
                   <td className="py-2">90 days</td>
                 </tr>
