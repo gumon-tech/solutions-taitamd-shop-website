@@ -3,32 +3,45 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { sendWhatsAppLead, skipWhatsAppLead } from "./Analytics";
+import { isWhatsAppBookingLink, sourceFromLink } from "@/lib/whatsapp";
 
 /**
- * The step between a massage booking button and WhatsApp (Q-KMKT-004).
+ * The step between a booking button and WhatsApp (Q-KMKT-004).
  *
  * Why it exists: a WhatsApp click tells Google that someone tapped, and nothing
  * more — the ad click id dies at the app boundary, so the campaign can only ever
  * optimise for taps. Name and number, hashed in the browser, let Google match the
  * enquiry back to the advert that produced it.
  *
- * Why it is only on massage: it is a real cost, not a free win, and nobody knows
- * how much yet. Massage is 51% of appointments and the category the campaign is
- * pushing, so it gives the fastest read; every other category keeps the plain
- * button and acts as the control group in the same weeks. Marketing chose this
- * over waiting a week for a baseline, because the shop has only just reopened and
- * a "before" measured now would not be a normal week anyway.
+ * Why it is on every button: it shipped on massage alone for one deploy, with the
+ * other categories held back as a control group so we could measure what the form
+ * costs in lost enquiries. The owner then ruled that he does not want that figure
+ * — "ไม่ต้องการดูตัวเลขนั้น ไม่ต้องพิสูจน์ตัวเลข ทำทุกอันเลย" — so the split test
+ * came out and the form went everywhere. whatsapp_lead_skip is still recorded, so
+ * the question can still be answered later if anyone changes their mind.
  *
  * Why there is a way past it: this form sits on the only route to booking. A
  * visitor who will not type a phone number must still be able to reach WhatsApp,
- * or we have replaced a measurement problem with a lost customer. Skipping is
- * counted too, so the cost of asking is visible rather than invisible.
+ * or we have replaced a measurement problem with a lost customer.
  *
  * Nothing typed here is stored or sent anywhere except to Google, hashed, and
  * only when the box is ticked.
  */
 
-const SERVICE_LABEL: Record<string, string> = { M: "massage" };
+const SERVICE_LABEL: Record<string, string> = {
+  M: "massage",
+  H: "hair",
+  N: "nail",
+  F: "facial",
+  W: "waxing",
+  B: "body",
+  L: "lash and brow",
+  A: "consultation",
+  G: "gift card",
+  C: "offer",
+  P: "order",
+  S: "signature",
+};
 
 /** UK numbers get typed as 07…, 447…, +44 7… or with spaces. Google wants E.164. */
 function toE164(raw: string): string | undefined {
@@ -62,12 +75,14 @@ export default function LeadCapture() {
       // Let people open the link their own way — a new tab is not an enquiry we
       // can measure, but taking it away is worse than not measuring it.
       if (e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
-      const a = (e.target as HTMLElement | null)?.closest?.("a[data-lead-form]");
-      if (!a) return;
-      const href = a.getAttribute("href");
-      if (!href) return;
+      // Match on where the link goes, and read the category out of the message it
+      // already carries — no marker attribute for anyone to forget. A booking link
+      // written on a new page next month is picked up and labelled by default.
+      const a = (e.target as HTMLElement | null)?.closest?.("a");
+      const href = a?.getAttribute("href");
+      if (!a || !href || !isWhatsAppBookingLink(a.href)) return;
       e.preventDefault();
-      setTarget({ href, service: a.getAttribute("data-lead-form") || "M" });
+      setTarget({ href, service: sourceFromLink(href) });
     }
     document.addEventListener("click", onClick);
     return () => document.removeEventListener("click", onClick);
@@ -131,9 +146,14 @@ export default function LeadCapture() {
         <h2 id="lead-title" className="text-lg font-medium text-ink">
           Before we open WhatsApp
         </h2>
+        {/*
+          One sentence for every category. An earlier version said "hold your
+          {service} slot", which reads fine for a massage and badly for a gift card
+          or a product order — and the form now sits on those buttons too.
+        */}
         <p className="mt-1.5 text-sm leading-relaxed text-mist">
-          Leave your name and number so we can hold your {service} slot even if the
-          chat gets interrupted.
+          Leave your name and number and we can pick your {service} enquiry back up
+          even if the chat gets interrupted.
         </p>
 
         <form onSubmit={onSubmit} className="mt-4 space-y-3">

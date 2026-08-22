@@ -56,13 +56,23 @@ export function buildWhatsAppLink(
 }
 
 /**
- * Categories whose booking links go through the lead form first (Q-KMKT-004).
- * Massage only, on purpose: every other category is the control group for the
- * same weeks, so we can see what the form costs instead of guessing.
+ * The category letter for a link, read back out of the message it carries.
+ *
+ * Every pre-filled message already ends in `[web-M]`, `[web-G]` and so on, so the
+ * form can label an enquiry without every button also carrying a marker attribute
+ * that someone has to remember to add. A booking link written on a new page next
+ * month is categorised correctly by having done nothing.
  */
-const LEAD_FORM_SOURCES = new Set(["M"]);
+export function sourceFromLink(href: string): string {
+  const m = decodeURIComponent(href).match(/\[web-([A-Z])\]/);
+  return m ? m[1] : SOURCE_UNKNOWN;
+}
 
-/** Spread onto a booking link: marks it for the form, or adds nothing at all. */
-export function leadFormAttr(source: string) {
-  return LEAD_FORM_SOURCES.has(source) ? { "data-lead-form": source } : {};
+export function isWhatsAppBookingLink(href: string): boolean {
+  try {
+    const u = new URL(href, "https://taitam-d.com");
+    return u.hostname === "wa.me" && !!u.pathname.replace(/^\/+|\/+$/g, "");
+  } catch {
+    return false;
+  }
 }

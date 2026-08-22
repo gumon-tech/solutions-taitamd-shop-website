@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { isWhatsAppBookingLink } from "@/lib/whatsapp";
 import Link from "next/link";
 
 // Google Consent Mode v2 (advanced). The tag loads on every visit but every
@@ -137,11 +138,10 @@ function trackLeadClicks() {
     if (!window.gtag) return;
     const a = (e.target as HTMLElement | null)?.closest?.("a");
     if (!a?.href) return;
-    // Links that open the lead form report themselves when the visitor actually
-    // leaves for WhatsApp. Counting the first click here too would inflate exactly
-    // the number the form is being measured against — the form's whole purpose is
-    // to find out how many people it costs us.
-    if (a.hasAttribute("data-lead-form")) return;
+    // Booking links open the lead form, and report themselves when the visitor
+    // actually leaves for WhatsApp. Counting the first click here as well would
+    // count everyone who opened the form and closed it as an enquiry.
+    if (isWhatsAppBookingLink(a.href)) return;
     const name = leadEventFor(a.href);
     if (!name) return;
     window.gtag("event", name, { link_url: a.href, page_path: location.pathname });
