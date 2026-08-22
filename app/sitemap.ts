@@ -24,5 +24,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/contact/`, lastModified },
     { url: `${SITE_URL}/book/`, lastModified },
     { url: `${SITE_URL}/cookies/`, lastModified },
+    { url: `${SITE_URL}/privacy/`, lastModified },
   ];
 }
