@@ -164,6 +164,15 @@ export default function Analytics() {
   // shrank. At the previous size this sheet covered roughly a third of a 375px screen,
   // which on the Signature landing page put the Book on WhatsApp button behind it before
   // the visitor had answered anything.
+  // The mobile offset is bottom-1, not bottom-20, for the same reason one page further on.
+  // Measured on production 2026-08-23: the home hero's "WhatsApp to book" sits at 577-623px
+  // from the top on every phone width, and the sheet is 152px tall, so a bottom-20 (80px)
+  // offset put the sheet over that button on every viewport shorter than 855px — which is
+  // every iPhone from the SE through the 15 (667/780/812/821/844/852). A hit test at the
+  // button's centre returned this dialog, not the link. At bottom-1 the sheet clears the
+  // button from 780px upwards. Below ~700px nothing bottom-anchored clears it, so keep the
+  // old 80px there: it at least leaves the button's centre tappable on an SE.
+  // Nothing about consent changed — this is geometry, not policy.
   // Legal's ruling (2026-08-11): PECR reg 6 forbids setting non-essential cookies before
   // consent — it does not ask us to obscure the page, and a banner covering the only
   // route to contact us pushes the consent itself toward a cookie wall.
@@ -174,7 +183,7 @@ export default function Analytics() {
     <div
       role="dialog"
       aria-label="Cookie consent"
-      className="fixed inset-x-3 bottom-20 md:bottom-4 md:left-auto md:right-4 md:max-w-sm z-[70] rounded-2xl border border-gold/30 bg-bg1/95 backdrop-blur p-3 md:p-4 shadow-2xl"
+      className="fixed inset-x-3 bottom-1 [@media(max-height:700px)]:bottom-20 md:bottom-4 md:left-auto md:right-4 md:max-w-sm z-[70] rounded-2xl border border-gold/30 bg-bg1/95 backdrop-blur p-3 md:p-4 shadow-2xl"
     >
       <p className="text-xs leading-relaxed text-ink/90 md:text-sm">
         We&apos;d like to use optional analytics cookies (Google Analytics &amp; Google
