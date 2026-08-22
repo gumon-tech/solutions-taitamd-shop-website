@@ -124,12 +124,19 @@ export default function PrivacyPage() {
 
             The years can come back when a real lawyer sets the period and a
             deletion mechanism exists — both, not either.
+
+            "yet" was in this sentence for about an hour. The owner then gave a
+            standing instruction that customer data is never to be deleted, which
+            turns "yet" into a hint at something that is not going to happen — the
+            same soft promise as the review sentence above. Legal ruled it out and
+            kept the version at 1.0: a word removed to match what is true is not a
+            change of substance a reader could have relied on.
           */}
           <p className="mt-2 text-mist">
             Contact details and appointment history: we keep these while you remain
             on our customer records.{" "}
             <span className="text-ink">
-              We do not yet delete inactive records automatically
+              We do not delete inactive records automatically
             </span>
             , so the surest way to have your details removed is to ask us — see
             &ldquo;Your choices&rdquo;. Treatment records: as required by our
