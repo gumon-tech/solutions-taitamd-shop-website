@@ -54,3 +54,15 @@ export function buildWhatsAppLink(
   const q = text ? `?text=${enc(text)}` : "";
   return `${base}${q}`;
 }
+
+/**
+ * Categories whose booking links go through the lead form first (Q-KMKT-004).
+ * Massage only, on purpose: every other category is the control group for the
+ * same weeks, so we can see what the form costs instead of guessing.
+ */
+const LEAD_FORM_SOURCES = new Set(["M"]);
+
+/** Spread onto a booking link: marks it for the form, or adds nothing at all. */
+export function leadFormAttr(source: string) {
+  return LEAD_FORM_SOURCES.has(source) ? { "data-lead-form": source } : {};
+}

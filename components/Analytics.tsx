@@ -137,10 +137,58 @@ function trackLeadClicks() {
     if (!window.gtag) return;
     const a = (e.target as HTMLElement | null)?.closest?.("a");
     if (!a?.href) return;
+    // Links that open the lead form report themselves when the visitor actually
+    // leaves for WhatsApp. Counting the first click here too would inflate exactly
+    // the number the form is being measured against — the form's whole purpose is
+    // to find out how many people it costs us.
+    if (a.hasAttribute("data-lead-form")) return;
     const name = leadEventFor(a.href);
     if (!name) return;
     window.gtag("event", name, { link_url: a.href, page_path: location.pathname });
   });
+}
+
+type LeadSubmission = {
+  phone?: string;
+  email?: string;
+  service: string;
+  href: string;
+  consented: boolean;
+};
+
+/**
+ * Hand a lead to Google at the moment the visitor leaves for WhatsApp.
+ *
+ * Only `ad_user_data` is granted from the tick box, never `ad_storage`. The two
+ * are different permissions: one governs sending user-provided data, the other
+ * governs writing to the device. Legal's ruling is that cookies are the banner's
+ * business and nothing else's, so a tick box about sending a hashed number must
+ * not quietly start writing advertising cookies as a side effect.
+ *
+ * Nothing here is stored. The values live in component state until this call and
+ * are gone with the navigation; they never reach a GA4 event parameter, the URL,
+ * or local storage. gtag hashes with SHA-256 before anything leaves the browser.
+ */
+export function sendWhatsAppLead({ phone, email, service, href, consented }: LeadSubmission) {
+  ensureGtag();
+  if (consented) {
+    window.gtag!("consent", "update", { ad_user_data: "granted" });
+    const userData: Record<string, string> = {};
+    if (phone) userData.phone_number = phone;
+    if (email) userData.email = email;
+    if (Object.keys(userData).length) window.gtag!("set", "user_data", userData);
+  }
+  window.gtag!("event", "whatsapp_lead_submit", { service, consented });
+  // Keep the control metric comparable: the split test reads whatsapp_booking_click
+  // for both the categories with a form and the ones without.
+  window.gtag!("event", "whatsapp_booking_click", { link_url: href, page_path: location.pathname });
+}
+
+/** The visitor chose to skip the form. Measured so the cost of the form is visible. */
+export function skipWhatsAppLead({ service, href }: { service: string; href: string }) {
+  ensureGtag();
+  window.gtag!("event", "whatsapp_lead_skip", { service });
+  window.gtag!("event", "whatsapp_booking_click", { link_url: href, page_path: location.pathname });
 }
 
 export function getConsent(): string | null {

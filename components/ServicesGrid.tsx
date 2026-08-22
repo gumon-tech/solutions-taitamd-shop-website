@@ -1,7 +1,7 @@
 "use client";
 
 import { SERVICE_CATEGORIES } from "@/lib/site";
-import { buildWhatsAppLink, sourceForSlug } from "@/lib/whatsapp";
+import { buildWhatsAppLink, sourceForSlug, leadFormAttr } from "@/lib/whatsapp";
 import Reveal from "./Reveal";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
@@ -46,6 +46,7 @@ export default function ServicesGrid() {
                       `Hi Taitam-D, I’m interested in ${c.title}. Please share availability and prices.`,
                       sourceForSlug(c.slug),
                     )}
+                    {...leadFormAttr(sourceForSlug(c.slug))}
                     target="_blank"
                     rel="noreferrer"
                     className="btn-shine inline-flex items-center justify-center gap-2 rounded-xl bg-ink/5 border border-ink/12 px-4 py-2.5 text-sm font-semibold hover:bg-ink/8 transition"

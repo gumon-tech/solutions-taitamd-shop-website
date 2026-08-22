@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import StructuredData from "@/components/StructuredData";
 import Analytics from "@/components/Analytics";
+import LeadCapture from "@/components/LeadCapture";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.baseUrl),
@@ -80,6 +81,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {children}
         <Footer />
         <Analytics />
+        <LeadCapture />
       </body>
     </html>
   );

@@ -12,6 +12,7 @@ import {
 import {
   buildWhatsAppLink,
   sourceForSlug,
+  leadFormAttr,
   SOURCE_PRODUCT,
   SOURCE_BY_SLUG,
 } from "@/lib/whatsapp";
@@ -99,6 +100,7 @@ export default function ServiceMenu() {
                       <li key={i}>
                         <a
                           href={buildWhatsAppLink(bookMessage(svc.name, v), sourceForSlug(cat.slug))}
+                          {...leadFormAttr(sourceForSlug(cat.slug))}
                           target="_blank"
                           rel="noreferrer"
                           className="group -mx-2 flex items-center justify-between gap-3 rounded-lg px-2 py-2.5 transition-colors hover:bg-gold/[0.07]"
