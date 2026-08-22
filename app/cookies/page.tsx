@@ -81,7 +81,7 @@ export default function CookiesPage() {
                   </td>
                   <td className="py-2">400 days</td>
                 </tr>
-                <tr>
+                <tr className="border-b border-ink/10">
                   <td className="py-2 pr-4"><code>_ga_R8SGQ58R5E</code></td>
                   <td className="py-2 pr-4">Only if you accept</td>
                   <td className="py-2 pr-4">
@@ -89,6 +89,31 @@ export default function CookiesPage() {
                     site&apos;s property.
                   </td>
                   <td className="py-2">400 days</td>
+                </tr>
+                {/*
+                  Added 2026-08-23. This one only appears for visitors who arrive
+                  from a Google ad, so it never showed up in a plain load of the
+                  home page — which is how the register was checked until now. It
+                  was reproduced by opening the site with a gclid in the URL and
+                  then accepting: _gcl_aw, 90 days. Wording ruled by Legal in
+                  Q-KWS-013. "Only if you accept" is load-bearing: with the same
+                  gclid and Decline, the site writes nothing at all, which is what
+                  keeps "no advertising identifier" true in the short version above.
+                  A sibling, _gcl_au, was seen once and has not reproduced, so it is
+                  deliberately absent — this table claims to be complete, so a row
+                  we cannot reproduce would be a false claim in the other direction.
+                */}
+                <tr>
+                  <td className="py-2 pr-4"><code>_gcl_aw</code></td>
+                  <td className="py-2 pr-4">
+                    Only if you accept — and only when you arrived from a Google ad
+                  </td>
+                  <td className="py-2 pr-4">
+                    Google Ads — records which ad click brought you here, so that a
+                    booking or enquiry can be counted against that ad. It does not
+                    identify you.
+                  </td>
+                  <td className="py-2">90 days</td>
                 </tr>
               </tbody>
             </table>
