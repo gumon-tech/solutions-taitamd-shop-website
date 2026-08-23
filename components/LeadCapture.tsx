@@ -105,7 +105,22 @@ export default function LeadCapture() {
 
   function go(href: string) {
     setTarget(null);
-    window.open(href, "_blank", "noreferrer");
+    // Same tab, deliberately.
+    //
+    // This was window.open(href, "_blank", "noreferrer"). Passing a features string
+    // makes the browser treat the call as a popup rather than a tab, and popups are
+    // blocked by default — so the visitor filled the form, pressed the button, and
+    // went nowhere at all. Measured on production 2026-08-23 with a real click: no
+    // new tab, no navigation, dialog closed, visitor left staring at the page. It
+    // was live for a Saturday night and most of a Sunday.
+    //
+    // It survived the checks I ran before shipping because those stubbed window.open
+    // to read the URL back — which proves the right URL was passed and says nothing
+    // about whether the browser honoured it.
+    //
+    // A WhatsApp deep link in the same tab is never blocked: on a phone it hands off
+    // to the app, on a desktop it opens WhatsApp Web, and the visitor can come back.
+    window.location.href = href;
   }
 
   function onSubmit(e: React.FormEvent) {
