@@ -1619,3 +1619,55 @@ Skip            whatsapp_lead_skip + whatsapp_booking_click
 ของวันที่ 22-23 ส.ค. ในคอนโซล ซึ่งเป็นเขตของ `MKT` · ขอไปแล้ว ห้องเขาปิดอยู่ตอนที่ถาม
 ⚠️ **และแม้แก้แล้ว ฟอร์มยังเพิ่มแรงเสียดทานอยู่ดี** ซึ่งเป็นคนละเรื่องกับบั๊กนี้ และเจ้าของสั่งไว้ว่าไม่ต้องวัดตัวเลขนั้น
 ⇒ ถ้าอยากได้ปุ่มจองแบบเดิมกลับมา **ถอดฟอร์มออกได้ด้วย commit เดียว** — `LeadCapture` ถูกเรียกที่ `app/layout.tsx` จุดเดียว
+
+---
+
+# ส่งงานต่อ · 2026-08-25T13:5xZ (SHOP@komphet-mac ปิด session)
+
+อ่านบล็อกนี้ก่อน แล้วค่อยทำขั้น 0 (ทะเบียนเครื่อง) และวัดของจริงตาม WORKSPACE-RESUME
+
+## เรื่องสำคัญสุด มติเจ้าของ 23 ส.ค. Q-WS-262 ห้ามพลาด
+
+```
+SHOP บน komphet-mac  คิวว่าง หยุด ไม่รับงานใหม่
+งานสายเว็บ            ย้ายไปห้อง KWEB บนเครื่อง komphet-air ตามมติ 22-23 ส.ค.
+รหัสห้อง              บนเครื่องนี้ยังเป็น SHOP บนเครื่อง air คือ KWEB อ่านทะเบียนเครื่องยืนยันก่อนสวมรหัส
+ใบที่ ack แล้ว        Q-WS-262 commit b48099a6 ในรีโป workspace
+```
+
+ถ้าเปิด session ใหม่บนเครื่องนี้แล้วไม่มีคำสั่งใหม่จากเจ้าของ ทำแค่ปิดใบค้างแล้วหยุด
+ถ้าเจ้าของสั่งงานเว็บใหม่ ทำได้ แต่รู้ไว้ว่าห้อง KWEB บน air ก็ถือรีโปเดียวกัน ระวังเดินชนกัน
+
+## สถานะจริง วัด 2026-08-25T13:48Z
+
+```
+production 7 หน้า   200 ทุกหน้า apex services book tour story contact cookies
+service menu       live เมนูเต็ม 130 บริการ ราคา เวลา ปุ่ม WhatsApp เติมข้อความ รูปหมวด 11 ใบ
+Advanced Aesthetics  live แยกตาม Q-LAW-046 กลุ่ม 1 ไม่ขึ้น กลุ่ม 2 ปรึกษาไม่มีราคา กลุ่ม 3 ราคาพร้อมคำบังคับ
+standards notice   live 4 จุด book Hero CTA FAQ ข้อความ non-sexual professional therapeutic
+รีโปเว็บ           ตรง origin/main ที่ 0da5f6f tree สะอาด
+```
+
+## ยังเปิดค้าง 1 ใบ ไม่ใช่งานเว็บ ห้ามพยายามปิดเอง
+
+```
+Q-LAW-045  ห้ามคอมมิตข้อมูลลูกค้า ชื่อ อีเมล เบอร์ ประวัติรักษา ลง git ใด ๆ เด็ดขาด
+           การดูด Clients Reports Pay จาก Treatwell ต้องมีฐานทางกฎหมายก่อน
+           รอเจ้าของและนักกฎหมายจริงเคาะ ไม่ใช่ห้องนี้ปิดได้ งานนี้เป็นของ repo private shop-office ห้อง OFFICE
+```
+
+## ของกลาง ระวัง
+
+รีโป workspace เป็น working tree ของกลาง หลายเครื่องเขียนพร้อมกัน มีของห้องอื่นค้างใน tree ได้เสมอ
+commit เฉพาะ path ของตัวเองด้วย git commit -m msg -- path เท่านั้น ห้าม git add -A
+push ไม่ได้เพราะ tree มีของห้องอื่น ให้ใช้ git pull --rebase --autostash
+
+## ที่เก็บของ
+
+```
+lib/catalog.ts             แหล่งกลางบริการ สินค้า แก้ราคาที่นี่ที่เดียว
+components/ServiceMenu.tsx  render เมนู
+public/images/services/     รูปหมวด 11 ใบ Gemini 72-112KB
+docs/reference/... ย้ายไป repo private solution-taitamd-shop-office แล้ว ไม่มี PII
+คีย์ Gemini ใน .env ที่นี่  verify แล้วใช้ได้ gitignore กันหลุด
+```
