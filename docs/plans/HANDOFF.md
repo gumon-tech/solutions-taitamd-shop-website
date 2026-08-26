@@ -2,8 +2,15 @@
 
 ## 🔑 `WORKSPACE-RESUME` — ทำสามข้อนี้ก่อนทำอะไรทั้งสิ้น
 
-> 🔴 **นิยามฉบับจริงอยู่ที่ `~/.claude/CLAUDE.md` (5 ขั้น) — ไฟล์นี้เป็นแค่สำเนาย่อ ถ้าขัดกัน ฉบับกลางชนะ**
+> 🔴 **นิยามฉบับจริงอยู่ที่ `~/dev/gumon-workspace/docs/workspace-resume.md` (ขั้น 0-6 · `Q-KWS-022` ย้ายมาไว้ในรีโป 2026-08-27)**
+> **`~/.claude/CLAUDE.md` เหลือเป็นตัวชี้ · ไฟล์นี้เป็นแค่สำเนาย่อ ถ้าขัดกัน ฉบับกลางชนะ**
+> 🔑 **ขั้น 6 = เคลียร์งานค้างที่ทำได้จนจบ ไม่ต้องถามก่อนเริ่ม — resume จบเมื่อกอง "ทำได้เอง" หมด ไม่ใช่เมื่อรายงานเสร็จ**
 > **พิมพ์ `WORKSPACE-RESUME` เมื่อไร ห้องนี้ต้อง:**
+>
+> 0️⃣ **ตั้งชื่อ session ตัวเองก่อนทุกอย่าง** (`Q-WS-270` · เพิ่ม 2026-08-27) — `mcp__ccd_session_mgmt__set_session_title`
+>    `session_id: "self"` · title = `[SHOP] Taitam-D Shop Website Lead` (รหัสจากทะเบียนเครื่องในขั้นถัดไป ห้ามเดา)
+>    เหตุ: ทะเบียนข้ามเครื่อง **snapshot ชื่อตอน session เริ่ม** ⇒ ตั้งทีหลังเครื่องอื่นยังเห็นชื่อเก่า
+>    และเมื่อ 7 ห้อง resume พร้อมกัน ทุกห้องขึ้นชื่อ "Workspace resume" เหมือนกันจนจ่าหน้าข้อความไม่ได้
 >
 > 0. 🔴 **อ่าน `machines/$(cat ~/dev/gumon-workspace/.machine-id)/queue/README.md` ก่อนอ่านอะไรทั้งสิ้น**
 >    เพื่อรู้ว่า **บนเครื่องที่คุณยืนอยู่ ห้องนี้ใช้รหัสอะไร** (`SHOP` @komphet-mac · `KWEB` @komphet-air)
@@ -103,15 +110,22 @@ cd ~/dev/gumon-workspace && { git fetch -q origin || echo "🔴 FETCH ล้ม 
 # 📌 ขอบเขตเครื่อง: สแกนเฉพาะ `machines/komphet-mac/` — ห้องนี้อยู่บนเครื่องนี้
 #    ใบ broadcast ในตู้ `ALL` ของเครื่องหนึ่ง **ผูกพันเฉพาะห้องของเครื่องนั้น** (`WS` เคาะใน `Q-TWS-001` ข้อ 4)
 #    วัด 2026-08-23: กว้างเป็น `machines/*/` แล้วได้ `Q-KWS-004` (komphet-air) กับ `Q-TWS-002` (tongo) ซึ่งไม่ใช่ของเรา
-OUT=$(for f in $({ git grep -l '^to:.*\bSHOP\b' origin/main -- 'machines/komphet-mac/queue/*/*.md'; \
-                  git grep -l '^to:.*\bALL\b'  origin/main -- 'machines/komphet-mac/queue/*/*.md'; } \
+# 🔴 แก้ 2026-08-27 — เพิ่มขา GLOBAL เป็นขาที่ 3 (`Q-WS-269` ข้อ 4)
+#    ตู้ `queue/GLOBAL/` อยู่ที่ **root ของรีโป workspace ไม่ใช่ใต้ `machines/`** ⇒ pathspec เดิมมองไม่เห็นทั้งตู้
+#    วัดเจอ 2026-08-27: สแกน 2 ขารายงาน "ไม่มีใบใหม่หลัง 25 ส.ค." ขณะที่ตู้ GLOBAL มีใบ open 8 ใบ
+#    (2 ใบ priority high · 1 ใบคือ `Q-KWS-024` มติมอบอำนาจของเจ้าของ) ⇒ hook เป็นตัวบอก ไม่ใช่ด่านนี้
+OUT=$(for f in $({ git grep -l '^to:.*\bSHOP\b'   origin/main -- 'machines/komphet-mac/queue/*/*.md'; \
+                  git grep -l '^to:.*\bALL\b'    origin/main -- 'machines/komphet-mac/queue/*/*.md'; \
+                  git grep -l '^to:.*\bGLOBAL\b' origin/main -- 'queue/GLOBAL/*.md'; } \
                 | sort -u | sed 's|^origin/main:||'); do \
   git show "origin/main:$f" 2>/dev/null | grep -q '^status: open' && echo "OPEN: $f"; done); echo "$OUT"
-# positive control 2 ตัว เพราะสแกนมี 2 ขา ขา SHOP กับ ขา ALL ล้มแยกกันได้
+# positive control 3 ตัว เพราะสแกนมี 3 ขา และแต่ละขาล้มแยกกันได้
 echo "$OUT" | grep -q 'Q-WS-262' && echo "✅ control ขา SHOP ผ่าน" \
   || echo "🔴 CONTROL ขา SHOP ล้ม — อย่าอ่านว่า 'ไม่มีใบใหม่' · ไปตรวจด้วยมือ"
 echo "$OUT" | grep -q 'Q-WS-200' && echo "✅ control ขา ALL ผ่าน" \
   || echo "🔴 CONTROL ขา ALL ล้ม — อย่าอ่านว่า 'ไม่มีใบใหม่' · ไปตรวจด้วยมือ"
+echo "$OUT" | grep -q 'Q-KWS-024' && echo "✅ control ขา GLOBAL ผ่าน" \
+  || echo "🔴 CONTROL ขา GLOBAL ล้ม — อย่าอ่านว่า 'ไม่มีใบใหม่' · ไปตรวจด้วยมือ"
 ```
 
 🔬 **บรรทัด positive control ไม่ใช่ของประดับ — มันคือด่านที่ทำให้ผลลัพธ์ "ว่าง" อ่านออก**
