@@ -108,14 +108,14 @@ OUT=$(for f in $({ git grep -l '^to:.*\bSHOP\b' origin/main -- 'machines/komphet
                 | sort -u | sed 's|^origin/main:||'); do \
   git show "origin/main:$f" 2>/dev/null | grep -q '^status: open' && echo "OPEN: $f"; done); echo "$OUT"
 # positive control 2 ตัว เพราะสแกนมี 2 ขา ขา SHOP กับ ขา ALL ล้มแยกกันได้
-echo "$OUT" | grep -q 'Q-LAW-045' && echo "✅ control ขา SHOP ผ่าน" \
+echo "$OUT" | grep -q 'Q-WS-262' && echo "✅ control ขา SHOP ผ่าน" \
   || echo "🔴 CONTROL ขา SHOP ล้ม — อย่าอ่านว่า 'ไม่มีใบใหม่' · ไปตรวจด้วยมือ"
 echo "$OUT" | grep -q 'Q-WS-200' && echo "✅ control ขา ALL ผ่าน" \
   || echo "🔴 CONTROL ขา ALL ล้ม — อย่าอ่านว่า 'ไม่มีใบใหม่' · ไปตรวจด้วยมือ"
 ```
 
 🔬 **บรรทัด positive control ไม่ใช่ของประดับ — มันคือด่านที่ทำให้ผลลัพธ์ "ว่าง" อ่านออก**
-`Q-LAW-045` (ขา `SHOP`) และ `Q-WS-200` (ขา `ALL`) เป็นใบ `open` ที่อายุยืน ⇒ **คำสั่งที่ทำงานถูกต้องต้องเห็นทั้งคู่เสมอ**
+`Q-WS-262` (ขา `SHOP`) และ `Q-WS-200` (ขา `ALL`) เป็นใบ `open` ที่อายุยืน ⇒ **คำสั่งที่ทำงานถูกต้องต้องเห็นทั้งคู่เสมอ**
 ⚠️ **ตัวเดิมคือ `Q-WS-101` และมันล้มจริงเมื่อ 2026-08-23** — ไม่ใช่คำสั่งพัง แต่ `WS` กวาดใบหมดอายุ
 ปิดมันไปเมื่อ 2026-08-21T11:0xZ (แทนด้วย `Q-WS-238` + `Q-WS-239`) ⇒ **เคสบวกของกลไกนี้ ไม่ใช่ false alarm**
 ⇒ มันหายเมื่อไร = pathspec เพี้ยน · ชื่อฟิลด์เปลี่ยน · หรือ `WS` เพิ่งปิดใบนั้น (**= ปลดพักแล้ว!**)
@@ -1671,3 +1671,58 @@ public/images/services/     รูปหมวด 11 ใบ Gemini 72-112KB
 docs/reference/... ย้ายไป repo private solution-taitamd-shop-office แล้ว ไม่มี PII
 คีย์ Gemini ใน .env ที่นี่  verify แล้วใช้ได้ gitignore กันหลุด
 ```
+
+---
+
+# WORKSPACE-RESUME 2026-08-26T15:0xZ — ห้องยังหยุดตาม Q-WS-262 · control ขา SHOP ตายไป 1 ตัว แก้แล้ว
+
+## วัดแล้ว ไม่ใช่เดา (2026-08-26T15:0xZ)
+
+```
+รหัสห้องบนเครื่องนี้  SHOP  อ่านจาก machines/komphet-mac/queue/README.md (.machine-id = komphet-mac)
+รีโปเว็บ            tree สะอาด ตรง origin/main ที่ 6ff6b7e  (handoff รอบก่อนเขียนไว้ 0da5f6f ซึ่งเป็น commit ก่อนตัวมันเอง)
+พอร์ต 3300/3301     ว่างทั้งคู่ (lsof คืน rc=1)
+production          200 ทั้ง 9 URL  apex services book tour story contact cookies privacy signature
+                    ⚠️ เอกสารรอบก่อนเขียนว่า "7 หน้า" ซึ่งนับขาด /privacy/ กับ /signature/
+production ตรง HEAD  รูปแรกใน lib/catalog.ts = /images/services/massage.jpg  หน้า /services/ อ้างถึง 1 ครั้ง · ไฟล์คืน 200
+ตู้ queue/SHOP      ไม่มีใบ open  (11 ใบในตู้เป็น done/answered/seen ทั้งหมด)
+สแกนสองขา           open ถึง SHOP หรือ ALL = 45 ใบ ทั้งหมดอยู่ตู้ ALL/ สร้าง 15-16 ส.ค. ⛔ ไม่มีใบใหม่หลัง 25 ส.ค.
+                    ไม่มีใบ open นอกตู้ ALL/ ที่จ่าหน้าถึงห้องนี้เลย
+Q-WS-262            ยัง status: open  ack_SHOP อยู่ในใบแล้ว ⇒ คำสั่งหยุดยังมีผล ห้องนี้ไม่รับงานใหม่
+```
+
+## control ขา SHOP ล้ม และมันล้มเพราะห้องนี้เอง
+
+```
+อาการ    บล็อก Verify คาดว่าเห็น Q-LAW-045 ในผลสแกน open  แต่ไม่เห็น
+เหตุ     ห้องนี้เปลี่ยน Q-LAW-045 จาก open เป็น seen เอง commit def1c60a (2026-08-25 20:46 +0700 = 13:46Z)
+         แล้วเขียน HANDOFF ตอน 13:5xZ อีก 10 นาทีถัดมา โดยไม่ได้แก้บรรทัด control ที่ชี้ไปที่ใบนั้น
+ไม่ใช่   สแกนพัง · ขา ALL ผ่านปกติ (Q-WS-200 โผล่ครบ) · ตรวจด้วยมือแล้วผลตรงกับสแกน
+แก้เป็น  control ขา SHOP ชี้ไปที่ Q-WS-262 แทน — ใบคำสั่งหยุดของเจ้าของ จ่าหน้า SHOP ตรงตัว ยัง open
+         และวันที่มันถูกปิดเมื่อไร คือวันที่ห้องนี้ถูกปลดให้ทำงานพอดี ⇒ เป็นวันที่ต้องมีคนมองอยู่แล้ว
+```
+
+🔑 ***control ที่ชี้ไปที่ใบซึ่งห้องตัวเองมีสิทธิ์ปิด จะถูกห้องตัวเองทำให้ตายโดยไม่รู้ตัว***
+⇒ เลือกใบที่ **ห้องอื่นเป็นคนปิด** มาเป็น control เท่านั้น
+
+## LEAD.md หมดอายุ 3 วันแล้ว ปล่อยไว้ตามเดิม
+
+```
+holder KWEB @komphet-air · expires 2026-08-23T07:55+07:00 ⇒ เลยมาแล้วประมาณ 3 วัน
+ไม่ต่ออายุ ไม่ยึดคืน  เพราะ Q-WS-262 สั่งให้สายเว็บอยู่กับ KWEB@air และห้องนี้หยุด
+ล็อกที่หมดอายุ ไม่ใช่ล็อกที่ว่าง — มันแปลว่าห้องที่ถืออยู่ไม่ได้ resume มาต่ออายุ ไม่ได้แปลว่าเขาปล่อย
+```
+
+## MEMORY.md ของโปรเจกต์ ตรวจแล้วยังจริงทุกข้อ
+
+```
+cookie_domain "none"   components/Analytics.tsx:75  ยังอยู่
+images unoptimized     next.config.mjs:15           ยังอยู่
+"Since 2009"           6 ไฟล์ ตรงกับที่ CLAUDE.md แจกแจง (app/signature app/story components/Hero Awards Story lib/site.ts)
+เบอร์ทางการ            lib/site.ts:32 whatsappNumber 447882359499 · ไม่มีเลข 020 หลงเหลือใน lib app components
+```
+
+## แถวถัดไป ไม่มี และนี่คือคำประกาศ
+
+Q-WS-262 ยัง open ⇒ ห้องนี้ปิดของค้างแล้วหยุด ไม่หยิบงานใหม่จนกว่าเจ้าของจะสั่ง
+ของค้างเดียวที่เหลือคือ Q-LAW-045 ซึ่งเป็นข้อห้ามถาวร รอเจ้าของกับนักกฎหมายจริง ไม่ใช่งานเว็บ
