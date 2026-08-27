@@ -97,7 +97,13 @@ IMG=$(grep -o '"/images/[a-z0-9/_-]*\.\(webp\|jpg\|png\)"' ~/dev/solutions-taita
 curl -s https://taitam-d.com/services/ | grep -c "$IMG"          # คาดหวัง: 1 (หน้าจริงอ้างรูปเดียวกับ HEAD)
 curl -s -o /dev/null -w "%{http_code}\n" "https://taitam-d.com$IMG"   # คาดหวัง: 200
 lsof -nP -iTCP:3300 -iTCP:3301 -sTCP:LISTEN               # คาดหวัง: ว่าง
-curl -s -o /dev/null -w "%{http_code}\n" https://taitam-d.com/   # คาดหวัง: 200
+# 🔴 อ่าน size_download คู่กับ http_code เสมอ (เพิ่ม 2026-08-27 · `MKT` เจอกับตัว)
+#    วัดจริงวันนี้: /book (ไม่มีสแลชท้าย) คืน `301 162` ⇒ ตัวหน้า 162 ไบต์นั้นหน้าตาเหมือนหน้าเว็บที่ยังไม่ได้แก้
+#    ⇒ ด่านที่ตามด้วย -L หรือที่ grep เนื้อหาจากผลลัพธ์นั้น จะอ่านว่า "ของยังไม่ขึ้น" ทั้งที่ของขึ้นแล้ว
+#    🔑 สแลชท้ายไม่ใช่รายละเอียดความสวยงามของ URL — ที่นี่มันคือความต่างระหว่างหน้าจริงกับหน้าเปลี่ยนทาง
+curl -s -o /dev/null -w "apex   %{http_code} %{size_download}\n" https://taitam-d.com/    # คาดหวัง: 200 · ราว 164 KB
+curl -s -o /dev/null -w "/book/ %{http_code} %{size_download}\n" https://taitam-d.com/book/  # คาดหวัง: 200 · ราว 48 KB
+#    เลขไบต์ขยับได้ทุกครั้งที่แก้เนื้อหา ⇒ เกณฑ์คือ **หลักหมื่นขึ้นไป** ⛔ ไม่ใช่ตรงเป๊ะ · หลักร้อย = หน้าเปลี่ยนทาง
 grep -H '^status:' ~/dev/gumon-workspace/machines/*/queue/SHOP/Q-*.md   # คาดหวัง: ไม่มีใบไหน open
 # 🔴 บรรทัดข้างบน **ไม่พอ** — ใบที่จ่าหน้าหลายห้องถูกเก็บใน**ตู้ของผู้ออก** ⇒ ตู้ SHOP/ มองไม่เห็น
 # และ **ห้ามใช้ `git pull`** ที่นี่ — working tree ของ workspace เป็นของกลาง ห้องอื่นมีงานค้างได้ตลอด
