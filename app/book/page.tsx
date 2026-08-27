@@ -27,9 +27,10 @@ export default function BookPage() {
               <h1 className="mt-4 max-w-2xl text-4xl font-semibold leading-[1.02] tracking-[-0.04em] md:text-6xl">Book a little <span className="text-[#a37d37]">time for you.</span></h1>
               <p className="mt-5 max-w-xl text-sm leading-relaxed text-[#5b6d62] md:text-base">Message Taitam-D directly for availability, treatment advice and our current comeback offers. We’ll help you find the right ritual and time.</p>
               {/*
-                The left button carries no [web-] letter on purpose (Q-MKT-060 item 3).
-                It opens an empty chat through SITE.whatsappLink, and the letter travels
-                inside the pre-filled message — an empty chat has no message to put it in.
+                The left button carries no [web-] letter on purpose (Q-MKT-060 item 3,
+                upheld by the ruling in Q-MKT-064). It opens an empty chat through the
+                QR short link held in SITE, and the letter travels inside the pre-filled
+                message — an empty chat has no message to put it in.
                 Adding ?text= here would turn it into a second copy of the button beside
                 it, and the choice between "just open WhatsApp" and "send these words" is
                 the reason both exist.

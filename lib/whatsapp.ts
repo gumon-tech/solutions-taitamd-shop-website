@@ -54,23 +54,29 @@ export const SOURCE_BOOK_PAGE = "K";
 export const SOURCE_QUESTION = "Q";
 /** The closing "WhatsApp to book" band, which runs on home, services, story, tour and contact. */
 export const SOURCE_CTA = "T";
+/** "Ask about offers", under the promotions band on the home page: ask abo(U)t offers. */
+export const SOURCE_OFFER_ENQUIRY = "U";
+/** "Ask a question first" on the signature page: ask a qu(E)stion first. */
+export const SOURCE_SIGNATURE_QUESTION = "E";
 
 /**
  * Buttons that carry no letter at all, on purpose.
  *
- * Six buttons link straight to SITE.whatsappLink (the wa.me/qr/… short link)
- * instead of going through buildWhatsAppLink: /book "Open WhatsApp", contact’s
- * "Start on WhatsApp" and "Open WhatsApp", the offers band’s "Ask about offers",
- * and the signature page’s "Ask a question first". They open an empty chat, and
- * the letter rides inside the pre-filled message, so an empty chat has nowhere
- * to put one.
+ * Three buttons link straight to the QR short link instead of going through
+ * buildWhatsAppLink: /book "Open WhatsApp", and contact’s "Start on WhatsApp"
+ * and "Open WhatsApp". They open an empty chat, and the letter rides inside the
+ * pre-filled message, so an empty chat has nowhere to put one.
  *
- * Each of them sits beside a pre-filled button and exists so the customer can
- * write their own words. Giving them a message to carry a letter would change
- * what the customer sees, which is a copy decision for MKT and the owner rather
- * than a wiring one, so they stay as they are and this note says why (Q-MKT-060
- * item 3). Q-KMKT-004’s grep only looks at buildWhatsAppLink call sites and will
- * not show them: the honest count of surfaces with no letter is six, not one.
+ * Each sits beside a pre-filled button and exists so the customer can write
+ * their own words: the words on the button promise an empty chat, and a message
+ * appearing in it would break that promise. That is a copy decision rather than
+ * a wiring one, so WS ruled on it (Q-MKT-064) and settled on these three staying
+ * empty while "Ask about offers" and "Ask a question first", whose own words
+ * already name a subject, took the letters U and E (Q-MKT-065).
+ *
+ * They were six before that ruling, and Q-KMKT-004’s grep showed none of them:
+ * it reads buildWhatsAppLink call sites, and a button with no letter is exactly
+ * a button that never calls it.
  *
  * One thing the far end should know: wa.me/qr/… is the same short link as the
  * printed QR code, so a click here and a scan in the shop arrive looking alike.

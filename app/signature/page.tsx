@@ -2,7 +2,7 @@ import Image from "next/image";
 import { ArrowUpRight, MessageCircle, Clock, MapPin, Sparkles, Check } from "lucide-react";
 import Reveal from "@/components/Reveal";
 import { SITE } from "@/lib/site";
-import { buildWhatsAppLink, SOURCE_SIGNATURE } from "@/lib/whatsapp";
+import { buildWhatsAppLink, SOURCE_SIGNATURE, SOURCE_SIGNATURE_QUESTION } from "@/lib/whatsapp";
 import type { Metadata } from "next";
 
 // Landing page for the Taitam-D Signature ad. It exists before the campaign runs on
@@ -223,8 +223,17 @@ export default function SignaturePage() {
                 <MessageCircle className="h-4 w-4 text-[#d7b874]" /> Book on WhatsApp
                 <ArrowUpRight className="h-4 w-4 text-[#d7b874]" />
               </a>
+              {/*
+                The price here repeats SITE.whatsappTemplates.signature word for
+                word. Change one and the other has to change in the same commit,
+                or a visitor asking a question quotes a price the booking message
+                no longer offers.
+              */}
               <a
-                href={SITE.whatsappLink}
+                href={buildWhatsAppLink(
+                  "Hi Taitam-D, I have a question about the Taitam-D Signature (£69 / 60 minutes) before I book.",
+                  SOURCE_SIGNATURE_QUESTION,
+                )}
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center justify-center gap-2 rounded-full border border-[#cdb887] px-5 py-3.5 text-sm font-semibold text-[#345a45] transition hover:bg-white/60"

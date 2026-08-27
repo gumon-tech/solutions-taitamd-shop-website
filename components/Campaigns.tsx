@@ -1,8 +1,7 @@
 import Image from "next/image";
 import { ArrowUpRight, MessageCircle, Sparkles } from "lucide-react";
 import Reveal from "./Reveal";
-import { SITE } from "@/lib/site";
-import { buildWhatsAppLink, SOURCE_OFFER } from "@/lib/whatsapp";
+import { buildWhatsAppLink, SOURCE_OFFER, SOURCE_OFFER_ENQUIRY } from "@/lib/whatsapp";
 
 // `illustrative` marks artwork that depicts a room and a therapist without being a
 // photograph of ours. Legal's test is not whether an image was AI-generated but whether
@@ -62,7 +61,10 @@ export default function Campaigns() {
               <h2 className="mt-3 text-3xl font-semibold leading-tight tracking-[-0.03em] md:text-5xl">A better reason to <span className="text-[#a07b38]">come back.</span></h2>
               <p className="mt-4 text-sm leading-relaxed text-[#53665a] md:text-base">Freshly made offers for the reopening season. Pick a ritual, then message us on WhatsApp and we’ll find a time for you.</p>
             </div>
-            <a href={SITE.whatsappLink} target="_blank" rel="noreferrer" className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-[#183d2d] px-5 py-3 text-sm font-semibold text-[#f7f3e9] transition hover:bg-[#25563e]"><MessageCircle className="h-4 w-4 text-[#d7b874]" /> Ask about offers <ArrowUpRight className="h-4 w-4 text-[#d7b874]" /></a>
+            <a href={buildWhatsAppLink(
+              "Hi Taitam-D, I’d like to hear about your current offers. Please share what’s running now.",
+              SOURCE_OFFER_ENQUIRY,
+            )} target="_blank" rel="noreferrer" className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-[#183d2d] px-5 py-3 text-sm font-semibold text-[#f7f3e9] transition hover:bg-[#25563e]"><MessageCircle className="h-4 w-4 text-[#d7b874]" /> Ask about offers <ArrowUpRight className="h-4 w-4 text-[#d7b874]" /></a>
           </div>
 
           <div className="mt-8 grid gap-5 lg:grid-cols-2">
