@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { ArrowUpRight, MapPin, Clock3, PhoneCall, MessageCircle } from "lucide-react";
 import { SITE } from "@/lib/site";
 import Reveal from "./Reveal";
-import { buildWhatsAppLink } from "@/lib/whatsapp";
+import { buildWhatsAppLink, SOURCE_HOME } from "@/lib/whatsapp";
 
 export default function Hero() {
   return (
@@ -33,7 +33,10 @@ export default function Hero() {
 
           <div className="mt-8 flex flex-col sm:flex-row gap-3">
             <Link
-              href={buildWhatsAppLink("Hi Taitam-D, I’d like to book a treatment. Please share availability and current offers.")}
+              href={buildWhatsAppLink(
+                "Hi Taitam-D, I’d like to book a treatment. Please share availability and current offers.",
+                SOURCE_HOME,
+              )}
               target="_blank"
               rel="noreferrer"
               className="btn-shine btn-epic inline-flex items-center justify-center gap-2 rounded-2xl bg-ink/5 border border-ink/12 px-5 py-3 text-sm font-semibold hover:bg-ink/8 transition shadow-glow"

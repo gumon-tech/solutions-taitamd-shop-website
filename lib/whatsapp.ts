@@ -35,6 +35,48 @@ export const SOURCE_PRODUCT = "P";
 export const SOURCE_SIGNATURE = "S";
 export const SOURCE_UNKNOWN = "X";
 
+/**
+ * Page-level buttons that carry no category, added for Q-MKT-060.
+ *
+ * Before this, the home hero, the /book page button and the navbar’s "quick
+ * question" all fell through to X while sending the same words, so the room
+ * answering WhatsApp could not tell a booking from a question, or the home page
+ * from /book — not from the letter and not from the message either.
+ *
+ * The letters follow one rule so the next surface does not need a debate: take
+ * the first letter of the surface’s own name that no other letter has claimed.
+ * hOme, booK, Quick question. KMKT owns the register (Q-KMKT-004) and may swap
+ * any of them in one line here; it was offline when the owner asked this room to
+ * take the ticket on 2026-08-27.
+ */
+export const SOURCE_HOME = "O";
+export const SOURCE_BOOK_PAGE = "K";
+export const SOURCE_QUESTION = "Q";
+/** The closing "WhatsApp to book" band, which runs on home, services, story, tour and contact. */
+export const SOURCE_CTA = "T";
+
+/**
+ * Buttons that carry no letter at all, on purpose.
+ *
+ * Six buttons link straight to SITE.whatsappLink (the wa.me/qr/… short link)
+ * instead of going through buildWhatsAppLink: /book "Open WhatsApp", contact’s
+ * "Start on WhatsApp" and "Open WhatsApp", the offers band’s "Ask about offers",
+ * and the signature page’s "Ask a question first". They open an empty chat, and
+ * the letter rides inside the pre-filled message, so an empty chat has nowhere
+ * to put one.
+ *
+ * Each of them sits beside a pre-filled button and exists so the customer can
+ * write their own words. Giving them a message to carry a letter would change
+ * what the customer sees, which is a copy decision for MKT and the owner rather
+ * than a wiring one, so they stay as they are and this note says why (Q-MKT-060
+ * item 3). Q-KMKT-004’s grep only looks at buildWhatsAppLink call sites and will
+ * not show them: the honest count of surfaces with no letter is six, not one.
+ *
+ * One thing the far end should know: wa.me/qr/… is the same short link as the
+ * printed QR code, so a click here and a scan in the shop arrive looking alike.
+ * Separating those needs a second link, not a letter.
+ */
+
 export function sourceForSlug(slug?: string): string {
   return (slug && SOURCE_BY_SLUG[slug]) || SOURCE_UNKNOWN;
 }

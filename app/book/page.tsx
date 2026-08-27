@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { ArrowUpRight, MessageCircle } from "lucide-react";
 import { SITE } from "@/lib/site";
-import { buildWhatsAppLink } from "@/lib/whatsapp";
+import { buildWhatsAppLink, SOURCE_BOOK_PAGE } from "@/lib/whatsapp";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -26,7 +26,22 @@ export default function BookPage() {
               <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#95743a]">WhatsApp booking</p>
               <h1 className="mt-4 max-w-2xl text-4xl font-semibold leading-[1.02] tracking-[-0.04em] md:text-6xl">Book a little <span className="text-[#a37d37]">time for you.</span></h1>
               <p className="mt-5 max-w-xl text-sm leading-relaxed text-[#5b6d62] md:text-base">Message Taitam-D directly for availability, treatment advice and our current comeback offers. We’ll help you find the right ritual and time.</p>
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row"><a href={SITE.whatsappLink} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full bg-[#183d2d] px-5 py-3.5 text-sm font-semibold text-[#f7f3e9] transition hover:bg-[#25563e]"><MessageCircle className="h-4 w-4 text-[#d7b874]" /> Open WhatsApp <ArrowUpRight className="h-4 w-4 text-[#d7b874]" /></a><a href={buildWhatsAppLink("Hi Taitam-D, I’d like to book a treatment. Please share availability and current offers.")} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full border border-[#cdb887] px-5 py-3.5 text-sm font-semibold text-[#345a45] transition hover:bg-white/60">Send a pre-filled message <ArrowUpRight className="h-4 w-4" /></a></div>
+              {/*
+                The left button carries no [web-] letter on purpose (Q-MKT-060 item 3).
+                It opens an empty chat through SITE.whatsappLink, and the letter travels
+                inside the pre-filled message — an empty chat has no message to put it in.
+                Adding ?text= here would turn it into a second copy of the button beside
+                it, and the choice between "just open WhatsApp" and "send these words" is
+                the reason both exist.
+                Worth knowing at the far end: that link is wa.me/qr/… — the same short
+                link behind the printed QR — so a click here and a scan in the shop reach
+                WhatsApp looking identical. Telling those two apart needs a separate link,
+                not a letter.
+              */}
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row"><a href={SITE.whatsappLink} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full bg-[#183d2d] px-5 py-3.5 text-sm font-semibold text-[#f7f3e9] transition hover:bg-[#25563e]"><MessageCircle className="h-4 w-4 text-[#d7b874]" /> Open WhatsApp <ArrowUpRight className="h-4 w-4 text-[#d7b874]" /></a><a href={buildWhatsAppLink(
+                "Hi Taitam-D, I’d like to book a treatment. Please share availability and current offers.",
+                SOURCE_BOOK_PAGE,
+              )} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full border border-[#cdb887] px-5 py-3.5 text-sm font-semibold text-[#345a45] transition hover:bg-white/60">Send a pre-filled message <ArrowUpRight className="h-4 w-4" /></a></div>
               <p className="mt-4 max-w-xl text-xs leading-relaxed text-[#5b6d62]">{SITE.standardsNotice}</p>
               <div className="mt-10 grid gap-3 sm:grid-cols-3"><div className="rounded-2xl bg-[#ebe3d4] p-4"><div className="text-[10px] uppercase tracking-[0.18em] text-[#927039]">Phone</div><div className="mt-2 text-sm font-semibold">{SITE.phone}</div></div><div className="rounded-2xl bg-[#ebe3d4] p-4"><div className="text-[10px] uppercase tracking-[0.18em] text-[#927039]">Hours</div><div className="mt-2 text-sm font-semibold">10:30am – 9pm</div></div><div className="rounded-2xl bg-[#ebe3d4] p-4"><div className="text-[10px] uppercase tracking-[0.18em] text-[#927039]">Location</div><div className="mt-2 text-sm font-semibold">King’s Cross</div></div></div>
             </div>
