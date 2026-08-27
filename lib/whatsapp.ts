@@ -60,23 +60,39 @@ export const SOURCE_OFFER_ENQUIRY = "U";
 export const SOURCE_SIGNATURE_QUESTION = "E";
 
 /**
+ * The three buttons that open a chat with nothing but a greeting in it.
+ *
+ * R is the one mnemonic left: it sits under the Q(R) card on /contact, and it is
+ * the letter that finally separates "tapped the button beside the QR picture"
+ * from "scanned the printed QR in the shop", which arrived identical until now.
+ * D and I are arbitrary. Every letter that spelled its own surface was taken by
+ * the time these three were assigned, and a forced mnemonic that only its author
+ * can reconstruct is worse than an honest table.
+ */
+export const SOURCE_BOOK_OPEN_CHAT = "D";
+export const SOURCE_CONTACT_OPEN_CHAT = "I";
+export const SOURCE_CONTACT_QR_CARD = "R";
+
+/** What an open-chat button puts in the box, per Q-MKT-065. */
+export const OPEN_CHAT_GREETING = "Hi Taitam-D";
+
+/**
  * Buttons that carry no letter at all, on purpose.
  *
- * Three buttons link straight to the QR short link instead of going through
- * buildWhatsAppLink: /book "Open WhatsApp", and contact’s "Start on WhatsApp"
- * and "Open WhatsApp". They open an empty chat, and the letter rides inside the
- * pre-filled message, so an empty chat has nowhere to put one.
+ * Every button that talks to the shop now carries a letter. Six of them did not
+ * until 2026-08-27: they linked straight to the QR short link, which opens an
+ * empty chat, and a letter has to ride inside a message. WS ruled that all six
+ * should carry one anyway (Q-MKT-064, second ruling) — five through a message of
+ * their own, and the sixth, the closing band, by becoming an ordinary pre-filled
+ * button.
  *
- * Each sits beside a pre-filled button and exists so the customer can write
- * their own words: the words on the button promise an empty chat, and a message
- * appearing in it would break that promise. That is a copy decision rather than
- * a wiring one, so WS ruled on it (Q-MKT-064) and settled on these three staying
- * empty while "Ask about offers" and "Ask a question first", whose own words
- * already name a subject, took the letters U and E (Q-MKT-065).
+ * Q-KMKT-004’s grep showed none of the six: it reads buildWhatsAppLink call
+ * sites, and a button with no letter is exactly a button that never called it.
  *
- * They were six before that ruling, and Q-KMKT-004’s grep showed none of them:
- * it reads buildWhatsAppLink call sites, and a button with no letter is exactly
- * a button that never calls it.
+ * One gap is left, and no letter can close it. The QR short link is the same one
+ * printed on the card in the shop, so a tap and a scan still arrive looking
+ * alike wherever that link is still used. Splitting those needs a second link
+ * from WhatsApp Business, not another letter.
  *
  * One thing the far end should know: wa.me/qr/… is the same short link as the
  * printed QR code, so a click here and a scan in the shop arrive looking alike.
@@ -97,10 +113,30 @@ export function buildWhatsAppLink(
   source: string = SOURCE_UNKNOWN,
   phone: string = SITE.whatsappNumber,
 ) {
+  return waLink(phone, message?.trim() ? `${message.trim()} [web-${source}]` : "");
+}
+
+function waLink(phone: string, text: string) {
   const base = phone.includes("wa.me") ? phone : `https://wa.me/${phone}`;
-  const text = message?.trim() ? `${message.trim()} [web-${source}]` : "";
-  const q = text ? `?text=${enc(text)}` : "";
-  return `${base}${q}`;
+  return `${base}${text ? `?text=${enc(text)}` : ""}`;
+}
+
+/**
+ * A chat that opens with a greeting, a letter, and a blank line under them.
+ *
+ * These buttons used to open a chat with nothing in it at all, which is why they
+ * carried no letter: there was no message for one to ride in. WS ruled that all
+ * five should carry one (Q-MKT-064), and MKT pointed out the cost before it
+ * shipped — the letter would sit between the visitor’s hello and whatever they
+ * came to say, reading as debris in the middle of their own sentence rather than
+ * as a tag at the end of ours.
+ *
+ * The blank line is the whole fix: the greeting and the letter keep the first
+ * line, and the visitor starts typing on a clean one. The seventeen pre-filled
+ * buttons are untouched by it — their letter already closes a finished sentence.
+ */
+export function buildOpenChatLink(source: string, phone: string = SITE.whatsappNumber) {
+  return waLink(phone, `${OPEN_CHAT_GREETING} [web-${source}]\n\n`);
 }
 
 /**
