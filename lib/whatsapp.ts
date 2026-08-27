@@ -73,8 +73,20 @@ export const SOURCE_BOOK_OPEN_CHAT = "D";
 export const SOURCE_CONTACT_OPEN_CHAT = "I";
 export const SOURCE_CONTACT_QR_CARD = "R";
 
-/** What an open-chat button puts in the box, per Q-MKT-065. */
-export const OPEN_CHAT_GREETING = "Hi Taitam-D";
+/**
+ * What the three open-chat buttons put in the box, per Q-MKT-065.
+ *
+ * Each takes its intent from the words already printed around it rather than a
+ * new phrase, because what the visitor read just before tapping is what they
+ * expect to be talking about. None of them names a treatment: these buttons are
+ * the ones the visitor finishes themselves, so the message is a letterhead and
+ * not the whole letter.
+ */
+export const OPEN_CHAT_MESSAGE = {
+  book: "Hi Taitam-D, I’d like to book a treatment.",
+  contactHeader: "Hi Taitam-D, I’d like help choosing a treatment and a time.",
+  contactQrCard: "Hi Taitam-D, I’d like to ask about availability.",
+};
 
 /**
  * Buttons that carry no letter at all, on purpose.
@@ -131,12 +143,16 @@ function waLink(phone: string, text: string) {
  * came to say, reading as debris in the middle of their own sentence rather than
  * as a tag at the end of ours.
  *
- * The blank line is the whole fix: the greeting and the letter keep the first
+ * The blank line is the whole fix: the message and the letter keep the first
  * line, and the visitor starts typing on a clean one. The seventeen pre-filled
- * buttons are untouched by it — their letter already closes a finished sentence.
+ * buttons are untouched by it — nobody is expected to keep typing after those.
  */
-export function buildOpenChatLink(source: string, phone: string = SITE.whatsappNumber) {
-  return waLink(phone, `${OPEN_CHAT_GREETING} [web-${source}]\n\n`);
+export function buildOpenChatLink(
+  message: string,
+  source: string,
+  phone: string = SITE.whatsappNumber,
+) {
+  return waLink(phone, `${message.trim()} [web-${source}]\n\n`);
 }
 
 /**
