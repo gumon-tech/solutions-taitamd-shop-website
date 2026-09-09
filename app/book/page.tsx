@@ -42,6 +42,18 @@ export default function BookPage() {
                 "Hi Taitam-D, I’d like to book a treatment. Please share availability and current offers.",
                 SOURCE_BOOK_PAGE,
               )} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full border border-[#cdb887] px-5 py-3.5 text-sm font-semibold text-[#345a45] transition hover:bg-white/60">Send a pre-filled message <ArrowUpRight className="h-4 w-4" /></a></div>
+              {/* Its own colours: this card is the cream panel, not the site's ink palette. */}
+              <p className="mt-4 text-sm text-[#5b6d62]">
+                <a
+                  href={SITE.treatwellBooking}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1.5 underline decoration-[#5b6d62]/40 underline-offset-4 transition hover:text-[#183d2d]"
+                >
+                  No WhatsApp? Book on Treatwell
+                  <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
+                </a>
+              </p>
               <p className="mt-4 max-w-xl text-xs leading-relaxed text-[#5b6d62]">{SITE.standardsNotice}</p>
               <div className="mt-10 grid gap-3 sm:grid-cols-3"><div className="rounded-2xl bg-[#ebe3d4] p-4"><div className="text-[10px] uppercase tracking-[0.18em] text-[#927039]">Phone</div><div className="mt-2 text-sm font-semibold">{SITE.phone}</div></div><div className="rounded-2xl bg-[#ebe3d4] p-4"><div className="text-[10px] uppercase tracking-[0.18em] text-[#927039]">Hours</div><div className="mt-2 text-sm font-semibold">10:30am – 9pm</div></div><div className="rounded-2xl bg-[#ebe3d4] p-4"><div className="text-[10px] uppercase tracking-[0.18em] text-[#927039]">Location</div><div className="mt-2 text-sm font-semibold">King’s Cross</div></div></div>
             </div>

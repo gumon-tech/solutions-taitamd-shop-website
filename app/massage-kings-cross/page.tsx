@@ -3,6 +3,7 @@ import Link from "next/link";
 import { MessageCircle } from "lucide-react";
 import ServicePriceGrid from "@/components/ServicePriceGrid";
 import CTA from "@/components/CTA";
+import TreatwellFallback from "@/components/TreatwellFallback";
 import { CATALOG } from "@/lib/catalog";
 import { SITE } from "@/lib/site";
 import { buildWhatsAppLink, SOURCE_MASSAGE_LANDING } from "@/lib/whatsapp";
@@ -70,6 +71,8 @@ export default function MassageKingsCrossPage() {
             See the full menu
           </Link>
         </div>
+
+        <TreatwellFallback className="mt-4" />
       </header>
 
       <section aria-label="Massage treatments and prices">

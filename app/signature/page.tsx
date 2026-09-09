@@ -113,7 +113,7 @@ const FAQ: Array<[string, string]> = [
   ],
   [
     "Where are you and how do I get there?",
-    "72-74 Caledonian Road, King's Cross, London N1 9DN — around a six-minute walk from King's Cross and St Pancras.",
+    `72-74 Caledonian Road, King's Cross, London N1 9DN — a ${SITE.walkMinutes}-minute walk from King's Cross and St Pancras.`,
   ],
   [
     "How do I book?",

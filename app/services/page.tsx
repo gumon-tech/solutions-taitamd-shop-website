@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import ServiceMenu from "@/components/ServiceMenu";
 import CTA from "@/components/CTA";
+import TreatwellFallback from "@/components/TreatwellFallback";
 import { TOUR_SHOT_COUNT } from "@/lib/tour";
 import { SITE } from "@/lib/site";
 
@@ -34,6 +35,11 @@ export default function ServicesPage() {
           Our full menu with prices and treatment times. Tap any price to message us on WhatsApp —
           the treatment, time and price come pre-filled, so we know exactly what you are after.
         </p>
+
+        {/* Above the menu rather than below it: this page is long, and a visitor with no
+            WhatsApp should not have to scroll past two hundred prices they cannot act on
+            to find the one route that works for them (Q-MKT-078). */}
+        <TreatwellFallback className="mt-4" />
       </header>
 
       <ServiceMenu />
@@ -41,7 +47,7 @@ export default function ServicesPage() {
         <p className="text-xs tracking-[0.28em] uppercase text-mist">Helpful answers</p>
         <h2 id="services-faq" className="mt-3 text-2xl md:text-3xl font-semibold">Frequently asked questions</h2>
         <div className="mt-6 grid gap-5 md:grid-cols-2">
-          <div><h3 className="font-semibold">Where is Taitam-D Beauty & Spa?</h3><p className="mt-2 text-sm leading-relaxed text-ink/75">We are at 72-74 Caledonian Road, King&apos;s Cross, London, N1 9DN — around a six-minute walk from King&apos;s Cross and St Pancras.</p></div>
+          <div><h3 className="font-semibold">Where is Taitam-D Beauty & Spa?</h3><p className="mt-2 text-sm leading-relaxed text-ink/75">We are at 72-74 Caledonian Road, King&apos;s Cross, London, N1 9DN — a {SITE.walkMinutes}-minute walk from King&apos;s Cross and St Pancras.</p></div>
           <div><h3 className="font-semibold">How do I book a treatment?</h3><p className="mt-2 text-sm leading-relaxed text-ink/75">Message us on WhatsApp for availability, treatment advice and current offers. Our team will help you choose the right service and time.</p></div>
           <div><h3 className="font-semibold">What treatments are available?</h3><p className="mt-2 text-sm leading-relaxed text-ink/75">Our menu includes Thai, deep tissue and aromatherapy massage, hair, facials, nails, waxing, eyelash services, micropigmentation and aesthetic injections.</p></div>
           <div><h3 className="font-semibold">When are you open?</h3><p className="mt-2 text-sm leading-relaxed text-ink/75">We are open daily from 10:30am to 9:00pm. Availability can change, so please contact us before visiting.</p></div>
@@ -54,7 +60,7 @@ export default function ServicesPage() {
               "@context": "https://schema.org",
               "@type": "FAQPage",
               mainEntity: [
-                ["Where is Taitam-D Beauty & Spa?", "We are at 72-74 Caledonian Road, King's Cross, London, N1 9DN — around a six-minute walk from King's Cross and St Pancras."],
+                ["Where is Taitam-D Beauty & Spa?", `We are at 72-74 Caledonian Road, King's Cross, London, N1 9DN — a ${SITE.walkMinutes}-minute walk from King's Cross and St Pancras.`],
                 ["How do I book a treatment?", "Message us on WhatsApp for availability, treatment advice and current offers. Our team will help you choose the right service and time."],
                 ["What treatments are available?", "Our menu includes Thai, deep tissue and aromatherapy massage, hair, facials, nails, waxing, eyelash services, micropigmentation and aesthetic injections."],
                 ["When are you open?", "We are open daily from 10:30am to 9:00pm. Availability can change, so please contact us before visiting."],

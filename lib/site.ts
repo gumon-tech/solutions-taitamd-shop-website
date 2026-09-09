@@ -47,6 +47,19 @@ export const SITE = {
   whatsappQr: "/images/whatsapp/whatsapp-qr-only.jpg",
   whatsappLink: "https://wa.me/qr/YIN5KFQPKWI2F1",
 
+  // The shop's public Treatwell listing — the fallback for a visitor with no
+  // WhatsApp (Q-MKT-078, owner's instruction). Never the primary path: WhatsApp is
+  // where the shop actually answers.
+  //
+  // OFFICE read this address out of the shop's own Treatwell Connect back office,
+  // from the "Preview on Treatwell" button Treatwell generates itself, and could
+  // not open it — CloudFront returns 403 to this country. SHOP fetched it and got
+  // 200: the page is titled for the shop, names Caledonian Road and N1 9DN, and
+  // carries venue id 287555 seventy-seven times, with this exact URL as its own
+  // canonical. Measured 2026-09-09, both halves recorded because a link nobody
+  // could open is the one thing this button must never be.
+  treatwellBooking: "https://www.treatwell.co.uk/place/taitam-d-massage-beauty/",
+
   // Academy
   academy: "https://academy.taitam-d.com/",
 
