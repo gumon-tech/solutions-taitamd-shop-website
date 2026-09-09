@@ -124,7 +124,7 @@ export default function Hero() {
                   <div className="mt-6 grid grid-cols-2 gap-3">
                     {[
                       { k: "Since", v: "2009" },
-                      { k: "5 min", v: "from King’s Cross" },
+                      { k: `${SITE.walkMinutes} min`, v: "from King’s Cross" },
                       { k: "Daily", v: "10:30am – 9pm" },
                       { k: "WhatsApp", v: "fast replies" }
                     ].map((b) => (

@@ -20,6 +20,17 @@ export const SITE = {
   description:
     "Thai‑inspired beauty & wellness in King’s Cross, London — massage, hair, nails, waxing, facials & more. Established in 2009. Message us on WhatsApp to reserve your treatment.",
   address: "72-74 Caledonian Road, King's Cross, London, N1 9DN",
+  // Walking time from King's Cross St Pancras, in minutes, as a number the copy
+  // formats itself — the hero says "5 min", the location block "5 min walk", the
+  // massage landing page "a 5-minute walk".
+  //
+  // It lives here because it did not, and the two places that held it disagreed:
+  // the hero said 5 and the location block ~6, both live, for a month. MKT settled
+  // it on 2026-09-09 by measuring the route in Google Maps — 4 minutes over 0.2
+  // miles on both suggested paths — and rounding up, so the number we publish is
+  // the one a visitor is least likely to find optimistic. Provenance in the
+  // marketing repo, docs/marketing/37, under the walking-distance heading.
+  walkMinutes: 5,
   hours: "Mon – Sun 10:30 AM – 9:00 PM",
   phone: "07564292247",
   email: "info@taitam-d.com",

@@ -14,7 +14,7 @@ const massage = CATALOG.find((c) => c.slug === "massage")!;
 
 const TITLE = "Thai Massage in King's Cross, London | Taitam-D";
 const DESCRIPTION =
-  "Thai, deep tissue, Swedish and aromatherapy massage a short walk from King's Cross station. Open every day. Message us on WhatsApp to check availability.";
+  `Thai, deep tissue, Swedish and aromatherapy massage a ${SITE.walkMinutes}-minute walk from King's Cross station. Open every day. Message us on WhatsApp to check availability.`;
 
 export const metadata: Metadata = {
   title: { absolute: TITLE },
@@ -38,14 +38,9 @@ export default function MassageKingsCrossPage() {
         </h1>
 
         <div className="mt-5 max-w-2xl space-y-4 text-ink/80">
-          {/* No walking time here on purpose. The site already carries two different ones —
-              "5 min" on the home page hero and "~6 min walk" in the Location block — and
-              adding a third number to a page written to rank for this area would settle that
-              disagreement by accident. Reported to MKT, who owns the copy; one number, in all
-              three places, in one edit, once they say which. */}
           <p>
-            Our treatment rooms are a short walk from King’s Cross station, on Caledonian Road.
-            We are open every day, {SITE.hours.replace("Mon – Sun ", "")}.
+            Our treatment rooms are a {SITE.walkMinutes}-minute walk from King’s Cross station,
+            on Caledonian Road. We are open every day, {SITE.hours.replace("Mon – Sun ", "")}.
           </p>
           <p>
             The massage menu runs from Thai and Thai foot massage through deep tissue, Swedish,

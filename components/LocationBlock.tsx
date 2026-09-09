@@ -34,8 +34,11 @@ export default function LocationBlock() {
                   </div>
                   <div>
                     <div className="text-xs tracking-[0.22em] uppercase text-mist">Quick access</div>
+                    {/* One interpolation rather than a number beside loose text: React splits
+                        the latter into two text nodes with a comment between them, which reads
+                        the same to a person and needlessly cuts the phrase in the markup. */}
                     <div className="mt-1 text-ink/90">
-                      ~6 min walk from King’s Cross / St Pancras
+                      {`${SITE.walkMinutes} min walk from King’s Cross / St Pancras`}
                     </div>
                   </div>
                 </div>
