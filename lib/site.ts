@@ -59,6 +59,14 @@ export const SITE = {
   // canonical. Measured 2026-09-09, both halves recorded because a link nobody
   // could open is the one thing this button must never be.
   treatwellBooking: "https://www.treatwell.co.uk/place/taitam-d-massage-beauty/",
+  // The embeddable form of the same listing, used by TreatwellWidget on /book/.
+  //
+  // Loading it sets two of Treatwell's own cookies — fe20-flipper-id and growthbook_id,
+  // both expiring 2028 — which is why the frame waits for a click rather than opening
+  // with the page: our banner promises that declining stores nothing, and an always-on
+  // frame would have made that sentence false for everyone who declined.
+  treatwellWidget:
+    "https://widget.treatwell.co.uk/place/taitam-d-massage-beauty/?utm_source=partner&utm_medium=salon-site-embedded-book-now-widget",
 
   // Academy
   academy: "https://academy.taitam-d.com/",
