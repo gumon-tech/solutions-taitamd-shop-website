@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { MessageCircle } from "lucide-react";
 import {
   CATALOG,
@@ -15,10 +16,7 @@ import {
   SOURCE_PRODUCT,
   SOURCE_BY_SLUG,
 } from "@/lib/whatsapp";
-
-function bookMessage(service: string, v: Variant) {
-  return `Hi Taitam-D, I’d like to book ${serviceEnquiryLabel(service, v)}. Please share availability.`;
-}
+import ServicePriceGrid from "@/components/ServicePriceGrid";
 
 // Medical / aesthetic rows never book the treatment directly (Q-LAW-046):
 // the enquiry asks for a consultation, and still names the exact option + price
@@ -77,53 +75,22 @@ export default function ServiceMenu() {
               <p className="mt-2 max-w-2xl text-sm leading-relaxed text-ink/70">{cat.blurb}</p>
             </header>
 
-            <ul className="mt-6 grid gap-5 md:grid-cols-2">
-              {cat.services.map((svc) => (
-                <li
-                  key={svc.name}
-                  className="rounded-[22px] border border-ink/10 bg-ink/[0.03] p-5"
+            {/* One link, on the massage category only, to the landing page that covers the
+                same treatments in more detail (Q-MKT-077 item 3). It sits above the rows so a
+                visitor who scrolled to this anchor from a search result meets it before the
+                prices, not after twelve of them. */}
+            {cat.slug === "massage" && (
+              <p className="mt-4 text-sm text-ink/70">
+                <Link
+                  href="/massage-kings-cross"
+                  className="font-medium text-ink underline decoration-gold/60 underline-offset-4"
                 >
-                  <div className="flex items-start gap-2">
-                    <h3 className="font-semibold leading-snug text-ink">{svc.name}</h3>
-                    {svc.featured && (
-                      <span className="mt-0.5 shrink-0 rounded-full bg-gold/15 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-gold">
-                        Popular
-                      </span>
-                    )}
-                  </div>
-                  {svc.desc && <p className="mt-1.5 text-xs leading-relaxed text-ink/60">{svc.desc}</p>}
-                  {svc.note && <p className="mt-1 text-xs text-ink/55">{svc.note}</p>}
+                  More about massage in King’s Cross
+                </Link>
+              </p>
+            )}
 
-                  <ul className="mt-3 divide-y divide-ink/8">
-                    {svc.variants.map((v, i) => (
-                      <li key={i}>
-                        <a
-                          href={buildWhatsAppLink(bookMessage(svc.name, v), sourceForSlug(cat.slug))}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="group -mx-2 flex items-center justify-between gap-3 rounded-lg px-2 py-2.5 transition-colors hover:bg-gold/[0.07]"
-                          aria-label={`Book ${svc.name}, ${variantLabel(v)}, £${v.price.gbp}, on WhatsApp`}
-                        >
-                          <span className="text-sm text-ink/75">{variantLabel(v)}</span>
-                          <span className="flex items-center gap-2">
-                            <span className="text-sm">
-                              {v.price.wasGbp && (
-                                <s className="mr-1.5 text-ink/40">£{v.price.wasGbp}</s>
-                              )}
-                              <span className="font-semibold text-ink">£{v.price.gbp}</span>
-                            </span>
-                            <MessageCircle
-                              aria-hidden="true"
-                              className="h-4 w-4 text-mist transition-colors group-hover:text-[#25563e]"
-                            />
-                          </span>
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </li>
-              ))}
-            </ul>
+            <ServicePriceGrid services={cat.services} source={sourceForSlug(cat.slug)} />
           </div>
         ))}
 

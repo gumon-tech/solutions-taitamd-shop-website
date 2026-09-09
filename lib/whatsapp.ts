@@ -74,6 +74,21 @@ export const SOURCE_CONTACT_OPEN_CHAT = "I";
 export const SOURCE_CONTACT_QR_CARD = "R";
 
 /**
+ * The /massage-kings-cross/ landing page (Q-MKT-077 item 3).
+ *
+ * This room proposed M, for massage, and MKT agreed — but M has belonged to the
+ * massage *category* since Q-KMKT-004, so every price button on /services/#cat-massage
+ * already sends it. Using M here would have merged the landing page into the one set of
+ * buttons it exists to be compared against, and the merge would have looked like a
+ * working letter: enquiries arrive, the letter parses, nothing errors.
+ *
+ * J is free and means nothing, which the table above already accepts as the honest
+ * outcome once the mnemonics run out. Every letter that spells this page is taken:
+ * M massage, K book, C offers, R the QR card, S signature, O home.
+ */
+export const SOURCE_MASSAGE_LANDING = "J";
+
+/**
  * What the three open-chat buttons put in the box, per Q-MKT-065.
  *
  * Each takes its intent from the words already printed around it rather than a

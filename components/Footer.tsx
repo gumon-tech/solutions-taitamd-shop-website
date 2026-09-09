@@ -32,6 +32,9 @@ export default function Footer() {
                   <Link href="/services" className="hover:text-ink">Services</Link>
                 </li>
                 <li>
+                  <Link href="/massage-kings-cross" className="hover:text-ink">Massage in King&rsquo;s Cross</Link>
+                </li>
+                <li>
                   <Link href="/story" className="hover:text-ink">Our Story</Link>
                 </li>
                 <li>
