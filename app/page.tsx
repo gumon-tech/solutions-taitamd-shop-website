@@ -9,6 +9,7 @@ import LocationBlock from "@/components/LocationBlock";
 import CTA from "@/components/CTA";
 import AcademyPromo from "@/components/AcademyPromo";
 import Campaigns from "@/components/Campaigns";
+import ShopFaq from "@/components/ShopFaq";
 
 // The home page states its own title rather than inheriting `title.default` from the
 // layout (Q-MKT-077). `absolute` is what keeps the layout's "%s — Taitam-D Beauty & Spa"
@@ -35,6 +36,7 @@ export default function Home() {
       <Awards />
       <AcademyPromo />
       <LocationBlock />
+      <ShopFaq id="home-faq" />
       <CTA />
     </main>
   );

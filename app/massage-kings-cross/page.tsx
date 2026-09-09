@@ -3,6 +3,7 @@ import Link from "next/link";
 import { MessageCircle } from "lucide-react";
 import ServicePriceGrid from "@/components/ServicePriceGrid";
 import CTA from "@/components/CTA";
+import ShopFaq from "@/components/ShopFaq";
 import TreatwellFallback from "@/components/TreatwellFallback";
 import { CATALOG } from "@/lib/catalog";
 import { SITE } from "@/lib/site";
@@ -121,6 +122,8 @@ export default function MassageKingsCrossPage() {
           </div>
         </div>
       </section>
+
+      <ShopFaq id="massage-faq" />
 
       <CTA />
     </main>
