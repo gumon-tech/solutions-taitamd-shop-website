@@ -20,6 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/services/`, lastModified },
     { url: `${SITE_URL}/massage-kings-cross/`, lastModified },
     { url: `${SITE_URL}/deep-tissue-massage-kings-cross/`, lastModified },
+    { url: `${SITE_URL}/facial-kings-cross/`, lastModified },
     { url: `${SITE_URL}/signature/`, lastModified },
     { url: `${SITE_URL}/tour/`, lastModified },
     { url: `${SITE_URL}/story/`, lastModified },
