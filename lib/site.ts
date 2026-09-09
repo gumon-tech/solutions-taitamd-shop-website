@@ -29,7 +29,9 @@ export const SITE = {
   // it on 2026-09-09 by measuring the route in Google Maps — 4 minutes over 0.2
   // miles on both suggested paths — and rounding up, so the number we publish is
   // the one a visitor is least likely to find optimistic. Provenance in the
-  // marketing repo, docs/marketing/37, under the walking-distance heading.
+  // marketing repo, docs/marketing/37, under the walking-distance heading, at
+  // commit 4f28e39 — the sha is here because a pointer to a heading in a file that
+  // keeps growing is a pointer that stops resolving.
   walkMinutes: 5,
   hours: "Mon – Sun 10:30 AM – 9:00 PM",
   phone: "07564292247",
