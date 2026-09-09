@@ -79,7 +79,18 @@ export default function ServiceMenu() {
                 the same treatments in more detail (Q-MKT-077 item 3, Q-MKT-079 group A). It
                 sits above the rows so a visitor who scrolled to this anchor from a search
                 result meets it before the prices, not after twelve of them.
-                One category still to come under Q-MKT-079: lashes. */}
+                All five landing pages from Q-MKT-079 now exist. */}
+            {cat.slug === "lashes" && (
+              <p className="mt-4 text-sm text-ink/70">
+                <Link
+                  href="/lash-extensions-kings-cross"
+                  className="font-medium text-ink underline decoration-gold/60 underline-offset-4"
+                >
+                  More about lash extensions in King’s Cross
+                </Link>
+              </p>
+            )}
+
             {cat.slug === "nails" && (
               <p className="mt-4 text-sm text-ink/70">
                 <Link

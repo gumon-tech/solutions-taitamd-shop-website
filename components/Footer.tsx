@@ -47,6 +47,9 @@ export default function Footer() {
                   <Link href="/nails-kings-cross" className="hover:text-ink">Nails in King&rsquo;s Cross</Link>
                 </li>
                 <li>
+                  <Link href="/lash-extensions-kings-cross" className="hover:text-ink">Lash Extensions</Link>
+                </li>
+                <li>
                   <Link href="/story" className="hover:text-ink">Our Story</Link>
                 </li>
                 <li>
