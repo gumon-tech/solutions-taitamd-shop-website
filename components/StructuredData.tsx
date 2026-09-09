@@ -44,6 +44,14 @@ export default function StructuredData() {
       // the old Google Maps value was a `?q=<address>` search, not a Business Profile —
       // neither identifies anything. Marketing adds the rest as each is confirmed (Q-MKT-002).
       sameAs: [SITE.social.facebook],
+      // Same URL the Location block links to, read from the one place that holds it, so the
+      // map a visitor taps and the map the schema names can never drift apart (Q-MKT-077).
+      //
+      // `geo` is deliberately absent. Coordinates are a claim about a point on the ground and
+      // nothing in this repo has ever measured one; a plausible pair typed in from memory would
+      // be indistinguishable from a surveyed one to every reader after us. The address and the
+      // map link already resolve the place, and Google geocodes from those.
+      hasMap: SITE.social.googleMaps,
       hasOfferCatalog: {
         "@type": "OfferCatalog",
         name: "Beauty and spa services",

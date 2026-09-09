@@ -22,8 +22,13 @@ export default function ServicesPage() {
     <main className="mx-auto max-w-7xl px-5 md:px-8 pb-14 md:pb-12">
       <header className="pt-8 md:pt-10 pb-10">
         <p className="text-xs tracking-[0.28em] uppercase text-mist">Service menu</p>
+        {/* Matches the title above it, which already named the services and the place while
+            this heading named neither (Q-MKT-077). Same list, same order as the title, so a
+            visitor arriving from that search result reads the same words twice. */}
         <h1 className="mt-3 text-4xl md:text-6xl font-semibold leading-[1.05]">
-          Everything you need — <span className="text-gold">crafted</span> with precision.
+          Massage, Nails, Waxing, <span className="text-gold">Facials</span> & Lashes in{" "}
+          {/* Same nowrap as the home page H1: at 375 wide this broke as "King's / Cross". */}
+          <span className="whitespace-nowrap">King’s Cross</span>
         </h1>
         <p className="mt-5 max-w-2xl text-ink/80">
           Our full menu with prices and treatment times. Tap any price to message us on WhatsApp —

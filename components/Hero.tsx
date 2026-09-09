@@ -21,9 +21,17 @@ export default function Hero() {
         <div className="lg:col-span-7">
           <Reveal>
             <p className="ui-kicker">King’s Cross • London</p>
+            {/* The H1 names the treatment and the place because that is the phrase people
+                search (Q-MKT-077). The previous line, "Luxury Thai-inspired beauty &
+                wellness", read well and said neither. The gold span keeps the visual
+                rhythm the design had, moved onto the words that now carry the meaning. */}
             <h1 className="ui-h1">
-              Luxury Thai‑inspired{" "}
-              <span className="text-gold">beauty & wellness</span>.
+              Thai massage and beauty in{" "}
+              {/* nowrap because the line broke between "King's" and "Cross" at 1440 wide,
+                  splitting the one phrase this heading exists to say. CSS, not a
+                  non-breaking character — D-W10 was the reverse mistake, a U+2011 baked
+                  into the brand string that then travelled into <title> and JSON-LD. */}
+              <span className="text-gold whitespace-nowrap">King’s Cross</span>
             </h1>
             <p className="ui-lead">
               A calm oasis in King’s Cross — massage, hair, nails, waxing and facials. Thoughtful technique, gentle atmosphere.
