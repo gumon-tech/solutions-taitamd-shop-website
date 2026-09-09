@@ -35,6 +35,9 @@ export default function Footer() {
                   <Link href="/massage-kings-cross" className="hover:text-ink">Massage in King&rsquo;s Cross</Link>
                 </li>
                 <li>
+                  <Link href="/deep-tissue-massage-kings-cross" className="hover:text-ink">Deep Tissue Massage</Link>
+                </li>
+                <li>
                   <Link href="/story" className="hover:text-ink">Our Story</Link>
                 </li>
                 <li>

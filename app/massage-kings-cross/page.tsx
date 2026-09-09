@@ -85,6 +85,20 @@ export default function MassageKingsCrossPage() {
         </p>
       </section>
 
+      <section aria-label="Deep tissue" className="mt-14">
+        <h2 className="text-2xl font-semibold md:text-3xl">Looking for firmer pressure?</h2>
+        <p className="mt-2 max-w-2xl text-sm leading-relaxed text-ink/70">
+          Deep tissue has its own page, with what to expect on a first visit and the treatments
+          people book alongside it.
+        </p>
+        <Link
+          href="/deep-tissue-massage-kings-cross"
+          className="mt-4 inline-block text-sm font-medium text-ink underline decoration-gold/60 underline-offset-4"
+        >
+          Deep tissue massage in King&rsquo;s Cross
+        </Link>
+      </section>
+
       <section aria-label="Where to find us" className="mt-14">
         <h2 className="text-2xl font-semibold md:text-3xl">Finding us</h2>
         <div className="mt-4 grid gap-5 sm:grid-cols-2">

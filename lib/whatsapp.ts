@@ -89,6 +89,30 @@ export const SOURCE_CONTACT_QR_CARD = "R";
 export const SOURCE_MASSAGE_LANDING = "J";
 
 /**
+ * Landing pages from Q-MKT-079 use two letters, decided by MKT on 2026-09-09 after this
+ * room reported the shortage: 22 of the 26 single letters were taken and the ticket asked
+ * for 5 more. Every existing single letter stays exactly where it is — renaming them would
+ * break the comparison with everything already counted.
+ *
+ * MKT holds this register now. KMKT owned it under Q-KMKT-004 and that room is dark.
+ *
+ *   letter   page                                  in use since
+ *   MD       /deep-tissue-massage-kings-cross/     2026-09-09
+ *   MF       /facial-kings-cross/                  not built yet
+ *   MW       /waxing-kings-cross/                  not built yet
+ *   MN       /nails-kings-cross/                   not built yet
+ *   ML       /lash-extensions-kings-cross/         not built yet
+ *
+ * The four single letters still free are V, Y and Z, plus J which /massage-kings-cross/
+ * already uses. Reach for two letters before spending them.
+ */
+export const SOURCE_DEEP_TISSUE_LANDING = "MD";
+export const SOURCE_FACIAL_LANDING = "MF";
+export const SOURCE_WAXING_LANDING = "MW";
+export const SOURCE_NAILS_LANDING = "MN";
+export const SOURCE_LASH_LANDING = "ML";
+
+/**
  * What the three open-chat buttons put in the box, per Q-MKT-065.
  *
  * Each takes its intent from the words already printed around it rather than a
@@ -179,7 +203,13 @@ export function buildOpenChatLink(
  * month is categorised correctly by having done nothing.
  */
 export function sourceFromLink(href: string): string {
-  const m = decodeURIComponent(href).match(/\[web-([A-Z])\]/);
+  // One or two letters since 2026-09-09. The single-letter form was written when one
+  // letter was all there was, and it would have read `[web-MD]` as no match at all —
+  // returning X, "not stated", for the pages we had just gone to the trouble of
+  // separating. Nothing calls this today (the lead form that did was removed with
+  // Q-MKT-078), which is exactly why it was worth fixing now: a parser that is wrong
+  // while unused is a trap set for whoever uses it next.
+  const m = decodeURIComponent(href).match(/\[web-([A-Z]{1,2})\]/);
   return m ? m[1] : SOURCE_UNKNOWN;
 }
 
