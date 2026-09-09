@@ -42,11 +42,11 @@ export default function LuxeBento() {
           <div>
             <p className="text-xs tracking-[0.28em] uppercase text-mist">Why us</p>
             <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-[-0.01em] text-ink leading-tight">
-              Designed to feel <span className="text-gold">exclusive</span>.
+              Deep tissue and <span className="text-gold">sports massage</span>
             </h2>
           </div>
           <div className="hidden md:block text-sm text-mist max-w-md">
-            High-impact visuals, minimal noise. Every detail earns its place.
+            Firm, targeted work for tight shoulders, backs and legs. Every detail earns its place.
           </div>
         </div>
       </Reveal>

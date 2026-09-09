@@ -16,7 +16,7 @@ export default function LocationBlock() {
           <div className="lg:col-span-5 glass rounded-[28px] p-7 md:p-9">
             <p className="text-xs tracking-[0.28em] uppercase text-mist">Location</p>
             <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-[-0.01em] text-ink leading-tight">
-              King’s Cross — <span className="text-gold">easy</span> to reach.
+              {SITE.walkMinutes} minutes from <span className="text-gold">King’s Cross station</span>
             </h2>
 
             <p className="mt-4 text-sm md:text-base text-mist leading-relaxed">

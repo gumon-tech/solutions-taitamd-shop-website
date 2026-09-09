@@ -130,7 +130,7 @@ export default function Gallery() {
           <div>
             <p className="text-xs tracking-[0.28em] uppercase text-mist">Inside Taitam-D</p>
             <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-[-0.01em] text-ink leading-tight">
-              A calm, curated <span className="text-gold">beauty ritual</span>.
+              Lash extensions, brows and the <span className="text-gold">infrared sauna</span>
             </h2>
             <p className="mt-4 text-sm md:text-base text-mist max-w-2xl">
               A few real moments — clean technique, soft lighting, and the details that make you feel taken care of.

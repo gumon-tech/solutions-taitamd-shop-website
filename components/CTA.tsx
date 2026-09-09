@@ -15,7 +15,7 @@ export default function CTA() {
                 Ready
               </p>
               <h2 className="mt-3 text-3xl md:text-5xl font-semibold leading-tight">
-                Your next <span className="text-gold">exclusive</span> moment.
+                Book a treatment in <span className="text-gold">King&rsquo;s Cross</span>
               </h2>
               <p className="mt-4 text-sm md:text-base text-mist max-w-2xl">
                 Message us directly for availability, treatment advice and today’s promotions.

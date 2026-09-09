@@ -11,7 +11,7 @@ export default function ServicesPreview() {
           <div>
             <p className="text-xs tracking-[0.28em] uppercase text-mist">Service menu</p>
             <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-[-0.01em] text-ink leading-tight">
-              Choose your <span className="text-gold">ritual</span>.
+              Thai massage, facials, nails and <span className="text-gold">waxing</span>
             </h2>
           </div>
           <Link
