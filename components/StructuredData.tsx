@@ -52,6 +52,20 @@ export default function StructuredData() {
       // be indistinguishable from a surveyed one to every reader after us. The address and the
       // map link already resolve the place, and Google geocodes from those.
       hasMap: SITE.social.googleMaps,
+      // Measured, which is why it is here at all: this field was left out on 2026-09-09
+      // precisely because nothing in the repo had ever measured a coordinate, and a
+      // plausible pair typed from memory reads exactly like a surveyed one. MKT then read
+      // it off the place URL in Google Maps through the owner's account — place "Taitam-D
+      // Beauty & Spa", plus code GVMJ+46 London, cid 0x48761b3f0e5cb66f:0xf973e0744373938e,
+      // on 2026-09-09.
+      //
+      // Numbers, not strings: schema.org allows both, and Google accepts both, but a
+      // number cannot pick up a stray space or a degree sign on its way through an edit.
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: 51.5327761,
+        longitude: -0.1194329,
+      },
       hasOfferCatalog: {
         "@type": "OfferCatalog",
         name: "Beauty and spa services",
