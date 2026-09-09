@@ -79,7 +79,18 @@ export default function ServiceMenu() {
                 the same treatments in more detail (Q-MKT-077 item 3, Q-MKT-079 group A). It
                 sits above the rows so a visitor who scrolled to this anchor from a search
                 result meets it before the prices, not after twelve of them.
-                Three more categories get pages under Q-MKT-079: waxing, nails and lashes. */}
+                Two categories still to come under Q-MKT-079: nails and lashes. */}
+            {cat.slug === "waxing" && (
+              <p className="mt-4 text-sm text-ink/70">
+                <Link
+                  href="/waxing-kings-cross"
+                  className="font-medium text-ink underline decoration-gold/60 underline-offset-4"
+                >
+                  More about waxing in King’s Cross
+                </Link>
+              </p>
+            )}
+
             {cat.slug === "facials" && (
               <p className="mt-4 text-sm text-ink/70">
                 <Link
