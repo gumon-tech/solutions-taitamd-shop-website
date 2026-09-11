@@ -17,6 +17,12 @@ import { SITE } from "@/lib/site";
  * next correction should land in one file rather than in however many copies exist by then.
  * Pages with their own subject — the treatment landing pages — write their own list instead,
  * since half of these answers would be beside the point there.
+ *
+ * The panel is cream rather than the page's green: this is the second of the two light bands
+ * phase 3 puts on the home page (Q-SHOP-033, ruled by WS). Ten questions and answers is the
+ * longest stretch of continuous reading anywhere on the page, which is exactly where a change
+ * of ground earns its keep. The colours are the ones /book/ has used all along, so this adds
+ * light without inventing any — the whole of what standing rule T11 permits.
  */
 export const SHOP_FAQ: Array<[string, string]> = [
   [
@@ -62,17 +68,17 @@ export default function ShopFaq({ id = "shop-faq" }: { id?: string }) {
   return (
     <section
       aria-labelledby={id}
-      className="mt-14 rounded-[28px] border border-ink/10 bg-ink/5 p-7 md:p-9"
+      className="mt-14 rounded-[28px] border border-[#d6c198] bg-[#f5efe3] p-7 md:p-9 shadow-[0_24px_60px_rgba(12,51,30,0.22)]"
     >
-      <p className="text-xs tracking-[0.28em] uppercase text-mist">Helpful answers</p>
-      <h2 id={id} className="mt-3 text-2xl md:text-3xl font-semibold">
+      <p className="text-xs tracking-[0.28em] uppercase text-[#6d5223]">Helpful answers</p>
+      <h2 id={id} className="mt-3 text-2xl md:text-3xl font-semibold text-[#183b2d]">
         Frequently asked questions
       </h2>
       <div className="mt-6 grid gap-5 md:grid-cols-2">
         {SHOP_FAQ.map(([q, a]) => (
           <div key={q}>
-            <h3 className="font-semibold">{q}</h3>
-            <p className="mt-2 text-sm leading-relaxed text-ink/75">{a}</p>
+            <h3 className="font-semibold text-[#183b2d]">{q}</h3>
+            <p className="mt-2 text-sm leading-relaxed text-[#2c4a3c]">{a}</p>
           </div>
         ))}
       </div>

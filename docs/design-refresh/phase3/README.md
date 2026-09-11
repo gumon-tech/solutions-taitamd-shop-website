@@ -3,6 +3,38 @@
 Evidence for `Q-SHOP-033` phase 3. Captured with `scripts/screenshot.mjs`; the method and the
 two ways of capturing that failed first are written up in `../phase2/README.md`.
 
+## 3.1 — two light bands on the home page
+
+| file | what it shows |
+|---|---|
+| `1440-before-cream-awards.jpg` · `1440-after-cream-awards.jpg` | the social-proof panel, and the four numbers inside it |
+| `1440-before-cream-faq.jpg` · `1440-after-cream-faq.jpg` | the ten questions and answers — the longest stretch of continuous reading on the page |
+| `375-*` | the same two on a phone |
+
+Measured on the page, both widths, with `scripts/brightness-probe.js`:
+
+```
+1440   average 12.7 → 19.2   ·   light cells 1260 → 3496
+ 375   average 13.4 → 21.2   ·   light cells 9862 → 27952
+```
+
+Light cells is the figure phase 3 exists to move. Phase 2 could not move it at all — every
+photograph on this page measures under 50, so pictures raise the average and add no light. Two
+cream panels nearly tripled it.
+
+Every text colour on those panels, measured off the captured pixels rather than computed from
+the CSS, against a 4.5 floor:
+
+```
+on #f5efe3 (86.6)   heading and answers 10.77   ·   paragraph 8.52   ·   label 6.36
+on #ebe3d4 (77.4)   heading and answers  9.68   ·   paragraph 7.65   ·   number 5.72
+```
+
+The label started at `#927039`, the colour /book/ has used for years, and measured 3.99 on
+`#f5efe3` and 3.58 on `#ebe3d4` — under the floor on both. It is `#6d5223` here instead. The
+same label is still `#927039` on /book/, /signature/ and the promotions card, which is a
+pre-existing failure this work found rather than caused; reported to WS separately.
+
 ## 3.3 — the opacity classes that were never generated
 
 | file | what it shows |
