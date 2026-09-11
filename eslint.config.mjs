@@ -12,7 +12,9 @@ const eslintConfig = [
     // `next lint` skipped these implicitly. Flat config has no such default,
     // so linting would otherwise walk the build output — including the
     // AI-session dist dirs (.next-claude, .next-claude-visual).
-    ignores: ["node_modules/**", ".next/**", ".next-*/**", "out/**", "next-env.d.ts"],
+    // scripts/ holds console probes that are pasted into a browser by hand — nothing there is
+    // imported by the app, so "declared but never used" is the shape they are supposed to have.
+    ignores: ["node_modules/**", ".next/**", ".next-*/**", "out/**", "next-env.d.ts", "scripts/**"],
   },
   ...compat.extends("next/core-web-vitals", "next/typescript"),
 ];

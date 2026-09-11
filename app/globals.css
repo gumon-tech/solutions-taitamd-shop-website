@@ -36,6 +36,9 @@ html {
 body {
   background: theme(colors.bg0);
   color: theme(colors.ink);
+  /* Inter for everything that is read. Set here rather than on a Tailwind class so nothing
+     has to be touched page by page — the variables come from next/font in layout.tsx. */
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
   min-height: 100dvh;
   overflow-x: hidden;
 
@@ -328,8 +331,10 @@ html[data-capture="true"] .btn-shine::after {
 
 /* ===== UI Components Layer ===== */
 @layer components {
+  /* Space is the cheapest thing a page can spend to look expensive, and this site had the
+     least of it where it mattered most. Sections were py-12/py-16 (Q-SHOP-033 phase 1). */
   .ui-section {
-    @apply py-12 md:py-16;
+    @apply py-16 md:py-24;
   }
 
   .ui-section-hero {
@@ -340,16 +345,29 @@ html[data-capture="true"] .btn-shine::after {
     @apply text-xs tracking-[0.32em] uppercase text-ink/70;
   }
 
+  /* Display serif on headings, and one size step down from where they were. A 72px heading
+     in a system sans was shouting; a 60px heading in Cormorant carries further with less
+     volume, which is the whole trade this phase is testing (Q-SHOP-033 phase 1). */
+  h1,
+  h2,
+  .ui-h1,
+  .ui-h2 {
+    font-family: var(--font-display), Georgia, "Times New Roman", serif;
+    letter-spacing: -0.01em;
+  }
+
   .ui-h1 {
-    @apply mt-4 text-5xl md:text-7xl font-semibold leading-[0.98];
+    @apply mt-4 text-5xl md:text-6xl font-semibold leading-[1.04];
   }
 
   .ui-h2 {
     @apply mt-3 text-3xl md:text-5xl font-semibold leading-tight;
   }
 
+  /* max-w-prose rather than max-w-2xl: a measure of roughly 65 characters is where long
+     reading stops being work, and the lead paragraph is the longest line on the page. */
   .ui-lead {
-    @apply mt-6 text-base md:text-lg text-ink/90 max-w-2xl leading-relaxed;
+    @apply mt-6 text-base md:text-lg text-ink/90 max-w-prose leading-relaxed;
   }
 
   .ui-section-cta {
