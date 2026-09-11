@@ -80,6 +80,14 @@ jobs:
         run: node scripts/check-orphan-assets.mjs
       - name: Build with Next.js
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
+      # After the build, because it compares the classes in the source against the stylesheet
+      # the build actually produced. Tailwind makes opacity modifiers from a scale in steps of
+      # five and emits nothing at all for a value off it — no error, no warning, and a page
+      # that still renders. Sixty-seven of those had collected here before anyone looked
+      # (Q-SHOP-033, ordered by WS 2026-09-11); nineteen were borders quietly falling through
+      # to a gray that is not in this palette.
+      - name: Check every opacity utility produced a rule
+        run: node scripts/check-opacity-classes.mjs
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5
         with:

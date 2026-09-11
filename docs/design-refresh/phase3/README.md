@@ -3,6 +3,37 @@
 Evidence for `Q-SHOP-033` phase 3. Captured with `scripts/screenshot.mjs`; the method and the
 two ways of capturing that failed first are written up in `../phase2/README.md`.
 
+## 3.0 — the hero card, which WS ordered fixed before anything else
+
+| file | what it shows |
+|---|---|
+| `1440-before-cream-hero-card.jpg` · `1440-after-cream-hero-card.jpg` | the signature card. Before: every line of type on the photograph. After: the photograph as a band, the type on cream. |
+| `375-*` | the same on a phone |
+
+Four lines of type were sitting on a picture, and phase 2 had thinned the wash so the picture
+came through. Measured off the pixels, against a 4.5 floor:
+
+```
+                                    before   after 1440   after 375
+Signature experience                  3.51        6.26        6.36
+Deep relief, soft luxury.             3.04       10.61       10.77
+Thai + Deep Tissue + Aromatherapy     2.99        8.28        8.52
+Taitam-D Signature — £69 / 60 min     2.86        6.24        6.36
+```
+
+The band keeps what phase 2 was after — you can see the room, at full opacity, with the wash
+still at 0.34 — and takes the type off it entirely.
+
+**One number went the wrong way and is worth reading carefully.** Average brightness at 1440
+is 19.2 → 19.0. The card is 208px taller now, because the type sits below the picture instead
+of on top of it, and the page grew with it. Light cells went 3496 → 3547 and total light
+(average × height) went 219,898 → 221,559: more light, spread over more page. At 375 both
+figures rose, 21.2 → 22.1 and 27952 → 30664.
+
+*An average falls when the denominator grows, and a rule written only against the average
+cannot tell that apart from losing light.* This is the same dilution that made phase 2 look
+like a regression until the absolute count settled it.
+
 ## 3.1 — two light bands on the home page
 
 | file | what it shows |

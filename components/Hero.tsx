@@ -92,7 +92,7 @@ export default function Hero() {
             className="relative"
           >
             <div className="glass rounded-[28px] p-5 shadow-glow overflow-hidden">
-              <div className="relative rounded-[22px] overflow-hidden border border-ink/10">
+              <div className="rounded-[22px] overflow-hidden border border-[#d6c198]">
                 {/* The picture behind this card is generated artwork, not one of our rooms.
                     Its alt text used to read "Serene Taitam-D massage room", which asserted
                     the opposite in the one layer nobody looks at — D-W22 forbids exactly that
@@ -105,22 +105,23 @@ export default function Hero() {
                     to keep the text on top legible, which is the only job it ever had. This
                     raises the page's average brightness rather than lowering it, which is the
                     direction standing rule T11 requires. */}
-                <Image src="/images/hero/taitamd-gemini-hero.jpg" alt="Softly lit massage room with warm natural light" fill priority className="object-cover" />
-                <div className="absolute inset-0 bg-[radial-gradient(700px_420px_at_20%_10%,rgba(200,176,124,0.16),rgba(0,0,0,0)),radial-gradient(600px_420px_at_85%_25%,rgba(127,155,82,0.12),rgba(0,0,0,0)),linear-gradient(135deg,rgba(15,51,20,0.34),rgba(11,42,16,0.16))]" />
-                {/* The three text utilities in this card read `text-ink` with no opacity, and
-                    that is deliberate. They were written as /72 and /82, which Tailwind never
-                    generated, so the browser has been painting them at full strength all along.
-                    Writing the intended value now would dim text that already measures 3.51,
-                    2.99 and 2.86 against a 4.5 floor — the sweep would be making a failing
-                    number worse in the name of tidiness. They go back to a faded weight when
-                    this card's body moves onto cream, where the contrast no longer depends on
-                    the photograph (Q-SHOP-033 phase 3, item 3.2, waiting on WS). */}
-                <div className="relative p-6 md:p-7">
-                  <div className="text-xs tracking-[0.32em] uppercase text-ink">Signature experience</div>
-                  <div className="mt-3 text-2xl font-semibold leading-tight text-ink/95">
+                {/* The picture is a band at the top of the card now, rather than the ground
+                    the whole card stood on. Phase 2 wanted it seen and thinned the wash to
+                    0.34 to get there; what that also did was put every line of type on a
+                    photograph, and the measurements came back 3.51, 2.99 and 2.86 against a
+                    4.5 floor. A band keeps what phase 2 was after — you can see the room —
+                    and takes the type off it entirely (Q-SHOP-033 phase 3, ruled by WS
+                    2026-09-11: fix the card before the cream sections). */}
+                <div className="relative h-44 md:h-52">
+                  <Image src="/images/hero/taitamd-gemini-hero.jpg" alt="Softly lit massage room with warm natural light" fill priority className="object-cover" />
+                  <div className="absolute inset-0 bg-[radial-gradient(700px_420px_at_20%_10%,rgba(200,176,124,0.16),rgba(0,0,0,0)),radial-gradient(600px_420px_at_85%_25%,rgba(127,155,82,0.12),rgba(0,0,0,0)),linear-gradient(135deg,rgba(15,51,20,0.34),rgba(11,42,16,0.16))]" />
+                </div>
+                <div className="bg-[#f5efe3] p-6 md:p-7">
+                  <div className="text-xs tracking-[0.32em] uppercase text-[#6d5223]">Signature experience</div>
+                  <div className="mt-3 text-2xl font-semibold leading-tight text-[#183b2d]">
                     Deep relief, soft luxury.
                   </div>
-                  <p className="mt-3 text-sm text-ink leading-relaxed">
+                  <p className="mt-3 text-sm text-[#2c4a3c] leading-relaxed">
                     Thai + Deep Tissue + Aromatherapy blends — tailored to your body. Clean, modern interiors inspired by Thai tradition.
                   </p>
 
@@ -130,7 +131,7 @@ export default function Hero() {
                       the ad. */}
                   <Link
                     href="/signature"
-                    className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-gold transition hover:text-ink"
+                    className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-[#6d5223] underline decoration-[#cdb887] underline-offset-4 transition hover:decoration-[#6d5223]"
                   >
                     Taitam-D Signature — £69 / 60 min
                     <ArrowUpRight className="h-4 w-4" />

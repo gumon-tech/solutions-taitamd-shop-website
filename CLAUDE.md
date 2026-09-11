@@ -182,11 +182,18 @@ grep -rln "2009" app components lib
 **1 · นิยาม "verify เขียว"** — repo นี้ **ไม่มี test runner** (`package.json` มีแค่ `dev/build/start/lint`):
 
 ```bash
-npm run build && npm run lint
+npm run build && npm run lint && npm run check:css
 ```
 
 `next build` ทำ typecheck ให้ในตัว + จับ static-export error · แล้ว **ต่อด้วย visual gate เสมอ**
 ไม่มีเทสต์ ⇒ ตาคือด่านสุดท้ายจริง ๆ ห้ามข้าม
+
+🔴 **`check:css` ต้องรัน หลัง build เสมอ** เพราะมันเทียบคลาสในซอร์สกับ **ไฟล์ CSS ที่ build ออกมาจริง**
+Tailwind สร้างคลาสโปร่งแสงจากบันไดขั้นละ 5 ⇒ เลขนอกบันได (`bg-ink/8` `border-ink/12`) **⛔ ไม่ถูกสร้างเป็นกฎเลย**
+⛔ ไม่มี error ⛔ ไม่มี warning และหน้าเว็บยังขึ้นปกติ · วัดเมื่อ 2026-09-11 เจอค้างอยู่ 67 จุด 22 คลาส
+โดย 19 จุดเป็นเส้นขอบที่ตกไปใช้ `gray-200` ซึ่ง **⛔ ไม่ใช่สีในจานสีนี้** (`Q-SHOP-033` · WS สั่งให้ทำด่านนี้)
+🔑 ***คลาสที่พิมพ์ผิดพังดังและถูกแก้ในนาทีนั้น คลาสที่ ⛔ ไม่มีอยู่จริงพังเงียบและอยู่ได้นานกว่าคนที่เขียนมัน***
+📌 ด่านนี้อยู่ใน `.github/workflows/nextjs.yml` ด้วย ⇒ หลุดขึ้น `main` แล้ว deploy จะล้ม ⛔ ไม่ใช่ขึ้นเว็บเงียบ ๆ
 
 **2 · Deploy gate** — verify ต้องเขียว **ก่อน** merge · **Lead เป็นคนเดียวที่ push `main`**
 
