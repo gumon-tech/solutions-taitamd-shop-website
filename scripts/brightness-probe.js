@@ -26,12 +26,28 @@
  * between two runs of the same page, not a photometer.
  *
  * Usage: paste into the browser console on the page under test, at a stated viewport width.
- *   measureBrightness()   →   { brightness, lightShare, cells, viewport, pageHeight }
+ *   await measureBrightness()   →   { brightness, lightShare, lightCells, cells, ... }
  *
  * `lightShare` is the percentage of page area brighter than 50, which answers "is there
- * enough light on this page" more directly than the mean does.
+ * enough light on this page" more directly than the mean does. Read it next to `lightCells`,
+ * the absolute count: a page that gets taller dilutes the share without losing any light, and
+ * the share alone reads that as a regression.
  */
-function measureBrightness(cols = 60) {
+async function measureBrightness(cols = 60) {
+  // Force every lazy image to load before measuring. Without this the probe silently reads a
+  // page with most of its pictures absent and reports it darker than it is — which is exactly
+  // what happened to the first phase-1 numbers (10.5 instead of 12.0). The comparison was
+  // still like-for-like, so the conclusion held, but the absolute figures were wrong, and
+  // these figures are quoted across tickets.
+  const imgs = [...document.querySelectorAll("img")];
+  imgs.forEach((i) => {
+    i.loading = "eager";
+  });
+  await Promise.all(
+    imgs.map((i) => (i.complete ? null : new Promise((r) => { i.onload = i.onerror = r; }))),
+  );
+  await new Promise((r) => setTimeout(r, 600));
+
   const lum = (r, g, b) => {
     const f = (c) => {
       c /= 255;
@@ -105,9 +121,13 @@ function measureBrightness(cols = 60) {
     sum += v;
     if (v > 50) light++;
   }
+  // lightCells is reported alongside lightShare on purpose. A page that grows taller dilutes
+  // the share while losing no light at all, and reading the share alone turns that into a
+  // false alarm — it did once, on phase 2, before the absolute count settled it.
   return {
     brightness: Math.round((sum / grid.length) * 10) / 10,
     lightShare: Math.round((light / grid.length) * 1000) / 10,
+    lightCells: light,
     cells: grid.length,
     viewport: `${W}x${window.innerHeight}`,
     pageHeight: H,
