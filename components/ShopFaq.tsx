@@ -5,9 +5,13 @@ import { SITE } from "@/lib/site";
  *
  * OFFICE counted the topics across 51 enquiries between 20 August and 8 September 2026 and
  * marked which answers it could confirm (Q-MKT-079 group C). Two of the ten — card payment
- * and gift cards — are absent because it could not, and they stay absent until somebody at
- * the shop confirms them: an FAQ answer is a promise made in advance to a reader who cannot
- * ask a follow-up question.
+ * and gift vouchers — went up empty because it could not confirm them, and stayed empty for
+ * two days until the owner answered on 2026-09-11. That gap was the point: an FAQ answer is
+ * a promise made in advance to a reader who cannot ask a follow-up question, so a guess here
+ * is worse than a silence.
+ *
+ * The voucher answer names no price, because the owner confirmed vouchers exist and did not
+ * confirm what they cost.
  *
  * It lives in a component because the same block belongs on several pages, and because the
  * next correction should land in one file rather than in however many copies exist by then.
@@ -43,6 +47,14 @@ export const SHOP_FAQ: Array<[string, string]> = [
   [
     "Can I see the rooms before I book?",
     "Yes. There are photographs of every room on our tour page, taken in the order you meet them walking in.",
+  ],
+  [
+    "How can I pay?",
+    "Credit and debit cards, contactless including Apple Pay and Google Pay, and cash.",
+  ],
+  [
+    "Do you sell gift vouchers?",
+    "Yes, gift vouchers are available. Message us on WhatsApp to arrange one.",
   ],
 ];
 
