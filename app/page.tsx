@@ -23,6 +23,7 @@ export const metadata: Metadata = {
   title: {
     absolute: "Thai Massage & Beauty Spa in King's Cross, London | Taitam-D",
   },
+  alternates: { canonical: "/" },
 };
 
 export default function Home() {

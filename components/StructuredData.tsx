@@ -1,14 +1,18 @@
-import { SERVICE_CATEGORIES, SITE } from "@/lib/site";
+import { SITE } from "@/lib/site";
 
 const absolute = (path: string) => new URL(path, SITE.baseUrl).toString();
 
 export default function StructuredData() {
   const businessId = `${SITE.baseUrl}/#business`;
   const websiteId = `${SITE.baseUrl}/#website`;
+  const serviceCatalogId = `${SITE.baseUrl}/services/#catalog`;
 
   const graph = [
     {
-      "@type": ["BeautySalon", "HealthAndBeautyBusiness"],
+      // The types describe the services that visitors can verify on the site. Do not
+      // add a type merely because it sounds useful for search: structured data must
+      // match the business and its visible content.
+      "@type": ["BeautySalon", "DaySpa", "HealthAndBeautyBusiness"],
       "@id": businessId,
       name: SITE.name,
       legalName: SITE.legalName,
@@ -18,7 +22,15 @@ export default function StructuredData() {
       description: SITE.description,
       telephone: `+${SITE.phone.startsWith("0") ? "44" + SITE.phone.slice(1) : SITE.phone}`,
       email: SITE.email,
+      contactPoint: {
+        "@type": "ContactPoint",
+        telephone: `+${SITE.phone.startsWith("0") ? "44" + SITE.phone.slice(1) : SITE.phone}`,
+        contactType: "customer service",
+        availableLanguage: "English",
+        url: `${SITE.baseUrl}/contact/`,
+      },
       priceRange: SITE.priceRange,
+      currenciesAccepted: "GBP",
       foundingDate: SITE.foundingDate,
       address: {
         "@type": "PostalAddress",
@@ -66,20 +78,10 @@ export default function StructuredData() {
         latitude: 51.5327761,
         longitude: -0.1194329,
       },
-      hasOfferCatalog: {
-        "@type": "OfferCatalog",
-        name: "Beauty and spa services",
-        itemListElement: SERVICE_CATEGORIES.map((service) => ({
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: service.title,
-            description: `${service.title}: ${service.subtitle}.`,
-            provider: { "@id": businessId },
-            areaServed: { "@type": "Place", name: "King's Cross, London" },
-          },
-        })),
-      },
+      // The full catalogue node is emitted on /services/, where the complete menu
+      // is visible to visitors. Keeping only a stable reference here avoids
+      // asserting an unseen catalogue on unrelated pages such as /privacy/.
+      hasOfferCatalog: { "@id": serviceCatalogId },
     },
     {
       "@type": "WebSite",
