@@ -10,7 +10,7 @@ export default function Story() {
         <h1 className="mt-3 text-4xl md:text-6xl font-semibold leading-[1.05]">
           Precision, by <span className="text-gold">design</span>.
         </h1>
-        <p className="mt-6 text-ink/82 max-w-3xl leading-relaxed">
+        <p className="mt-6 text-ink/[0.82] max-w-3xl leading-relaxed">
           Founded in 2009, {SITE.name} is a Thai beauty and wellness house in King’s Cross —
           refined through experience and led by a single standard: measured excellence.
         </p>
@@ -27,7 +27,7 @@ export default function Story() {
               priority
               className="object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/26 via-black/8 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/[0.26] via-black/[0.08] to-transparent" />
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_15%,rgba(196,170,98,.14),transparent_58%)]" />
           </div>
         </div>
@@ -37,7 +37,7 @@ export default function Story() {
       <div className="mt-8 md:mt-10 grid lg:grid-cols-12 gap-6">
         <Reveal className="lg:col-span-7">
           <div className="glass rounded-[28px] p-7 md:p-9 shadow-glow overflow-hidden relative h-full">
-            <div className="absolute -top-28 -right-24 h-72 w-72 rounded-full bg-gold/12 blur-3xl" />
+            <div className="absolute -top-28 -right-24 h-72 w-72 rounded-full bg-gold/[0.12] blur-3xl" />
             <div className="absolute -bottom-28 -left-24 h-72 w-72 rounded-full bg-rose/10 blur-3xl" />
             <div className="relative">
               <h2 className="text-2xl md:text-3xl font-semibold">A house built on standards</h2>
@@ -45,7 +45,7 @@ export default function Story() {
                 Luxury is not loud. It lives in technique, hygiene, and finishing detail — consistent, intentional, and calm.
               </p>
 
-              <div className="mt-7 grid sm:grid-cols-2 gap-3 text-sm text-ink/78">
+              <div className="mt-7 grid sm:grid-cols-2 gap-3 text-sm text-ink/[0.78]">
                 {[
                   ["Technique first", "Pressure, pacing, and precision — tailored every time."],
                   ["Thai + modern", "Traditional craft, delivered with London-level discipline."],
@@ -54,7 +54,7 @@ export default function Story() {
                 ].map(([t, d]) => (
                   <div key={t} className="rounded-2xl bg-ink/5 border border-ink/10 p-5">
                     <div className="font-semibold text-ink/95">{t}</div>
-                    <div className="mt-1.5 text-sm text-ink/76">{d}</div>
+                    <div className="mt-1.5 text-sm text-ink/[0.76]">{d}</div>
                   </div>
                 ))}
               </div>
@@ -81,7 +81,7 @@ export default function Story() {
               href={SITE.academy}
               target="_blank"
               rel="noreferrer"
-              className="mt-6 inline-flex items-center justify-center rounded-2xl bg-ink/5 border border-ink/12 px-5 py-3 text-sm font-semibold hover:bg-ink/8 transition w-full"
+              className="mt-6 inline-flex items-center justify-center rounded-2xl bg-ink/5 border border-ink/[0.12] px-5 py-3 text-sm font-semibold hover:bg-ink/[0.08] transition w-full"
             >
               Visit the Academy
             </a>
@@ -105,7 +105,7 @@ export default function Story() {
                 fill
                 className="object-cover object-[50%_18%]"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/18 via-black/4 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/[0.18] via-black/[0.04] to-transparent" />
             </div>
           </div>
         </Reveal>
@@ -118,8 +118,8 @@ export default function Story() {
               <h2 className="mt-3 text-2xl md:text-3xl font-semibold">The standard begins with her</h2>
               <div className="mt-3 space-y-1">
                 <div className="text-lg md:text-xl font-semibold text-ink/95">Thanyarat Pomnongsan <span className="text-mist font-medium">(Kru Nok)</span></div>
-                <div className="text-sm text-ink/78">CEO &amp; Founder, Taitam-D Group • Taitam-D Academy London</div>
-                <div className="text-sm text-ink/78">Beauty Mentor • Certified NLP Master</div>
+                <div className="text-sm text-ink/[0.78]">CEO &amp; Founder, Taitam-D Group • Taitam-D Academy London</div>
+                <div className="text-sm text-ink/[0.78]">Beauty Mentor • Certified NLP Master</div>
               </div>
               <p className="mt-4 text-sm md:text-base text-ink/80 leading-relaxed max-w-2xl">
                 Taitam-D was created to elevate Thai craftsmanship through modern structure. From treatment protocols to curriculum design,
@@ -128,10 +128,10 @@ export default function Story() {
 
               <div className="mt-6 rounded-2xl bg-ink/5 border border-ink/10 p-5">
                 <div className="text-sm font-semibold text-ink/95">“Luxury is not decoration. It is discipline.”</div>
-                <div className="mt-1.5 text-sm text-ink/78">— Thanyarat Pomnongsan (Kru Nok), Founder</div>
+                <div className="mt-1.5 text-sm text-ink/[0.78]">— Thanyarat Pomnongsan (Kru Nok), Founder</div>
               </div>
 
-              <div className="mt-6 grid sm:grid-cols-3 gap-3 text-sm text-ink/78">
+              <div className="mt-6 grid sm:grid-cols-3 gap-3 text-sm text-ink/[0.78]">
                 {[
                   ["Established", "2009"],
                   ["Location", "King’s Cross"],
@@ -170,7 +170,7 @@ export default function Story() {
                 fill
                 className="object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/16 via-black/0 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/[0.16] via-black/0 to-transparent" />
             </div>
           </div>
         </Reveal>

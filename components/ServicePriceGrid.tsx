@@ -42,7 +42,7 @@ export default function ServicePriceGrid({
           {svc.desc && <p className="mt-1.5 text-xs leading-relaxed text-ink/60">{svc.desc}</p>}
           {svc.note && <p className="mt-1 text-xs text-ink/55">{svc.note}</p>}
 
-          <ul className="mt-3 divide-y divide-ink/8">
+          <ul className="mt-3 divide-y divide-ink/[0.08]">
             {svc.variants.map((v, i) => (
               <li key={i}>
                 <a

@@ -174,7 +174,7 @@ export default function ServiceMenu() {
                   {cat.services.map((svc) => (
                     <li key={svc.name} className="rounded-[22px] border border-ink/10 bg-ink/[0.03] p-5">
                       <h4 className="font-semibold leading-snug text-ink">{svc.name}</h4>
-                      <ul className="mt-3 divide-y divide-ink/8">
+                      <ul className="mt-3 divide-y divide-ink/[0.08]">
                         {svc.variants.map((v, i) => (
                           <li key={i}>
                             <a

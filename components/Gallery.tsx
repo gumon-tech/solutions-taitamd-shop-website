@@ -178,7 +178,7 @@ export default function Gallery() {
                       </div>
                     </div>
 
-                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-gold/30 bg-black/18 backdrop-blur-sm group-hover:bg-black/28 transition">
+                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-gold/30 bg-black/[0.18] backdrop-blur-sm group-hover:bg-black/[0.28] transition">
                       <ArrowUpRight className="h-5 w-5 text-gold" />
                     </span>
                   </div>

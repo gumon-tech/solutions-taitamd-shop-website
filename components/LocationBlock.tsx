@@ -27,7 +27,7 @@ export default function LocationBlock() {
 
             {/* Quick facts (fills the “empty” feel without clutter) */}
             <div className="mt-8 md:mt-9 grid gap-3 text-sm">
-              <div className="rounded-2xl bg-[radial-gradient(700px_240px_at_20%_0%,rgba(214,179,106,0.14),rgba(0,0,0,0)),radial-gradient(700px_240px_at_90%_60%,rgba(127,153,82,0.14),rgba(0,0,0,0))] border border-ink/12 p-4">
+              <div className="rounded-2xl bg-[radial-gradient(700px_240px_at_20%_0%,rgba(214,179,106,0.14),rgba(0,0,0,0)),radial-gradient(700px_240px_at_90%_60%,rgba(127,153,82,0.14),rgba(0,0,0,0))] border border-ink/[0.12] p-4">
                 <div className="flex items-start gap-3">
                   <div className="mt-0.5 inline-flex h-9 w-9 items-center justify-center rounded-xl bg-ink/10 border border-gold/20">
                     <Clock3 className="h-4 w-4 text-ink/80" />
@@ -72,7 +72,7 @@ export default function LocationBlock() {
                 href={SITE.social.googleMaps}
                 target="_blank"
                 rel="noreferrer"
-                className="group inline-flex items-center justify-between rounded-2xl border border-gold/25 bg-ink/8 px-4 py-3 text-sm text-ink/90 hover:bg-ink/12"
+                className="group inline-flex items-center justify-between rounded-2xl border border-gold/25 bg-ink/[0.08] px-4 py-3 text-sm text-ink/90 hover:bg-ink/[0.12]"
               >
                 <span className="inline-flex items-center gap-2">
                   <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-ink/10 border border-gold/20">

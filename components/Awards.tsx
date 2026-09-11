@@ -12,8 +12,8 @@ export default function Awards() {
     <section className="ui-section">
       <Reveal>
         <div className="glass rounded-[28px] p-7 md:p-10 shadow-glow overflow-hidden relative">
-          <div className="absolute -top-28 -right-24 h-72 w-72 rounded-full bg-gold/12 blur-3xl" />
-          <div className="absolute -bottom-28 -left-24 h-72 w-72 rounded-full bg-rose/12 blur-3xl" />
+          <div className="absolute -top-28 -right-24 h-72 w-72 rounded-full bg-gold/[0.12] blur-3xl" />
+          <div className="absolute -bottom-28 -left-24 h-72 w-72 rounded-full bg-rose/[0.12] blur-3xl" />
           <div className="relative">
             <p className="text-xs tracking-[0.28em] uppercase text-mist">Social proof</p>
             <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-[-0.01em] text-ink leading-tight">

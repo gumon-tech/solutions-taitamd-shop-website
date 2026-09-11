@@ -72,7 +72,7 @@ export default function Navbar() {
       "inline-flex items-center justify-center rounded-xl border px-3 py-2 text-[11px] font-semibold tracking-[0.18em] uppercase transition",
       active
         ? "border-gold bg-gold text-[#1F3D2A]"
-        : "border-ink/12 bg-ink/5 hover:bg-ink/8 text-ink/90"
+        : "border-ink/[0.12] bg-ink/5 hover:bg-ink/[0.08] text-ink/90"
     );
 
   const drawerItemCls = (active: boolean) =>
@@ -80,7 +80,7 @@ export default function Navbar() {
       "inline-flex items-center justify-between rounded-2xl border transition px-4 py-3",
       active
         ? "border-gold bg-gold text-[#1F3D2A] [&>svg]:text-[#1F3D2A]"
-        : "border-ink/12 bg-ink/5 hover:bg-ink/8"
+        : "border-ink/[0.12] bg-ink/5 hover:bg-ink/[0.08]"
     );
 
   return (
@@ -137,7 +137,7 @@ export default function Navbar() {
               {/* Desktop / larger phones */}
               <Link
                 href="/book"
-                className="hidden sm:inline-flex btn-shine btn-epic items-center gap-2 rounded-xl bg-ink/5 border border-ink/12 px-3.5 py-2 text-sm font-medium hover:bg-ink/8 transition whitespace-nowrap"
+                className="hidden sm:inline-flex btn-shine btn-epic items-center gap-2 rounded-xl bg-ink/5 border border-ink/[0.12] px-3.5 py-2 text-sm font-medium hover:bg-ink/[0.08] transition whitespace-nowrap"
               >
                 Special Offer <ArrowUpRight className="h-4 w-4 text-gold" />
               </Link>
@@ -145,7 +145,7 @@ export default function Navbar() {
               {/* Small mobile: icon-only CTA */}
               <Link
                 href="/book"
-                className="sm:hidden inline-flex h-10 w-10 items-center justify-center rounded-xl border border-ink/12 bg-ink/5 hover:bg-ink/8 transition"
+                className="sm:hidden inline-flex h-10 w-10 items-center justify-center rounded-xl border border-ink/[0.12] bg-ink/5 hover:bg-ink/[0.08] transition"
                 aria-label="Special Offer"
               >
                 <ArrowUpRight className="h-5 w-5 text-gold" />
@@ -154,7 +154,7 @@ export default function Navbar() {
               {/* Mobile menu button */}
               <button
                 onClick={() => setOpen(true)}
-                className="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-xl border border-ink/12 bg-ink/5 hover:bg-ink/8 transition"
+                className="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-xl border border-ink/[0.12] bg-ink/5 hover:bg-ink/[0.08] transition"
                 aria-label="Open menu"
                 type="button"
               >
@@ -210,12 +210,12 @@ export default function Navbar() {
               exit={{ y: -18, opacity: 0 }}
               transition={{ duration: 0.22 }}
             >
-              <div className="glass rounded-2xl border border-ink/12 shadow-glow overflow-hidden">
+              <div className="glass rounded-2xl border border-ink/[0.12] shadow-glow overflow-hidden">
                 <div className="flex items-center justify-between px-4 py-3 border-b border-ink/10">
                   <div className="text-sm font-semibold">Menu</div>
                   <button
                     onClick={() => setOpen(false)}
-                    className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-ink/12 bg-ink/5 hover:bg-ink/8 transition"
+                    className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-ink/[0.12] bg-ink/5 hover:bg-ink/[0.08] transition"
                     aria-label="Close menu"
                     type="button"
                   >

@@ -37,7 +37,7 @@ export default function FollowUs() {
                 group inline-flex items-center gap-2
                 rounded-2xl
                 border border-ink/15
-                bg-ink/6
+                bg-ink/[0.06]
                 hover:bg-ink/10
                 px-4 py-2.5
                 text-sm font-medium

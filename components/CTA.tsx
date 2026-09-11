@@ -30,14 +30,14 @@ export default function CTA() {
                 )}
                 target="_blank"
                 rel="noreferrer"
-                className="btn-shine btn-epic inline-flex items-center justify-center gap-2 rounded-2xl bg-ink/5 border border-ink/12 px-6 py-3.5 text-sm font-semibold hover:bg-ink/8 transition shadow-glow"
+                className="btn-shine btn-epic inline-flex items-center justify-center gap-2 rounded-2xl bg-ink/5 border border-ink/[0.12] px-6 py-3.5 text-sm font-semibold hover:bg-ink/[0.08] transition shadow-glow"
               >
                 WhatsApp to book <ArrowUpRight className="h-4 w-4 text-gold" />
               </a>
 
               <a
                 href={`tel:${SITE.phone}`}
-                className="inline-flex items-center justify-center rounded-2xl bg-ink/8 border border-gold/20 px-6 py-3 text-sm font-semibold text-ink/90 hover:bg-ink/12 transition"
+                className="inline-flex items-center justify-center rounded-2xl bg-ink/[0.08] border border-gold/20 px-6 py-3 text-sm font-semibold text-ink/90 hover:bg-ink/[0.12] transition"
               >
                 Call {SITE.phone}
               </a>
@@ -47,7 +47,7 @@ export default function CTA() {
                 href={buildWhatsAppLink(SITE.whatsappTemplates.giftCard, SOURCE_GIFT)}
                 target="_blank"
                 rel="noreferrer"
-                className="text-[11px] tracking-[0.18em] uppercase text-ink/72 hover:text-ink transition md:text-right"
+                className="text-[11px] tracking-[0.18em] uppercase text-ink/[0.72] hover:text-ink transition md:text-right"
               >
                 Gift card via WhatsApp →
               </a>

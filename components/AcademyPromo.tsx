@@ -24,7 +24,7 @@ export default function AcademyPromo() {
 
           <div className="hidden md:flex items-center gap-4 md:pb-1">
             {/* Proof badge (secondary) */}
-            <div className="inline-flex items-center gap-2 rounded-2xl border border-ink/10 bg-ink/3 px-4 py-2 text-xs text-mist whitespace-nowrap">
+            <div className="inline-flex items-center gap-2 rounded-2xl border border-ink/10 bg-ink/[0.03] px-4 py-2 text-xs text-mist whitespace-nowrap">
               <BadgeCheck className="h-4 w-4 text-gold" />
               Recognized qualifications
             </div>
@@ -34,7 +34,7 @@ export default function AcademyPromo() {
               href={SITE.academy}
               target="_blank"
               rel="noreferrer"
-              className="btn-shine inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-2xl bg-ink/5 border border-ink/12 px-5 py-3 text-sm font-semibold hover:bg-ink/8 transition"
+              className="btn-shine inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-2xl bg-ink/5 border border-ink/[0.12] px-5 py-3 text-sm font-semibold hover:bg-ink/[0.08] transition"
             >
               Explore Academy <ArrowUpRight className="h-4 w-4 text-gold" />
             </Link>
@@ -90,7 +90,7 @@ export default function AcademyPromo() {
                 href={SITE.academy}
                 target="_blank"
                 rel="noreferrer"
-                className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-ink/5 border border-ink/12 px-5 py-3 text-sm font-semibold hover:bg-ink/8 transition"
+                className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-ink/5 border border-ink/[0.12] px-5 py-3 text-sm font-semibold hover:bg-ink/[0.08] transition"
               >
                 View courses <ArrowUpRight className="h-4 w-4 text-gold" />
               </Link>
@@ -132,7 +132,7 @@ export default function AcademyPromo() {
                   href={SITE.academy}
                   target="_blank"
                   rel="noreferrer"
-                  className="btn-shine inline-flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-2xl bg-ink/5 border border-ink/12 px-5 py-3 text-sm font-semibold hover:bg-ink/8 transition"
+                  className="btn-shine inline-flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-2xl bg-ink/5 border border-ink/[0.12] px-5 py-3 text-sm font-semibold hover:bg-ink/[0.08] transition"
                 >
                   Explore Academy <ArrowUpRight className="h-4 w-4 text-gold" />
                 </Link>

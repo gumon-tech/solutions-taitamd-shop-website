@@ -17,7 +17,7 @@ export default function ServicesGrid() {
             <motion.div
               whileHover={{ y: -4 }}
               transition={{ type: "spring", stiffness: 260, damping: 20 }}
-              className="glass rounded-2xl p-6 overflow-hidden relative h-full flex flex-col border border-ink/12 shadow-[0_6px_18px_rgba(17,72,17,0.08)] hover:shadow-[0_18px_36px_rgba(17,72,17,0.14)] transition-shadow duration-300"
+              className="glass rounded-2xl p-6 overflow-hidden relative h-full flex flex-col border border-ink/[0.12] shadow-[0_6px_18px_rgba(17,72,17,0.08)] hover:shadow-[0_18px_36px_rgba(17,72,17,0.14)] transition-shadow duration-300"
             >
               <div className="absolute -top-24 -right-24 h-72 w-72 rounded-full bg-gold/10 blur-2xl" />
               <div className="absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-rose/10 blur-2xl" />
@@ -48,11 +48,11 @@ export default function ServicesGrid() {
                     )}
                     target="_blank"
                     rel="noreferrer"
-                    className="btn-shine inline-flex items-center justify-center gap-2 rounded-xl bg-ink/5 border border-ink/12 px-4 py-2.5 text-sm font-semibold hover:bg-ink/8 transition"
+                    className="btn-shine inline-flex items-center justify-center gap-2 rounded-xl bg-ink/5 border border-ink/[0.12] px-4 py-2.5 text-sm font-semibold hover:bg-ink/[0.08] transition"
                   >
                     Book this <ArrowUpRight className="h-4 w-4 text-gold" />
                   </Link>
-                  <span className="text-xs text-ink/74">Ask for availability on WhatsApp</span>
+                  <span className="text-xs text-ink/[0.74]">Ask for availability on WhatsApp</span>
                 </div>
               </div>
             </motion.div>
