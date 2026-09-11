@@ -1,4 +1,5 @@
 import { SITE } from "@/lib/site";
+import FaqPanel from "./FaqPanel";
 
 /**
  * The questions people actually ask, and the answers the shop stands behind.
@@ -18,11 +19,11 @@ import { SITE } from "@/lib/site";
  * Pages with their own subject — the treatment landing pages — write their own list instead,
  * since half of these answers would be beside the point there.
  *
- * The panel is cream rather than the page's green: this is the second of the two light bands
- * phase 3 puts on the home page (Q-SHOP-033, ruled by WS). Ten questions and answers is the
- * longest stretch of continuous reading anywhere on the page, which is exactly where a change
- * of ground earns its keep. The colours are the ones /book/ has used all along, so this adds
- * light without inventing any — the whole of what standing rule T11 permits.
+ * What this file is now is the shop's ten answers and nothing else. The panel around them —
+ * cream ground, dark text, the FAQPage structured data — moved to FaqPanel, which the five
+ * treatment landing pages use as well. This file had been the original that the other five
+ * were copied from, and the copies are what made phase 3 dangerous: changing the ground in
+ * six places means five chances to miss one.
  */
 export const SHOP_FAQ: Array<[string, string]> = [
   [
@@ -65,37 +66,5 @@ export const SHOP_FAQ: Array<[string, string]> = [
 ];
 
 export default function ShopFaq({ id = "shop-faq" }: { id?: string }) {
-  return (
-    <section
-      aria-labelledby={id}
-      className="mt-14 rounded-[28px] border border-[#d6c198] bg-[#f5efe3] p-7 md:p-9 shadow-[0_24px_60px_rgba(12,51,30,0.22)]"
-    >
-      <p className="text-xs tracking-[0.28em] uppercase text-[#6d5223]">Helpful answers</p>
-      <h2 id={id} className="mt-3 text-2xl md:text-3xl font-semibold text-[#183b2d]">
-        Frequently asked questions
-      </h2>
-      <div className="mt-6 grid gap-5 md:grid-cols-2">
-        {SHOP_FAQ.map(([q, a]) => (
-          <div key={q}>
-            <h3 className="font-semibold text-[#183b2d]">{q}</h3>
-            <p className="mt-2 text-sm leading-relaxed text-[#2c4a3c]">{a}</p>
-          </div>
-        ))}
-      </div>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            mainEntity: SHOP_FAQ.map(([name, text]) => ({
-              "@type": "Question",
-              name,
-              acceptedAnswer: { "@type": "Answer", text },
-            })),
-          }),
-        }}
-      />
-    </section>
-  );
+  return <FaqPanel id={id} items={SHOP_FAQ} />;
 }

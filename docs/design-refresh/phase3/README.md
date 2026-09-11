@@ -35,6 +35,31 @@ The label started at `#927039`, the colour /book/ has used for years, and measur
 same label is still `#927039` on /book/, /signature/ and the promotions card, which is a
 pre-existing failure this work found rather than caused; reported to WS separately.
 
+## 3.2 — the same panel on the treatment landing pages
+
+| file | what it shows |
+|---|---|
+| `1440-before-cream-landing-faq.jpg` · `1440-after-cream-landing-faq.jpg` | /facial-kings-cross/, standing in for all six |
+| `375-*` | the same on a phone |
+
+Measured on /facial-kings-cross/, both widths:
+
+```
+1440   average 3.4 → 13.3   ·   light cells 0 → 1196
+ 375   average 3.4 → 14.9   ·   light cells 0 → 8802
+```
+
+**Zero**, at both widths, before this. Not "few" — the six pages Google sends paid traffic to
+had no area above 50 anywhere on them. They are the newest pages on the site and were built
+entirely out of the dark ground, which is how a page ends up with no light at all without
+anybody choosing that.
+
+The panel now lives in `components/FaqPanel.tsx`. The markup had been copied into six files,
+which is what made this phase risky: six grounds to change means five chances to leave one
+behind, on pages nobody opens often enough to notice. The FAQPage structured data was moved
+with it and verified unchanged — the parsed object hashes identically on all six pages before
+and after.
+
 ## 3.3 — the opacity classes that were never generated
 
 | file | what it shows |

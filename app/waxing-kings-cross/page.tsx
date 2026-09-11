@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { MessageCircle } from "lucide-react";
 import ServicePriceGrid from "@/components/ServicePriceGrid";
+import FaqPanel from "@/components/FaqPanel";
 import TreatwellFallback from "@/components/TreatwellFallback";
 import CTA from "@/components/CTA";
 import { CATALOG } from "@/lib/catalog";
@@ -169,34 +170,7 @@ export default function WaxingKingsCrossPage() {
         <p className="mt-5 text-xs leading-relaxed text-mist">{SITE.standardsNotice}</p>
       </section>
 
-      <section aria-labelledby="wx-faq" className="mt-14 rounded-[28px] border border-ink/10 bg-ink/5 p-7 md:p-9">
-        <p className="text-xs tracking-[0.28em] uppercase text-mist">Helpful answers</p>
-        <h2 id="wx-faq" className="mt-3 text-2xl md:text-3xl font-semibold">
-          Frequently asked questions
-        </h2>
-        <div className="mt-6 grid gap-5 md:grid-cols-2">
-          {FAQ.map(([q, a]) => (
-            <div key={q}>
-              <h3 className="font-semibold">{q}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-ink/75">{a}</p>
-            </div>
-          ))}
-        </div>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "FAQPage",
-              mainEntity: FAQ.map(([name, text]) => ({
-                "@type": "Question",
-                name,
-                acceptedAnswer: { "@type": "Answer", text },
-              })),
-            }),
-          }}
-        />
-      </section>
+      <FaqPanel id="wx-faq" items={FAQ} />
 
       <section aria-label="Other treatments nearby" className="mt-14">
         <h2 className="text-2xl font-semibold md:text-3xl">More at Taitam-D</h2>
