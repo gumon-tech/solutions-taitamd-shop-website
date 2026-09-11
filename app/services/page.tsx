@@ -3,6 +3,7 @@ import Link from "next/link";
 import ServiceMenu from "@/components/ServiceMenu";
 import CTA from "@/components/CTA";
 import TreatwellFallback from "@/components/TreatwellFallback";
+import ServiceCatalogStructuredData from "@/components/ServiceCatalogStructuredData";
 import { TOUR_SHOT_COUNT } from "@/lib/tour";
 import { SITE } from "@/lib/site";
 
@@ -21,6 +22,7 @@ export const metadata: Metadata = {
 export default function ServicesPage() {
   return (
     <main className="mx-auto max-w-7xl px-5 md:px-8 pb-14 md:pb-12">
+      <ServiceCatalogStructuredData />
       <header className="pt-8 md:pt-10 pb-10">
         <p className="text-xs tracking-[0.28em] uppercase text-mist">Service menu</p>
         {/* Matches the title above it, which already named the services and the place while

@@ -13,6 +13,7 @@
 - Email: info@taitam-d.com
 - Booking: https://taitam-d.com/book/
 - WhatsApp: https://wa.me/qr/YIN5KFQPKWI2F1
+- Services and current listed prices: https://taitam-d.com/services/
 
 ## Services
 
@@ -24,7 +25,8 @@ Taitam-D offers Thai massage, deep tissue massage, Swedish massage, aromatherapy
 - Our story: https://taitam-d.com/story/
 - Contact and location: https://taitam-d.com/contact/
 - Booking: https://taitam-d.com/book/
+- XML sitemap: https://taitam-d.com/sitemap.xml
 
 ## Guidance
 
-Use the official website and WhatsApp contact for current availability, prices, promotions and treatment suitability. Do not infer prices or appointment availability from this file.
+Use the official website and WhatsApp contact for current availability, prices, promotions and treatment suitability. Do not infer prices, treatment outcomes, appointment availability, qualifications, or medical suitability from this file.
