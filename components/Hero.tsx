@@ -128,6 +128,28 @@ export default function Hero() {
                     <ArrowUpRight className="h-4 w-4" />
                   </Link>
 
+                  {/* These four sat on the photograph with nothing behind them, and phase 2
+                      let the photograph through: the white line on the WhatsApp tile fell from
+                      4.59 to 2.52 against a 4.5 floor, measured off the paired screenshots.
+                      Two separate reasons, and only one of them was visible.
+
+                      The first is that `bg-black/16` and `border-white/14` never existed.
+                      Tailwind generates opacity modifiers from a scale in steps of five, so
+                      /16 and /14 produce no rule at all — the tiles had no background, and
+                      their border fell through to preflight's gray-200, a colour that is not
+                      in this palette. Around sixty more of these are spread across the repo
+                      (`bg-ink/8` is in sixteen places), reported to WS separately.
+
+                      The second is the fix WS ruled on: cream panel, dark text — the same
+                      `#ebe3d4` tile /book/ has used all along, which is a surface Kru Nok has
+                      already accepted, and which raises the page's average brightness rather
+                      than lowering it (T11). The wash stays where phase 2 put it.
+
+                      The panel is opaque, not translucent. At 90% the cream still let the
+                      photograph through enough to move the numbers: the Since tile sits over
+                      the darkest corner and its label measured 4.31 against the same 4.5 floor
+                      we are here to clear. Leaving any of the contrast dependent on the picture
+                      behind it would be re-creating the defect at a smaller amplitude. */}
                   <div className="mt-6 grid grid-cols-2 gap-3">
                     {[
                       { k: "Since", v: "2009" },
@@ -135,9 +157,9 @@ export default function Hero() {
                       { k: "Daily", v: "10:30am – 9pm" },
                       { k: "WhatsApp", v: "fast replies" }
                     ].map((b) => (
-                      <div key={b.k} className="rounded-2xl bg-black/16 border border-white/14 p-4">
-                        <div className="text-xl font-semibold text-gold">{b.k}</div>
-                        <div className="text-xs text-ink/76 mt-1">{b.v}</div>
+                      <div key={b.k} className="rounded-2xl bg-[#ebe3d4] border border-[#cdb887] p-4">
+                        <div className="text-xl font-semibold text-[#6d5223]">{b.k}</div>
+                        <div className="text-xs text-[#183b2d] mt-1">{b.v}</div>
                       </div>
                     ))}
                   </div>
@@ -146,7 +168,7 @@ export default function Hero() {
 
               <div className="mt-4 flex items-center justify-between gap-4 text-xs text-ink/72">
                 <span>Reserve by WhatsApp · {SITE.whatsappDisplay}</span>
-                <span className="inline-flex h-8 w-8 items-center justify-center rounded-xl bg-black/16 border border-white/14 animate-floaty">
+                <span className="inline-flex h-8 w-8 items-center justify-center rounded-xl bg-black/15 border border-white/15 animate-floaty">
                   ✦
                 </span>
               </div>
