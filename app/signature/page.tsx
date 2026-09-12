@@ -190,7 +190,7 @@ export default function SignaturePage() {
         <div className="overflow-hidden rounded-[32px] border border-[#d6c198] bg-[#f5efe3] text-[#183b2d] shadow-[0_24px_60px_rgba(12,51,30,0.22)]">
           <div className="grid lg:grid-cols-[1.05fr_0.95fr]">
             <div className="px-5 pb-6 pt-5 md:p-12">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[#95743a] md:text-xs">{OWNER_COPY.eyebrow}</p>
+            <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[#6d5223] md:text-xs">{OWNER_COPY.eyebrow}</p>
 
             <h1 className="mt-2 max-w-3xl text-[1.75rem] font-semibold uppercase leading-[1.06] tracking-[-0.02em] sm:text-4xl md:mt-4 md:text-5xl">
               Nuad Thai <span className="text-[#a37d37]">Heritage Massage</span>
@@ -244,7 +244,7 @@ export default function SignaturePage() {
 
             <p className="mt-6 max-w-2xl text-sm leading-relaxed text-[#5b6d62] md:mt-7 md:text-base">{OWNER_COPY.consult}</p>
 
-            <p className="mt-4 max-w-2xl text-xs font-semibold uppercase tracking-[0.12em] text-[#8d6c2c] md:text-sm">
+            <p className="mt-4 max-w-2xl text-xs font-semibold uppercase tracking-[0.12em] text-[#6d5223] md:text-sm">
               {OWNER_COPY.modalities}
             </p>
 
@@ -252,24 +252,24 @@ export default function SignaturePage() {
 
             <div className="mt-8 grid gap-3 sm:grid-cols-3">
               <div className="rounded-2xl bg-[#ebe3d4] p-4">
-                <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.18em] text-[#927039]">
+                <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.18em] text-[#6d5223]">
                   <Clock className="h-3.5 w-3.5" /> Duration
                 </div>
                 <div className="mt-2 text-sm font-semibold">60 minutes</div>
               </div>
               <div className="rounded-2xl bg-[#ebe3d4] p-4">
-                <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.18em] text-[#927039]">
+                <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.18em] text-[#6d5223]">
                   <MapPin className="h-3.5 w-3.5" /> Where
                 </div>
                 <div className="mt-2 text-sm font-semibold">King&rsquo;s Cross &middot; 6 min walk</div>
               </div>
               <div className="rounded-2xl bg-[#ebe3d4] p-4">
-                <div className="text-[10px] uppercase tracking-[0.18em] text-[#927039]">Open</div>
+                <div className="text-[10px] uppercase tracking-[0.18em] text-[#6d5223]">Open</div>
                 <div className="mt-2 text-sm font-semibold">{SITE.hours}</div>
               </div>
             </div>
 
-            <p className="mt-8 text-xs uppercase tracking-[0.2em] text-[#95743a]">{OWNER_COPY.poweredBy}</p>
+            <p className="mt-8 text-xs uppercase tracking-[0.2em] text-[#6d5223]">{OWNER_COPY.poweredBy}</p>
           </div>
 
             {/* The room this treatment happens in, photographed by Kru Nok on 2026-08-12
