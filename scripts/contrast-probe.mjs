@@ -106,6 +106,20 @@ const pageHeight = await evaluate(`(async () => {
   const H = document.body.scrollHeight;
   for (let y = 0; y < H; y += 300) { window.scrollTo(0, y); await new Promise(r => setTimeout(r, 60)); }
   await Promise.all([...document.querySelectorAll("img")].map((i) => i.complete ? null : new Promise(r => { i.onload = i.onerror = r; })));
+  // The control swatch. #6d5223 on #fffdf8 is 7.17 by the WCAG formula, worked out by hand, and
+  // this probe has to come back with 7.17 before any other number it prints can be believed.
+  // Four earlier versions of this file each returned a tidy, plausible, wrong list of failures;
+  // none of them announced itself as broken. A value whose answer is known in advance is the
+  // only thing that told them apart. Required every run by the ruling on Q-SHOP-033.
+  const ctl = document.createElement("div");
+  ctl.id = "__contrast_control";
+  ctl.textContent = "contrast control swatch";
+  ctl.setAttribute("style", "position:relative;z-index:2147483647;background:#fffdf8;color:#6d5223;font-size:14px;font-weight:600;padding:10px;width:200px;margin:0");
+  // At the very end of the document, where it covers nothing. Put at the top it sat under the
+  // floating navbar, which is translucent, and the swatch then measured 5.60 against a greenish
+  // grey that is not its background — the control catching its own placement. Raised above
+  // everything as well, so no later overlay can repeat that.
+  document.body.appendChild(ctl);
   window.scrollTo(0, 0);
   await new Promise(r => setTimeout(r, 1200));
   return document.body.scrollHeight;
@@ -197,7 +211,15 @@ await evaluate(`(() => {
 // scrollY never changes.
 const results = [];
 const pageWidth = await evaluate(`document.documentElement.scrollWidth`);
-for (let band = 0; band < pageHeight; band += height) {
+// Band tops, with a final band anchored to the bottom of the page rather than running off it.
+// A clip that extends past the end of the document comes back as a short image, and anything
+// sitting in that overhang reads as never measured — which is how the control swatch, the one
+// element whose answer is known, disappeared from its own run.
+const bands = [];
+for (let b = 0; b < pageHeight; b += height) bands.push(b);
+const lastBand = Math.max(0, pageHeight - height);
+if (!bands.includes(lastBand)) bands.push(lastBand);
+for (const band of bands) {
   const { data } = await send("Page.captureScreenshot", {
     format: "png",
     captureBeyondViewport: true,
@@ -220,18 +242,34 @@ for (let band = 0; band < pageHeight; band += height) {
 ws.close();
 chrome.kill();
 
+const CONTROL_TEXT = "contrast control swatch";
+const CONTROL_EXPECTED = 7.17;
+const control = results.find((r) => r.text === CONTROL_TEXT);
+const pageResults = results.filter((r) => r.text !== CONTROL_TEXT);
+
+if (!control) {
+  console.log("control swatch never measured — this run proves nothing. Not reporting numbers.");
+  ws.close?.();
+  process.exit(2);
+}
+console.log(`control  ${control.fg} on ${control.bg} = ${control.ratio.toFixed(2)} (expected #6d5223 on #fffdf8 = ${CONTROL_EXPECTED})  ${Math.abs(control.ratio - CONTROL_EXPECTED) <= 0.05 ? "ok" : "MISMATCH"}`);
+if (Math.abs(control.ratio - CONTROL_EXPECTED) > 0.05) {
+  console.log(`the control is off, so every other number this run produced is off too. Not reporting them.`);
+  process.exit(2);
+}
+
 // MATCH=<regex> also prints the elements it names whether they pass or fail, so a fix can be
 // reported as the number it now is rather than as an absence from the failure list.
 const match = process.env.MATCH ? new RegExp(process.env.MATCH, "i") : null;
 if (match) {
   console.log(`matched by MATCH=${process.env.MATCH}:`);
-  for (const r of results.filter((r) => match.test(r.text))) {
+  for (const r of pageResults.filter((r) => match.test(r.text))) {
     console.log(`  ${String(r.ratio).padStart(5)} (needs ${r.need})  ${r.fg} on ${r.bg}  ${Math.round(r.size)}px/${r.weight}  ${JSON.stringify(r.text)}`);
   }
 }
 
-const fails = results.filter((r) => r.ratio < r.need && r.ratio > 1.02);
-console.log(`contrast-probe ${url} ${width}x${height} — ${results.length} text elements, ${fails.length} below AA`);
+const fails = pageResults.filter((r) => r.ratio < r.need && r.ratio > 1.02);
+console.log(`contrast-probe ${url} ${width}x${height} — ${pageResults.length} text elements, ${fails.length} below AA`);
 for (const f of fails.sort((a, b) => a.ratio - b.ratio)) {
   console.log(`  ${String(f.ratio).padStart(5)} < ${f.need}  ${f.fg} on ${f.bg}  ${Math.round(f.size)}px/${f.weight}  ${JSON.stringify(f.text)}`);
 }
