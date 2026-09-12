@@ -48,11 +48,19 @@ lines.push("Measured on this PR's build and on the base branch's build, in the s
 lines.push("Not a required check: this is here so the numbers are in front of you before you merge.");
 lines.push("");
 
-// The control first, because nothing below it means anything if it is off. #6d5223 on #fffdf8
-// is 7.17 worked out by hand; a probe that does not return 7.17 is not measuring this page.
-const controls = WIDTHS.map(([w]) => pr[w].contrast.control);
-const controlOk = controls.every((c) => Math.abs(c - 7.17) <= 0.05);
-lines.push(`**Control** #6d5223 on #fffdf8 — expected 7.17, got ${controls.join(" and ")} — ${controlOk ? "ok" : "**MISMATCH, ignore everything below**"}`);
+// The controls first, because nothing below them means anything if one is off. Both values are
+// worked out by hand. Two of them, not one, because the first control only ever exercised the
+// flat-background path the probe already got right — the bug that reached a ruling happened on
+// a gradient, and a control proves the path it walks and nothing else.
+lines.push("**Controls** — both computed by hand; if either is off, ignore everything below it.");
+lines.push("");
+lines.push("| control | expected | measured |");
+lines.push("|---|---|---|");
+for (const [w] of WIDTHS) {
+  for (const c of pr[w].contrast.controls) {
+    lines.push(`| ${c.what} (${w}px) | ${c.expected} | ${c.got ?? "not measured"} |`);
+  }
+}
 lines.push("");
 
 lines.push("| | width | base | this PR | change |");

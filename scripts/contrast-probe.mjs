@@ -121,6 +121,27 @@ const pageHeight = await evaluate(`(async () => {
   // grey that is not its background — the control catching its own placement. Raised above
   // everything as well, so no later overlay can repeat that.
   document.body.appendChild(ctl);
+
+  // The second control, on a gradient, required by WS after the first one failed to catch the
+  // bug that mattered. The flat swatch above only ever exercised the path the probe already got
+  // right; the failure that reached a ruling happened on .glass, where no background colour
+  // repeats often enough to be a mode. A control proves the path it walks and nothing else.
+  //
+  // Its value is still computable by hand. The background runs #0a2e22 to #4c7a4e down the box,
+  // luminance is monotonic along that, so the median-luminance pixel is the midpoint colour —
+  // #2b5438, each channel the mean of the two ends. #f2f4e8 on #2b5438 is 7.78.
+  //
+  // The padding is 44px and not 10px for a reason worth keeping. The glyphs are far brighter
+  // than any of the background, so they all sort to the top, and every glyph pixel pushes the
+  // median one place further up into the lighter half of the gradient. At 10px padding the text
+  // was about a tenth of the box and the median landed on #335d3d instead of #2b5438 — a real
+  // 0.97 of contrast, enough to read as a broken control. Drowning the text in background puts
+  // the median back within a shade of the midpoint.
+  const ctl2 = document.createElement("div");
+  ctl2.id = "__contrast_control_gradient";
+  ctl2.textContent = "contrast control gradient";
+  ctl2.setAttribute("style", "position:relative;z-index:2147483647;background:linear-gradient(to bottom,#0a2e22,#4c7a4e);color:#f2f4e8;font-size:14px;font-weight:600;padding:44px 10px;width:200px;margin:0");
+  document.body.appendChild(ctl2);
   window.scrollTo(0, 0);
   await new Promise(r => setTimeout(r, 1200));
   return document.body.scrollHeight;
@@ -269,21 +290,60 @@ for (const band of bands) {
 ws.close();
 chrome.kill();
 
-const CONTROL_TEXT = "contrast control swatch";
-const CONTROL_EXPECTED = 7.17;
-const control = results.find((r) => r.text === CONTROL_TEXT);
-const pageResults = results.filter((r) => r.text !== CONTROL_TEXT);
+// Two controls, both computable by hand, one flat and one on a gradient. Either being wrong
+// voids the whole run (WS, Q-SHOP-033, 2026-09-12): a probe off by an unknown amount does not
+// produce slightly wrong findings, it produces a list that looks exactly like work to do.
+const CONTROLS = [
+  { text: "contrast control swatch", expected: 7.17, what: "#6d5223 on #fffdf8, flat", tol: 0.05 },
+  // 7.78 is the hand-computed value and also a ceiling the measurement approaches from below,
+  // never above. Every glyph pixel is brighter than all of the background, so glyphs sort to the
+  // top and each one pushes the median one place further into the lighter half of the gradient —
+  // a lighter background reads as less contrast. The bias only has one direction, so the band is
+  // one-sided in practice; 0.45 covers the text this swatch carries.
+  //
+  // The tolerance is not what gives this control its teeth. `within` does: the background it
+  // measures has to be a colour that is actually in the gradient. The bug this exists to catch
+  // reported a glyph colour as the background and came out at 1.90 against a true 6.49, and no
+  // tolerance on a ratio distinguishes that from an honest near miss — a range check does.
+  { text: "contrast control gradient", expected: 7.78, what: "#f2f4e8 on #2b5438, gradient midpoint", tol: 0.45,
+    within: ["#0a2e22", "#4c7a4e"] },
+];
+const srgbOf = (v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); };
+const lumHex = (h) => {
+  const p = [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
+  return 0.2126 * srgbOf(p[0]) + 0.7152 * srgbOf(p[1]) + 0.0722 * srgbOf(p[2]);
+};
+const controlTexts = new Set(CONTROLS.map((c) => c.text));
+const pageResults = results.filter((r) => !controlTexts.has(r.text));
 
-if (!control) {
-  console.log("control swatch never measured — this run proves nothing. Not reporting numbers.");
-  ws.close?.();
+let controlsOk = true;
+for (const c of CONTROLS) {
+  const hit = results.find((r) => r.text === c.text);
+  if (!hit) {
+    console.log(`control "${c.what}" was never measured — this run proves nothing.`);
+    controlsOk = false;
+    continue;
+  }
+  c.got = hit.ratio;
+  let ok = Math.abs(hit.ratio - c.expected) <= c.tol;
+  if (ok && c.within) {
+    const l = lumHex(hit.bg);
+    const [lo, hi] = c.within.map(lumHex).sort((a, b) => a - b);
+    if (l < lo || l > hi) {
+      ok = false;
+      console.log(`control "${c.what}" measured ${hit.bg} as the background, which is not a colour in the gradient — the probe is reading something other than the surface.`);
+    }
+  }
+  if (!ok) controlsOk = false;
+  if (!process.env.JSON) {
+    console.log(`control  ${c.what} — expected ${c.expected}, got ${hit.ratio.toFixed(2)} (measured ${hit.fg} on ${hit.bg})  ${ok ? "ok" : "MISMATCH"}`);
+  }
+}
+if (!controlsOk) {
+  console.log("a control is off, so every other number this run produced is off too. Not reporting them.");
   process.exit(2);
 }
-if (!process.env.JSON) console.log(`control  ${control.fg} on ${control.bg} = ${control.ratio.toFixed(2)} (expected #6d5223 on #fffdf8 = ${CONTROL_EXPECTED})  ${Math.abs(control.ratio - CONTROL_EXPECTED) <= 0.05 ? "ok" : "MISMATCH"}`);
-if (Math.abs(control.ratio - CONTROL_EXPECTED) > 0.05) {
-  console.log(`the control is off, so every other number this run produced is off too. Not reporting them.`);
-  process.exit(2);
-}
+const control = { ratio: CONTROLS[0].got };
 
 // MATCH=<regex> also prints the elements it names whether they pass or fail, so a fix can be
 // reported as the number it now is rather than as an absence from the failure list.
@@ -298,7 +358,8 @@ if (match) {
 const fails = pageResults.filter((r) => r.ratio < r.need && r.ratio > 1.02);
 if (process.env.JSON) {
   console.log(JSON.stringify({
-    url, width, height, control: control.ratio, elements: pageResults.length,
+    url, width, height, controls: CONTROLS.map((c) => ({ what: c.what, expected: c.expected, got: c.got })),
+    elements: pageResults.length,
     fails: fails.map((f) => ({ text: f.text, ratio: f.ratio, need: f.need, fg: f.fg, bg: f.bg })),
   }));
   process.exit(0);
