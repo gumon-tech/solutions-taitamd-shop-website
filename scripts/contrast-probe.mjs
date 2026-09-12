@@ -171,23 +171,49 @@ await evaluate(`(() => {
     const ctx = c.getContext("2d");
     ctx.drawImage(img, 0, 0);
     const d = ctx.getImageData(x, y, w, h).data;
-    const counts = new Map();
-    const pixels = [];
-    for (let i = 0; i < d.length; i += 4) {
-      const p = [d[i], d[i+1], d[i+2]];
-      pixels.push(p);
-      const k = hex(p);
-      counts.set(k, (counts.get(k) || 0) + 1);
-    }
-    let bgHex = null, best = -1;
-    for (const [k, v] of counts) if (v > best) { best = v; bgHex = k; }
-    const bg = [1,3,5].map(i => parseInt(bgHex.slice(i, i+2), 16));
+
+    // Background from the pixels, foreground from CSS — each from the source that actually
+    // knows it.
+    //
+    // The background has to be measured, because that is the whole point: a label on a
+    // photograph, or on .glass (two translucent gradients over the page), has no background
+    // colour in the stylesheet at all. The median luminance is the background — glyphs are a
+    // minority of any text element's area, so the middle pixel is the surface under them.
+    //
+    // The foreground must NOT be measured, and the earlier version of this that took the
+    // most extreme pixel was wrong in a way that invented work. On a heading like
+    //   Professional massage training — <span class="text-gold">high-quality…</span>
+    // sitting on .glass, no single background colour repeats often enough to be the mode,
+    // because the gradient is smooth — but the gold span's glyph cores are all exactly
+    // #c8b07c. So the mode came back gold, the extreme came back white, and the probe
+    // reported white-on-gold at 1.90: two foreground colours compared with each other, on an
+    // element where nothing is wrong. It got as far as a WS ruling to change a colour that
+    // did not need changing.
+    const lums = [];
+    for (let i = 0; i < d.length; i += 4) lums.push({ l: lum([d[i], d[i+1], d[i+2]]), p: [d[i], d[i+1], d[i+2]] });
+    lums.sort((a, b) => a.l - b.l);
+    const bg = lums[Math.floor(lums.length / 2)].p;
     const bgL = lum(bg);
-    // The glyph core is the pixel furthest from the surface it sits on. Everything between is
-    // antialiasing, which is not what the eye resolves the letterform from.
-    let fg = bg, spread = 0;
-    for (const p of pixels) { const dd = Math.abs(lum(p) - bgL); if (dd > spread) { spread = dd; fg = p; } }
+    const bgHex = hex(bg);
+
+    // Text colour as declared, composited over the surface just measured when it is not
+    // opaque — half this site's body text is ink at 82%, and what reaches the eye is the blend.
+    const css = getComputedStyle(n.el).color;
+    // Backslashes are doubled on purpose: this whole block is inside a template literal, so
+    // one backslash is eaten before the page ever sees the regex. /\s/ arrived as /s/ and
+    // matched the letter s; /\// arrived as // and commented out the rest of the line.
+    const m = css.match(/rgba?\\(([^)]+)\\)/);
+    if (!m) return null;
+    // Both spellings: "rgb(109, 82, 35)" and the space-separated "rgb(109 82 35 / 0.82)".
+    // Chrome returns either depending on how the value was authored, and splitting only on
+    // commas turned the second form into one number and three NaNs — which arrived here as a
+    // null ratio and took the control down with it.
+    const parts = m[1].split(/[\\s,\\/]+/).filter(Boolean).map((v) => parseFloat(v));
+    if (parts.length < 3 || parts.slice(0, 3).some((v) => !Number.isFinite(v))) return null;
+    const alpha = parts.length > 3 && Number.isFinite(parts[3]) ? parts[3] : 1;
+    const fg = [0, 1, 2].map((i) => Math.round(parts[i] * alpha + bg[i] * (1 - alpha)));
     const fgL = lum(fg);
+
     const [hi, lo] = fgL > bgL ? [fgL, bgL] : [bgL, fgL];
     const ratio = (hi + 0.05) / (lo + 0.05);
     n.done = true;
