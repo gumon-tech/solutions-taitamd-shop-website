@@ -145,6 +145,60 @@ lashes    แหนบกับถาดขนตาวางบนผ้า ไ
 ภาพที่มีอยู่เดิมหกไฟล์ **เก็บไว้ใช้เป็นภาพประกอบรองได้** เช่นวางคู่กับหัวข้อย่อยในหน้าเดียวกัน
 เพราะภาพนิ่งของอุปกรณ์ทำหน้าที่นั้นได้ดี สิ่งที่มันทำไม่ได้คือเป็นภาพหลักของหน้าบริการ
 
+## 9b โจทย์สำหรับ Gemini หกข้อ คัดลอกไปวางได้เลย
+
+ทุกข้อใช้ท่อนเปิดเดียวกัน เพื่อให้หกภาพเป็นชุดเดียวกันจริง ไม่ใช่หกภาพที่บังเอิญอยู่เว็บเดียวกัน
+สร้างที่ **1440x960** แล้วบันทึกเป็น JPEG คุณภาพประมาณ 80 ให้ไฟล์ลงมาอยู่ราว 120 ถึง 150 KB
+อัตราส่วน 3:2 ตรงกับช่องที่เตรียมไว้ เปลี่ยนภาพภายหลังได้โดยเลย์เอาต์ไม่ขยับ
+
+**ท่อนเปิดที่ใช้ร่วมกันทั้งหกข้อ**
+
+```
+A photograph for a London beauty salon website. Deep forest green walls, warm natural
+wood, matte brushed gold accents, cream and white linen. Soft natural daylight from a
+side window, gentle shadows, calm and unhurried. Shallow depth of field. Realistic
+photography, not illustration. Horizontal 3:2 composition. No text, no logos, no
+watermarks anywhere in the image.
+```
+
+**หกข้อต่อท้าย เติมทีละข้อ**
+
+```
+1  massage
+   A therapist's hands working across a client's upper back and shoulder, the client
+   lying face down under a cream towel. Show the hands mid-movement so the massage is
+   clearly happening. Frame from the shoulders up, the therapist's face out of frame.
+
+2  deep-tissue
+   A therapist pressing with forearm and palm into a client's lower back or calf, the
+   pressure visible in the hands. Firmer and more deliberate than a relaxation massage.
+   Client under a cream towel, face out of frame.
+
+3  facial
+   A therapist's hands applying cream along a client's cheek and jaw, the client lying
+   back with eyes closed. The client's face is visible and relaxed. A small bowl and a
+   jade roller on a wooden tray nearby, slightly out of focus.
+
+4  nails
+   A close view of two pairs of hands over a wooden table: the client's hand resting
+   flat, the technician's hands filing or painting one nail. Both hands clearly in the
+   frame. Polish bottles out of focus in the background.
+
+5  lashes
+   A lash technician leaning in with fine tweezers, applying an extension to a client
+   who is lying down with eyes closed. Show the tweezers and the technician's hand
+   close to the lash line.
+
+6  waxing
+   A therapist's gloved hands smoothing a wax strip along a client's lower leg or
+   forearm, mid-motion. Clean, clinical and calm. Client's face out of frame.
+```
+
+**สิ่งที่ต้องปฏิเสธเวลาเลือกภาพที่ได้มา** ห้องเปล่า เตียงที่ไม่มีคน ภาพอุปกรณ์ล้วน
+มือที่ลอยอยู่โดยไม่มีคนรับบริการ และภาพที่มีตัวอักษรหรือโลโก้ปลอมงอกมาในภาพ
+
+**ได้ภาพมาแล้ว `alt` ห้ามเขียนว่าเป็นห้องของเรา ช่างของเรา หรือลูกค้าจริงของเรา** ตามข้อ 5
+
 ## 10 รายการตรวจก่อน commit ทุกภาพ
 
 ```
