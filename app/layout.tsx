@@ -34,6 +34,7 @@ const sans = Inter({
 import { SITE } from "@/lib/site";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import StickyBookBar from "@/components/StickyBookBar";
 import StructuredData from "@/components/StructuredData";
 import Analytics from "@/components/Analytics";
 
@@ -110,6 +111,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Navbar />
         {children}
         <Footer />
+        <StickyBookBar />
         <Analytics />
       </body>
     </html>

@@ -14,8 +14,13 @@
   --bg-lock-top: rgba(27, 71, 51, 0.72);
   --bg-lock-bottom: rgba(8, 37, 27, 0.82);
 
-  /* Navbar offset (fix overlap on mobile) */
-  --nav-height: 120px;
+  /* Navbar offset (fix overlap on mobile).
+     96px, measured, not guessed: with the duplicated quick-nav row gone the mobile header is
+     86px from the top of the screen to the bottom of its card, so this leaves 10px of air
+     under it. At 120px it had been wrong in both directions over time — 36px of the page was
+     hidden behind a 156px header, and then 34px of empty space was reserved under an 86px one.
+     Anything that changes the header's height has to come back and remeasure this number. */
+  --nav-height: 96px;
 }
 
 @media (min-width: 1024px) {
@@ -44,6 +49,15 @@ body {
 
   /* IMPORTANT: prevents fixed/sticky navbar from covering hero title */
   padding-top: var(--nav-height);
+}
+
+/* Room at the bottom for the sticky booking bar, which is mobile only. Without this the last
+   line of the footer sits underneath it on every page — the bar is opaque, so the text does
+   not look cut off, it looks absent. */
+@media (max-width: 767px) {
+  body {
+    padding-bottom: 84px;
+  }
 }
 
 /* ===== Background (Reference Green Hero) ===== */
@@ -333,8 +347,11 @@ html[data-capture="true"] .btn-shine::after {
 @layer components {
   /* Space is the cheapest thing a page can spend to look expensive, and this site had the
      least of it where it mattered most. Sections were py-12/py-16 (Q-SHOP-033 phase 1). */
+  /* 48px on phones rather than 64px. Twelve sections of a 16px saving at each end is most of
+     a screenful of scrolling removed from a page that runs to nearly 20,000px on a phone, and
+     no content leaves the page to get it (Q-SHOP-033 phase 4). */
   .ui-section {
-    @apply py-16 md:py-24;
+    @apply py-12 md:py-24;
   }
 
   .ui-section-hero {

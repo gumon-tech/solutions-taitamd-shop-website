@@ -67,14 +67,6 @@ export default function Navbar() {
         : "text-mist hover:text-ink hover:bg-ink/5"
     );
 
-  const mobileQuickCls = (active: boolean) =>
-    cn(
-      "inline-flex items-center justify-center rounded-xl border px-3 py-2 text-[11px] font-semibold tracking-[0.18em] uppercase transition",
-      active
-        ? "border-gold bg-gold text-[#1F3D2A]"
-        : "border-ink/[0.12] bg-ink/5 hover:bg-ink/[0.08] text-ink/90"
-    );
-
   const drawerItemCls = (active: boolean) =>
     cn(
       "inline-flex items-center justify-between rounded-2xl border transition px-4 py-3",
@@ -103,9 +95,14 @@ export default function Navbar() {
                 className="h-11 w-11 object-contain drop-shadow-[0_2px_10px_rgba(0,0,0,0.45)]"
               />
 
-              <div className="leading-tight">
+              {/* The tagline is hidden on the narrowest screens rather than shrunk to fit.
+                  At 375 there is room for about 159px of it and it wants 221px, so every
+                  option that keeps it ends in an ellipsis mid-word — "RELAX • REFRESH • RE…"
+                  reads as a layout fault, not as brand. It returns at 640px, and the same
+                  three words are in the footer on every page regardless. */}
+              <div className="min-w-0 leading-tight">
                 <div className="text-sm font-semibold tracking-wide">{SITE.name}</div>
-                <div className="text-[11px] text-mist tracking-[0.22em] uppercase">
+                <div className="hidden sm:block text-[11px] text-mist tracking-[0.22em] uppercase">
                   {SITE.tagline}
                 </div>
               </div>
@@ -161,23 +158,6 @@ export default function Navbar() {
                 <Menu className="h-5 w-5 text-gold" />
               </button>
             </div>
-          </div>
-
-          {/* Mobile quick nav */}
-          <div className="mt-3 md:hidden grid grid-cols-2 gap-2">
-            <Link href="/services" className={mobileQuickCls(isActivePath("/services"))}>
-              Services
-            </Link>
-
-            {/* external -> no active */}
-            <a
-              href={SITE.academy}
-              target="_blank"
-              rel="noreferrer"
-              className={mobileQuickCls(false)}
-            >
-              Academy
-            </a>
           </div>
 
           {/* Top progress */}

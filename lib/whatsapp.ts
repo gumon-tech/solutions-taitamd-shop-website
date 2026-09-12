@@ -89,6 +89,21 @@ export const SOURCE_CONTACT_QR_CARD = "R";
 export const SOURCE_MASSAGE_LANDING = "J";
 
 /**
+ * The sticky booking bar pinned to the bottom of every mobile page (Q-SHOP-033 phase 4).
+ *
+ * Two letters, not one: 22 of the 26 singles were already taken when MKT moved this register
+ * to two letters on 2026-09-09, and taking one of the last four for a surface that is not a
+ * landing page would spend the shortage on the wrong thing. S(ticky) B(ar).
+ *
+ * It matters that this one is separate rather than reusing O. The bar sends exactly the words
+ * the home hero sends, so without its own letter the count would say the hero got busier on
+ * phones while the real answer would be that a second button appeared somewhere else entirely.
+ *
+ * MKT holds the register and may swap this letter in one line here.
+ */
+export const SOURCE_STICKY_BAR = "SB";
+
+/**
  * Landing pages from Q-MKT-079 use two letters, decided by MKT on 2026-09-09 after this
  * room reported the shortage: 22 of the 26 single letters were taken and the ticket asked
  * for 5 more. Every existing single letter stays exactly where it is — renaming them would
