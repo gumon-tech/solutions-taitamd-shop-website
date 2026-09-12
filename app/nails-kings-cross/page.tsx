@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { MessageCircle } from "lucide-react";
 import ServicePriceGrid from "@/components/ServicePriceGrid";
 import FaqPanel from "@/components/FaqPanel";
@@ -116,6 +117,23 @@ export default function NailsKingsCrossPage() {
         </div>
 
         <TreatwellFallback className="mt-4" />
+
+        {/* The picture shows the treatment happening, not the room it happens in. Six landing
+            pages carried no image at all until now while the ads pointed straight at them, and
+            the six pictures already in the repo were empty rooms — which is the thing the owner
+            objected to, not the absence (W-40, standing rule T18).
+
+            The alt text describes what is in the frame and stops there. This image is generated,
+            and D-W22 allows that anywhere so long as nothing calls it our room, our therapist or
+            a real client of ours. */}
+        <Image
+          src="/images/landing/nails.jpg"
+          alt="A nail technician filing a client's nail at a manicure table"
+          width={1200}
+          height={805}
+          sizes="(max-width: 768px) 100vw, 720px"
+          className="mt-8 w-full max-w-3xl rounded-[24px] border border-ink/10 object-cover shadow-[0_18px_44px_rgba(5,32,12,0.28)]"
+        />
       </header>
 
       <section aria-label="Choosing a treatment" className="max-w-2xl">

@@ -154,12 +154,25 @@ lashes    แหนบกับถาดขนตาวางบนผ้า ไ
 **ท่อนเปิดที่ใช้ร่วมกันทั้งหกข้อ**
 
 ```
-A photograph for a London beauty salon website. Deep forest green walls, warm natural
-wood, matte brushed gold accents, cream and white linen. Soft natural daylight from a
-side window, gentle shadows, calm and unhurried. Shallow depth of field. Realistic
+A photograph for a London beauty salon website. Bright, airy and high-key: generous
+daylight floods the frame from a large window, and cream, white and pale oak fill most
+of the composition. Deep forest green appears only as an accent wall or a smaller area
+behind the subject, never filling the background. Matte brushed gold details. Light,
+open and fresh rather than dim or moody. Soft shadows, nothing dark or heavy. Realistic
 photography, not illustration. Horizontal 3:2 composition. No text, no logos, no
 watermarks anywhere in the image.
 ```
+
+**ท่อนเปิดนี้เป็นฉบับที่สอง และฉบับแรกใช้ไม่ได้ ทั้งที่ภาพสวยและตรงโจทย์ทุกข้อ**
+ฉบับแรกสั่งว่า deep forest green walls กับ soft daylight ตรงตามโทนร้าน ได้ภาพที่ถูกต้องทุกอย่าง
+แต่ **ความสว่างเฉลี่ยของภาพอยู่ที่ 26 ถึง 34 จากเกณฑ์ 50** ซึ่งแปลว่าภาพทั้งชุดนับเป็นพื้นที่มืด
+วัดแล้วหน้าเว็บสามหน้าจากหกหน้าพื้นที่สว่างลดลงหน้าละ 52 ช่อง ซึ่งผิดกติกา T11 ข้อหลัก
+ฉบับที่สองเปลี่ยนให้เขียวเข้มเป็นผนังเน้นแทนที่จะเป็นพื้นหลังทั้งภาพ ได้ความสว่าง 46 ถึง 64
+และพื้นที่สว่างของทั้งหกหน้าเพิ่มขึ้นหรือเท่าเดิม ไม่มีหน้าไหนลด
+
+**บทเรียนที่ต้องพกไปด้วยทุกครั้งที่สั่งสร้างภาพ** โทนแบรนด์ที่เขียนว่าเขียวเข้ม
+ถ้าสั่งตรง ๆ จะได้ภาพที่มืดเกินเกณฑ์วัดของเราเอง ต้องสั่งให้เขียวเป็นสีเน้น ไม่ใช่สีพื้น
+และต้องวัดความสว่างของไฟล์ภาพก่อนเอาขึ้นหน้า ไม่ใช่วัดหลังจากวางแล้ว
 
 **หกข้อต่อท้าย เติมทีละข้อ**
 
