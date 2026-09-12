@@ -32,11 +32,12 @@ const [, , url = "http://localhost:3300/", wArg = "1440", hArg = "900"] = proces
 const width = +wArg;
 const height = +hArg;
 const PORT = 9333 + (process.pid % 400);
-const CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
+// CHROME_PATH so this runs on a CI runner as well as on the machine it was written on.
+const CHROME = process.env.CHROME_PATH || "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 
 const profile = mkdtempSync(join(tmpdir(), "contrast-"));
 const chrome = spawn(CHROME, [
-  "--headless=new", "--disable-gpu", "--hide-scrollbars", "--no-first-run",
+  "--headless=new", "--disable-gpu", "--hide-scrollbars", "--no-first-run", "--no-sandbox",
   `--user-data-dir=${profile}`, `--remote-debugging-port=${PORT}`,
   `--window-size=${width},${height}`,
 ], { stdio: "ignore" });
@@ -278,7 +279,7 @@ if (!control) {
   ws.close?.();
   process.exit(2);
 }
-console.log(`control  ${control.fg} on ${control.bg} = ${control.ratio.toFixed(2)} (expected #6d5223 on #fffdf8 = ${CONTROL_EXPECTED})  ${Math.abs(control.ratio - CONTROL_EXPECTED) <= 0.05 ? "ok" : "MISMATCH"}`);
+if (!process.env.JSON) console.log(`control  ${control.fg} on ${control.bg} = ${control.ratio.toFixed(2)} (expected #6d5223 on #fffdf8 = ${CONTROL_EXPECTED})  ${Math.abs(control.ratio - CONTROL_EXPECTED) <= 0.05 ? "ok" : "MISMATCH"}`);
 if (Math.abs(control.ratio - CONTROL_EXPECTED) > 0.05) {
   console.log(`the control is off, so every other number this run produced is off too. Not reporting them.`);
   process.exit(2);
@@ -295,6 +296,14 @@ if (match) {
 }
 
 const fails = pageResults.filter((r) => r.ratio < r.need && r.ratio > 1.02);
+if (process.env.JSON) {
+  console.log(JSON.stringify({
+    url, width, height, control: control.ratio, elements: pageResults.length,
+    fails: fails.map((f) => ({ text: f.text, ratio: f.ratio, need: f.need, fg: f.fg, bg: f.bg })),
+  }));
+  process.exit(0);
+}
+
 console.log(`contrast-probe ${url} ${width}x${height} — ${pageResults.length} text elements, ${fails.length} below AA`);
 for (const f of fails.sort((a, b) => a.ratio - b.ratio)) {
   console.log(`  ${String(f.ratio).padStart(5)} < ${f.need}  ${f.fg} on ${f.bg}  ${Math.round(f.size)}px/${f.weight}  ${JSON.stringify(f.text)}`);

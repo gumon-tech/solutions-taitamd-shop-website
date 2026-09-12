@@ -1,0 +1,85 @@
+# The visual gate, on every pull request, whoever opened it.
+#
+# Why this exists and why it does not block: this repository belongs to the owner, he works on
+# it with Codex, and merging straight to main is the way he has chosen to work — a branch
+# protection rule that waits for one room's review would be this room deciding how he works on
+# his own site. WS ruled on 2026-09-12 that the measurement moves to CI instead, so the numbers
+# are in front of whoever is about to press merge. It is deliberately NOT a required check.
+#
+# It builds both sides and measures both in the same run rather than comparing against numbers
+# stored in the repo. A committed baseline is one more number that is true the day it is written
+# and quietly false afterwards, which is the exact failure this project keeps paying for.
+name: Visual gate
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: visual-gate-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  visual-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the pull request
+        uses: actions/checkout@v7
+        with:
+          path: pr
+
+      - name: Checkout the base branch
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ github.base_ref }}
+          path: base
+
+      - name: Setup Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+
+      # Chrome is preinstalled on the GitHub-hosted images. Find it rather than assume a path,
+      # and say so plainly if it is gone: a gate that silently measures nothing is worse than a
+      # gate that is missing, because the summary still renders and still looks like evidence.
+      - name: Locate Chrome
+        run: |
+          for c in google-chrome-stable google-chrome chromium-browser chromium; do
+            if command -v "$c" >/dev/null 2>&1; then
+              echo "CHROME_PATH=$(command -v "$c")" >> "$GITHUB_ENV"
+              "$c" --version
+              exit 0
+            fi
+          done
+          echo "No Chrome on this runner — the visual gate cannot measure anything." >&2
+          exit 1
+
+      - name: Build the pull request
+        working-directory: pr
+        run: npm ci && npx --no-install next build
+
+      - name: Build the base branch
+        working-directory: base
+        run: npm ci && npx --no-install next build
+
+      # Static export, so a plain file server is the whole runtime. Trailing-slash routes land
+      # on <route>/index.html, which is how the site is served in production too.
+      - name: Serve both builds
+        run: |
+          (cd pr/out && python3 -m http.server 3301 >/dev/null 2>&1 &)
+          (cd base/out && python3 -m http.server 3302 >/dev/null 2>&1 &)
+          for i in $(seq 1 30); do
+            if curl -sf -o /dev/null http://localhost:3301/ && curl -sf -o /dev/null http://localhost:3302/; then
+              echo "both builds are being served"
+              exit 0
+            fi
+            sleep 1
+          done
+          echo "the builds never came up" >&2
+          exit 1
+
+      - name: Measure and report
+        working-directory: pr
+        run: node scripts/visual-gate-report.mjs http://localhost:3302/ http://localhost:3301/ >> "$GITHUB_STEP_SUMMARY"
