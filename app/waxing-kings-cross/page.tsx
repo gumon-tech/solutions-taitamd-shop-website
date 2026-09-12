@@ -160,7 +160,7 @@ export default function WaxingKingsCrossPage() {
           Back, shoulders and chest, with intimate waxing by arrangement.
         </p>
         <ServicePriceGrid services={mens} source={SOURCE_WAXING_LANDING} />
-        <p className="mt-8 text-xs leading-relaxed text-ink/50">
+        <p className="mt-8 text-xs leading-relaxed text-ink/60">
           Prices reflect our Treatwell listing and may change. Message us to confirm availability and
           the latest offers before your visit.
         </p>

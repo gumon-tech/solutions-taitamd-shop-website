@@ -184,7 +184,7 @@ export default function NailsKingsCrossPage() {
       <section aria-label="Removals and hand treatments" className="mt-14">
         <h2 className="text-2xl font-semibold md:text-3xl">Removals and hand care</h2>
         <ServicePriceGrid services={extras} source={SOURCE_NAILS_LANDING} />
-        <p className="mt-8 text-xs leading-relaxed text-ink/50">
+        <p className="mt-8 text-xs leading-relaxed text-ink/60">
           Prices reflect our Treatwell listing and may change. Message us to confirm availability and
           the latest offers before your visit.
         </p>

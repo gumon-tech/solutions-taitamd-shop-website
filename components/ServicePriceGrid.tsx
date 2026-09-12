@@ -33,14 +33,21 @@ export default function ServicePriceGrid({
         <li key={svc.name} className="rounded-[22px] border border-ink/10 bg-ink/[0.03] p-5">
           <div className="flex items-start gap-2">
             <h3 className="font-semibold leading-snug text-ink">{svc.name}</h3>
+            {/* A solid cream chip rather than gold on a translucent gold wash. The gold measured
+                4.23 here, and 11px semibold is not large text, so it needed 4.5; the gold tone
+                itself is one Kru Nok settled and T11 puts it out of reach. The chip is the same
+                treatment already used on the promotion cards, and it reads 5.72. */}
             {svc.featured && (
-              <span className="mt-0.5 shrink-0 rounded-full bg-gold/15 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-gold">
+              <span className="mt-0.5 shrink-0 rounded-full bg-[#ebe3d4] px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-[#6d5223]">
                 Popular
               </span>
             )}
           </div>
           {svc.desc && <p className="mt-1.5 text-xs leading-relaxed text-ink/60">{svc.desc}</p>}
-          {svc.note && <p className="mt-1 text-xs text-ink/55">{svc.note}</p>}
+          {/* 60%, not 55%. These notes carry the things a client has to tell us before a
+              booking — how many weeks pregnant, what to expect — so they are the last text on
+              the page that should be hard to read. 55% measured 4.32; 60% is 4.84. */}
+          {svc.note && <p className="mt-1 text-xs text-ink/60">{svc.note}</p>}
 
           <ul className="mt-3 divide-y divide-ink/[0.08]">
             {svc.variants.map((v, i) => (
@@ -55,7 +62,10 @@ export default function ServicePriceGrid({
                   <span className="text-sm text-ink/75">{variantLabel(v)}</span>
                   <span className="flex items-center gap-2">
                     <span className="text-sm">
-                      {v.price.wasGbp && <s className="mr-1.5 text-ink/40">£{v.price.wasGbp}</s>}
+                      {/* 60%, not 40%. At 40% the struck former price measured 3.02 against the card, and the
+                          old price is the whole argument for the new one — a saving nobody can read is
+                          not a saving. 60% is 4.84 and still reads as secondary to the price paid. */}
+                      {v.price.wasGbp && <s className="mr-1.5 text-ink/60">£{v.price.wasGbp}</s>}
                       <span className="font-semibold text-ink">£{v.price.gbp}</span>
                     </span>
                     <MessageCircle

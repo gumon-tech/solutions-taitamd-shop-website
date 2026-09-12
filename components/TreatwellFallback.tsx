@@ -14,7 +14,7 @@ import { SITE } from "@/lib/site";
  */
 export default function TreatwellFallback({ className = "" }: { className?: string }) {
   return (
-    <p className={`text-sm text-ink/60 ${className}`}>
+    <p className={`text-sm text-ink ${className}`}>
       <a
         href={SITE.treatwellBooking}
         target="_blank"

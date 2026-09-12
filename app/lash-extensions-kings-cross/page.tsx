@@ -156,7 +156,7 @@ export default function LashExtensionsKingsCrossPage() {
           If extensions are more than you want, a lash perm and tint lifts and darkens what you have.
         </p>
         <ServicePriceGrid services={lashExtras} source={SOURCE_LASH_LANDING} />
-        <p className="mt-8 text-xs leading-relaxed text-ink/50">
+        <p className="mt-8 text-xs leading-relaxed text-ink/60">
           Prices reflect our Treatwell listing and may change. Message us to confirm availability and
           the latest offers before your visit.
         </p>

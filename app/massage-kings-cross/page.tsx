@@ -98,7 +98,7 @@ export default function MassageKingsCrossPage() {
         <h2 className="text-2xl font-semibold md:text-3xl">Massage treatments and prices</h2>
         <p className="mt-2 max-w-2xl text-sm leading-relaxed text-ink/70">{massage.blurb}</p>
         <ServicePriceGrid services={massage.services} source={SOURCE_MASSAGE_LANDING} />
-        <p className="mt-8 text-xs leading-relaxed text-ink/50">
+        <p className="mt-8 text-xs leading-relaxed text-ink/60">
           Prices reflect our Treatwell listing and may change. Message us to confirm availability
           and the latest offers before your visit.
         </p>

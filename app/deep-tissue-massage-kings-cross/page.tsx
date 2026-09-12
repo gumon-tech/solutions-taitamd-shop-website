@@ -157,7 +157,7 @@ export default function DeepTissueKingsCrossPage() {
           Aromatherapy and Thai Foot, is on the services page.
         </p>
         <ServicePriceGrid services={services} source={SOURCE_DEEP_TISSUE_LANDING} />
-        <p className="mt-8 text-xs leading-relaxed text-ink/50">
+        <p className="mt-8 text-xs leading-relaxed text-ink/60">
           Prices reflect our Treatwell listing and may change. Message us to confirm availability and
           the latest offers before your visit.
         </p>
