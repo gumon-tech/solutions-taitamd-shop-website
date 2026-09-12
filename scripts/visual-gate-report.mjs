@@ -12,96 +12,145 @@
 // is written and quietly false afterwards, which is the failure this project keeps paying for.
 //
 // Usage:  node scripts/visual-gate-report.mjs <baseUrl> <prUrl>
-import { execFileSync } from "node:child_process";
+import { execFile } from "node:child_process";
 
 const [, , baseUrl, prUrl] = process.argv;
 const WIDTHS = [[1440, 900], [375, 812]];
 
-const run = (script, url, w, h, json) => {
-  const out = execFileSync("node", [script, url, String(w), String(h)], {
-    encoding: "utf8",
-    env: { ...process.env, ...(json ? { JSON: "1" } : {}) },
-    maxBuffer: 64 * 1024 * 1024,
+// Nine pages, not one. Every measurement before 2026-09-12 was taken on the home page, and the
+// six landing pages turned out to be carrying 26 to 28 pieces of text below AA — including every
+// price on them — which nothing had ever looked at. Those six are where the ads point, so they
+// were the pages least measured and most visited. Same shape as the _gcl_aw finding this repo
+// already paid for: a check that walks the team's route never sees what the customer's route
+// shows. Set by WS on Q-SHOP-035.
+const ALL_PAGES = [
+  "", "book/", "signature/",
+  "massage-kings-cross/", "deep-tissue-massage-kings-cross/", "facial-kings-cross/",
+  "nails-kings-cross/", "lash-extensions-kings-cross/", "waxing-kings-cross/",
+];
+
+// GATE_PAGES trims the list for a local run. CI always measures all nine; this exists so the
+// machinery can be exercised in a minute instead of ten, and a gate whose own plumbing is
+// never tested is a gate nobody has checked.
+const PAGES = process.env.GATE_PAGES ? process.env.GATE_PAGES.split(",") : ALL_PAGES;
+
+// Four at a time. Nine pages at two widths, on two branches, with two probes each is 72 browser
+// launches; in series that is half an hour, which is long enough that people stop waiting for the
+// check and merge anyway — a gate nobody reads is the same as no gate. Each probe owns its own
+// Chrome and its own port, so they do not interfere; four is what a standard runner's memory
+// takes comfortably.
+const CONCURRENCY = 4;
+
+const run = (script, url, w, h, json) =>
+  new Promise((resolve, reject) => {
+    execFile("node", [script, url, String(w), String(h)], {
+      encoding: "utf8",
+      env: { ...process.env, ...(json ? { JSON: "1" } : {}) },
+      maxBuffer: 64 * 1024 * 1024,
+    }, (err, stdout) => {
+      if (err && !stdout) return reject(new Error(`${script} ${url} ${w}: ${err.message}`));
+      try {
+        resolve(JSON.parse(stdout.trim().split("\n").pop()));
+      } catch (e) {
+        reject(new Error(`${script} ${url} ${w} returned nothing parseable: ${stdout.slice(0, 200)}`));
+      }
+    });
   });
-  return JSON.parse(out.trim().split("\n").pop());
+
+const pool = async (jobs) => {
+  const results = new Array(jobs.length);
+  let next = 0;
+  await Promise.all(Array.from({ length: CONCURRENCY }, async () => {
+    while (true) {
+      const i = next++;
+      if (i >= jobs.length) return;
+      results[i] = await jobs[i]();
+    }
+  }));
+  return results;
 };
 
-const measure = (url) => {
-  const per = {};
-  for (const [w, h] of WIDTHS) {
-    per[w] = {
-      bright: run("scripts/brightness-run.mjs", url, w, h, false),
-      contrast: run("scripts/contrast-probe.mjs", url, w, h, true),
-    };
+// Every measurement is queued first and then run through the pool, so the work is one flat list
+// rather than nested loops that can only go as fast as their slowest step.
+const jobs = [];
+const slots = [];
+for (const side of ["base", "pr"]) {
+  const root = side === "base" ? baseUrl : prUrl;
+  for (const page of PAGES) {
+    for (const [w, h] of WIDTHS) {
+      const url = root.replace(/\/$/, "") + "/" + page;
+      slots.push({ side, page, w, kind: "bright" });
+      jobs.push(() => run("scripts/brightness-run.mjs", url, w, h, false));
+      slots.push({ side, page, w, kind: "contrast" });
+      jobs.push(() => run("scripts/contrast-probe.mjs", url, w, h, true));
+    }
   }
-  return per;
-};
+}
 
-const base = measure(baseUrl);
-const pr = measure(prUrl);
+const answers = await pool(jobs);
+
+const base = {};
+const pr = {};
+for (const page of PAGES) { base[page] = {}; pr[page] = {}; for (const [w] of WIDTHS) { base[page][w] = {}; pr[page][w] = {}; } }
+slots.forEach((slot, i) => {
+  const target = slot.side === "base" ? base : pr;
+  target[slot.page][slot.w][slot.kind] = answers[i];
+});
 
 const sign = (n) => (n > 0 ? `+${n}` : String(n));
 const lines = [];
 lines.push("## Visual gate — T11 and text contrast");
 lines.push("");
-lines.push("Measured on this PR's build and on the base branch's build, in the same run.");
+lines.push(`${PAGES.length} page${PAGES.length === 1 ? "" : "s"}, measured on this PR's build and on the base branch's build in the same run.`);
 lines.push("Not a required check: this is here so the numbers are in front of you before you merge.");
 lines.push("");
 
 // The controls first, because nothing below them means anything if one is off. Both values are
 // worked out by hand. Two of them, not one, because the first control only ever exercised the
-// flat-background path the probe already got right — the bug that reached a ruling happened on
-// a gradient, and a control proves the path it walks and nothing else.
-lines.push("**Controls** — both computed by hand; if either is off, ignore everything below it.");
+// flat-background path the probe already got right — the bug that reached a ruling happened on a
+// gradient, and a control proves the path it walks and nothing else.
+const ctl = pr[PAGES[0]][WIDTHS[0][0]].contrast.controls;
+const ctlOk = ctl.every((c) => c.got != null);
+lines.push(`**Controls** — ${ctl.map((c) => `${c.what}: expected ${c.expected}, got ${c.got ?? "not measured"}`).join("; ")}`);
+if (!ctlOk) lines.push("");
+if (!ctlOk) lines.push("A control did not measure. Ignore every number below it.");
 lines.push("");
-lines.push("| control | expected | measured |");
-lines.push("|---|---|---|");
-for (const [w] of WIDTHS) {
-  for (const c of pr[w].contrast.controls) {
-    lines.push(`| ${c.what} (${w}px) | ${c.expected} | ${c.got ?? "not measured"} |`);
+
+lines.push("| page | width | lit cells (must not fall) | average | height | below AA |");
+lines.push("|---|---|---|---|---|---|");
+let regressions = 0;
+for (const page of PAGES) {
+  for (const [w] of WIDTHS) {
+    const b = base[page][w];
+    const p2 = pr[page][w];
+    const dLit = p2.bright.lightCells - b.bright.lightCells;
+    const dAvg = Math.round((p2.bright.brightness - b.bright.brightness) * 100) / 100;
+    const dAA = p2.contrast.fails.length - b.contrast.fails.length;
+    if (dLit < 0) regressions++;
+    const flag = dLit < 0 ? " FELL" : "";
+    lines.push(`| /${page} | ${w} | ${b.bright.lightCells} → ${p2.bright.lightCells} (${sign(dLit)})${flag} | ${b.bright.brightness} → ${p2.bright.brightness} (${sign(dAvg)}) | ${b.bright.height} → ${p2.bright.height} | ${b.contrast.fails.length} → ${p2.contrast.fails.length} (${sign(dAA)}) |`);
   }
 }
 lines.push("");
-
-lines.push("| | width | base | this PR | change |");
-lines.push("|---|---|---|---|---|");
-for (const [w] of WIDTHS) {
-  const b = base[w].bright;
-  const p = pr[w].bright;
-  const rows = [
-    ["Lit cells (T11 primary — must not fall)", b.lightCells, p.lightCells],
-    ["Average brightness", b.brightness, p.brightness],
-    ["Page height (px)", b.height, p.height],
-    ["Text below AA", base[w].contrast.fails.length, pr[w].contrast.fails.length],
-  ];
-  for (const [label, bv, pv] of rows) {
-    const d = Math.round((pv - bv) * 100) / 100;
-    // The word, not a glyph: a reader whose client drops the character would be left with a
-    // row that reads as though nothing happened, which is the opposite of what it means.
-    const flag = label.startsWith("Lit cells") && d < 0 ? " — FELL, check before merging" : "";
-    lines.push(`| ${label}${flag} | ${w} | ${bv} | ${pv} | ${sign(d)} |`);
-  }
+if (regressions) {
+  lines.push(`**${regressions} page/width combinations lost lit area.** T11 treats that as a stop, not a note — check before merging.`);
+  lines.push("");
 }
-lines.push("");
 
-// Only text that this PR pushed below AA, not the backlog — a gate that reprints every
-// pre-existing failure on every PR teaches people to scroll past it.
-for (const [w] of WIDTHS) {
-  const was = new Set(base[w].contrast.fails.map((f) => f.text));
-  const now = pr[w].contrast.fails.filter((f) => !was.has(f.text));
-  if (now.length) {
-    lines.push(`**New below AA at ${w}px**`);
+// Only text this PR pushed below AA, not the backlog. A gate that reprints every pre-existing
+// failure on every pull request teaches people to scroll past it.
+for (const page of PAGES) {
+  for (const [w] of WIDTHS) {
+    const was = new Set(base[page][w].contrast.fails.map((f) => f.text));
+    const now = pr[page][w].contrast.fails.filter((f) => !was.has(f.text));
+    if (!now.length) continue;
+    lines.push(`**New below AA on /${page} at ${w}px**`);
     lines.push("");
     lines.push("| ratio | needs | colours | text |");
     lines.push("|---|---|---|---|");
     for (const f of now) lines.push(`| ${f.ratio} | ${f.need} | ${f.fg} on ${f.bg} | ${f.text} |`);
     lines.push("");
   }
-}
-
-const existing = pr[1440].contrast.fails.length;
-if (existing) {
-  lines.push(`<sub>${existing} text elements were already below AA at 1440 before this PR. They are tracked in Q-SHOP-033, not repeated here.</sub>`);
 }
 
 console.log(lines.join("\n"));

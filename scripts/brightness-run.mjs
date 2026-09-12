@@ -15,19 +15,35 @@ import { join } from "node:path";
 const [, , url, wArg = "1440", hArg = "900"] = process.argv;
 const width = +wArg;
 const height = +hArg;
-const PORT = 9500 + (process.pid % 300);
 const CHROME = process.env.CHROME_PATH || "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
+
+// Chrome picks the port, we read it back. A fixed port derived from the pid collided as soon as
+// the visual gate started running four of these at once: two ranges overlapped, and pid modulo a
+// constant repeats. Port 0 makes Chrome bind whatever is free and write it to DevToolsActivePort
+// in its own profile directory, which cannot collide with anything.
+const readPort = async (profileDir) => {
+  const f = join(profileDir, "DevToolsActivePort");
+  for (let i = 0; i < 120; i++) {
+    try {
+      const txt = readFileSync(f, "utf8").trim().split("\n")[0];
+      if (txt) return +txt;
+    } catch {}
+    await new Promise((r) => setTimeout(r, 250));
+  }
+  throw new Error("Chrome never reported a debugging port");
+};
 
 const profile = mkdtempSync(join(tmpdir(), "bright-"));
 const chrome = spawn(CHROME, [
   "--headless=new", "--disable-gpu", "--hide-scrollbars", "--no-first-run", "--no-sandbox",
-  `--user-data-dir=${profile}`, `--remote-debugging-port=${PORT}`,
+  `--user-data-dir=${profile}`, "--remote-debugging-port=0",
   `--window-size=${width},${height}`,
 ], { stdio: "ignore" });
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 let target;
+const PORT = await readPort(profile);
 for (let i = 0; i < 60; i++) {
   await sleep(500);
   try {
