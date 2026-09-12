@@ -57,6 +57,22 @@ for (const sig of ["SIGINT", "SIGTERM", "SIGHUP"]) {
 process.on("uncaughtException", (e) => { stopChrome(); console.error(e); process.exit(1); });
 process.on("unhandledRejection", (e) => { stopChrome(); console.error(e); process.exit(1); });
 
+// A ceiling on the whole run.
+//
+// OFFICE traced a probe that had been alive for 7 hours 45 minutes with nobody waiting for its
+// answer. Cleaning up orphans covers the case where the parent dies; it does nothing for this
+// one, where the parent is alive and blocked forever on a reply that never comes — every CDP
+// call here parks a promise in a map, and a promise nobody resolves waits as long as the machine
+// does. A probe that cannot finish should fail loudly in minutes, not idle for a working day.
+const WATCHDOG_MS = Number(process.env.PROBE_TIMEOUT_MS ?? 240000);
+const watchdog = setTimeout(() => {
+  console.error(`probe gave up after ${Math.round(WATCHDOG_MS / 1000)}s: ${process.argv.slice(2).join(" ")}`);
+  stopChrome();
+  process.exit(3);
+}, WATCHDOG_MS);
+watchdog.unref();
+
+
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -79,8 +95,19 @@ ws.onmessage = (e) => {
   const m = JSON.parse(e.data);
   if (m.id && pending.has(m.id)) { pending.get(m.id)(m.result); pending.delete(m.id); }
 };
+// Each call gets its own deadline too, so a single wedged command names itself in the error
+// instead of being swallowed by the overall ceiling.
+const CALL_TIMEOUT_MS = 120000;
 const send = (method, params = {}) =>
-  new Promise((r) => { const n = ++id; pending.set(n, r); ws.send(JSON.stringify({ id: n, method, params })); });
+  new Promise((resolve, reject) => {
+    const n = ++id;
+    const timer = setTimeout(() => {
+      pending.delete(n);
+      reject(new Error(`CDP call timed out after ${CALL_TIMEOUT_MS / 1000}s: ${method}`));
+    }, CALL_TIMEOUT_MS);
+    pending.set(n, (result) => { clearTimeout(timer); resolve(result); });
+    ws.send(JSON.stringify({ id: n, method, params }));
+  });
 
 await send("Page.enable");
 await send("Emulation.setDeviceMetricsOverride", {
