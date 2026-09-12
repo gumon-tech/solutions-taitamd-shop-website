@@ -15,6 +15,7 @@
 //   node scripts/screenshot.mjs shot.png 1440 900 ""            # top of the page
 //   node scripts/screenshot.mjs shot.png 375 812 "These are our" # that section
 import { spawn } from "node:child_process";
+import { sweepStaleChrome } from "./chrome-orphans.mjs";
 import { writeFileSync, mkdtempSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -25,12 +26,37 @@ const height = +hArg;
 const PORT = 9333 + (process.pid % 400);
 const CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 
+sweepStaleChrome();
 const profile = mkdtempSync(join(tmpdir(), "cap-"));
 const chrome = spawn(CHROME, [
   "--headless=new", "--disable-gpu", "--hide-scrollbars", "--no-first-run",
   `--user-data-dir=${profile}`, `--remote-debugging-port=${PORT}`,
   `--window-size=${width},${height}`,
-], { stdio: "ignore" });
+], { stdio: "ignore", detached: true });
+
+// Take the browser down with us, however we go.
+//
+// These scripts spawned Chrome and killed it on the happy path only. Two runs were cancelled
+// mid-flight on 2026-09-12 — one by a tool timeout, one deliberately — and because a killed
+// node process never reaches its last line, both left a Chrome behind. They were found 7 hours
+// 45 minutes and 1 hour 24 minutes later, each with a GPU helper pinned at about 90% of a core,
+// on a machine several other rooms were working on. Chrome is spawned into its own process
+// group and the whole group is signalled, because the parent alone ignored SIGTERM while its
+// helper kept spinning.
+let chromeDown = false;
+const stopChrome = () => {
+  if (chromeDown) return;
+  chromeDown = true;
+  try { process.kill(-chrome.pid, "SIGKILL"); } catch {}
+  try { chrome.kill("SIGKILL"); } catch {}
+};
+process.on("exit", stopChrome);
+for (const sig of ["SIGINT", "SIGTERM", "SIGHUP"]) {
+  process.on(sig, () => { stopChrome(); process.exit(130); });
+}
+process.on("uncaughtException", (e) => { stopChrome(); console.error(e); process.exit(1); });
+process.on("unhandledRejection", (e) => { stopChrome(); console.error(e); process.exit(1); });
+
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
