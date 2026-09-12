@@ -11,7 +11,7 @@ export default function AcademyPromo() {
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
           <div>
-            <p className="text-xs tracking-[0.28em] uppercase text-mist">Academy</p>
+            <p className="text-xs tracking-[0.28em] uppercase text-ink">Academy</p>
 
             <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-[-0.01em] text-ink leading-tight">
               Train with <span className="text-gold">real technique</span> — not just theory.
@@ -100,7 +100,7 @@ export default function AcademyPromo() {
           {/* Right card */}
           <div className="lg:col-span-7">
             <div className="glass rounded-[28px] p-6 md:p-7">
-              <p className="text-xs tracking-[0.28em] uppercase text-mist">What you’ll learn</p>
+              <p className="text-xs tracking-[0.28em] uppercase text-ink">What you’ll learn</p>
 
               <h3 className="mt-3 text-2xl md:text-3xl font-semibold leading-tight">
                 Professional massage training —{" "}

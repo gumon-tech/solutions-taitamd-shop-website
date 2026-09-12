@@ -64,7 +64,10 @@ export default function Navbar() {
       "px-3 py-2 rounded-xl text-sm transition",
       active
         ? "bg-gold text-[#1F3D2A] font-semibold border border-gold shadow-[0_8px_22px_rgba(76,116,79,0.24)]"
-        : "text-mist hover:text-ink hover:bg-ink/5"
+        // Full ink rather than 82%: the transparency was the entire shortfall against the
+        // backdrop these sit on (4.38 at 82%, 5.63 without). The active link is still obvious —
+        // it carries a gold fill, which never depended on the inactive ones being dimmed.
+        : "text-ink hover:bg-ink/5"
     );
 
   const drawerItemCls = (active: boolean) =>
@@ -102,7 +105,7 @@ export default function Navbar() {
                   three words are in the footer on every page regardless. */}
               <div className="min-w-0 leading-tight">
                 <div className="text-sm font-semibold tracking-wide">{SITE.name}</div>
-                <div className="hidden sm:block text-[11px] text-mist tracking-[0.22em] uppercase">
+                <div className="hidden sm:block text-[11px] text-ink tracking-[0.22em] uppercase">
                   {SITE.tagline}
                 </div>
               </div>
@@ -124,7 +127,7 @@ export default function Navbar() {
                 href={SITE.academy}
                 target="_blank"
                 rel="noreferrer"
-                className="px-3 py-2 rounded-xl text-sm text-mist hover:text-ink hover:bg-ink/5 transition inline-flex items-center gap-2"
+                className="px-3 py-2 rounded-xl text-sm text-ink hover:bg-ink/5 transition inline-flex items-center gap-2"
               >
                 Academy <GraduationCap className="h-4 w-4 text-gold" />
               </a>

@@ -358,8 +358,11 @@ html[data-capture="true"] .btn-shine::after {
     @apply pt-8 md:pt-10 pb-16 md:pb-20 relative;
   }
 
+  /* Full ink, not 70%. At 70% this read 3.02 against the hero backdrop on a phone; the
+     transparency was the whole of the shortfall, and removing it costs nothing but a shade
+     (Q-SHOP-033, WS 2026-09-12 item 2). */
   .ui-kicker {
-    @apply text-xs tracking-[0.32em] uppercase text-ink/70;
+    @apply text-xs tracking-[0.32em] uppercase text-ink;
   }
 
   /* Display serif on headings, and one size step down from where they were. A 72px heading

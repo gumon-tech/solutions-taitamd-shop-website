@@ -20,7 +20,7 @@ export default function FollowUs() {
 
   return (
     <div className="space-y-3">
-      <div className="text-xs tracking-[0.28em] uppercase text-mist">
+      <div className="text-xs tracking-[0.28em] uppercase text-ink">
         Follow us
       </div>
 

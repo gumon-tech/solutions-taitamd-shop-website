@@ -40,7 +40,7 @@ export default function ServicesPreview() {
       <Reveal>
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
           <div>
-            <p className="text-xs tracking-[0.28em] uppercase text-mist">Service menu</p>
+            <p className="text-xs tracking-[0.28em] uppercase text-ink">Service menu</p>
             <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-[-0.01em] text-ink leading-tight">
               Thai massage, facials, nails and <span className="text-gold">waxing</span>
             </h2>
@@ -77,7 +77,7 @@ export default function ServicesPreview() {
                   />
                 </div>
                 <div className="p-5">
-                  <div className="text-xs tracking-[0.28em] uppercase text-mist">{c.title}</div>
+                  <div className="text-xs tracking-[0.28em] uppercase text-ink">{c.title}</div>
                   <div className="mt-2 text-lg font-semibold leading-snug">{c.subtitle}</div>
                   <span className="mt-3 inline-flex items-center gap-2 text-sm text-gold">
                     See prices

@@ -27,7 +27,7 @@ export default function Footer() {
           <div className="md:col-span-7 grid gap-8 sm:grid-cols-3">
             <div className="text-sm">
               <div className="text-ink font-medium mb-2">Explore</div>
-              <ul className="space-y-1 text-mist">
+              <ul className="space-y-1 text-ink">
                 <li>
                   <Link href="/services" className="hover:text-ink">Services</Link>
                 </li>
@@ -69,7 +69,7 @@ export default function Footer() {
 
             <div className="text-sm">
               <div className="text-ink font-medium mb-2">Academy</div>
-              <ul className="space-y-1 text-mist">
+              <ul className="space-y-1 text-ink">
                 <li>
                   <a href={SITE.academy} target="_blank" rel="noreferrer" className="hover:text-ink">
                     Taitam-D Academy London

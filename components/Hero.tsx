@@ -74,7 +74,7 @@ export default function Hero() {
                 transition={{ duration: 0.55, delay: 0.12 + idx * 0.08 }}
                 className="glass rounded-2xl p-4"
               >
-                <div className="flex items-center gap-2 text-xs tracking-[0.22em] uppercase text-mist">
+                <div className="flex items-center gap-2 text-xs tracking-[0.22em] uppercase text-ink">
                   <i.icon className="h-4 w-4 text-gold" />
                   {i.label}
                 </div>

@@ -15,9 +15,9 @@ import { buildWhatsAppLink, SOURCE_STICKY_BAR } from "@/lib/whatsapp";
  * bottom of every mobile screen would take some away on every page at once. The cream is
  * #f5efe3, already in the palette and already the surface of the booking and signature pages.
  *
- * It is not the dead MobileDock component, which is a four-item nav bar that was never
- * imported anywhere. This is one action and one link, because the second tap on a phone is
- * where people leave.
+ * One action and one link, because the second tap on a phone is where people leave. There used
+ * to be a MobileDock component that looked like a head start on this — a four-item nav bar,
+ * never imported by anything, deleted in the same round.
  */
 export default function StickyBookBar() {
   return (

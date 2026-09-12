@@ -40,7 +40,7 @@ export default function LuxeBento() {
       <Reveal>
         <div className="flex items-end justify-between gap-4">
           <div>
-            <p className="text-xs tracking-[0.28em] uppercase text-mist">Why us</p>
+            <p className="text-xs tracking-[0.28em] uppercase text-ink">Why us</p>
             <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-[-0.01em] text-ink leading-tight">
               Deep tissue and <span className="text-gold">sports massage</span>
             </h2>

@@ -31,7 +31,7 @@ export default function RoomBand() {
     <section className="ui-section" aria-labelledby="rooms-band">
       <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
         <div>
-          <p className="text-xs tracking-[0.28em] uppercase text-mist">Inside the shop</p>
+          <p className="text-xs tracking-[0.28em] uppercase text-ink">Inside the shop</p>
           <h2 id="rooms-band" className="mt-3 text-3xl md:text-5xl font-bold tracking-[-0.01em] leading-tight">
             These are our <span className="text-gold">rooms</span>
           </h2>

@@ -6,7 +6,7 @@ export default function Story() {
   return (
     <section className="pt-8 md:pt-10 pb-10">
       <Reveal>
-        <p className="text-xs tracking-[0.28em] uppercase text-mist">Our story</p>
+        <p className="text-xs tracking-[0.28em] uppercase text-ink">Our story</p>
         <h1 className="mt-3 text-4xl md:text-6xl font-semibold leading-[1.05]">
           Precision, by <span className="text-gold">design</span>.
         </h1>
@@ -64,14 +64,14 @@ export default function Story() {
 
         <Reveal className="lg:col-span-5" delay={0.06}>
           <div className="glass rounded-[28px] p-7 md:p-9 h-full">
-            <p className="text-xs tracking-[0.28em] uppercase text-mist">Good to know</p>
+            <p className="text-xs tracking-[0.28em] uppercase text-ink">Good to know</p>
             <h3 className="mt-3 text-2xl font-semibold">Taitam-D Academy London</h3>
             <p className="mt-3 text-sm text-ink/80 leading-relaxed">
               Our professional training lives on a dedicated site, keeping this space focused and refined — while holding education to the same standard.
             </p>
 
             <div className="mt-5 rounded-2xl bg-ink/5 border border-ink/10 p-5">
-              <div className="text-xs tracking-[0.22em] uppercase text-mist">Credentials</div>
+              <div className="text-xs tracking-[0.22em] uppercase text-ink">Credentials</div>
               <div className="mt-2 text-sm text-ink/90">
                 VTCT-accredited wellness &amp; spa courses across key beauty disciplines.
               </div>
@@ -87,7 +87,7 @@ export default function Story() {
             </a>
 
             <div className="mt-8 rounded-2xl bg-ink/5 border border-ink/10 p-5">
-              <div className="text-xs tracking-[0.22em] uppercase text-mist">Address</div>
+              <div className="text-xs tracking-[0.22em] uppercase text-ink">Address</div>
               <div className="mt-2 text-sm text-ink/90">Just minutes from King’s Cross Station.</div>
             </div>
           </div>
@@ -114,7 +114,7 @@ export default function Story() {
           <div className="glass rounded-[28px] p-7 md:p-9 h-full relative overflow-hidden">
             <div className="absolute -top-24 -left-24 h-72 w-72 rounded-full bg-gold/10 blur-3xl" />
             <div className="relative">
-              <p className="text-xs tracking-[0.28em] uppercase text-mist">Founder-led</p>
+              <p className="text-xs tracking-[0.28em] uppercase text-ink">Founder-led</p>
               <h2 className="mt-3 text-2xl md:text-3xl font-semibold">The standard begins with her</h2>
               <div className="mt-3 space-y-1">
                 <div className="text-lg md:text-xl font-semibold text-ink/95">Thanyarat Pomnongsan <span className="text-mist font-medium">(Kru Nok)</span></div>
@@ -138,7 +138,7 @@ export default function Story() {
                     ["Bookings", "WhatsApp"]
                 ].map(([k, v]) => (
                   <div key={k} className="rounded-2xl bg-ink/5 border border-ink/10 p-5">
-                    <div className="text-xs tracking-[0.22em] uppercase text-mist">{k}</div>
+                    <div className="text-xs tracking-[0.22em] uppercase text-ink">{k}</div>
                     <div className="mt-2 text-lg font-semibold text-ink/95">{v}</div>
                   </div>
                 ))}
@@ -152,7 +152,7 @@ export default function Story() {
       <div className="mt-6 md:mt-8 grid lg:grid-cols-12 gap-6 items-stretch">
         <Reveal className="lg:col-span-7">
           <div className="glass rounded-[28px] p-7 md:p-9 h-full flex flex-col justify-center">
-            <p className="text-xs tracking-[0.28em] uppercase text-mist">Rooted</p>
+            <p className="text-xs tracking-[0.28em] uppercase text-ink">Rooted</p>
             <h2 className="mt-3 text-2xl md:text-3xl font-semibold">Rooted in Thai craft</h2>
             <p className="mt-4 text-sm md:text-base text-ink/80 leading-relaxed max-w-2xl">
               From pressure mapping to finishing detail, every element traces back to traditional Thai practice — refined for a modern audience.

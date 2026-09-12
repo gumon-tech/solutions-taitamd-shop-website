@@ -14,7 +14,7 @@ export default function LocationBlock() {
         <div className="grid lg:grid-cols-12 gap-6 items-stretch">
           {/* LEFT: info card */}
           <div className="lg:col-span-5 glass rounded-[28px] p-7 md:p-9">
-            <p className="text-xs tracking-[0.28em] uppercase text-mist">Location</p>
+            <p className="text-xs tracking-[0.28em] uppercase text-ink">Location</p>
             <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-[-0.01em] text-ink leading-tight">
               {SITE.walkMinutes} minutes from <span className="text-gold">King’s Cross station</span>
             </h2>
@@ -33,7 +33,7 @@ export default function LocationBlock() {
                     <Clock3 className="h-4 w-4 text-ink/80" />
                   </div>
                   <div>
-                    <div className="text-xs tracking-[0.22em] uppercase text-mist">Quick access</div>
+                    <div className="text-xs tracking-[0.22em] uppercase text-ink">Quick access</div>
                     {/* One interpolation rather than a number beside loose text: React splits
                         the latter into two text nodes with a comment between them, which reads
                         the same to a person and needlessly cuts the phrase in the markup. */}
@@ -48,7 +48,7 @@ export default function LocationBlock() {
                     <TrainFront className="h-4 w-4 text-ink/80" />
                   </div>
                   <div>
-                    <div className="text-xs tracking-[0.22em] uppercase text-mist">Nearest stations</div>
+                    <div className="text-xs tracking-[0.22em] uppercase text-ink">Nearest stations</div>
                     <div className="mt-1 text-ink/90">
                       King’s Cross · St Pancras · Caledonian Road
                     </div>
@@ -58,12 +58,12 @@ export default function LocationBlock() {
 
               {/* Contact blocks */}
               <div className="rounded-2xl bg-ink/5 border border-ink/10 p-4">
-                <div className="text-xs tracking-[0.22em] uppercase text-mist">Phone</div>
+                <div className="text-xs tracking-[0.22em] uppercase text-ink">Phone</div>
                 <div className="mt-1 text-ink/90">{SITE.phone}</div>
               </div>
 
               <div className="rounded-2xl bg-ink/5 border border-ink/10 p-4">
-                <div className="text-xs tracking-[0.22em] uppercase text-mist">Email</div>
+                <div className="text-xs tracking-[0.22em] uppercase text-ink">Email</div>
                 <div className="mt-1 text-ink/90">{SITE.email}</div>
               </div>
 
@@ -119,7 +119,7 @@ export default function LocationBlock() {
 
                 <div className="px-5 py-4">
                   <div className="flex flex-wrap items-center justify-between gap-3">
-                    <p className="text-xs tracking-[0.22em] uppercase text-mist">Storefront</p>
+                    <p className="text-xs tracking-[0.22em] uppercase text-ink">Storefront</p>
                     <Link
                       href={SITE.social.googleMaps}
                       target="_blank"

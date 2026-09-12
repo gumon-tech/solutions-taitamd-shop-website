@@ -73,7 +73,10 @@ export default function Campaigns() {
                 <article className="overflow-hidden rounded-[26px] border border-[#dbcba9] bg-[#fffdf8] shadow-[0_14px_36px_rgba(27,58,42,0.1)]">
                   <div className="relative aspect-[4/3] overflow-hidden">
                     <Image src={campaign.image} alt={campaign.illustrative ? `${campaign.title} promotion — illustrative image` : `${campaign.title} promotion`} fill className="object-cover transition duration-700 hover:scale-[1.03]" sizes="(max-width: 1024px) 100vw, 50vw" />
-                    <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[#173b2c]/65 to-transparent" />
+                    {/* The scrim that used to live here was carrying the white title. The title
+                        moved onto the card, and the only thing left on the photograph is a chip
+                        with its own opaque background — so the scrim was darkening a third of
+                        every picture for nothing, which is exactly what T11 asks us not to do. */}
                     <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between gap-4 text-white">
                       <div>
                         {/* The eyebrow sits on a photograph, so its contrast is whatever the picture
@@ -81,14 +84,19 @@ export default function Campaigns() {
                            T11 forbids darkening the image to rescue text, so the label carries its own
                            cream chip instead — a fixed 5.72 that no future photo can undo, and a few
                            more bright pixels rather than fewer. */}
-                        <div className="inline-flex rounded-full bg-[#ebe3d4] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.25em] text-[#6d5223]">{campaign.eyebrow}</div>
-                        <h3 className="mt-2 text-2xl font-semibold tracking-[-0.02em] md:text-3xl">{campaign.title}</h3></div>
+                        <div className="inline-flex rounded-full bg-[#ebe3d4] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.25em] text-[#6d5223]">{campaign.eyebrow}</div></div>
                       <div className="hidden h-11 w-11 items-center justify-center rounded-full border border-white/30 bg-black/15 backdrop-blur sm:flex"><Sparkles className="h-5 w-5 text-[#eed59a]" /></div>
                     </div>
                   </div>
                   <div className="p-5 md:p-6">
                     {campaign.illustrative && <p className="mb-2 text-[11px] uppercase tracking-[0.18em] text-[#8a9a8f]">Illustrative image</p>}
-                    <p className="text-sm leading-relaxed text-[#52655a]">{campaign.detail}</p>
+                    {/* The title used to sit on the photograph in white, which measured 2.50 on a
+                        phone against a threshold of 3.0 — the picture is bright in places and no
+                        text colour survives every picture. T11 forbids darkening an image to
+                        rescue the text on it, so the heading comes off the photograph instead and
+                        onto the card, where it has a background we actually choose. */}
+                    <h3 className="text-2xl font-semibold tracking-[-0.02em] text-[#19392a] md:text-3xl">{campaign.title}</h3>
+                    <p className="mt-3 text-sm leading-relaxed text-[#52655a]">{campaign.detail}</p>
                     <div className="mt-4 grid grid-cols-2 gap-2">{campaign.prices.map((price) => <div key={price} className="rounded-xl bg-[#f3eee5] px-3 py-2 text-xs font-semibold text-[#284b39]">{price}</div>)}</div>
                     <div className="mt-5 flex flex-col gap-4 border-t border-[#e7dece] pt-5 sm:flex-row sm:items-center sm:justify-between"><div className="text-sm font-semibold text-[#6d5223]">{campaign.offer}</div><a href={buildWhatsAppLink(campaign.message, SOURCE_OFFER)} target="_blank" rel="noreferrer" className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-[#183d2d] px-4 py-2.5 text-xs font-semibold text-[#f7f3e9] transition hover:bg-[#25563e]"><MessageCircle className="h-4 w-4 text-[#d7b874]" /> Reserve offer</a></div>
                   </div>

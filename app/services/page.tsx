@@ -24,7 +24,7 @@ export default function ServicesPage() {
     <main className="mx-auto max-w-7xl px-5 md:px-8 pb-14 md:pb-12">
       <ServiceCatalogStructuredData />
       <header className="pt-8 md:pt-10 pb-10">
-        <p className="text-xs tracking-[0.28em] uppercase text-mist">Service menu</p>
+        <p className="text-xs tracking-[0.28em] uppercase text-ink">Service menu</p>
         {/* Matches the title above it, which already named the services and the place while
             this heading named neither (Q-MKT-077). Same list, same order as the title, so a
             visitor arriving from that search result reads the same words twice. */}
@@ -46,7 +46,7 @@ export default function ServicesPage() {
 
       <ServiceMenu />
       <section className="mt-4 rounded-[28px] border border-ink/10 bg-ink/5 p-7 md:p-9" aria-labelledby="services-faq">
-        <p className="text-xs tracking-[0.28em] uppercase text-mist">Helpful answers</p>
+        <p className="text-xs tracking-[0.28em] uppercase text-ink">Helpful answers</p>
         <h2 id="services-faq" className="mt-3 text-2xl md:text-3xl font-semibold">Frequently asked questions</h2>
         <div className="mt-6 grid gap-5 md:grid-cols-2">
           <div><h3 className="font-semibold">Where is Taitam-D Beauty & Spa?</h3><p className="mt-2 text-sm leading-relaxed text-ink/75">We are at 72-74 Caledonian Road, King&apos;s Cross, London, N1 9DN — a {SITE.walkMinutes}-minute walk from King&apos;s Cross and St Pancras.</p></div>
@@ -81,7 +81,7 @@ export default function ServicesPage() {
         href="/tour"
         className="group mt-4 block rounded-[28px] border border-ink/10 bg-ink/5 p-7 transition-colors hover:border-gold/40 md:p-9"
       >
-        <p className="text-xs tracking-[0.28em] uppercase text-mist">Before you book</p>
+        <p className="text-xs tracking-[0.28em] uppercase text-ink">Before you book</p>
         <h2 className="mt-3 text-2xl font-semibold md:text-3xl">
           See the rooms <span className="text-gold">before you choose one.</span>
         </h2>

@@ -128,7 +128,7 @@ export default function Gallery() {
       <Reveal>
         <div className="flex items-end justify-between gap-6">
           <div>
-            <p className="text-xs tracking-[0.28em] uppercase text-mist">Inside Taitam-D</p>
+            <p className="text-xs tracking-[0.28em] uppercase text-ink">Inside Taitam-D</p>
             <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-[-0.01em] text-ink leading-tight">
               Lash extensions, brows and the <span className="text-gold">infrared sauna</span>
             </h2>
@@ -170,7 +170,11 @@ export default function Gallery() {
                 <div className="absolute left-4 bottom-4 right-4">
                   <div className="flex items-end justify-between gap-3">
                     <div className="drop-shadow-[0_8px_22px_rgba(0,0,0,0.35)]">
-                      <div className="text-[11px] tracking-[0.26em] uppercase text-white/75">
+                      {/* Full white, not 75%. This caption sits on a photograph, so its contrast
+                          is whatever the picture is that day — 3.62 measured on a phone. The
+                          transparency was the part we control, and dropping it is the fix that
+                          touches no colour value (Q-SHOP-033, WS item 2). */}
+                      <div className="text-[11px] tracking-[0.26em] uppercase text-white">
                         {t.kicker}
                       </div>
                       <div className="mt-1 text-sm md:text-base font-semibold leading-snug text-white/90">

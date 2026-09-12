@@ -11,7 +11,7 @@ export default function CTA() {
           <div className="absolute inset-0 opacity-50 bg-[radial-gradient(600px_280px_at_20%_0%,rgba(214,179,106,0.22),rgba(0,0,0,0)),radial-gradient(550px_260px_at_85%_20%,rgba(127,163,105,0.16),rgba(0,0,0,0))]" />
           <div className="relative grid md:grid-cols-12 gap-6 items-center">
             <div className="md:col-span-7">
-              <p className="text-xs tracking-[0.28em] uppercase text-mist">
+              <p className="text-xs tracking-[0.28em] uppercase text-ink">
                 Ready
               </p>
               <h2 className="mt-3 text-3xl md:text-5xl font-semibold leading-tight">

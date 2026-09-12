@@ -34,7 +34,7 @@ export default function MassageKingsCrossPage() {
   return (
     <main className="mx-auto max-w-7xl px-5 md:px-8 pb-14 md:pb-12">
       <header className="pt-8 md:pt-10 pb-10">
-        <p className="text-xs tracking-[0.28em] uppercase text-mist">Massage</p>
+        <p className="text-xs tracking-[0.28em] uppercase text-ink">Massage</p>
         <h1 className="mt-3 text-4xl md:text-6xl font-semibold leading-[1.05]">
           Thai Massage in <span className="text-gold whitespace-nowrap">King’s Cross</span>
         </h1>

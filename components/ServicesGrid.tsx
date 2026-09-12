@@ -25,7 +25,7 @@ export default function ServicesGrid() {
               <div className="relative flex flex-col h-full">
                 {/* Header block gets a consistent weight */}
                 <div>
-                  <div className="text-xs tracking-[0.28em] uppercase text-mist">{c.title}</div>
+                  <div className="text-xs tracking-[0.28em] uppercase text-ink">{c.title}</div>
                   <div className="mt-2 text-2xl font-semibold leading-snug min-h-[3.25rem]">{c.subtitle}</div>
                 </div>
 
