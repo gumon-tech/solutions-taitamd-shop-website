@@ -68,12 +68,12 @@ export default function DeepTissueKingsCrossPage() {
   return (
     <main className="mx-auto max-w-7xl px-5 md:px-8 pb-14 md:pb-12">
       <header className="pt-8 md:pt-10 pb-10">
-        <p className="text-xs tracking-[0.28em] uppercase text-ink">Deep tissue massage</p>
+        <p className="inline-flex rounded-full bg-[#ebe3d4] px-3 py-1 text-xs tracking-[0.28em] uppercase text-[#6d5223]">Deep tissue massage</p>
         <h1 className="mt-3 text-4xl md:text-6xl font-semibold leading-[1.05]">
           Deep Tissue Massage in <span className="text-gold whitespace-nowrap">King’s Cross</span>
         </h1>
 
-        <div className="mt-5 max-w-2xl space-y-4 text-ink/80">
+        <div className="mt-5 max-w-2xl space-y-4 text-ink">
           <p>
             Our treatment rooms are on Caledonian Road, a {SITE.walkMinutes}-minute walk from
             King’s Cross station. We are open every day, {SITE.hours.replace("Mon – Sun ", "")}.

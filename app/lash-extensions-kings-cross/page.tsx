@@ -66,12 +66,12 @@ export default function LashExtensionsKingsCrossPage() {
   return (
     <main className="mx-auto max-w-7xl px-5 md:px-8 pb-14 md:pb-12">
       <header className="pt-8 md:pt-10 pb-10">
-        <p className="text-xs tracking-[0.28em] uppercase text-ink">Lash extensions</p>
+        <p className="inline-flex rounded-full bg-[#ebe3d4] px-3 py-1 text-xs tracking-[0.28em] uppercase text-[#6d5223]">Lash extensions</p>
         <h1 className="mt-3 text-4xl md:text-6xl font-semibold leading-[1.05]">
           Lash Extensions in <span className="text-gold whitespace-nowrap">King’s Cross</span>
         </h1>
 
-        <div className="mt-5 max-w-2xl space-y-4 text-ink/80">
+        <div className="mt-5 max-w-2xl space-y-4 text-ink">
           <p>
             Our salon is on Caledonian Road, a {SITE.walkMinutes}-minute walk from King’s Cross
             station. We are open every day, {SITE.hours.replace("Mon – Sun ", "")}. Classic, hybrid
