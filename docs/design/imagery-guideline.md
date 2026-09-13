@@ -252,6 +252,52 @@ waxing ฉบับแรก 49.8                            ไม่นับ 
 **เป้าที่ปลอดภัยคือ 55 ขึ้นไป ไม่ใช่ 50 พอดี** เพราะ 50 พอดีคือขอบที่พลิกไปมาได้จากการบีบไฟล์
 ยกค่าแสงของไฟล์ทีหลังได้ และไม่ถือว่าตกแต่งเกินจริง เพราะเป็นภาพของเราเองและไม่ได้เปลี่ยนคำกล่าวอ้างใด
 
+## 9e ภาพหลักหน้าแรก 2026-09-13 ทะเบียนโจทย์
+
+WS เคาะใน `Q-SHOP-033` ack `6bb5f171` ให้เปลี่ยน เพราะภาพเดิมเป็นห้องนวดไม่มีคน ซึ่งคือรูปที่เจ้าของค้าน
+และหน้าแรกคือหน้าที่ผู้ซื้อเห็นมากที่สุด
+
+**ออกแบบจากช่องที่แสดงจริง ไม่ใช่จากขนาดไฟล์** วัดบน dev server ด้วย `getBoundingClientRect`
+```
+จอ 1440   กล่อง 439x203   อัตราส่วน 2.16
+จอ 375    กล่อง 291x172   อัตราส่วน 1.69
+```
+ภาพถูก `object-cover` ตัดกลางทั้ง 2 จอ ดังนั้นโจทย์สั่งภาพกว้าง 2 เท่าของสูง และให้ตัวงานอยู่ในกลาง 60% ของความกว้าง
+เพราะจอ 375 เหลือความกว้างราว 78% ของภาพ ถ้าตัวงานกินถึงขอบ มือหรือเท้าจะหลุดกรอบบนมือถือ
+
+```
+เครื่องมือ   gumon-workspace/bin/ask-gemini -m gemini-3-pro-image --image-out <ไฟล์> -f <โจทย์>
+วันที่       2026-09-13
+ผลที่ได้     1456x720 JPEG ทั้ง 3 ใบ
+ไฟล์ขึ้นเว็บ  public/images/hero/taitamd-hero-thai-massage.jpg  ใบ B ยกแสง 5% ย่อเป็น 1320x653 ได้ 81 KB ความสว่าง 62.5
+ไฟล์เดิม     docs/design/retired-images/taitamd-gemini-hero.jpg  ความสว่าง 16.3 ย้ายออกจาก public/ เพราะไฟล์ที่ไม่มีหน้าไหนอ้างทำให้ด่านไฟล์กำพร้าล้ม deploy
+```
+
+**โจทย์ที่ใช้** ท่อนเปิดร่วมของข้อ 9b แต่ตัดประโยคเรื่อง 3:2 ออก แล้วต่อด้วย 2 ท่อนนี้ ปิดด้วยท่อนกายวิภาคของข้อ 9c ครบทุกคำ
+```
+Very wide horizontal composition, twice as wide as it is tall. Keep the whole subject inside
+the central sixty percent of the width, with calm empty space of cream wall and pale wood on
+both the left and the right, so the picture can be cropped at the sides without cutting the
+subject. Keep the subject vertically centred with space above and below.
+
+A traditional Thai massage in progress. A client lies face down on a low cream mat under a
+cream towel, seen from the side. A therapist kneels beside them and presses both palms flat
+into the client's upper back, arms straight, leaning their weight in, so the massage is
+clearly happening. The therapist's face is out of frame or turned away; frame from the
+therapist's shoulders down. The client's face is turned away from the camera.
+```
+
+**3 ใบที่ได้ และเหตุที่เลือกหรือไม่เลือก** ความสว่างวัดตามสเกลของด่าน
+```
+A  65.1  ไม่ใช้  มีรอยต่อแนวตั้งที่ขอบซ้ายและขวา พื้นกับผนังไม่ต่อกับกลางภาพ คือภาพปะ และเห็นหน้าช่างบางส่วน
+B  56.8  ใช้     มือ 2 ข้างกลางภาพ หน้าช่างอยู่นอกกรอบ ตัดกรอบทั้ง 2 จอแล้วมือกับเท้ายังอยู่
+C  51.7  ไม่ใช้  มืดกว่า เห็นหน้าช่างบางส่วน ตัวงานยาวถึงขอบขวาจึงหลุดกรอบบนมือถือ และมีเตียงแปลกปลอมมุมขวาล่าง
+```
+ใบ A สอนว่า **ภาพที่สั่งให้กว้างกว่าสัดส่วนปกติของโมเดล อาจได้รอยปะที่ขอบ** ดังนั้นต้องขยายไปดูขอบซ้ายขวาทุกใบ ไม่ใช่ดูแค่ตัวงานกลางภาพ
+
+**ตรวจมือที่ขนาดเต็ม** ขยาย 3 เท่าเฉพาะบริเวณมือ แขนลูกค้า และเท้าช่าง
+มือช่าง 2 ข้าง นิ้ว 4 กับนิ้วโป้ง 1 นับได้ครบ ข้อมือ 1 ต่อแขน 1 · แขนลูกค้าเห็น 1 ข้าง อีกข้างอยู่ใต้ลำตัว ไม่ใช่แขนหาย · เท้าช่าง 2 ข้างปกติ
+
 ## 10 รายการตรวจก่อน commit ทุกภาพ
 
 ```
