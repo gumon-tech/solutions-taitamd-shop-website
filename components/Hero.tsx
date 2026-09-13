@@ -93,11 +93,12 @@ export default function Hero() {
           >
             <div className="glass rounded-[28px] p-5 shadow-glow overflow-hidden">
               <div className="rounded-[22px] overflow-hidden border border-[#d6c198]">
-                {/* The picture behind this card is generated artwork, not one of our rooms.
-                    Its alt text used to read "Serene Taitam-D massage room", which asserted
-                    the opposite in the one layer nobody looks at — D-W22 forbids exactly that
-                    claim. The image itself stays until a real photograph replaces it
-                    (Q-SHOP-020, ruled by WS); the false claim did not have to wait. */}
+                {/* The picture is generated artwork, not one of our rooms, our therapists or our
+                    clients, so the alt text describes what is shown and claims nothing (D-W22).
+                    It replaced an empty massage room on 2026-09-13: a room with nobody in it is
+                    what the owner called selling beds, and this is the page most buyers see
+                    (WS ruling in Q-SHOP-033). The old file is kept, unserved, in
+                    docs/design/retired-images/. Prompt and model: imagery-guideline.md 9e. */}
                 {/* The picture was here all along and almost nobody could see it: 0.78 opacity
                     under three gradient layers, the heaviest of them a 62% green wash. What a
                     visitor actually met was a gradient, not a place (Q-SHOP-033 phase 2).
@@ -113,7 +114,7 @@ export default function Hero() {
                     and takes the type off it entirely (Q-SHOP-033 phase 3, ruled by WS
                     2026-09-11: fix the card before the cream sections). */}
                 <div className="relative h-44 md:h-52">
-                  <Image src="/images/hero/taitamd-gemini-hero.jpg" alt="Softly lit massage room with warm natural light" fill priority className="object-cover" />
+                  <Image src="/images/hero/taitamd-hero-thai-massage.jpg" alt="Therapist pressing both palms into a client's upper back during a Thai massage" fill priority className="object-cover" />
                   <div className="absolute inset-0 bg-[radial-gradient(700px_420px_at_20%_10%,rgba(200,176,124,0.16),rgba(0,0,0,0)),radial-gradient(600px_420px_at_85%_25%,rgba(127,155,82,0.12),rgba(0,0,0,0)),linear-gradient(135deg,rgba(15,51,20,0.34),rgba(11,42,16,0.16))]" />
                 </div>
                 <div className="bg-[#f5efe3] p-6 md:p-7">
