@@ -82,4 +82,11 @@ jobs:
 
       - name: Measure and report
         working-directory: pr
-        run: node scripts/visual-gate-report.mjs http://localhost:3302/ http://localhost:3301/ >> "$GITHUB_STEP_SUMMARY"
+        # The report goes to the log as well as the summary. The summary is only readable on
+        # github.com while signed in, so on the gate's first real run (34739734549, 2026-09-13) a
+        # green job was all anyone outside the browser could see — and green does not mean the
+        # controls measured: the report prints "A control did not measure" and still exits 0.
+        # pipefail keeps a crashed report failing the step instead of tee's exit status hiding it.
+        run: |
+          set -o pipefail
+          node scripts/visual-gate-report.mjs http://localhost:3302/ http://localhost:3301/ | tee -a "$GITHUB_STEP_SUMMARY"
