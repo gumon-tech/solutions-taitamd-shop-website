@@ -104,6 +104,17 @@ export const SOURCE_MASSAGE_LANDING = "J";
 export const SOURCE_STICKY_BAR = "SB";
 
 /**
+ * Scanning the QR picture on /book/ and in the Contact section (2026-09-17).
+ *
+ * The picture used to encode the wa.me/qr/… short link, which WhatsApp revoked, so a scan
+ * opened "no longer valid" and never reached the chat. It now encodes the number link with a
+ * greeting and this letter, which also separates a scan of the website's QR from a scan of any
+ * printed one for the first time. Q(R) S(can). The letter lives inside the image, so changing
+ * it means regenerating the picture (command beside SITE.whatsappQr), not only this line.
+ */
+export const SOURCE_WEB_QR_SCAN = "QS";
+
+/**
  * Landing pages from Q-MKT-079 use two letters, decided by MKT on 2026-09-09 after this
  * room reported the shortage: 22 of the 26 single letters were taken and the ticket asked
  * for 5 more. Every existing single letter stays exactly where it is — renaming them would
@@ -155,14 +166,10 @@ export const OPEN_CHAT_MESSAGE = {
  * Q-KMKT-004’s grep showed none of the six: it reads buildWhatsAppLink call
  * sites, and a button with no letter is exactly a button that never called it.
  *
- * One gap is left, and no letter can close it. The QR short link is the same one
- * printed on the card in the shop, so a tap and a scan still arrive looking
- * alike wherever that link is still used. Splitting those needs a second link
- * from WhatsApp Business, not another letter.
- *
- * One thing the far end should know: wa.me/qr/… is the same short link as the
- * printed QR code, so a click here and a scan in the shop arrive looking alike.
- * Separating those needs a second link, not a letter.
+ * The wa.me/qr/… short link these buttons once used is gone from the site. WhatsApp
+ * revoked it (found 2026-09-17), and the website QR picture now carries its own
+ * letter, SOURCE_WEB_QR_SCAN. Any QR still printed from that short link in the shop
+ * is dead too.
  */
 
 export function sourceForSlug(slug?: string): string {

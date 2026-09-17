@@ -44,8 +44,11 @@ export const SITE = {
   // Direct chat / enquiries
   whatsappNumber: "447882359499", // E.164 without "+"
   whatsappDisplay: "07882359499",
-  whatsappQr: "/images/whatsapp/whatsapp-qr-only.jpg",
-  whatsappLink: "https://wa.me/qr/YIN5KFQPKWI2F1",
+  // The QR encodes the number link, never a wa.me/qr/… short link: those can be revoked, and
+  // the old one (YIN5KFQPKWI2F1) was, so every scan landed on "no longer valid" (OFFICE, 2026-09-17).
+  // Encoded text: "Hi Taitam-D, I would like to book. [web-QS]" plus a blank line (kept short: a longer message made the code too dense to read at 183px on /contact).
+  // Regenerate with: qrencode -l M -m 2 -s 12 -o <file>.png "<link from buildOpenChatLink(…, SOURCE_WEB_QR_SCAN)>"
+  whatsappQr: "/images/whatsapp/whatsapp-qr-447882359499.png",
 
   // The shop's public Treatwell listing — the fallback for a visitor with no
   // WhatsApp (Q-MKT-078, owner's instruction). Never the primary path: WhatsApp is
