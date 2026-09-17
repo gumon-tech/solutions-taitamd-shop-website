@@ -11,42 +11,63 @@ import { buildWhatsAppLink, SOURCE_OFFER, SOURCE_OFFER_ENQUIRY } from "@/lib/wha
 // results — there the picture is the claim, and a caption does not rescue it (Q-MKT/LAW
 // ruling 2026-08-10, recorded in docs/plans/DECISIONS-BOARD.md D-W22).
 //
-// No card carries the flag today. It stays declared because the label is the mechanism
-// that ruling created, and deleting it the moment it happens to be unused is how a guard
-// disappears years before the risk does.
+// Two of the three cards carry it since 2026-09-17: both show a treatment in progress in
+// generated artwork. The sauna card is our own room and does not.
 type Campaign = {
   image: string;
   illustrative?: boolean;
   eyebrow: string;
   title: string;
   detail: string;
-  prices: string[];
+  points: string[];
   offer: string;
   message: string;
 };
 
+// The three offers Kru Nok designed as flyers, relayed by OFFICE on 2026-09-17 with the owner's
+// instruction to put them on the home page (source: solution-taitamd-shop-office
+// docs/reference/promotions-2026-09-17.md at d545907). The owner approved rebuilding them as
+// cards rather than showing the flyers, in the SHOP room, the same day.
+//
+// Rules this copy keeps, so the next edit keeps them too:
+// - Every claim comes from the flyer's own words. The flyers state no expiry date and say
+//   nothing about combining with other offers, so neither appears here. Do not add them
+//   without a source.
+// - The flyers say "bring this coupon". A website visitor has no coupon, so the owner ruled
+//   that mentioning the offer on WhatsApp or on arrival is how it is claimed from here.
+// - The flyer images are not used: their QR codes carry flyer-* source codes, and a scan from
+//   this page would be counted as a flyer. The buttons below carry the web offer letter instead.
 const campaigns: Campaign[] = [
   {
-    // Swapped off the generated artwork 2026-08-16 (Q-SHOP-020, ruled by WS): the old
-    // picture showed a wash room with a therapist in it, which reads as a claim about
-    // our premises and our people — exactly what D-W22 forbids. This is the real salon
-    // room, so the `illustrative` label comes off with it.
-    image: "/images/tour/salon-lavender-mural.jpg",
-    eyebrow: "Comeback offer · Hair care",
-    title: "Hair Spa & Detox",
-    detail: "A scalp massage, nano steam, mask and blow dry in one restorative ritual.",
-    prices: ["Men £40", "Short £59", "Medium £69", "Long £79"],
-    offer: "Save £10 on the full Hair Spa package",
-    message: "Hi Taitam-D, I’m interested in the Hair Spa & Detox comeback offer. Please share availability.",
+    // Our own infrared sauna, photographed in the shop, so no illustrative label.
+    image: "/images/tour/infrared-sauna.jpg",
+    eyebrow: "We’re back · Welcome back gift",
+    title: "Free infrared sauna session",
+    detail: "After one month of renovation, we are delighted to welcome you back. When you enjoy a 90-minute massage with us, your infrared sauna session is free.",
+    points: ["With a 90-minute massage", "Sauna session worth £35"],
+    offer: "You are welcome to share this gift with a friend",
+    message: "Hi Taitam-D, I’d like to book a 90-minute massage with the free infrared sauna welcome back gift.",
   },
   {
-    image: "/images/campaigns/promo-spa-ritual-gemini-v3.jpg",
-    eyebrow: "Comeback offer · Spa rituals",
-    title: "Choose your reset",
-    detail: "Small, focused rituals for hair, face, hands and feet — designed to leave you refreshed.",
-    prices: ["Hair Spa from £40", "Face Spa £30", "Hand Spa £20", "Foot Spa £30"],
-    offer: "Enjoy £10 off when you choose the full package",
-    message: "Hi Taitam-D, I’d like to ask about the Hair Spa, Face Spa, Hand Spa and Foot Spa comeback offers.",
+    illustrative: true,
+    image: "/images/landing/massage.jpg",
+    eyebrow: "£5 gift voucher · Walk-in offer",
+    title: "£5 off any 1-hour massage",
+    detail: "Perfect for travellers, commuters and local visitors looking for relaxation near King’s Cross.",
+    points: ["Any 1-hour massage", "Special walk-in offer"],
+    offer: "Mention this offer on WhatsApp or when you arrive",
+    message: "Hi Taitam-D, I’d like to use the £5 off any 1-hour massage offer.",
+  },
+  {
+    // Cropped from Kru Nok's own flyer artwork, clear of its text and QR code.
+    illustrative: true,
+    image: "/images/campaigns/promo-hair-spa-wash.jpg",
+    eyebrow: "£10 gift voucher · Walk-in offer",
+    title: "£10 off Hair Spa",
+    detail: "Head massage and hair wash in one treatment: a soothing scalp massage, a refreshing hair wash and expert care that leaves your scalp and hair feeling clean, calm and beautifully refreshed.",
+    points: ["Hair Spa treatment", "Special walk-in offer"],
+    offer: "Mention this offer on WhatsApp or when you arrive",
+    message: "Hi Taitam-D, I’d like to use the £10 off Hair Spa offer.",
   },
 ];
 
@@ -67,7 +88,7 @@ export default function Campaigns() {
             )} target="_blank" rel="noreferrer" className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-[#183d2d] px-5 py-3 text-sm font-semibold text-[#f7f3e9] transition hover:bg-[#25563e]"><MessageCircle className="h-4 w-4 text-[#d7b874]" /> Ask about offers <ArrowUpRight className="h-4 w-4 text-[#d7b874]" /></a>
           </div>
 
-          <div className="mt-8 grid gap-5 lg:grid-cols-2">
+          <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {campaigns.map((campaign, index) => (
               <Reveal key={campaign.title} delay={index * 0.08}>
                 <article className="overflow-hidden rounded-[26px] border border-[#dbcba9] bg-[#fffdf8] shadow-[0_14px_36px_rgba(27,58,42,0.1)]">
@@ -97,7 +118,7 @@ export default function Campaigns() {
                         onto the card, where it has a background we actually choose. */}
                     <h3 className="text-2xl font-semibold tracking-[-0.02em] text-[#19392a] md:text-3xl">{campaign.title}</h3>
                     <p className="mt-3 text-sm leading-relaxed text-[#52655a]">{campaign.detail}</p>
-                    <div className="mt-4 grid grid-cols-2 gap-2">{campaign.prices.map((price) => <div key={price} className="rounded-xl bg-[#f3eee5] px-3 py-2 text-xs font-semibold text-[#284b39]">{price}</div>)}</div>
+                    <div className="mt-4 grid grid-cols-2 gap-2">{campaign.points.map((point) => <div key={point} className="rounded-xl bg-[#f3eee5] px-3 py-2 text-xs font-semibold text-[#284b39]">{point}</div>)}</div>
                     <div className="mt-5 flex flex-col gap-4 border-t border-[#e7dece] pt-5 sm:flex-row sm:items-center sm:justify-between"><div className="text-sm font-semibold text-[#6d5223]">{campaign.offer}</div><a href={buildWhatsAppLink(campaign.message, SOURCE_OFFER)} target="_blank" rel="noreferrer" className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-[#183d2d] px-4 py-2.5 text-xs font-semibold text-[#f7f3e9] transition hover:bg-[#25563e]"><MessageCircle className="h-4 w-4 text-[#d7b874]" /> Reserve offer</a></div>
                   </div>
                 </article>
