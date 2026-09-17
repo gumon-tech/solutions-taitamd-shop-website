@@ -110,7 +110,7 @@ export default function Campaigns() {
                     </div>
                   </div>
                   <div className="p-5 md:p-6">
-                    {campaign.illustrative && <p className="mb-2 text-[11px] uppercase tracking-[0.18em] text-[#8a9a8f]">Illustrative image</p>}
+                    {campaign.illustrative && <p className="mb-2 text-[11px] uppercase tracking-[0.18em] text-[#52655a]">Illustrative image</p>}
                     {/* The title used to sit on the photograph in white, which measured 2.50 on a
                         phone against a threshold of 3.0 — the picture is bright in places and no
                         text colour survives every picture. T11 forbids darkening an image to
