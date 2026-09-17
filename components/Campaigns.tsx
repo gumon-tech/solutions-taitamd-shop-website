@@ -30,13 +30,18 @@ type Campaign = {
 // cards rather than showing the flyers, in the SHOP room, the same day.
 //
 // Rules this copy keeps, so the next edit keeps them too:
-// - Every claim comes from the flyer's own words. The flyers state no expiry date and say
-//   nothing about combining with other offers, so neither appears here. Do not add them
-//   without a source.
+// - Every claim comes from the flyer's own words, plus the two terms the owner added the same
+//   day through OFFICE (promotions-2026-09-17.md at 1f3ff13 in the shop-office repo): the offers
+//   run for 30 days counting 17 September as day one, so until Friday 16 October 2026, and they
+//   can be used on top of prices that are already reduced, just by mentioning them.
+//   The site is static and will not take this down by itself: remove or replace these cards
+//   when the offers end.
 // - The flyers say "bring this coupon". A website visitor has no coupon, so the owner ruled
 //   that mentioning the offer on WhatsApp or on arrival is how it is claimed from here.
 // - The flyer images are not used: their QR codes carry flyer-* source codes, and a scan from
 //   this page would be counted as a flyer. The buttons below carry the web offer letter instead.
+const OFFERS_END = "Friday 16 October 2026";
+
 const campaigns: Campaign[] = [
   {
     // Our own infrared sauna, photographed in the shop, so no illustrative label.
@@ -81,6 +86,7 @@ export default function Campaigns() {
               <div className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.28em] text-[#6d5223]"><Sparkles className="h-4 w-4" /> Current promotions</div>
               <h2 className="mt-3 text-3xl font-semibold leading-tight tracking-[-0.03em] md:text-5xl">A better reason to <span className="text-[#a07b38]">come back.</span></h2>
               <p className="mt-4 text-sm leading-relaxed text-[#53665a] md:text-base">Freshly made offers for the reopening season. Pick a ritual, then message us on WhatsApp and we’ll find a time for you.</p>
+              <p className="mt-3 text-sm font-semibold leading-relaxed text-[#284b39]">All three offers run until {OFFERS_END} and can be used with our already reduced prices. No coupon needed, just mention the offer.</p>
             </div>
             <a href={buildWhatsAppLink(
               "Hi Taitam-D, I’d like to hear about your current offers. Please share what’s running now.",
