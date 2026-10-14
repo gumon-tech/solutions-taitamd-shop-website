@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import OffersGate from "./OffersGate";
 import { ArrowUpRight, MapPin, Clock3, PhoneCall, MessageCircle } from "lucide-react";
 import { SITE } from "@/lib/site";
 import Reveal from "./Reveal";
@@ -51,12 +52,14 @@ export default function Hero() {
             >
               <MessageCircle className="h-4 w-4 text-gold" /> WhatsApp to book <ArrowUpRight className="h-4 w-4 text-gold" />
             </Link>
+            <OffersGate>
             <Link
               href="#promotions"
               className="inline-flex items-center justify-center gap-2 rounded-2xl bg-transparent border border-ink/[0.12] px-5 py-3 text-sm font-semibold hover:bg-ink/5 transition"
             >
               See promotions
             </Link>
+            </OffersGate>
           </div>
 
           <p className="mt-3 text-xs leading-relaxed text-mist">{SITE.standardsNotice}</p>

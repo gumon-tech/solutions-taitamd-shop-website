@@ -1,6 +1,8 @@
 import Image from "next/image";
 import { ArrowUpRight, MessageCircle, Sparkles } from "lucide-react";
 import Reveal from "./Reveal";
+import OffersGate from "./OffersGate";
+import { OFFERS_END_LABEL, offersLive } from "@/lib/offers";
 import { buildWhatsAppLink, SOURCE_OFFER, SOURCE_OFFER_ENQUIRY } from "@/lib/whatsapp";
 
 // `illustrative` marks artwork that depicts a room and a therapist without being a
@@ -34,13 +36,15 @@ type Campaign = {
 //   day through OFFICE (promotions-2026-09-17.md at 1f3ff13 in the shop-office repo): the offers
 //   run for 30 days counting 17 September as day one, so until Friday 16 October 2026, and they
 //   can be used on top of prices that are already reduced, just by mentioning them.
-//   The site is static and will not take this down by itself: remove or replace these cards
+//   The site is static and will not rebuild itself on that day: OffersGate hides this section
+//   (and the hero's "See promotions" link) on the visitor's clock after the end date, and a
+//   build after the end date leaves it out of the HTML. Still remove or replace these cards
 //   when the offers end.
 // - The flyers say "bring this coupon". A website visitor has no coupon, so the owner ruled
 //   that mentioning the offer on WhatsApp or on arrival is how it is claimed from here.
 // - The flyer images are not used: their QR codes carry flyer-* source codes, and a scan from
 //   this page would be counted as a flyer. The buttons below carry the web offer letter instead.
-const OFFERS_END = "Friday 16 October 2026";
+const OFFERS_END = OFFERS_END_LABEL;
 
 const campaigns: Campaign[] = [
   {
@@ -77,7 +81,9 @@ const campaigns: Campaign[] = [
 ];
 
 export default function Campaigns() {
+  if (!offersLive()) return null;
   return (
+    <OffersGate>
     <section id="promotions" className="ui-section scroll-mt-nav">
       <Reveal>
         <div className="rounded-[32px] border border-gold/25 bg-[#f4eee2] p-6 text-[#19392a] shadow-[0_24px_60px_rgba(12,51,30,0.2)] md:p-8">
@@ -134,5 +140,6 @@ export default function Campaigns() {
         </div>
       </Reveal>
     </section>
+    </OffersGate>
   );
 }
