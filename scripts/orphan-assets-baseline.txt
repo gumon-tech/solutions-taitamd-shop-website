@@ -16,4 +16,3 @@ public/images/treatwell/treatwell-1628962.jpg
 public/images/treatwell/treatwell-1628963.jpg
 public/images/treatwell/treatwell-1628965.jpg
 public/images/treatwell/treatwell-358089.jpg
-public/images/whatsapp/WhatsApp Image 2569-08-03 at 19.43.01.jpeg

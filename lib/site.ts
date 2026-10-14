@@ -42,13 +42,16 @@ export const SITE = {
   image: "/images/hero/og-1200x630.jpg",
 
   // Direct chat / enquiries
-  whatsappNumber: "447882359499", // E.164 without "+"
-  whatsappDisplay: "07882359499",
+  // The shop's own number since 2026-10-14 (owner's instruction relayed by KBOT): the same line as
+  // `phone`, now on the WhatsApp Cloud API where the shop's assistant answers every chat. Kru Nok's
+  // personal number, used here until that day, must not appear on any public page again.
+  whatsappNumber: "447564292247", // E.164 without "+"
+  whatsappDisplay: "07564292247",
   // The QR encodes the number link, never a wa.me/qr/… short link: those can be revoked, and
   // the old one (YIN5KFQPKWI2F1) was, so every scan landed on "no longer valid" (OFFICE, 2026-09-17).
   // Encoded text: "Hi Taitam-D, I would like to book. [web-QS]" plus a blank line (kept short: a longer message made the code too dense to read at 183px on /contact).
   // Regenerate with: qrencode -l M -m 2 -s 12 -o <file>.png "<link from buildOpenChatLink(…, SOURCE_WEB_QR_SCAN)>"
-  whatsappQr: "/images/whatsapp/whatsapp-qr-447882359499.png",
+  whatsappQr: "/images/whatsapp/whatsapp-qr-447564292247.png",
 
   // The shop's public Treatwell listing — the fallback for a visitor with no
   // WhatsApp (Q-MKT-078, owner's instruction). Never the primary path: WhatsApp is

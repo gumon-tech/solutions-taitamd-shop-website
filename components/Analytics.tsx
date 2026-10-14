@@ -104,7 +104,7 @@ function denyConsent() {
 }
 
 // A wa.me link means one of two opposite things, and the difference is the whole
-// point of the number: a link with a path (/447882359499, /qr/XXXX) opens a chat
+// point of the number: a link with a path (/447564292247, /qr/XXXX) opens a chat
 // WITH US and is a lead; a bare wa.me/?text= opens the visitor's own contact list
 // so they can forward the page to a friend, and is not.
 // Matching on the hostname alone counted both as whatsapp_click (measured on
