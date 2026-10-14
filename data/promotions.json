@@ -1,0 +1,51 @@
+{
+  "updated_at": "2026-10-14T16:00:00Z",
+  "note": "All three offers run until Friday 16 October 2026 and can be used with our already reduced prices. No coupon needed, just mention the offer.",
+  "promotions": [
+    {
+      "code": "P-SAUNA90",
+      "title": "Free infrared sauna session",
+      "eyebrow": "We’re back · Welcome back gift",
+      "detail": "After one month of renovation, we are delighted to welcome you back. When you enjoy a 90-minute massage with us, your infrared sauna session is free.",
+      "points": ["With a 90-minute massage", "Sauna session worth £35"],
+      "offer": "You are welcome to share this gift with a friend",
+      "message": "Hi Taitam-D, I’d like to book a 90-minute massage with the free infrared sauna welcome back gift.",
+      "image": "/images/tour/infrared-sauna.jpg",
+      "illustrative": false,
+      "starts": "2026-09-17",
+      "ends": "2026-10-16",
+      "ends_label": "Friday 16 October 2026",
+      "status": "live"
+    },
+    {
+      "code": "P-MASSAGE5",
+      "title": "£5 off any 1-hour massage",
+      "eyebrow": "£5 gift voucher · Walk-in offer",
+      "detail": "Perfect for travellers, commuters and local visitors looking for relaxation near King’s Cross.",
+      "points": ["Any 1-hour massage", "Special walk-in offer"],
+      "offer": "Mention this offer on WhatsApp or when you arrive",
+      "message": "Hi Taitam-D, I’d like to use the £5 off any 1-hour massage offer.",
+      "image": "/images/landing/massage.jpg",
+      "illustrative": true,
+      "starts": "2026-09-17",
+      "ends": "2026-10-16",
+      "ends_label": "Friday 16 October 2026",
+      "status": "live"
+    },
+    {
+      "code": "P-HAIRSPA10",
+      "title": "£10 off Hair Spa",
+      "eyebrow": "£10 gift voucher · Walk-in offer",
+      "detail": "Head massage and hair wash in one treatment: a soothing scalp massage, a refreshing hair wash and expert care that leaves your scalp and hair feeling clean, calm and beautifully refreshed.",
+      "points": ["Hair Spa treatment", "Special walk-in offer"],
+      "offer": "Mention this offer on WhatsApp or when you arrive",
+      "message": "Hi Taitam-D, I’d like to use the £10 off Hair Spa offer.",
+      "image": "/images/campaigns/promo-hair-spa-wash.jpg",
+      "illustrative": true,
+      "starts": "2026-09-17",
+      "ends": "2026-10-16",
+      "ends_label": "Friday 16 October 2026",
+      "status": "live"
+    }
+  ]
+}

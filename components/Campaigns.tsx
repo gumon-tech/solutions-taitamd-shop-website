@@ -1,8 +1,17 @@
 import Image from "next/image";
 import { ArrowUpRight, MessageCircle, Sparkles } from "lucide-react";
 import Reveal from "./Reveal";
-import OffersGate from "./OffersGate";
-import { OFFERS_END_LABEL, offersLive } from "@/lib/offers";
+import { existsSync } from "node:fs";
+import { join } from "node:path";
+import PromoGate from "./PromoGate";
+import {
+  promotionWindow,
+  promotionsGate,
+  promotionsNote,
+  upcomingPromotions,
+  windowActive,
+  type Promotion,
+} from "@/lib/promotions";
 import { buildWhatsAppLink, SOURCE_OFFER, SOURCE_OFFER_ENQUIRY } from "@/lib/whatsapp";
 
 // `illustrative` marks artwork that depicts a room and a therapist without being a
@@ -15,75 +24,35 @@ import { buildWhatsAppLink, SOURCE_OFFER, SOURCE_OFFER_ENQUIRY } from "@/lib/wha
 //
 // Two of the three cards carry it since 2026-09-17: both show a treatment in progress in
 // generated artwork. The sauna card is our own room and does not.
-type Campaign = {
-  image: string;
-  illustrative?: boolean;
-  eyebrow: string;
-  title: string;
-  detail: string;
-  points: string[];
-  offer: string;
-  message: string;
-};
+// The offers themselves live in data/promotions.json (lib/promotions.ts reads and checks it).
+// Rules every entry there keeps, so the next edit keeps them too:
+// - Every claim comes from the offer's own source (the flyer, plus terms the owner added). The
+//   first three, from Kru Nok's flyers of 2026-09-17: solution-taitamd-shop-office
+//   docs/reference/promotions-2026-09-17.md at d545907 and 1f3ff13.
+// - Flyers say "bring this coupon". A website visitor has no coupon, so the owner ruled that
+//   mentioning the offer on WhatsApp or on arrival is how it is claimed from here.
+// - Flyer images are not used: their QR codes carry flyer-* source codes, and a scan from this
+//   page would be counted as a flyer. The buttons carry the web offer letter instead.
+// - `illustrative` as above: true for generated artwork of a treatment, never for our premises.
 
-// The three offers Kru Nok designed as flyers, relayed by OFFICE on 2026-09-17 with the owner's
-// instruction to put them on the home page (source: solution-taitamd-shop-office
-// docs/reference/promotions-2026-09-17.md at d545907). The owner approved rebuilding them as
-// cards rather than showing the flyers, in the SHOP room, the same day.
-//
-// Rules this copy keeps, so the next edit keeps them too:
-// - Every claim comes from the flyer's own words, plus the two terms the owner added the same
-//   day through OFFICE (promotions-2026-09-17.md at 1f3ff13 in the shop-office repo): the offers
-//   run for 30 days counting 17 September as day one, so until Friday 16 October 2026, and they
-//   can be used on top of prices that are already reduced, just by mentioning them.
-//   The site is static and will not rebuild itself on that day: OffersGate hides this section
-//   (and the hero's "See promotions" link) on the visitor's clock after the end date, and a
-//   build after the end date leaves it out of the HTML. Still remove or replace these cards
-//   when the offers end.
-// - The flyers say "bring this coupon". A website visitor has no coupon, so the owner ruled
-//   that mentioning the offer on WhatsApp or on arrival is how it is claimed from here.
-// - The flyer images are not used: their QR codes carry flyer-* source codes, and a scan from
-//   this page would be counted as a flyer. The buttons below carry the web offer letter instead.
-const OFFERS_END = OFFERS_END_LABEL;
-
-const campaigns: Campaign[] = [
-  {
-    // Our own infrared sauna, photographed in the shop, so no illustrative label.
-    image: "/images/tour/infrared-sauna.jpg",
-    eyebrow: "We’re back · Welcome back gift",
-    title: "Free infrared sauna session",
-    detail: "After one month of renovation, we are delighted to welcome you back. When you enjoy a 90-minute massage with us, your infrared sauna session is free.",
-    points: ["With a 90-minute massage", "Sauna session worth £35"],
-    offer: "You are welcome to share this gift with a friend",
-    message: "Hi Taitam-D, I’d like to book a 90-minute massage with the free infrared sauna welcome back gift.",
-  },
-  {
-    illustrative: true,
-    image: "/images/landing/massage.jpg",
-    eyebrow: "£5 gift voucher · Walk-in offer",
-    title: "£5 off any 1-hour massage",
-    detail: "Perfect for travellers, commuters and local visitors looking for relaxation near King’s Cross.",
-    points: ["Any 1-hour massage", "Special walk-in offer"],
-    offer: "Mention this offer on WhatsApp or when you arrive",
-    message: "Hi Taitam-D, I’d like to use the £5 off any 1-hour massage offer.",
-  },
-  {
-    // Cropped from Kru Nok's own flyer artwork, clear of its text and QR code.
-    illustrative: true,
-    image: "/images/campaigns/promo-hair-spa-wash.jpg",
-    eyebrow: "£10 gift voucher · Walk-in offer",
-    title: "£10 off Hair Spa",
-    detail: "Head massage and hair wash in one treatment: a soothing scalp massage, a refreshing hair wash and expert care that leaves your scalp and hair feeling clean, calm and beautifully refreshed.",
-    points: ["Hair Spa treatment", "Special walk-in offer"],
-    offer: "Mention this offer on WhatsApp or when you arrive",
-    message: "Hi Taitam-D, I’d like to use the £10 off Hair Spa offer.",
-  },
-];
+// Fails the build when an entry points at a picture that is not in public/, instead of
+// shipping a broken image to the home page.
+function assertImages(list: Promotion[]) {
+  for (const p of list) {
+    if (!existsSync(join(process.cwd(), "public", p.image))) {
+      throw new Error(`data/promotions.json: ${p.code}: image ${p.image} is not in public/`);
+    }
+  }
+}
 
 export default function Campaigns() {
-  if (!offersLive()) return null;
+  const now = Date.now();
+  const campaigns = upcomingPromotions(now);
+  assertImages(campaigns);
+  if (!campaigns.length) return null;
+  const { windows, initiallyActive } = promotionsGate(now);
   return (
-    <OffersGate>
+    <PromoGate windows={windows} initiallyActive={initiallyActive}>
     <section id="promotions" className="ui-section scroll-mt-nav">
       <Reveal>
         <div className="rounded-[32px] border border-gold/25 bg-[#f4eee2] p-6 text-[#19392a] shadow-[0_24px_60px_rgba(12,51,30,0.2)] md:p-8">
@@ -92,7 +61,7 @@ export default function Campaigns() {
               <div className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.28em] text-[#6d5223]"><Sparkles className="h-4 w-4" /> Current promotions</div>
               <h2 className="mt-3 text-3xl font-semibold leading-tight tracking-[-0.03em] md:text-5xl">A better reason to <span className="text-[#a07b38]">come back.</span></h2>
               <p className="mt-4 text-sm leading-relaxed text-[#53665a] md:text-base">Freshly made offers for the reopening season. Pick a ritual, then message us on WhatsApp and we’ll find a time for you.</p>
-              <p className="mt-3 text-sm font-semibold leading-relaxed text-[#284b39]">All three offers run until {OFFERS_END} and can be used with our already reduced prices. No coupon needed, just mention the offer.</p>
+              {promotionsNote && <p className="mt-3 text-sm font-semibold leading-relaxed text-[#284b39]">{promotionsNote}</p>}
             </div>
             <a href={buildWhatsAppLink(
               "Hi Taitam-D, I’d like to hear about your current offers. Please share what’s running now.",
@@ -102,7 +71,8 @@ export default function Campaigns() {
 
           <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {campaigns.map((campaign, index) => (
-              <Reveal key={campaign.title} delay={index * 0.08}>
+              <PromoGate key={campaign.code} windows={[promotionWindow(campaign)]} initiallyActive={windowActive(promotionWindow(campaign), now)}>
+              <Reveal delay={index * 0.08}>
                 <article className="overflow-hidden rounded-[26px] border border-[#dbcba9] bg-[#fffdf8] shadow-[0_14px_36px_rgba(27,58,42,0.1)]">
                   <div className="relative aspect-[4/3] overflow-hidden">
                     <Image src={campaign.image} alt={campaign.illustrative ? `${campaign.title} promotion — illustrative image` : `${campaign.title} promotion`} fill className="object-cover transition duration-700 hover:scale-[1.03]" sizes="(max-width: 1024px) 100vw, 50vw" />
@@ -135,11 +105,12 @@ export default function Campaigns() {
                   </div>
                 </article>
               </Reveal>
+              </PromoGate>
             ))}
           </div>
         </div>
       </Reveal>
     </section>
-    </OffersGate>
+    </PromoGate>
   );
 }

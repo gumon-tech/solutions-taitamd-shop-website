@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Hero from "@/components/Hero";
+import { promotionsGate } from "@/lib/promotions";
 import LuxeBento from "@/components/LuxeBento";
 import ServicesPreview from "@/components/ServicesPreview";
 import Gallery from "@/components/Gallery";
@@ -29,7 +30,7 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <main className="mx-auto max-w-7xl px-5 md:px-8 pb-14 md:pb-12">
-      <Hero />
+      <Hero promotions={promotionsGate()} />
       <Campaigns />
       <LuxeBento />
       <ServicesPreview />

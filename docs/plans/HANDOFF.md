@@ -36,7 +36,12 @@ production    apex 200 189,305 B · /book/ 200 52,279 B
 
 **งานวันนี้ `f5d8d3e`** — การ์ดโปร 3 แบบของครูนกบนหน้าแรก (`components/Campaigns.tsx`) และลิงก์ "See promotions"
 บน hero (`components/Hero.tsx`) ซ่อนตัวเองหลัง `2026-10-16T23:00Z` (เที่ยงคืนลอนดอน BST) ผ่าน
-`components/OffersGate.tsx` + `lib/offers.ts` · ตัดสินด้วยนาฬิกาของผู้เข้าชม เพราะเว็บ static ไม่ rebuild เอง
+gate ที่ตัดสินด้วยนาฬิกาของผู้เข้าชม เพราะเว็บ static ไม่ rebuild เอง · แทนที่แล้วด้วยระบบโปรโมชันข้างล่าง
+
+**ระบบโปรโมชัน 2026-10-14** (คำสั่งผู้สั่งงานผ่าน KBOT) — โปรอยู่ใน `data/promotions.json` อ่านและตรวจโดย `lib/promotions.ts`
+แสดงผลโดย `components/Campaigns.tsx` + `components/PromoGate.tsx` (รายโปร + ทั้งส่วน + ลิงก์ hero ผ่าน `app/page.tsx`)
+ช่วงวัน = เที่ยงคืนลอนดอนต้นวัน `starts` ถึงท้ายวัน `ends` · วัดแล้วถูกทั้ง BST และ GMT · ไฟล์ผิดรูป 5 แบบทำ build ล้ม
+ชื่อช่องใช้ร่วมกับฐานของ KBOT ⇒ เปลี่ยนชื่อช่องต้องตกลงกับ KBOT · `scripts/check-orphan-assets.mjs` สแกน `data/` ด้วยแล้ว
 เงื่อนไขโปร: ใช้ได้ถึง Friday 16 October 2026 · ใช้ร่วมราคาลดได้ · บอกทาง WhatsApp ไม่ต้องมีคูปอง
 
 ## Verify
@@ -74,9 +79,9 @@ date -u +%Y-%m-%d                                # หลัง 2026-10-16 = แ
 
 ## งานเปิดค้าง
 
-**มีวันกำหนด — ห้องนี้ถือ:** หลัง 2026-10-16 ถอดหรือเปลี่ยนการ์ดใน `components/Campaigns.tsx` แล้วลบ
-`components/OffersGate.tsx` + `lib/offers.ts` และ `<OffersGate>` ใน `components/Hero.tsx` (gate คือตาข่าย ไม่ใช่แผน)
-ถ้ามีโปรใหม่ ต้องมาจากครูนก/OFFICE · ห้ามแต่งเอง
+**มีวันกำหนด:** โปร 3 แบบหมด 2026-10-16 · ซ่อนเองตาม `ends` ไม่ต้อง deploy · KBOT ส่งคำตัดสินผู้บริหารมา (ต่อ/ถอด/ใหม่)
+แล้วแก้ที่ `data/promotions.json` ไฟล์เดียว (ดู `data/PROMOTIONS.md`) · หลังหมดเขตตั้ง `status: ended` + แก้ `note`
+โปรใหม่ต้องมาจากครูนก/OFFICE/KBOT · ห้ามแต่งเอง
 
 **รอคน (ห้ามเดา):**
 ```

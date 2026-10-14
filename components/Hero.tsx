@@ -3,13 +3,16 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import OffersGate from "./OffersGate";
+import PromoGate from "./PromoGate";
+import type { PromotionWindow } from "@/lib/promotions";
 import { ArrowUpRight, MapPin, Clock3, PhoneCall, MessageCircle } from "lucide-react";
 import { SITE } from "@/lib/site";
 import Reveal from "./Reveal";
 import { buildWhatsAppLink, SOURCE_HOME } from "@/lib/whatsapp";
 
-export default function Hero() {
+// `promotions` comes from the home page (a server component), so the link's state at build time
+// matches the HTML; PromoGate re-checks it on the visitor's clock.
+export default function Hero({ promotions }: { promotions: { windows: PromotionWindow[]; initiallyActive: boolean } }) {
   return (
     <section className="ui-section-hero">
       <div className="absolute inset-x-0 -top-12 h-40 pointer-events-none">
@@ -52,14 +55,14 @@ export default function Hero() {
             >
               <MessageCircle className="h-4 w-4 text-gold" /> WhatsApp to book <ArrowUpRight className="h-4 w-4 text-gold" />
             </Link>
-            <OffersGate>
+            <PromoGate windows={promotions.windows} initiallyActive={promotions.initiallyActive}>
             <Link
               href="#promotions"
               className="inline-flex items-center justify-center gap-2 rounded-2xl bg-transparent border border-ink/[0.12] px-5 py-3 text-sm font-semibold hover:bg-ink/5 transition"
             >
               See promotions
             </Link>
-            </OffersGate>
+            </PromoGate>
           </div>
 
           <p className="mt-3 text-xs leading-relaxed text-mist">{SITE.standardsNotice}</p>

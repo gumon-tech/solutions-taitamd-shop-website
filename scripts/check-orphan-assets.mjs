@@ -21,7 +21,8 @@ import { readFileSync, readdirSync, statSync } from "node:fs";
 import { join, relative, extname } from "node:path";
 
 const BASELINE = "scripts/orphan-assets-baseline.txt";
-const CODE_DIRS = ["app", "components", "lib"];
+// data/ holds content files that name pictures, such as data/promotions.json.
+const CODE_DIRS = ["app", "components", "lib", "data"];
 const CODE_FILES = ["next.config.mjs", "package.json"];
 const CODE_EXT = new Set([".tsx", ".ts", ".mjs", ".js", ".json", ".css"]);
 
