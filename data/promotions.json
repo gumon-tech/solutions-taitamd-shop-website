@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-10-14T16:00:00Z",
-  "note": "All three offers run until Friday 16 October 2026 and can be used with our already reduced prices. No coupon needed, just mention the offer.",
+  "updated_at": "2026-10-14T18:27:36Z",
+  "note": "Both offers run until Friday 16 October 2026 and can be used with our already reduced prices. No coupon needed, just mention the offer.",
   "promotions": [
     {
       "code": "P-SAUNA90",
@@ -30,7 +30,7 @@
       "starts": "2026-09-17",
       "ends": "2026-10-16",
       "ends_label": "Friday 16 October 2026",
-      "status": "live"
+      "status": "ended"
     },
     {
       "code": "P-HAIRSPA10",
