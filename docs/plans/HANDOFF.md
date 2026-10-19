@@ -7,7 +7,7 @@
    เพื่อรู้รหัสห้องบนเครื่องนี้: SHOP @komphet-mac · KWEB @komphet-air · ห้ามเดาจากเอกสาร (Q-KWS-004 ข้อ 3.2)
    แล้วตั้งชื่อ session [<รหัส>] Taitam-D Shop Website Lead และพิมพ์ชื่อเต็มในรายงาน (Q-WS-270)
 1  อ่านไฟล์นี้จนจบ
-2  รันบล็อก **งาน 2026-10-14 `3e18dee`** (คำสั่งผู้สั่งงานผ่าน KBOT) — WhatsApp ทั้งเว็บย้ายไปเบอร์ร้าน `447564292247` (เบอร์เดียวกับ `phone`
+2  รันบล็อก ## Verify ข้างล่าง · บริบทงานล่าสุด **2026-10-14 `3e18dee`** (คำสั่งผู้สั่งงานผ่าน KBOT) — WhatsApp ทั้งเว็บย้ายไปเบอร์ร้าน `447564292247` (เบอร์เดียวกับ `phone`
 ต่อ WhatsApp Cloud API ระบบ AI ของ KBOT ตอบ) · ⛔ ห้ามเบอร์ส่วนตัวครูนก `7882359499` กลับขึ้นหน้าเว็บสาธารณะ
 QR ใหม่สร้างจาก `qrencode`-เทียบเท่า: เครื่อง air ไม่มี qrencode ⇒ ใช้ `qrcode@1.5.4` ที่มีอยู่แล้วใน
 `~/dev/solution-taitamd-platform/node_modules/.pnpm/` (ไม่ติดตั้งเพิ่ม) · ตรวจด้วย `BarcodeDetector` ในเบราว์เซอร์
@@ -22,13 +22,14 @@ QR ใหม่สร้างจาก `qrencode`-เทียบเท่า: 
 ```
 เวลาทุกค่าที่เขียนลงไฟล์มาจาก `date -u` เท่านั้น (`stat -f '%Sm'` พิมพ์เวลาเครื่อง +07 ได้วันคนละวัน)
 
-## สถานะปัจจุบัน (วัด 2026-10-14T13:1xZ)
+## สถานะปัจจุบัน (วัด 2026-10-19T13:xxZ)
 
 ```
-main          3e18dee live · deploy run 38575444892 success
-production    apex 200 189,305 B · /book/ 200 52,279 B
+main          87fbfca live · deploy run 38615460394 success
+production    apex 200 182,265 B · /book/ 200 52,279 B
 พอร์ต         3300 / 3301 ว่าง
-ตู้            bin/queue-open-to KWEB → จ่าหน้าตรง 0 · ประกาศทุกห้อง 26
+ตู้            bin/queue-open-to KWEB → จ่าหน้าตรง 0 · ประกาศทุกห้อง 30 (ใบของห้องนี้ปิดครบ)
+บัญชี Claude   A (app2@) ตั้งแต่ 19 ต.ค. · รายงานตัวแล้วตาม Q-KWS-117 (ack ใน queue/GLOBAL/ack/Q-KWS-117/)
 คำสั่งยืน      T27 (stand by) ถูกถอนโดย T28 2026-09-19 (TTD.md · commit 4f9437e26 · Q-WS-470)
               ห้องทำงานเว็บร้านตามปกติ · ไม่อยู่บนกระดาน TTD · ยืนรอ request จากห้องอื่น
 ขอบเขต        Q-WS-209 — ก่อนหยิบแถวไหน ตอบให้ได้ว่ารับใช้ Platform หรือ A1 ตรงไหน ตอบไม่ได้ = รอ
@@ -51,17 +52,17 @@ export PATH="$HOME/.local/bin:$HOME/.nvm/versions/node/v24.19.0/bin:$PATH"   # s
 cd ~/dev/solutions-taitamd-shop-website
 git status -sb                                   # คาด: ## main...origin/main ไม่มีไฟล์ค้าง (next-env.d.ts/tsconfig.json โผล่ = ดูกับดักข้อ 1)
 git fetch -q origin && git rev-list --count HEAD..origin/main   # คาด: 0
-git log --oneline -1                             # คาด: f5d8d3e หรือใหม่กว่า · ใหม่กว่า = ไล่ว่าใครออก แล้ววัด live
-gh run list --limit 3                            # คาด: completed success ทุกแถว · 1 run ต่อ 1 push (ล่าสุด 38569004058)
-git log origin/main --since=2026-10-14 --format='%h %an %s'   # คาด: เฉพาะ commit ของห้องนี้ · เจ้าของเคย merge PR #4 (Codex) ตรงเข้า main เอง
-curl -s -o /dev/null -w "apex %{http_code} %{size_download}\n" https://taitam-d.com/        # คาด: 200 · หลักแสน (189,305 B วันนี้)
+git log --oneline -1                             # คาด: 87fbfca หรือใหม่กว่า · ใหม่กว่า = ไล่ว่าใครออก แล้ววัด live
+gh run list --limit 3                            # คาด: completed success ทุกแถว · 1 run ต่อ 1 push (ล่าสุด 38615460394)
+git log origin/main --since=2026-10-19 --format='%h %an %s'   # คาด: เฉพาะ commit ของห้องนี้ · คุณคมเพชรเคย merge PR #4 (Codex) ตรงเข้า main เอง
+curl -s -o /dev/null -w "apex %{http_code} %{size_download}\n" https://taitam-d.com/        # คาด: 200 · หลักแสน (182,265 B วันนี้ · ลดเหลือ ~159,900 B เมื่อส่วนโปรถูกถอดออกจาก HTML)
 curl -s -o /dev/null -w "/book/ %{http_code} %{size_download}\n" https://taitam-d.com/book/ # คาด: 200 · หลักหมื่น (52,279 B วันนี้)
 #   ต้องมีสแลชท้ายเสมอ — /book คืน 301 162 B · อ่าน http_code คู่ size_download · เห็น 301 หรือหลักร้อย = หน้าเปลี่ยนทาง อย่าอ่านเนื้อหา
 lsof -nP -iTCP:3300 -iTCP:3301 -sTCP:LISTEN     # คาด: ว่าง (exit 1) · ไม่ว่าง = session อื่นของเรา ห้าม kill
-npm run -s check:assets | head -1               # คาด: 19 known orphans, 0 new (self-test passed)
-~/dev/gumon-workspace/bin/queue-open-to KWEB     # คาด: จ่าหน้าตรง 0 · ประกาศทุกห้อง 26 (บน mac ใช้ SHOP)
+npm run -s check:assets | head -1               # คาด: 18 known orphans, 0 new (self-test passed)
+~/dev/gumon-workspace/bin/queue-open-to KWEB     # คาด: จ่าหน้าตรง 0 · ประกาศทุกห้อง 30 (บน mac ใช้ SHOP)
 ~/dev/gumon-workspace/bin/queue-open-to --selftest   # คาด: ผ่านครบทุกขา
-date -u +%Y-%m-%d                                # หลัง 2026-10-16 = แถว "ถอดการ์ดโปร" ถึงกำหนดแล้ว
+date -u +%Y-%m-%d                                # เลย 2026-10-16 แล้ว ⇒ แถว "ถอดการ์ดโปร" เลยกำหนด และอยู่ในมือ KBOT (Q-KWEB-002)
 ```
 - ห้าม `git pull` ในรีโป workspace ระหว่างสแกน — working tree ของกลาง pull ล้มแล้ว grep รันต่อบนสำเนาเก่าโดยหน้าตาปกติ (Q-SHOP-008) ใช้ `git fetch` เท่านั้น
 - ใบ "ประกาศทุกห้อง" ปิดได้เฉพาะผู้ออก · ของเราคืออ่านแล้วเขียน ack ถ้าใบขอ · hook GLOBAL ฟ้องทุกใบที่ไม่มี ack โดยไม่ดูว่าจ่าหน้าใคร ⇒ `grep -m1 "^to:"` รายใบก่อนไล่
@@ -71,17 +72,21 @@ date -u +%Y-%m-%d                                # หลัง 2026-10-16 = แ
 ## กระดานเป้าหมาย (A8)
 
 ```
-(1) ครั้งที่แล้ว   f5d8d3e การ์ดโปรซ่อนตัวเองหลัง 16 ต.ค. · live · run 38569004058
-(2) เป้าที่ตาม     ยืนรอ request · แถวมีวันกำหนด 1 แถว (ข้างล่าง) · Q-SHOP-033 งานหน้าตาเว็บปิดครบ G1-G14 · W-40 ปิด 5194ce0
-(3) เสร็จแล้ว     ทุกงานที่รับมา live และวัดแล้ว
-(4) เหลือ         ถอดการ์ดโปรหลัง 16 ต.ค. (ห้องนี้) · คำถามรอคน 4 ข้อ (ข้างล่าง)
+(1) ครั้งที่แล้ว   87fbfca ถอดการ์ด £5 ที่ซ้อนส่วนลดของ Treatwell · live · run 38615460394
+(2) เป้าที่ตาม     stand by · งานแก้เว็บย้ายไปทดสอบที่ระบบ PoC ของ KBOT (คุณคมเพชรสั่ง 19 ต.ค.) · Q-SHOP-033 ปิดครบ G1-G14 · W-40 ปิด 5194ce0
+(3) เสร็จแล้ว     ทุกงานที่รับมา live และวัดแล้ว · ใบในตู้ KWEB ปิดครบ (จ่าหน้าตรง 0)
+(4) เหลือ         ปิดสถานะโปรที่หมดเขต = รอ diff/PR จากระบบ KBOT (Q-KWEB-002 · ห้องนี้ไม่แก้เอง) · hold 2 แถวไม่มีนาฬิกา · คำถามรอคน 5 ข้อ (ข้างล่าง)
 ```
 
 ## งานเปิดค้าง
 
-**มีวันกำหนด:** โปร 3 แบบหมด 2026-10-16 · ซ่อนเองตาม `ends` ไม่ต้อง deploy · KBOT ส่งคำตัดสินผู้บริหารมา (ต่อ/ถอด/ใหม่)
-แล้วแก้ที่ `data/promotions.json` ไฟล์เดียว (ดู `data/PROMOTIONS.md`) · หลังหมดเขตตั้ง `status: ended` + แก้ `note`
-โปรใหม่ต้องมาจากครูนก/OFFICE/KBOT · ห้ามแต่งเอง
+**ส่งมอบให้ KBOT แล้ว (คุณคมเพชรสั่ง 2026-10-19):** งานแก้เว็บไปทดสอบที่ระบบ PoC ของห้อง KBOT
+⇒ ห้องนี้ **ไม่แก้ `data/promotions.json` เอง** · รอ diff/PR ของระบบ แล้วตรวจด่าน (build · lint · check:css · check:assets · visual gate) + merge
+ใบที่ถาม: `Q-KWEB-002` ในตู้ KBOT (ถาม 5 ข้อ: แตะไฟล์อะไรได้ · ส่งงานมาทางไหน · ใครรันด่าน · ห้ามตัดสินอะไรเอง · ขอบเขต Q-WS-209)
+สภาพที่ส่งมอบ: โปรหมดเขต 2026-10-16 แต่ `P-SAUNA90` และ `P-HAIRSPA10` ยังเขียน `status: "live"` และ `note` ยังค้างประโยคของโปรที่หมดแล้ว
+ปลายทางที่ตกลงไว้: ทั้งสามใบ `ended` · ถอด `note` · ห้ามแต่งโปรเอง โปรใหม่ต้องมาจากครูนก/KOFC/KBOT
+ระวัง เตรียมพื้นให้แล้วที่ `lib/promotions.ts`: ถอดช่อง `note` ออกจาก JSON ทำ `next build` ล้ม (cast เดิมอ้างว่า `note` มีแน่) ⇒ แก้ให้อ่าน `note` เป็น optional จริง
+   ⇒ ด่านที่ตรวจแค่ "JSON ถูกรูป" ไม่พอสำหรับไฟล์นี้ ต้องรัน `npm run build` จริง
 
 **รอคน (ห้ามเดา):**
 ```

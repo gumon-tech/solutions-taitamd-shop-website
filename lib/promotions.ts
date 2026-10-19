@@ -90,9 +90,12 @@ function validate(raw: unknown): Promotion[] {
 
 const promotions = validate(data);
 
-export const promotionsNote: string | undefined = isText((data as { note?: unknown }).note)
-  ? (data as { note: string }).note
-  : undefined;
+// `note` is optional, so read it once through a widened view of the file: casting the parsed
+// JSON straight to `{ note: string }` only compiled while the file happened to carry the field,
+// and stopped compiling the day it was taken out (2026-10-19).
+const note: unknown = (data as { note?: unknown }).note;
+
+export const promotionsNote: string | undefined = isText(note) ? note : undefined;
 
 /** From midnight at the shop on `starts` until midnight at the end of `ends`, London time. */
 export function promotionWindow(p: Promotion): PromotionWindow {
