@@ -92,10 +92,34 @@ const promotions = validate(data);
 
 // `note` is optional, so read it once through a widened view of the file: casting the parsed
 // JSON straight to `{ note: string }` only compiled while the file happened to carry the field,
-// and stopped compiling the day it was taken out (2026-10-19).
+// and stopped compiling the day it was taken out (2026-10-19). An empty string counts as no
+// note, which is the shape KBOT's own `website_payload()` sends when nothing is running.
 const note: unknown = (data as { note?: unknown }).note;
 
 export const promotionsNote: string | undefined = isText(note) ? note : undefined;
+
+/**
+ * Two things the shape checks above cannot see, because they are about the calendar rather
+ * than the file: an offer still marked `live` after its last day, and a note left behind once
+ * the last offer has gone. Both are silent by design — the page simply stops showing them —
+ * so nothing complained for the three days after the September offers ended on 16 October,
+ * while `data/promotions.json` still called two of them live and the note still promised a
+ * date that had passed. KBOT reads that file every three hours as the register of what is on,
+ * so a stale `live` is wrong for the shop even when no visitor can see it (Q-KBOT-007).
+ *
+ * Running at import makes `next build` fail, which is where the other five file checks already
+ * fail, and the message says what to change. A deploy is blocked until someone edits one line:
+ * that is the point, since the quiet version of this cost three days.
+ */
+function auditCalendar(list: Promotion[], now: number) {
+  const over = list.filter((p) => p.status === "live" && now >= promotionWindow(p)[1]);
+  for (const p of over) {
+    fail(p.code, `\`status\` is still "live" but the offer ended on ${p.ends} — set it to "ended"`);
+  }
+  if (isText(note) && !list.some((p) => p.status === "live" && now < promotionWindow(p)[1])) {
+    fail("(file)", "`note` is still set while no offer is live — take the field out, or send \"\"");
+  }
+}
 
 /** From midnight at the shop on `starts` until midnight at the end of `ends`, London time. */
 export function promotionWindow(p: Promotion): PromotionWindow {
@@ -105,6 +129,8 @@ export function promotionWindow(p: Promotion): PromotionWindow {
 export function windowActive([start, end]: PromotionWindow, now = Date.now()) {
   return start <= now && now < end;
 }
+
+auditCalendar(promotions, Date.now());
 
 /**
  * Promotions worth putting in the HTML: marked live and not yet over when the site is built.
