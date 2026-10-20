@@ -1,4 +1,5 @@
 import data from "@/data/promotions.json";
+import { DAY, londonMidnight } from "./london-day";
 
 // The home page promotions live in data/promotions.json so they can change without touching
 // code: the shop's system (KBOT) proposes edits to that one file, by pull request once it has a
@@ -31,34 +32,9 @@ export type Promotion = {
 export type PromotionWindow = [number, number];
 
 const STATUSES: PromotionStatus[] = ["live", "draft", "ended"];
-const DAY = /^(\d{4})-(\d{2})-(\d{2})$/;
 
 function fail(code: string, why: string): never {
   throw new Error(`data/promotions.json: ${code}: ${why}`);
-}
-
-// London's UTC offset in minutes at an instant (60 in BST, 0 in GMT).
-function londonOffset(utcMs: number) {
-  const parts = new Intl.DateTimeFormat("en-GB", {
-    timeZone: "Europe/London",
-    hourCycle: "h23",
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit",
-  }).formatToParts(new Date(utcMs));
-  const n = (t: string) => Number(parts.find((p) => p.type === t)?.value);
-  return (Date.UTC(n("year"), n("month") - 1, n("day"), n("hour"), n("minute")) - utcMs) / 60000;
-}
-
-// Midnight at the shop at the start of a calendar day, as a UTC instant. `dayOffset` 1 gives
-// the midnight that ends the day. The clocks change at 01:00 or 02:00, never at midnight, so one
-// correction step lands on the right instant.
-function londonMidnight(day: string, dayOffset = 0) {
-  const [, y, m, d] = DAY.exec(day)!.map(Number);
-  const guess = Date.UTC(y, m - 1, d + dayOffset);
-  return guess - londonOffset(guess - londonOffset(guess) * 60000) * 60000;
 }
 
 function isText(v: unknown): v is string {
