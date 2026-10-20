@@ -56,6 +56,9 @@ export default function Footer() {
                   <Link href="/contact" className="hover:text-ink">Contact</Link>
                 </li>
                 <li>
+                  <Link href="/careers" className="hover:text-ink">Careers</Link>
+                </li>
+                <li>
                   <Link href="/book" className="hover:text-ink">Book via WhatsApp</Link>
                 </li>
                 <li>

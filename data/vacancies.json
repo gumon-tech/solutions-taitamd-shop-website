@@ -1,5 +1,277 @@
 {
-  "updated_at": "2026-10-20T23:20:00Z",
-  "note": "",
-  "vacancies": []
+  "updated_at": "2026-10-20T01:30:00Z",
+  "vacancies": [
+    {
+      "code": "V-FOH-01",
+      "group": "A",
+      "title": "Front of House",
+      "summary": "The first person every visitor meets, and the one who keeps the diary honest.",
+      "duties": [
+        "Welcome walk-ins and find them a time when the rooms are full",
+        "Answer WhatsApp with the real diary open, so what we promise is what we have",
+        "Keep the WhatsApp diary and Treatwell saying the same thing",
+        "Take calls, card and cash payments, and issue gift vouchers",
+        "Note what a client asked for, including when they want the same therapist again"
+      ],
+      "essential": [
+        "No beauty qualification needed",
+        "English good enough to talk with clients and write replies",
+        "Comfortable with a booking system on screen",
+        "The right to work in the UK"
+      ],
+      "desirable": [
+        "A second language that matches our clients",
+        "Experience of a busy service counter",
+        "Enough of a feel for the menu to suggest a treatment"
+      ],
+      "council_registration": false,
+      "posted": "2026-10-20",
+      "closes": "2026-12-31",
+      "closes_label": "Wednesday 31 December 2026",
+      "status": "live"
+    },
+    {
+      "code": "V-SPA-01",
+      "group": "A",
+      "title": "Spa Assistant",
+      "summary": "The role that gives every therapist their time back, and the fastest way into the trade here.",
+      "duties": [
+        "Wash, fold and keep the linen moving",
+        "Turn a room around between clients",
+        "Switch the sauna on 45 minutes ahead",
+        "Keep the rooms stocked",
+        "Clean and lay out tools on schedule",
+        "Look after the pedicure row and the foot spas"
+      ],
+      "essential": [
+        "No beauty qualification needed",
+        "Able to follow a hygiene routine to the letter",
+        "The right to work in the UK"
+      ],
+      "desirable": [
+        "An infection control certificate",
+        "Experience in a spa or a hotel"
+      ],
+      "council_registration": false,
+      "posted": "2026-10-20",
+      "closes": "2026-12-31",
+      "closes_label": "Wednesday 31 December 2026",
+      "status": "live"
+    },
+    {
+      "code": "V-MAS-01",
+      "group": "B",
+      "title": "Massage Therapist",
+      "summary": "Fifteen treatments on the menu, from a 15-minute foot massage to two hours of deep tissue.",
+      "duties": [
+        "Work the massage menu: Thai, deep tissue, Swedish, aromatherapy, hot stone, sports, foot and head",
+        "Ask about aches and history before every treatment, every time",
+        "Adjust pressure to what the client tells you, not to what the booking says",
+        "Turn your own room around and change the linen"
+      ],
+      "essential": [
+        "A body massage qualification with anatomy and physiology among its units — we ask for the units, not only the certificate name",
+        "At Level 3 for the treatments that need it",
+        "Register as a therapist with Islington Council before starting — the council asks for your qualifications unit by unit, and allows at least 21 days",
+        "The right to work in the UK"
+      ],
+      "desirable": [
+        "Thai technique certified by a school",
+        "Deep tissue or sports as separate units",
+        "Pregnancy massage"
+      ],
+      "council_registration": true,
+      "posted": "2026-10-20",
+      "closes": "2026-12-31",
+      "closes_label": "Wednesday 31 December 2026",
+      "status": "live"
+    },
+    {
+      "code": "V-BTY-01",
+      "group": "B",
+      "title": "Beauty Therapist",
+      "summary": "Facials, waxing and brow and lash work — three lines that run side by side here.",
+      "duties": [
+        "Seven facials, 60 to 95 minutes",
+        "Waxing across 19 options, including intimate waxing in a closed room",
+        "Threading, brow and lash tinting, lash perming",
+        "Five body treatments",
+        "Write down for the client what was used on them"
+      ],
+      "essential": [
+        "A beauty therapy qualification covering facials and waxing, with the units to show for each",
+        "Level 3 where the treatment calls for it, including intimate waxing",
+        "Register as a therapist with Islington Council before starting — the council asks for your qualifications unit by unit, and allows at least 21 days",
+        "The right to work in the UK"
+      ],
+      "desirable": [
+        "Facial electrotherapy units — galvanic, faradic, microcurrent — because the menu includes a non-surgical face lift facial",
+        "Intimate waxing as a separate unit"
+      ],
+      "council_registration": true,
+      "posted": "2026-10-20",
+      "closes": "2026-12-31",
+      "closes_label": "Wednesday 31 December 2026",
+      "status": "live"
+    },
+    {
+      "code": "V-NAIL-01",
+      "group": "B",
+      "title": "Nail Technician",
+      "summary": "Thirty-three treatments and the shortest turnarounds in the shop.",
+      "duties": [
+        "Manicures and pedicures, classic and spa, with polish or UV gel",
+        "Acrylic and fibre gel extensions, infills and removals",
+        "Keep tools and the pedicure row clean between clients"
+      ],
+      "essential": [
+        "Manicure and pedicure qualifications",
+        "A separate nail extensions qualification at Level 3",
+        "Register as a therapist with Islington Council before starting — the council asks for your qualifications unit by unit, and allows at least 21 days",
+        "The right to work in the UK"
+      ],
+      "desirable": [
+        "Both acrylic and fibre gel",
+        "An eye for finish that holds up in a photograph"
+      ],
+      "council_registration": true,
+      "posted": "2026-10-20",
+      "closes": "2026-12-31",
+      "closes_label": "Wednesday 31 December 2026",
+      "status": "live"
+    },
+    {
+      "code": "V-LASH-01",
+      "group": "B",
+      "title": "Lash Technician",
+      "summary": "The line we most want a second pair of hands on.",
+      "duties": [
+        "Classic, hybrid and Russian volume extensions, around an hour",
+        "Infills at 30 to 45 minutes, removals at 20",
+        "Lash lifting and tinting",
+        "Patch test and consultation before any first set"
+      ],
+      "essential": [
+        "An eyelash extensions qualification at Level 3, with the units to show",
+        "Register as a therapist with Islington Council before starting — the council asks for your qualifications unit by unit, and allows at least 21 days",
+        "The right to work in the UK"
+      ],
+      "desirable": [
+        "Russian volume as a unit of its own, separate from classic",
+        "Lash lifting"
+      ],
+      "council_registration": true,
+      "posted": "2026-10-20",
+      "closes": "2026-12-31",
+      "closes_label": "Wednesday 31 December 2026",
+      "status": "live"
+    },
+    {
+      "code": "V-HAIR-01",
+      "group": "B",
+      "title": "Hair Stylist",
+      "summary": "Sixteen treatments, from a blow dry to six hours of Japanese straightening.",
+      "duties": [
+        "Cutting, colour, highlights and balayage",
+        "Keratin and Japanese straightening",
+        "Blow dry and styling",
+        "Hair spa treatments",
+        "Bookings run from 30 minutes to six hours"
+      ],
+      "essential": [
+        "A hairdressing qualification",
+        "The right to work in the UK"
+      ],
+      "desirable": [
+        "Japanese straightening and keratin, the longest and most exacting work on the menu",
+        "The Asian cutting technique the shop is known for"
+      ],
+      "council_registration": false,
+      "posted": "2026-10-20",
+      "closes": "2026-12-31",
+      "closes_label": "Wednesday 31 December 2026",
+      "status": "live"
+    },
+    {
+      "code": "V-ADV-01",
+      "group": "C",
+      "title": "Advanced Aesthetics Practitioner",
+      "summary": "The treatments that need a qualification per treatment and a steady consultation.",
+      "duties": [
+        "HIFU across face and body",
+        "No-needle mesotherapy",
+        "Microblading and semi-permanent make-up",
+        "Laser tattoo removal",
+        "Consultation and patch test before every first appointment"
+      ],
+      "essential": [
+        "A qualification for each treatment you would perform, at the level the council sets for it — higher here than elsewhere on this list",
+        "Core of knowledge for laser work",
+        "Register as a therapist with Islington Council before starting — the council asks for your qualifications unit by unit, and allows at least 21 days",
+        "The right to work in the UK"
+      ],
+      "desirable": [
+        "Your own professional indemnity insurance",
+        "Work you can show and we can check"
+      ],
+      "council_registration": true,
+      "posted": "2026-10-20",
+      "closes": "2026-12-31",
+      "closes_label": "Wednesday 31 December 2026",
+      "status": "live"
+    },
+    {
+      "code": "V-COORD-01",
+      "group": "B",
+      "title": "Salon Coordinator",
+      "summary": "The role that keeps the paperwork ahead of the shop rather than behind it.",
+      "duties": [
+        "Build the rota and keep it staffed",
+        "Keep the menu and prices right on Treatwell",
+        "Order stock and keep count",
+        "Hold the staff file: right to work, qualifications, council registrations",
+        "Track when the premises licence comes up for renewal"
+      ],
+      "essential": [
+        "No beauty qualification needed",
+        "Orderly with paperwork, because this role is the paperwork",
+        "The right to work in the UK"
+      ],
+      "desirable": [
+        "Salon or clinic administration",
+        "A feel for compliance records"
+      ],
+      "council_registration": false,
+      "posted": "2026-10-20",
+      "closes": "2026-12-31",
+      "closes_label": "Wednesday 31 December 2026",
+      "status": "live"
+    },
+    {
+      "code": "V-LEAD-01",
+      "group": "C",
+      "title": "Shift Lead",
+      "summary": "Senior enough to open the shop, assess a new therapist, and know when to stop.",
+      "duties": [
+        "Open and close",
+        "Keep quality honest on the floor",
+        "Assess new therapists before they take on the Taitam-D Signature",
+        "Decide when a client should see a doctor instead"
+      ],
+      "essential": [
+        "Your own treatment qualification, at Level 3",
+        "Experience leading a team",
+        "Register as a therapist with Islington Council before starting — the council asks for your qualifications unit by unit, and allows at least 21 days",
+        "The right to work in the UK"
+      ],
+      "desirable": [
+        "An assessor qualification"
+      ],
+      "council_registration": true,
+      "posted": "2026-10-20",
+      "closes": "2026-12-31",
+      "closes_label": "Wednesday 31 December 2026",
+      "status": "live"
+    }
+  ]
 }
