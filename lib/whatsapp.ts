@@ -133,6 +133,12 @@ export const SOURCE_WEB_QR_SCAN = "QS";
  * already uses. Reach for two letters before spending them.
  */
 export const SOURCE_DEEP_TISSUE_LANDING = "MD";
+
+// Careers. Reserved by KMKT in their answer to Q-KWEB-007 and registered here when the
+// careers flow was settled, so nobody picks the letter again before the page exists.
+// Clicks from this page emit careers_enquiry_click, not the booking conversion — see
+// components/Analytics.tsx.
+export const SOURCE_CAREERS = "CR";
 export const SOURCE_FACIAL_LANDING = "MF";
 export const SOURCE_WAXING_LANDING = "MW";
 export const SOURCE_NAILS_LANDING = "MN";

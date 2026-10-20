@@ -124,7 +124,14 @@ function leadEventFor(href: string): string | null {
   }
   if (u.hostname === "wa.me") {
     // Trailing slashes only, never a real path, on the share variant.
-    return u.pathname.replace(/^\/+|\/+$/g, "") ? "whatsapp_booking_click" : "social_share_click";
+    if (!u.pathname.replace(/^\/+|\/+$/g, "")) return "social_share_click";
+    // Someone opening WhatsApp from the careers page is applying for a job, not booking a
+    // treatment. The name is what Ads imports, so leaving them under the same one would have
+    // the campaign bidding for job seekers at the price of customers — the same mistake the
+    // share button made in August, arriving from a different direction (Q-KWEB-015, KMKT
+    // agreed 2026-10-20). Their one condition: nothing may ever turn careers_enquiry_click
+    // into a conversion action or key event, or this is undone at the console instead.
+    return location.pathname.startsWith("/careers") ? "careers_enquiry_click" : "whatsapp_booking_click";
   }
   if (SHARE_HOSTS.has(u.hostname) && /sharer|intent/.test(u.pathname)) return "social_share_click";
   return null;
