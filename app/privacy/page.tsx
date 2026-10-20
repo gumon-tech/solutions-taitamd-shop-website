@@ -148,6 +148,48 @@ export default function PrivacyPage() {
         </section>
 
         <section>
+          <h2 className="text-lg font-medium text-ink">If you apply for a job</h2>
+          {/*
+            Added 2026-10-20, the day applications opened on /careers/. Until then this
+            notice described clients only, and an applicant is neither a client nor an
+            employee: they have no relationship with the shop and nothing here told them
+            what happens to what they send.
+
+            Every figure below is somebody's decision, not a drafting choice. Twelve months
+            and the access list are KWS's ruling in Q-KWEB-016; the employment-plus-two-years
+            period is the Home Office's own wording, checked against their guide of 1 October
+            2026; asking for documents only after a conditional offer is this room's ruling
+            L-2, which follows ICO's line that you verify successful candidates where you can.
+
+            One thing this page states that has not yet been observed: the deletion runs on a
+            schedule and has never actually removed a record, because no record is old enough
+            (KBOT, 2026-10-20). That is different from the customer-records case above, where
+            the mechanism did not exist at all and the sentence had to come out. Here it
+            exists and is running. If it turns out not to fire when the first record matures,
+            this paragraph is wrong and comes out the same day.
+          */}
+          <p className="mt-2 text-mist">
+            Applications happen in WhatsApp, with the shop&rsquo;s assistant. We ask which
+            role interests you, what qualifications you hold, when you can work, and whether
+            you have the right to work in the UK.{" "}
+            <span className="text-ink">
+              We do not ask for your passport or right-to-work documents in a chat
+            </span>
+            , and if you send them anyway they are discarded unread. Those are requested only
+            if we offer you the role.
+          </p>
+          <p className="mt-2 text-mist">
+            Your application is seen by the owner and by our management and technical team —
+            four people at present. It is held so we can consider you and reply to you, and
+            is deleted twelve months after we tell you our decision, or twelve months after
+            your start date if you join us. If you join us, copies of your right-to-work
+            documents are kept for as long as you work here and for two years afterwards, as
+            the Home Office requires, and are then destroyed. We do not use anything you send
+            us when applying for advertising.
+          </p>
+        </section>
+
+        <section>
           <h2 className="text-lg font-medium text-ink">Cookies</h2>
           <p className="mt-2 text-mist">
             What this website stores on your device, and how to change your
