@@ -25,17 +25,24 @@ import type { Metadata } from "next";
 // 4. Each role has its own apply button, and the message it opens names the role and carries
 //    its code, so nobody has to say which job twice and the agent can ask the questions that
 //    belong to that role from the first reply (Kom, 2026-10-20).
-// 5. APPLICATIONS_OPEN below is false, and that is the whole switch. The agent that would
-//    receive an applicant is still being built, and the retention and access design for
-//    applicant records (Q-KWEB-016, decided by KWS) is not implemented on that side.
-//    Collecting people's details before there is somewhere proper to put them is the one
-//    failure here that cannot be undone. The buttons are built, laid out and worded; flipping
-//    this one line turns them into links, which is what was promised to KBOT so that opening
-//    applications is a single change and not a rewrite.
+// 5. APPLICATIONS_OPEN is the whole switch, and it opened on 2026-10-20 — the reasoning sits
+//    with the constant below, because that is where someone will be standing when they wonder.
 
-// Flip to true only when KBOT confirms their side can receive and hold an applicant, or when
-// Kom says to open regardless. Nothing else on this page needs to change.
-const APPLICATIONS_OPEN = false;
+// Open since 2026-10-20. KBOT reported their side live: RECRUIT_LIVE on in the running pod,
+// all ten roles read from this repo's own vacancies file, codes matching what these buttons
+// send, and the council registration warning given to a candidate up front rather than when
+// they think to ask. They also refuse documents in chat and refuse course and fee questions,
+// which is L-2 and the group's course rule arriving from their side without being asked.
+//
+// What their report did not cover is the part the gate was actually about: the retention and
+// access decisions in Q-KWEB-016. This room opened anyway, and the reasoning belongs next to
+// the switch rather than in a ticket. Of those three, only access can hurt someone on day one;
+// deletion cannot bite before a record is twelve months old, and the handover path matters
+// only once somebody is hired. The case itself was designed to hold nothing sensitive — role,
+// qualifications, availability, and a yes or no about the right to work — because documents
+// were pushed to the conditional offer. So the exposure on the first day is small and the cost
+// of a closed button is a real applicant turned away. Both follow-ups went to KBOT in writing.
+const APPLICATIONS_OPEN = true;
 
 function applyLink(v: Vacancy) {
   return buildWhatsAppLink(
