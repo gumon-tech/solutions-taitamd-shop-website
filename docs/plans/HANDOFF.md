@@ -22,11 +22,11 @@ QR ใหม่สร้างจาก `qrencode`-เทียบเท่า: 
 ```
 เวลาทุกค่าที่เขียนลงไฟล์มาจาก `date -u` เท่านั้น (`stat -f '%Sm'` พิมพ์เวลาเครื่อง +07 ได้วันคนละวัน)
 
-## สถานะปัจจุบัน (วัด 2026-10-19T13:xxZ)
+## สถานะปัจจุบัน (วัด 2026-10-20T15:xxZ)
 
 ```
-main          87fbfca live · deploy run 38615460394 success
-production    apex 200 182,265 B · /book/ 200 52,279 B
+main          d2c5bc8 live · deploy run 39446844015 success
+production    apex 200 160,103 B · /book/ 200 52,279 B · /careers/ 200 199,646 B
 พอร์ต         3300 / 3301 ว่าง
 ตู้            bin/queue-open-to KWEB → จ่าหน้าตรง 0 · ประกาศทุกห้อง 30 (ใบของห้องนี้ปิดครบ)
 บัญชี Claude   A (app2@) ตั้งแต่ 19 ต.ค. · รายงานตัวแล้วตาม Q-KWS-117 (ack ใน queue/GLOBAL/ack/Q-KWS-117/)
@@ -53,17 +53,18 @@ export PATH="$HOME/.local/bin:$HOME/.nvm/versions/node/v24.19.0/bin:$PATH"   # s
 cd ~/dev/solutions-taitamd-shop-website
 git status -sb                                   # คาด: ## main...origin/main ไม่มีไฟล์ค้าง (next-env.d.ts/tsconfig.json โผล่ = ดูกับดักข้อ 1)
 git fetch -q origin && git rev-list --count HEAD..origin/main   # คาด: 0
-git log --oneline -1                             # คาด: 87fbfca หรือใหม่กว่า · ใหม่กว่า = ไล่ว่าใครออก แล้ววัด live
-gh run list --limit 3                            # คาด: completed success ทุกแถว · 1 run ต่อ 1 push (ล่าสุด 38615460394)
-git log origin/main --since=2026-10-19 --format='%h %an %s'   # คาด: เฉพาะ commit ของห้องนี้ · คุณคมเพชรเคย merge PR #4 (Codex) ตรงเข้า main เอง
-curl -s -o /dev/null -w "apex %{http_code} %{size_download}\n" https://taitam-d.com/        # คาด: 200 · หลักแสน (182,265 B วันนี้ · ลดเหลือ ~159,900 B เมื่อส่วนโปรถูกถอดออกจาก HTML)
-curl -s -o /dev/null -w "/book/ %{http_code} %{size_download}\n" https://taitam-d.com/book/ # คาด: 200 · หลักหมื่น (52,279 B วันนี้)
+git log --oneline -1                             # คาด: d2c5bc8 หรือใหม่กว่า · ใหม่กว่า = ไล่ว่าใครออก แล้ววัด live
+gh run list --limit 3                            # คาด: completed success ทุกแถว · 1 run ต่อ 1 push (ล่าสุด 39446844015)
+git log origin/main --since=2026-10-20 --format='%h %an %s'   # คาด: เฉพาะ commit ของห้องนี้ · คุณคมเพชรเคย merge PR #4 (Codex) ตรงเข้า main เอง
+curl -s -o /dev/null -w "apex %{http_code} %{size_download}\n" https://taitam-d.com/        # คาด: 200 · 160,103 B วันนี้
+curl -s -o /dev/null -w "/book/ %{http_code} %{size_download}\n" https://taitam-d.com/book/ # คาด: 200 · 52,279 B
+curl -s -o /dev/null -w "/careers/ %{http_code} %{size_download}\n" https://taitam-d.com/careers/ # คาด: 200 · 199,646 B · เปิดรับสมัคร 10 ตำแหน่ง
 #   ต้องมีสแลชท้ายเสมอ — /book คืน 301 162 B · อ่าน http_code คู่ size_download · เห็น 301 หรือหลักร้อย = หน้าเปลี่ยนทาง อย่าอ่านเนื้อหา
 lsof -nP -iTCP:3300 -iTCP:3301 -sTCP:LISTEN     # คาด: ว่าง (exit 1) · ไม่ว่าง = session อื่นของเรา ห้าม kill
 npm run -s check:assets | head -1               # คาด: 18 known orphans, 0 new (self-test passed)
 ~/dev/gumon-workspace/bin/queue-open-to KWEB     # คาด: จ่าหน้าตรง 0 · ประกาศทุกห้อง 30 (บน mac ใช้ SHOP)
 ~/dev/gumon-workspace/bin/queue-open-to --selftest   # คาด: ผ่านครบทุกขา
-date -u +%Y-%m-%d                                # เลย 2026-10-16 แล้ว ⇒ แถว "ถอดการ์ดโปร" เลยกำหนด และอยู่ในมือ KBOT (Q-KWEB-002)
+date -u +%Y-%m-%d                                # ตำแหน่งงานทุกใบ closes 2026-12-31 ⇒ หลังวันนั้น build จะล้มจนกว่าจะตั้ง status closed
 ```
 - ห้าม `git pull` ในรีโป workspace ระหว่างสแกน — working tree ของกลาง pull ล้มแล้ว grep รันต่อบนสำเนาเก่าโดยหน้าตาปกติ (Q-SHOP-008) ใช้ `git fetch` เท่านั้น
 - ใบ "ประกาศทุกห้อง" ปิดได้เฉพาะผู้ออก · ของเราคืออ่านแล้วเขียน ack ถ้าใบขอ · hook GLOBAL ฟ้องทุกใบที่ไม่มี ack โดยไม่ดูว่าจ่าหน้าใคร ⇒ `grep -m1 "^to:"` รายใบก่อนไล่
@@ -73,11 +74,43 @@ date -u +%Y-%m-%d                                # เลย 2026-10-16 แล�
 ## กระดานเป้าหมาย (A8)
 
 ```
-(1) ครั้งที่แล้ว   87fbfca ถอดการ์ด £5 ที่ซ้อนส่วนลดของ Treatwell · live · run 38615460394
-(2) เป้าที่ตาม     stand by · โปรรอบหน้าเป็นของระบบ KBOT (Q-KBOT-007) ห้องนี้ถือด่านกับ merge · Q-SHOP-033 ปิดครบ G1-G14 · W-40 ปิด 5194ce0
-(3) เสร็จแล้ว     ทุกงานที่รับมา live และวัดแล้ว · ใบในตู้ KWEB ปิดครบ (จ่าหน้าตรง 0)
-(4) เหลือ         ไม่มีแถวที่เดินเองได้ · hold 2 แถวไม่มีนาฬิกา · คำถามรอคน 5 ข้อ (ข้างล่าง) · โปรรอบหน้ารอระบบ KBOT ครบ 4 เงื่อนไข
+(1) ครั้งที่แล้ว   เปิดรับสมัครงานทั้งระบบ · หน้า /careers/ 10 ตำแหน่ง · ปุ่มสมัครรายตำแหน่งพาเข้า WhatsApp ของ KBOT
+(2) เป้าที่ตาม     รอทีมบริหารตรวจหน้า แล้วแก้ deploy ส่งตรวจใหม่จนผ่าน (วนได้ ไม่ใช่ครั้งเดียวจบ)
+(3) เสร็จแล้ว     แผนกำลังคน · หน้า careers · ด่านวันปิดรับ · แยก event ออกจาก conversion การจอง · หน้า privacy ครอบผู้สมัครแล้ว
+(4) เหลือ         รอคำตอบ 4 ห้อง (ข้างล่าง) · hold 2 แถวไม่มีนาฬิกา · ไม่มีแถวที่เดินเองได้
 ```
+
+## งานวันที่ 2026-10-20 — เปิดรับสมัครงาน (อ่านก่อนแตะอะไรที่เกี่ยวกับ careers)
+
+ผู้สั่งงานสั่งให้วางแผนกำลังคนแล้วเปิดรับสมัคร ใช้เว็บเป็นช่องทางหลัก · ทำครบและขึ้น production แล้ว
+
+```
+แผนเต็ม        docs/plans/STAFFING-AND-CAREERS-2026-10-20.md  (ข้อ 6 คือกลุ่มการรับสมัคร)
+ตำแหน่ง        data/vacancies.json  อ่านและตรวจโดย lib/vacancies.ts  สเปกช่องอยู่ data/VACANCIES.md
+               KBOT อ่านไฟล์เดียวกันผ่าน https ⇒ เว็บกับบอตไม่มีสำเนาที่สอง
+หน้า           app/careers/page.tsx  ·  sitemap และ footer เติมแล้ว
+ภาพ           public/images/careers/careers-therapist-gemini.jpg (สร้างด้วย AI ตามมติ D-W27)
+               ภาพหน้าร้านบนหน้าเดียวกันเป็นรูปถ่ายจริง เพราะเป็นคำกล่าวอ้างเรื่องสถานที่
+ตัวนับ          components/Analytics.tsx แยกหน้า careers ออกเป็น careers_enquiry_click
+               ห้ามเด็ดขาด ใครก็ตามห้ามสร้าง conversion action ให้ event นี้ (เงื่อนไขของ KMKT · คอมเมนต์อยู่ข้างบรรทัด)
+```
+
+**สามด่านที่ห้องนี้เพิ่มวันนี้ และพิสูจน์แล้วทั้งหมดว่าฟ้องจริง ไม่ใช่ด่านที่ผ่านตลอด**
+```
+lib/promotions.ts  โปร status live ที่เลย ends แล้ว ⇒ build ล้ม · note ค้างตอนไม่มีโปร ⇒ build ล้ม
+lib/vacancies.ts   ตำแหน่ง live ที่เลย closes แล้ว ⇒ build ล้ม · note ค้างตอนไม่มีตำแหน่ง ⇒ build ล้ม
+                   และช่อง pay salary wage rate employment_type ⇒ build ล้ม (มติผู้สั่งงานที่ทำเป็นด่าน)
+```
+
+**คำเคาะเรื่องกฎหมายของห้องนี้** หลังห้องกฎหมายปิด (`Q-KWS-118`) ห้องนี้เคาะเอง ลงทะเบียนที่
+`queue/GLOBAL/legal-register/KWEB.md` ของ workspace · วันนี้มี 5 แถว `L-1` ถึง `L-5`
+สรุปสั้น: ไม่ระบุเพศในประกาศ · ขอเอกสาร right to work เฉพาะผู้ได้ conditional offer · ไม่พูดรูปแบบการจ้างจนผู้สั่งงานเคาะ
+อายุเก็บข้อมูลผู้สมัคร 12 เดือน (KWS เคาะ) · ผู้บริหารกับทีมเทคนิค 4 คนเห็นใบสมัคร และ**บอกผู้สมัครบนหน้า privacy แล้ว**
+
+**ข้อเดียวบนเว็บที่ยังไม่เคยเห็นเกิดจริง** ย่อหน้าในหน้า privacy ที่บอกว่าระบบลบข้อมูลผู้สมัครหลัง 12 เดือน
+งานลบมีและเดินอยู่ แต่ยังไม่เคยลบอะไรเพราะไม่มีระเบียนอายุครบ (KBOT ยืนยันเอง)
+⇒ **ถ้าระเบียนแรกครบอายุแล้วไม่ลบ ย่อหน้านั้นผิดและต้องถอดวันเดียวกัน** เงื่อนไขนี้เขียนไว้ข้างย่อหน้าในโค้ดแล้ว
+KBOT สั่งให้งานลบส่งข้อความบอกตอนลบครั้งแรก ⇒ จะมีสัญญาณมาเอง ไม่ต้องจำ
 
 ## งานเปิดค้าง
 
