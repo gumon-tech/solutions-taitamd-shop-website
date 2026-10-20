@@ -1,8 +1,9 @@
 import Image from "next/image";
-import { Check, Clock3, MapPin, Sparkles } from "lucide-react";
+import { Check, Clock3, MapPin, MessageCircle, Sparkles } from "lucide-react";
 import Reveal from "@/components/Reveal";
 import { SITE } from "@/lib/site";
 import { openVacancies, vacanciesNote, type Vacancy, type VacancyGroup } from "@/lib/vacancies";
+import { buildWhatsAppLink, SOURCE_CAREERS } from "@/lib/whatsapp";
 import type { Metadata } from "next";
 
 // The careers page. Kom set the flow on 2026-10-20: the page lists what is open and what each
@@ -21,11 +22,27 @@ import type { Metadata } from "next";
 // 3. The council registration line is not small print. A therapist registers with Islington
 //    themselves, treatment by treatment, and the council allows at least 21 days — so it
 //    changes when someone can actually start, and a candidate deserves to know before applying.
-// 4. The apply button does not open WhatsApp yet. The agent that would receive an applicant is
-//    still being built, and the retention and access design for applicant records (Q-KWEB-016,
-//    decided by KWS) is not implemented on that side. Collecting people's details before there
-//    is somewhere proper to put them is the one failure here that cannot be undone, so the
-//    button says so instead. KBOT tells this room directly when it is ready.
+// 4. Each role has its own apply button, and the message it opens names the role and carries
+//    its code, so nobody has to say which job twice and the agent can ask the questions that
+//    belong to that role from the first reply (Kom, 2026-10-20).
+// 5. APPLICATIONS_OPEN below is false, and that is the whole switch. The agent that would
+//    receive an applicant is still being built, and the retention and access design for
+//    applicant records (Q-KWEB-016, decided by KWS) is not implemented on that side.
+//    Collecting people's details before there is somewhere proper to put them is the one
+//    failure here that cannot be undone. The buttons are built, laid out and worded; flipping
+//    this one line turns them into links, which is what was promised to KBOT so that opening
+//    applications is a single change and not a rewrite.
+
+// Flip to true only when KBOT confirms their side can receive and hold an applicant, or when
+// Kom says to open regardless. Nothing else on this page needs to change.
+const APPLICATIONS_OPEN = false;
+
+function applyLink(v: Vacancy) {
+  return buildWhatsAppLink(
+    `Hi Taitam-D, I'd like to apply for the ${v.title} position (${v.code}).`,
+    SOURCE_CAREERS,
+  );
+}
 
 export const metadata: Metadata = {
   title: `Careers — ${SITE.name}`,
@@ -117,6 +134,23 @@ function VacancyCard({ v }: { v: Vacancy }) {
             </>
           )}
         </div>
+      </div>
+
+      <div className="mt-6">
+        {APPLICATIONS_OPEN ? (
+          <a
+            href={applyLink(v)}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 rounded-full bg-gold px-5 py-3 text-sm font-semibold text-[#19392a] transition hover:opacity-90"
+          >
+            <MessageCircle className="h-4 w-4" /> Apply for {v.title}
+          </a>
+        ) : (
+          <span className="inline-flex items-center gap-2 rounded-full border border-ink/[0.14] bg-ink/[0.04] px-5 py-3 text-sm font-semibold text-ink/60">
+            Applications open shortly
+          </span>
+        )}
       </div>
 
       {v.council_registration && (
@@ -269,11 +303,9 @@ export default function CareersPage() {
               How to apply
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-ink/80">
-              Applications will open through WhatsApp, where you can tell us which role you are
-              interested in and what you have done before, without filling in a form.
-            </p>
-            <p className="mx-auto mt-5 inline-flex items-center gap-2 rounded-full border border-ink/[0.14] bg-ink/[0.04] px-5 py-3 text-sm font-semibold text-ink/70">
-              Applications open shortly
+              Applications happen in WhatsApp — no form to fill in. Use the button on the role
+              you want and the chat opens already knowing which one it is, so we can ask you
+              about that job rather than start from the beginning.
             </p>
             <p className="mx-auto mt-5 max-w-xl text-sm leading-relaxed text-ink/60">
               We will never ask for a copy of your passport or your right-to-work documents in a
