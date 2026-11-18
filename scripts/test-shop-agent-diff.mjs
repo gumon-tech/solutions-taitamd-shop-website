@@ -8,6 +8,7 @@
 // written into this file as the baseline, never the live data/*.json. Unusual characters are written as \u{...}
 // escapes so the file says what each one is.
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { checkDiff, imageFileCheck } from "./lib/shop-agent-diff.mjs";
@@ -518,6 +519,31 @@ const edit = (x, fn) => {
   noC("photos", "a site picture deleted", P, use("/images/tour/infrared-sauna.jpg"), /only earlier public\/images\/sp-/, { ...x, deleted: ["public/images/gallery/massage-1600x900.jpg"] });
   noC("promotions", "a deleted file outside photos", base, clone(base), /only a photos pull request may add or delete files/, { deleted: ["public/images/sp-x.jpg"] });
   noC("photos", "a price in an alt", P, edit(P, (p) => { p.slots["home.hero"].alt = "Massage for \u{00A3}35"; }), /price or currency/, x);
+}
+
+// ================================================================ the failure comment the shop system parses
+// Every marker line in the workflow carries reason= right after stage=, from a fixed list per stage.
+{
+  const yml = readFileSync(path.join(root, ".github/workflows/auto-merge-shop-agent.yml"), "utf8");
+  const lines = yml.split("\n").filter((l) => l.includes("shop-agent-merge-failed stage="));
+  const MARK = /shop-agent-merge-failed stage=(\S+) reason=(\S+) concern=/;
+  test("workflow: every marker line has reason= right after stage=", () => {
+    assert.ok(lines.length >= 4, `expected the header and three comment lines, found ${lines.length}`);
+    for (const l of lines) assert.ok(MARK.test(l), `no stage=... reason=... concern= in:\n${l.trim()}`);
+  });
+  const bodies = lines.filter((l) => l.includes("gh pr comment")).map((l) => MARK.exec(l)?.slice(1, 3).join(" "));
+  test("workflow: stage=check reason=check, stage=publish reason=publish, stage=merge reason=$REASON", () => {
+    assert.deepEqual(bodies.sort(), ["check check", "merge $REASON", "publish publish"]);
+    for (const l of lines.filter((x) => x.includes("gh pr comment"))) {
+      assert.ok(/stage=\S+ reason=\S+ concern=\$\{CONCERN:-unknown\} sha=\$SHA run=\$RUN"$/.test(l.trim()), `tokens out of order in:\n${l.trim()}`);
+    }
+  });
+  test("workflow: the merge reason is moved, lookup or refused", () => {
+    const from = yml.indexOf('case "$REASON" in');
+    const step = yml.slice(from, yml.indexOf("esac", from));
+    for (const r of ["moved)", "lookup)", "*)      REASON=refused;"]) assert.ok(step.includes(r), `no ${r} in the reason case`);
+    assert.ok(/echo "reason=moved"/.test(yml) && /echo "reason=lookup"/.test(yml), "the base step sets moved and lookup");
+  });
 }
 
 console.log(`shop-agent diff rules: ${passed} passed, ${failed} failed`);

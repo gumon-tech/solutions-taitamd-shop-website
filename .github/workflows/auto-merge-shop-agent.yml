@@ -47,8 +47,10 @@ name: Merge shop system data changes
 # step fails and the pull request waits for a person.
 #
 # Failure comments carry a marker line the shop system parses:
-#   shop-agent-merge-failed stage=<check|merge|publish> concern=<concern|unknown> sha=<pull request head> run=<url>
-# stage=merge covers both "main moved after the checks" (the comment says so) and "GitHub refused the merge".
+#   shop-agent-merge-failed stage=<check|merge|publish> reason=<reason> concern=<concern|unknown> sha=<pull request head> run=<url>
+# reason is a fixed token right after stage: stage=check reason=check · stage=publish reason=publish ·
+# stage=merge reason=moved (main moved after the checks; rebuild the branch from the new main) | reason=lookup (the
+# current main could not be read) | reason=refused (GitHub refused the merge).
 # A run that was replaced by a newer commit on the pull request (the system edits its branch) stays silent.
 on:
   pull_request_target:
@@ -253,16 +255,16 @@ jobs:
           case "$REASON" in
             moved)  why="main moved after the checks ran, so the checked result is not what would be merged; rebuilding the branch from the new main runs the checks again" ;;
             lookup) why="the current main could not be read, so it could not be confirmed that main had not moved" ;;
-            *)      why="GitHub refused the merge" ;;
+            *)      REASON=refused; why="GitHub refused the merge" ;;
           esac
-          gh pr comment "$PR" --repo "$REPO" --body "Automatic merge did not happen: $why. shop-agent-merge-failed stage=merge concern=${CONCERN:-unknown} sha=$SHA run=$RUN"
+          gh pr comment "$PR" --repo "$REPO" --body "Automatic merge did not happen: $why. shop-agent-merge-failed stage=merge reason=$REASON concern=${CONCERN:-unknown} sha=$SHA run=$RUN"
 
       - name: Comment if starting the site publish failed (the merge itself worked)
         if: failure() && steps.publish.outcome == 'failure'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh pr comment "$PR" --repo "$REPO" --body "Merged, but starting the Pages workflow failed, so the site shows this when the Pages workflow next runs. shop-agent-merge-failed stage=publish concern=${CONCERN:-unknown} sha=$SHA run=$RUN"
+          gh pr comment "$PR" --repo "$REPO" --body "Merged, but starting the Pages workflow failed, so the site shows this when the Pages workflow next runs. shop-agent-merge-failed stage=publish reason=publish concern=${CONCERN:-unknown} sha=$SHA run=$RUN"
 
   report:
     needs: check
@@ -286,4 +288,4 @@ jobs:
         run: |
           head=$(gh pr view "$PR" --repo "$REPO" --json headRefOid --jq .headRefOid)
           if [ "$head" != "$SHA" ]; then echo "replaced by a newer commit, staying silent"; exit 0; fi
-          gh pr comment "$PR" --repo "$REPO" --body "Automatic merge did not happen: the checks failed (concern, changed files, build, lint, check:css or the diff rules). shop-agent-merge-failed stage=check concern=${CONCERN:-unknown} sha=$SHA run=$RUN"
+          gh pr comment "$PR" --repo "$REPO" --body "Automatic merge did not happen: the checks failed (concern, changed files, build, lint, check:css or the diff rules). shop-agent-merge-failed stage=check reason=check concern=${CONCERN:-unknown} sha=$SHA run=$RUN"
