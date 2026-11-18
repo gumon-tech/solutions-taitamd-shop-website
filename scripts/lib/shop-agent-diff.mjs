@@ -11,7 +11,7 @@ const LISTS = {
   promotions: {
     list: "promotions",
     id: "code",
-    mayChange: ["status", "ends", "ends_label"],
+    mayChange: ["status", "starts", "ends", "ends_label"],
     top: ["updated_at", "note", "promotions"],
     fields: ["code", "title", "eyebrow", "detail", "points", "offer", "message", "image", "illustrative", "starts", "ends", "ends_label", "status"],
   },
@@ -29,6 +29,16 @@ const POINT_LEN = 60;
 const WORD_MAX = 24;
 const CODE = /^P-[A-Z0-9]{2,20}$/;
 const UPDATED_AT = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(:\d{2}(\.\d{1,9})?)?Z$/;
+const DAY = /^\d{4}-\d{2}-\d{2}$/;
+const isDay = (v) => typeof v === "string" && DAY.test(v) && new Date(`${v}T00:00:00Z`).toISOString().slice(0, 10) === v;
+
+/** `starts` and `ends` are real calendar days and the offer does not end before it starts. */
+function dateProblems(at, p) {
+  const out = [];
+  for (const k of ["starts", "ends"]) if (!isDay(p?.[k])) out.push(`${at}: ${k} must be a date like 2026-11-19`);
+  if (!out.length && p.starts > p.ends) out.push(`${at}: starts ${p.starts} is after ends ${p.ends}`);
+  return out;
+}
 export const IMAGE = /^\/images\/[a-z0-9_/-]+\.(jpe?g|png|webp)$/;
 const TOUR = "/images/tour/"; // photographs of our own premises
 const LINK = /https?:\/\/|www\.|:\/\//i;
@@ -200,6 +210,7 @@ export function checkDiff(concern, before, after, { staffNames = [], isImageFile
       if (spec.mayChange.includes(k)) continue;
       if (!same(old[k], cur[k])) errors.push(`${spec.list}: ${id}.${k} was changed (only ${spec.mayChange.join(", ")} may change on an existing entry)`);
     }
+    if (concern === "promotions" && (!same(old.starts, cur.starts) || !same(old.ends, cur.ends))) errors.push(...dateProblems(id, cur));
     if (concern === "promotions" && !same(old.ends_label, cur.ends_label)) {
       if (typeof cur.ends_label !== "string") errors.push(`${id}: ends_label must be text`);
       else {
@@ -213,7 +224,7 @@ export function checkDiff(concern, before, after, { staffNames = [], isImageFile
   for (const e of now) {
     if (!oldIds.has(e?.[spec.id])) {
       seenNew = true;
-      if (concern === "promotions") errors.push(...newCardProblems(e, staffNames), ...imageProblems(e, was, isImageFile));
+      if (concern === "promotions") errors.push(...newCardProblems(e, staffNames), ...dateProblems(e?.code ?? "(new card)", e), ...imageProblems(e, was, isImageFile));
     } else if (seenNew) errors.push(`${spec.list}: new entries must be appended at the end (${e?.[spec.id]} comes after a new one)`);
   }
   return errors;

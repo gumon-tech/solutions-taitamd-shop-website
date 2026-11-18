@@ -1,17 +1,76 @@
 // Tests for the shop-agent diff rules (scripts/lib/shop-agent-diff.mjs). Plain Node, no test runner, no dependencies:
 //   npm run test:shop-agent
-// The baseline is the real data/promotions.json on disk, and pictures are looked up in the real public/images, so a
-// change to either that would refuse the shop system's ordinary cards shows up here. The workflow runs this on every
-// shop-agent pull request, with main's scripts. Unusual characters are written as \u{...} escapes so the file says
+// The baseline is a fixed copy of data/promotions.json as of e8ee631 (the three October cards), written out below, so
+// the result never depends on what the live file holds: the workflow runs this on the merge result of every
+// shop-agent pull request, and a test tied to the live data would fail the next data change. Pictures are still
+// looked up in the real public/images, so removing or renaming one the shop system's cards rely on shows up here. Unusual characters are written as \u{...} escapes so the file says
 // what each one is.
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { checkDiff, imageFileCheck } from "./lib/shop-agent-diff.mjs";
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
-const base = JSON.parse(readFileSync(path.join(root, "data/promotions.json"), "utf8"));
+// data/promotions.json at e8ee631.
+const base = {
+  "updated_at": "2026-10-19T13:41:36Z",
+  "promotions": [
+    {
+      "code": "P-SAUNA90",
+      "title": "Free infrared sauna session",
+      "eyebrow": "We\u{2019}re back \u{00B7} Welcome back gift",
+      "detail": "After one month of renovation, we are delighted to welcome you back. When you enjoy a 90-minute massage with us, your infrared sauna session is free.",
+      "points": [
+        "With a 90-minute massage",
+        "Sauna session worth \u{00A3}35"
+      ],
+      "offer": "You are welcome to share this gift with a friend",
+      "message": "Hi Taitam-D, I\u{2019}d like to book a 90-minute massage with the free infrared sauna welcome back gift.",
+      "image": "/images/tour/infrared-sauna.jpg",
+      "illustrative": false,
+      "starts": "2026-09-17",
+      "ends": "2026-10-16",
+      "ends_label": "Friday 16 October 2026",
+      "status": "ended"
+    },
+    {
+      "code": "P-MASSAGE5",
+      "title": "\u{00A3}5 off any 1-hour massage",
+      "eyebrow": "\u{00A3}5 gift voucher \u{00B7} Walk-in offer",
+      "detail": "Perfect for travellers, commuters and local visitors looking for relaxation near King\u{2019}s Cross.",
+      "points": [
+        "Any 1-hour massage",
+        "Special walk-in offer"
+      ],
+      "offer": "Mention this offer on WhatsApp or when you arrive",
+      "message": "Hi Taitam-D, I\u{2019}d like to use the \u{00A3}5 off any 1-hour massage offer.",
+      "image": "/images/landing/massage.jpg",
+      "illustrative": true,
+      "starts": "2026-09-17",
+      "ends": "2026-10-16",
+      "ends_label": "Friday 16 October 2026",
+      "status": "ended"
+    },
+    {
+      "code": "P-HAIRSPA10",
+      "title": "\u{00A3}10 off Hair Spa",
+      "eyebrow": "\u{00A3}10 gift voucher \u{00B7} Walk-in offer",
+      "detail": "Head massage and hair wash in one treatment: a soothing scalp massage, a refreshing hair wash and expert care that leaves your scalp and hair feeling clean, calm and beautifully refreshed.",
+      "points": [
+        "Hair Spa treatment",
+        "Special walk-in offer"
+      ],
+      "offer": "Mention this offer on WhatsApp or when you arrive",
+      "message": "Hi Taitam-D, I\u{2019}d like to use the \u{00A3}10 off Hair Spa offer.",
+      "image": "/images/campaigns/promo-hair-spa-wash.jpg",
+      "illustrative": true,
+      "starts": "2026-09-17",
+      "ends": "2026-10-16",
+      "ends_label": "Friday 16 October 2026",
+      "status": "ended"
+    }
+  ]
+};
 const isImageFile = imageFileCheck(root);
 const opts = { staffNames: ["Somchai Jaidee"], isImageFile };
 const clone = (x) => JSON.parse(JSON.stringify(x));
@@ -100,6 +159,28 @@ ok("points, a date and a price", withCard(card({ points: ["Any 1-hour massage", 
   const b = clone(before);
   b.promotions[0].status = "live";
   ok("draft to live", b, before);
+  const c = clone(base);
+  c.promotions[2].starts = "2026-09-01";
+  ok("an existing card starting earlier (starts may change)", c);
+  const d = clone(base);
+  d.promotions[2].starts = "2026-11-19";
+  d.promotions[2].ends = "2026-12-19";
+  d.promotions[2].status = "live";
+  ok("an existing card restarted today with a new end", d);
+}
+{
+  const a = clone(base);
+  a.promotions[0].starts = "2026-10-17";
+  no("an existing card whose starts moves after its ends", a, /starts 2026-10-17 is after ends 2026-10-16/);
+  const b = clone(base);
+  b.promotions[0].starts = "19/11/2026";
+  no("an existing card with a malformed starts", b, /starts must be a date/);
+  const c = clone(base);
+  c.promotions[0].starts = "2026-02-30";
+  no("an existing card with an impossible starts", c, /starts must be a date/);
+  const d = clone(base);
+  d.promotions[0].ends = "2026-09-01";
+  no("an existing card whose ends moves before its starts", d, /is after ends/);
 }
 ok("removing the note", clone(base), withNote("Old note."));
 ok("an empty note", withNote(""));
@@ -175,6 +256,8 @@ no("an unknown card field", withCard(card({ html: "<b>x</b>" })), /unknown field
 no("a title over 80 characters", withCard(card({ title: "Free sauna and more ".repeat(5) })), /title is/);
 no("five points", withCard(card({ points: ["a", "b", "c", "d", "e"] })), /at most 4 points/);
 no("a bad code", withCard(card({ code: "p-lower" })), /code must look like/);
+no("a new card that ends before it starts", withCard(card({ starts: "2026-12-21", ends: "2026-12-20" })), /is after ends/);
+no("a new card with a malformed ends", withCard(card({ ends: "2026-12" })), /ends must be a date/);
 no("a new card with a health word in ends_label", withCard(card({ ends_label: "When the pain stops" })), /health-result/);
 {
   const a = clone(base);
