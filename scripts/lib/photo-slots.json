@@ -1,32 +1,52 @@
 {
   "home.hero": {
-    "alt_max": 160
+    "alt_max": 160,
+    "ratio": "2:1",
+    "min_long_side": 1900
   },
   "home.roomband.1": {
-    "alt_max": 160
+    "alt_max": 160,
+    "ratio": "4:3",
+    "min_long_side": 1200
   },
   "home.roomband.2": {
-    "alt_max": 160
+    "alt_max": 160,
+    "ratio": "4:3",
+    "min_long_side": 1200
   },
   "home.roomband.3": {
-    "alt_max": 160
+    "alt_max": 160,
+    "ratio": "4:3",
+    "min_long_side": 1200
   },
   "home.gallery.1": {
-    "alt_max": 160
+    "alt_max": 160,
+    "ratio": "16:9",
+    "min_long_side": 1500
   },
   "home.gallery.2": {
-    "alt_max": 160
+    "alt_max": 160,
+    "ratio": "4:3",
+    "min_long_side": 1500
   },
   "home.gallery.3": {
-    "alt_max": 160
+    "alt_max": 160,
+    "ratio": "4:3",
+    "min_long_side": 1500
   },
   "home.gallery.4": {
-    "alt_max": 160
+    "alt_max": 160,
+    "ratio": "2:1",
+    "min_long_side": 1500
   },
   "home.gallery.5": {
-    "alt_max": 160
+    "alt_max": 160,
+    "ratio": "16:9",
+    "min_long_side": 1500
   },
   "home.gallery.6": {
-    "alt_max": 160
+    "alt_max": 160,
+    "ratio": "16:9",
+    "min_long_side": 1500
   }
 }
