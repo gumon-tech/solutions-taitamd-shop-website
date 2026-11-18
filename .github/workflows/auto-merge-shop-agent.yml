@@ -1,15 +1,28 @@
 name: Merge shop system data changes
 # The shop's WhatsApp system (shop-agent) keeps at most ONE open pull request per concern from a branch named
-# shop-agent/<concern>-<id>. Today the only concern is promotions. It rebuilds that branch from main plus every change
-# a manager has confirmed in chat. This workflow merges that pull request by itself, and only if ALL hold:
+# shop-agent/<concern>-<id>, and rebuilds that branch from main plus every change a manager has confirmed in chat.
+# Concerns, each with its own file (what may change in it: the "shop system" section of data/<CONCERN>.md, enforced by
+# scripts/lib/shop-agent-diff.mjs):
+#   promotions data/promotions.json   new cards; status and dates of existing ones; the note
+#   hours      data/hours.json        the whole week (lib/hours.ts holds the rules)
+#   closures   data/closures.json     new closures; status, dates and label of existing ones (never removed)
+#   notice     data/notice.json       the one-line notice, replaced whole (null or one notice)
+#   faq        data/faq.json          questions and answers edited or appended (never removed); not the massage answer
+#   services   data/services.json     services added, renamed, re-priced or removed inside the existing categories
+#   copy       data/copy.json         the value of any slot declared in scripts/lib/copy-slots.json
+#   photos     data/photos.json       src and alt of any slot declared in scripts/lib/photo-slots.json, plus new
+#                                     pictures public/images/sp-<name>.jpg|.webp (at most 600 KB each), and deleting
+#                                     earlier sp- pictures no slot uses any more
+# This workflow merges that pull request by itself, and only if ALL hold:
 #   1. the pull request comes from a branch inside this repository named shop-agent/<concern>-<id> with a known concern
-#   2. against main it changes exactly one file, data/<concern>.json (M: not added, renamed or deleted)
-#   3. the site's own checks pass on the merged result: scripts/check-orphan-assets.mjs, next build, npm run lint and
-#      npm run check:css (the same steps the Pages deploy runs, plus lint)
-#   4. npm run test:shop-agent and scripts/check-shop-agent-diff.mjs pass: wording already on the site is not edited,
-#      nothing is removed or reordered, the note and every new card pass the text rules (no health claims, no links or
-#      bare domains, no phone numbers, English letters only, no invisible characters, ...) and new pictures are real
-#      files under public/images with the same `illustrative` as cards already using them
+#   2. against main it changes exactly one file, data/<concern>.json (M: not added, renamed or deleted); a photos pull
+#      request may also add new picture files public/images/sp-<name>.jpg|.webp and delete earlier sp- ones, nothing else
+#   3. the site's own checks pass on the merged result: scripts/check-orphan-assets.mjs, next build (which runs every
+#      data validator in lib/), npm run lint and npm run check:css (the same steps the Pages deploy runs, plus lint)
+#   4. npm run test:shop-agent and scripts/check-shop-agent-diff.mjs pass: only what the concern allows changed, nothing
+#      that stays is removed or reordered, every new or changed public text passes the text rules (no health claims, no
+#      links or bare domains, no phone numbers, English letters only, no invisible characters, prices only in promotions
+#      and services, ...) and every picture is a real file under public/images (an added one: a real JPEG or WebP)
 #   5. main is still the commit the checks ran against when the merge starts
 # Anything else stays open for a person, and a comment says which stage failed (the shop system reads it and tells
 # the manager). Uses the built-in GITHUB_TOKEN only. Modelled on the same workflow in the Sri Siam site repository.
@@ -19,13 +32,15 @@ name: Merge shop system data changes
 #          main could require it later. permissions {}. For a person's pull request it only prints a line and succeeds:
 #          no checkout, no npm (visual-gate.yml builds those under pull_request). For shop-agent/* it checks out with
 #          no stored credentials and enforces rules 1 to 4. Rule 2 runs before npm, so the scripts that run are always
-#          the ones on main (a shop-agent pull request cannot change a script, a workflow or a page, only its data file).
+#          the ones on main (a shop-agent pull request cannot change a script, a workflow, a slot list or a page, only its
+#          data file and, for photos, new pictures).
 #          It outputs the main commit it checked against (rule 5).
 #   merge  needs check, only for shop-agent/* pull requests that are not drafts: no checkout, no npm. Rule 5 first.
 #   report comments on a failed check of a shop-agent/* pull request.
 #
 # pull_request_target is deliberate: the workflow definition always comes from main, so a pull request cannot edit this
-# file to skip a check. The pull request's own code is never trusted: rule 2 means it can only change one JSON file.
+# file to skip a check. The pull request's own code is never trusted: rule 2 means it can only change one JSON file
+# (and add pictures, which nothing executes).
 #
 # A merge made with GITHUB_TOKEN does not start other workflows, so the merge job starts nextjs.yml (the Pages deploy)
 # by workflow_dispatch, the one event GITHUB_TOKEN may trigger. If main ever gets a rule that needs a review, the merge
@@ -84,7 +99,7 @@ jobs:
           concern=unknown
           if printf '%s' "$name" | grep -Eq '^[A-Za-z0-9._-]+$'; then
             case "$name" in
-              promotions-?*) concern=promotions ;;
+              promotions-?*|hours-?*|closures-?*|notice-?*|faq-?*|services-?*|copy-?*|photos-?*) concern="${name%%-*}" ;;
             esac
           fi
           echo "concern=$concern" >> "$GITHUB_OUTPUT"
@@ -96,23 +111,41 @@ jobs:
           CONCERN: ${{ steps.concern.outputs.concern }}
         run: |
           if [ "$CONCERN" = unknown ]; then
-            echo "::error::branch shop-agent/<concern>-<id> needs a known concern (promotions)"
+            echo "::error::branch shop-agent/<concern>-<id> needs a known concern (promotions hours closures notice faq services copy photos)"
             exit 1
           fi
 
+      # Exactly one line M data/<concern>.json (mode 100644, nothing renamed). A photos pull request may also add up to
+      # ten pictures public/images/sp-<name>.jpg|.webp as new regular files (mode 100644, so no links; weight and first
+      # bytes are checked by rule 4) and delete up to ten earlier sp- pictures, its own uploads, once no slot uses them.
+      # Paths git would quote (unusual characters) never match.
       # Also records which main the merge result was built on (HEAD^1), so the merge job can refuse to merge once main
       # has moved: the checks below only speak for this exact main.
-      - name: Rule 2, only the file of this concern changes, and this is the head that was checked
+      - name: Rule 2, only the file of this concern changes (photos may add or delete sp- pictures), and this is the head that was checked
         id: files
         if: startsWith(github.event.pull_request.head.ref, 'shop-agent/')
         env:
           CONCERN: ${{ steps.concern.outputs.concern }}
         run: |
-          changed=$(git diff --name-status HEAD^1 HEAD)
-          printf 'Changed against main:\n%s\n' "$changed"
-          want=$(printf 'M\tdata/%s.json' "$CONCERN")
-          if [ "$changed" != "$want" ]; then
-            echo "::error::this pull request must change exactly data/$CONCERN.json and nothing else"
+          raw=$(git diff --raw --no-renames --no-abbrev HEAD^1 HEAD)
+          printf 'Changed against main:\n%s\n' "$raw"
+          tab=$(printf '\t')
+          data_line="^:100644 100644 [0-9a-f]{40,64} [0-9a-f]{40,64} M${tab}data/${CONCERN}\\.json\$"
+          sp='public/images/sp-[a-z0-9]+(-[a-z0-9]+)*\.(jpg|webp)'
+          file_line="^:000000 100644 0{40,64} [0-9a-f]{40,64} A${tab}${sp}\$"
+          gone_line="^:100644 000000 [0-9a-f]{40,64} 0{40,64} D${tab}${sp}\$"
+          allowed="$data_line"
+          if [ "$CONCERN" = photos ]; then allowed="$data_line|$file_line|$gone_line"; fi
+          other=$(printf '%s\n' "$raw" | grep -Ev "$allowed" || true)
+          data=$(printf '%s\n' "$raw" | grep -Ec "$data_line" || true)
+          files=$(printf '%s\n' "$raw" | grep -Ec "$file_line" || true)
+          gone=$(printf '%s\n' "$raw" | grep -Ec "$gone_line" || true)
+          if [ -n "$other" ] || [ "$data" != 1 ] || [ "$files" -gt 10 ] || [ "$gone" -gt 10 ]; then
+            if [ "$CONCERN" = photos ]; then
+              echo "::error::this pull request must change data/photos.json and may only add or delete up to 10 pictures public/images/sp-<name>.jpg or .webp each"
+            else
+              echo "::error::this pull request must change exactly data/$CONCERN.json and nothing else"
+            fi
             exit 1
           fi
           test "$(git rev-parse HEAD^2)" = "$SHA"
@@ -152,7 +185,7 @@ jobs:
         if: startsWith(github.event.pull_request.head.ref, 'shop-agent/')
         run: npm run check:css
 
-      - name: Rule 4, wording already on the site is not edited, nothing is removed, new cards pass the text rules
+      - name: Rule 4, only what the concern allows changed, and new or changed text passes the text rules
         if: startsWith(github.event.pull_request.head.ref, 'shop-agent/')
         env:
           CONCERN: ${{ steps.concern.outputs.concern }}

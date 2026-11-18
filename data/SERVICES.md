@@ -41,3 +41,20 @@
 
 `MEDICAL_NOTICE` · `CONSULTATION_ONLY` · `CATALOG_MEDICAL` (HIFU · SPMU · tattoo removal) · `PRODUCTS` · `SITE.signaturePrice`
 ห้ามเพิ่ม Anti-Wrinkle Injections หรือคำว่า "Botox" ที่ไหนบนเว็บ (Q-LAW-046) · เพิ่มบริการการแพทย์ ⇒ ต้องผ่านคน ไม่ใช่ไฟล์นี้
+
+## การเปลี่ยนจากระบบร้าน (shop system)
+
+สาขา `shop-agent/services-<id>` · ไฟล์ `data/services.json` · workflow `.github/workflows/auto-merge-shop-agent.yml` merge เองเมื่อด่านผ่าน แล้วสั่ง deploy
+
+ระบบทำได้ / ห้าม
+- ภายในหมวดที่มีอยู่: **เพิ่มบริการ · เปลี่ยนชื่อ · แก้ `desc` · แก้ตัวเลือก** (`option` `minutes` `price` `treatwell_sku`) · **ลบบริการ** (เลิกให้บริการ)
+- **ห้าม**: เพิ่มหรือลบหมวด · แก้ `slug` `title` `blurb` `image` ของหมวด · แก้ `service_categories` (การ์ดหน้าแรก) ·
+  เพิ่มหรือแก้ `note` (เงื่อนไขการจอง) · ตั้ง `featured` ให้บริการที่ยังไม่เคยมี
+- ช่วงราคาและนาทีตรวจที่ `lib/services.ts` ตอน build (`gbp` 0–5000 · `wasGbp` ไม่ต่ำกว่า `gbp` · นาที 1–600)
+
+ด่านทั้งหมดเหมือนโปรโมชัน (ดู `data/PROMOTIONS.md` หัวข้อ "การเปลี่ยนจากระบบร้าน"): PR แก้ไฟล์นี้ไฟล์เดียว ·
+`npm run test:shop-agent` · `check-orphan-assets` · `next build` (ตัวตรวจของไฟล์นี้ใน `lib/`) · lint · `check:css` ·
+`scripts/check-shop-agent-diff.mjs services` · และ `main` ต้องยังไม่ขยับตอน merge · ไม่ผ่านข้อใด PR ค้างไว้ให้คน พร้อมคอมเมนต์ `shop-agent-merge-failed`
+ข้อความที่เพิ่มหรือแก้ต้องผ่านกติกาเนื้อหาชุดเดียวกับโปรโมชัน (ไม่อ้างผลต่อสุขภาพ · ไม่มีลิงก์ โดเมน อีเมล เบอร์โทร · อักษรอังกฤษเท่านั้น ·
+ไม่มีอีโมจิหรืออักขระล่องหน · ไม่มีชื่อคนในทีม · คำเดียวไม่เกิน 24 ตัวอักษร · ห้าม `<` `>`) · เขียน `£` ได้ (ไฟล์นี้คือที่อยู่ของราคา) · **ห้ามชื่อหรือคำอธิบายที่เป็นบริการการแพทย์หรือความงามเชิงหัตถการ** (Botox · anti-wrinkle · injection · filler · HIFU · laser · micro-needling · SPMU · tattoo removal ฯลฯ ตาม Q-LAW-046) · คำว่า therapist ใช้ได้
+ข้อความเดิมที่ไม่ได้แตะ ไม่ถูกตรวจซ้ำ

@@ -3,8 +3,10 @@
 // The baseline is a fixed copy of data/promotions.json as of e8ee631 (the three October cards), written out below, so
 // the result never depends on what the live file holds: the workflow runs this on the merge result of every
 // shop-agent pull request, and a test tied to the live data would fail the next data change. Pictures are still
-// looked up in the real public/images, so removing or renaming one the shop system's cards rely on shows up here. Unusual characters are written as \u{...} escapes so the file says
-// what each one is.
+// looked up in the real public/images, so removing or renaming one the shop system's cards rely on shows up here.
+// The other concerns (hours, closures, notice, faq, services, copy, photos) follow the same way: a small fixture
+// written into this file as the baseline, never the live data/*.json. Unusual characters are written as \u{...}
+// escapes so the file says what each one is.
 import assert from "node:assert/strict";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -288,6 +290,199 @@ no("a new card with a health word in ends_label", withCard(card({ ends_label: "W
   const d = clone(base);
   d.promotions.splice(1, 0, clone(JYDW));
   no("a new card in the middle", d, /moved|appended at the end/);
+}
+
+// ================================================================ the content concerns
+const okC = (concern, name, before, after, extra = {}) =>
+  test(`${concern} accepts: ${name}`, () => assert.deepEqual(checkDiff(concern, before, after, { ...opts, ...extra }), []));
+const noC = (concern, name, before, after, pattern, extra = {}) =>
+  test(`${concern} refuses: ${name}`, () => {
+    const errors = checkDiff(concern, before, after, { ...opts, ...extra });
+    assert.ok(errors.length > 0, "no error");
+    if (pattern) assert.ok(errors.some((e) => pattern.test(e)), `no error matching ${pattern}:\n${errors.join("\n")}`);
+  });
+const edit = (x, fn) => {
+  const y = clone(x);
+  fn(y);
+  return y;
+};
+
+// ---- hours: the whole file may be replaced; lib/hours.ts holds the rules
+{
+  const day = (d) => ({ day: d, opens: "10:30", closes: "21:00" });
+  const H = { days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].map(day) };
+  okC("hours", "new times and a closed Sunday", H, edit(H, (h) => { h.days[0].opens = "11:00"; h.days[6] = { day: "Sunday", closed: true }; }));
+  noC("hours", "an extra top-level field", H, { ...clone(H), note: "Closed for Christmas" }, /unknown field note/);
+  noC("hours", "added files", H, clone(H), /only a photos pull request may add or delete files/, { added: [{ path: "public/images/sp-x.jpg", size: 10, regular: true, head: new Uint8Array([0xff, 0xd8, 0xff]) }] });
+}
+
+// ---- closures: append, change status / dates / label, never remove
+{
+  const C = { closures: [{ code: "C-XMAS26", from: "2026-12-24", to: "2026-12-26", label: "Christmas", status: "live" }] };
+  const NY = { code: "C-NY27", from: "2027-01-01", to: "2027-01-01", label: "New Year\u{2019}s Day", status: "live" };
+  okC("closures", "a new closure appended", C, edit(C, (c) => c.closures.push(clone(NY))));
+  okC("closures", "status, dates and label of an existing one", C, edit(C, (c) => Object.assign(c.closures[0], { status: "ended", from: "2026-12-23", to: "2026-12-27", label: "Christmas break" })));
+  okC("closures", "from an empty list", { closures: [] }, { closures: [clone(NY)] });
+  noC("closures", "removing a closure", C, { closures: [] }, /was removed/);
+  noC("closures", "a new one placed first", C, edit(C, (c) => c.closures.unshift(clone(NY))), /moved|appended/);
+  noC("closures", "an unknown field", C, edit(C, (c) => c.closures.push({ ...clone(NY), note: "x" })), /unknown fields note/);
+  noC("closures", "a bad code", C, edit(C, (c) => c.closures.push({ ...clone(NY), code: "C NY" })), /code must be/);
+  noC("closures", "from after to", C, edit(C, (c) => { c.closures[0].from = "2026-12-28"; }), /is after to/);
+  noC("closures", "an impossible date", C, edit(C, (c) => c.closures.push({ ...clone(NY), to: "2027-02-30" })), /to must be a date/);
+  noC("closures", "a status other than live or ended", C, edit(C, (c) => { c.closures[0].status = "hidden"; }), /status must be/);
+  noC("closures", "a phone number in the label", C, edit(C, (c) => { c.closures[0].label = "Call 07700 900123"; }), /phone-like/);
+  noC("closures", "a price in the label", C, edit(C, (c) => { c.closures[0].label = "Christmas, \u{00A3}10 off"; }), /price or currency/);
+  noC("closures", "a link in the label", C, edit(C, (c) => { c.closures[0].label = "See bit.ly/xmas"; }), /link/);
+  noC("closures", "a label over 80 characters", C, edit(C, (c) => { c.closures[0].label = "Closed ".repeat(13); }), /limit 80/);
+}
+
+// ---- notice: the slot is replaced whole (null or one notice)
+{
+  const N = { code: "N-XMAS26", text: "We close early on 24 December and reopen on 27 December.", starts: "2026-12-20", ends: "2026-12-26", link: "/contact" };
+  okC("notice", "a notice set", { notice: null }, { notice: clone(N) });
+  okC("notice", "a notice cleared", { notice: clone(N) }, { notice: null });
+  okC("notice", "a notice without a link", { notice: null }, { notice: { ...clone(N), link: undefined } });
+  okC("notice", "a link to a section", { notice: null }, { notice: { ...clone(N), link: "/services#cat-massage" } });
+  noC("notice", "a link to another site", { notice: null }, { notice: { ...clone(N), link: "https://example.com" } }, /link must be a path/);
+  noC("notice", "a protocol-relative link", { notice: null }, { notice: { ...clone(N), link: "//example.com/x" } }, /link must be a path/);
+  noC("notice", "a link with a query", { notice: null }, { notice: { ...clone(N), link: "/book?ref=x" } }, /link must be a path/);
+  noC("notice", "a price in the text", { notice: null }, { notice: { ...clone(N), text: "All massages \u{00A3}10 off this week." } }, /price or currency/);
+  noC("notice", "an emoji in the text", { notice: null }, { notice: { ...clone(N), text: "Closed for Christmas \u{1F384}" } }, /emoji/);
+  noC("notice", "a health claim in the text", { notice: null }, { notice: { ...clone(N), text: "Beat winter stress with us." } }, /health-result/);
+  noC("notice", "ends before starts", { notice: null }, { notice: { ...clone(N), ends: "2026-12-19" } }, /is after ends/);
+  noC("notice", "an unknown field", { notice: null }, { notice: { ...clone(N), colour: "red" } }, /unknown fields colour/);
+  noC("notice", "text over 200 characters", { notice: null }, { notice: { ...clone(N), text: "Open as usual. ".repeat(15) } }, /limit 200/);
+  noC("notice", "a notice that is a list", { notice: null }, { notice: [clone(N)] }, /null or an object/);
+}
+
+// ---- faq: answers edited or appended, never removed; the massage answer and the page keys stay
+{
+  const F = {
+    shop: [
+      { id: "where-are-you", q: "Where are you?", a: "We are at {{address}}, a {{walk_minutes}}-minute walk from King's Cross St Pancras." },
+      { id: "what-are-your-opening-hours", q: "What are your opening hours?", a: "We are open every day from {{hours}}." },
+    ],
+    massage_expectation: { id: "massage-expectation", q: "What should I expect during a massage?", a: ["Standards notice.", "If you have pain, tell your therapist."] },
+    pages: { "nails-kings-cross": [{ id: "how-long-do-gel-nails-last", q: "How long do gel nails last?", a: "Usually two to three weeks." }] },
+  };
+  const NEW = { id: "do-you-sell-gift-vouchers", q: "Do you sell gift vouchers?", a: ["Yes.", "Message us on WhatsApp to arrange one."] };
+  okC("faq", "an answer edited with a token", F, edit(F, (f) => { f.shop[1].a = "We are open from {{hours}}, every day of the week."; }));
+  okC("faq", "a question edited", F, edit(F, (f) => { f.shop[0].q = "Where is the shop?"; }));
+  okC("faq", "an answer appended to the shop list", F, edit(F, (f) => f.shop.push(clone(NEW))));
+  okC("faq", "an answer appended to a page list", F, edit(F, (f) => f.pages["nails-kings-cross"].push(clone(NEW))));
+  okC("faq", "the word therapist", F, edit(F, (f) => { f.shop[0].a = "Ask your therapist about pressure before you start."; }));
+  noC("faq", "an answer removed", F, edit(F, (f) => f.shop.pop()), /was removed/);
+  noC("faq", "answers reordered", F, edit(F, (f) => f.shop.reverse()), /moved/);
+  noC("faq", "an id changed", F, edit(F, (f) => { f.shop[0].id = "where"; }), /was removed/);
+  noC("faq", "the massage expectation answer edited", F, edit(F, (f) => { f.massage_expectation.a[1] = "Relax."; }), /massage_expectation/);
+  noC("faq", "a new page key", F, edit(F, (f) => { f.pages["new-page"] = [clone(NEW)]; }), /new page key/);
+  noC("faq", "a page key removed", F, edit(F, (f) => { delete f.pages["nails-kings-cross"]; }), /pages.nails-kings-cross: was removed/);
+  noC("faq", "an unknown token", F, edit(F, (f) => { f.shop[1].a = "From {{price}}."; }), /unknown token \{\{price\}\}/);
+  noC("faq", "a stray brace", F, edit(F, (f) => { f.shop[1].a = "Open {hours}."; }), /stray/);
+  noC("faq", "a price", F, edit(F, (f) => { f.shop[1].a = "An hour is \u{00A3}69."; }), /price or currency/);
+  noC("faq", "a health claim", F, edit(F, (f) => { f.shop[1].a = "Massage relieves back pain."; }), /health-result/);
+  noC("faq", "a new answer with an extra field", F, edit(F, (f) => f.shop.push({ ...clone(NEW), hidden: true })), /unknown fields hidden/);
+  noC("faq", "a new answer with a bad id", F, edit(F, (f) => f.shop.push({ ...clone(NEW), id: "Gift Vouchers" })), /id must be/);
+  noC("faq", "seven paragraphs", F, edit(F, (f) => { f.shop[0].a = ["a", "b", "c", "d", "e", "f", "g"]; }), /1 to 6 paragraphs/);
+  noC("faq", "a question over 160 characters", F, edit(F, (f) => { f.shop[0].q = "Where? ".repeat(25); }), /limit 160/);
+  noC("faq", "angle brackets", F, edit(F, (f) => { f.shop[0].a = "We are <b>here</b>."; }), /< or >/);
+}
+
+// ---- services: services added, renamed, re-priced or removed inside the existing categories
+{
+  const v = (minutes, gbp) => ({ minutes, price: { gbp }, treatwell_sku: null });
+  const S = {
+    categories: [
+      {
+        slug: "massage", title: "Massage", blurb: "Thai and western massage.", image: "/images/services/massage.jpg",
+        services: [
+          { name: "Deep Tissue Massage", variants: [v(30, 39), v(60, 69)] },
+          { name: "Pregnancy Massage", note: "Please tell us how many weeks along you are when you book.", variants: [v(60, 69)] },
+          { name: "Thai Remedy", desc: "Our signature remedial blend of Thai techniques for deep, lasting relief.", variants: [v(60, 74)] },
+        ],
+      },
+      { slug: "nails", title: "Nails", blurb: "Hands and feet.", services: [{ name: "Spa Pedicure with Gel (UV)", featured: true, variants: [v(60, 45)] }] },
+    ],
+    service_categories: [{ slug: "massage", title: "Massage", subtitle: "Thai and western", highlights: ["Deep tissue"] }],
+  };
+  okC("services", "a price and a duration changed", S, edit(S, (s) => { s.categories[0].services[0].variants[1] = v(75, 79); }));
+  okC("services", "a struck-through price and a Treatwell id", S, edit(S, (s) => { s.categories[0].services[0].variants[0] = { minutes: 30, price: { gbp: 35, wasGbp: 39 }, treatwell_sku: "TW-abc_1" }; }));
+  okC("services", "a service renamed in place", S, edit(S, (s) => { s.categories[0].services[0].name = "Deep Tissue"; }));
+  okC("services", "an unchanged desc with old wording kept on a re-priced service", S, edit(S, (s) => { s.categories[0].services[2].variants[0] = v(60, 79); }));
+  okC("services", "a service added with a price in its desc", S, edit(S, (s) => s.categories[0].services.push({ name: "Swedish Massage", desc: "Long, flowing strokes. From 30 minutes, \u{00A3}35.", variants: [v(30, 35), { option: "With hot stones", minutes: 60, price: { gbp: 74 }, treatwell_sku: null }] })));
+  okC("services", "a service removed", S, edit(S, (s) => s.categories[0].services.splice(1, 1)));
+  okC("services", "the featured service re-priced", S, edit(S, (s) => { s.categories[1].services[0].variants[0] = v(60, 49); }));
+  noC("services", "service_categories changed", S, edit(S, (s) => { s.service_categories[0].subtitle = "New"; }), /service_categories/);
+  noC("services", "a category title changed", S, edit(S, (s) => { s.categories[1].title = "Hands"; }), /nails.title was changed/);
+  noC("services", "a category added", S, edit(S, (s) => s.categories.push({ slug: "laser", title: "Laser", blurb: "x", services: [] })), /no category is added/);
+  noC("services", "featured set on a new service", S, edit(S, (s) => s.categories[1].services.push({ name: "Gel Manicure", featured: true, variants: [v(45, 30)] })), /featured/);
+  noC("services", "a note changed", S, edit(S, (s) => { s.categories[0].services[1].note = "Any stage welcome."; }), /note: may not/);
+  noC("services", "a new service with a note", S, edit(S, (s) => s.categories[0].services.push({ name: "Couples Massage", note: "Call first.", variants: [v(60, 130)] })), /note: may not/);
+  noC("services", "a medical treatment added", S, edit(S, (s) => s.categories[0].services.push({ name: "Botox Top-Up", variants: [v(30, 150)] })), /medical or aesthetic/);
+  noC("services", "a health claim in a new desc", S, edit(S, (s) => { s.categories[0].services[0].desc = "Firm pressure for lasting relief."; }), /health-result/);
+  noC("services", "an unknown field", S, edit(S, (s) => { s.categories[0].services[0].badge = "New"; }), /unknown fields badge/);
+  noC("services", "an emoji in an option", S, edit(S, (s) => { s.categories[0].services[0].variants[0].option = "Short \u{2728}"; }), /emoji/);
+  noC("services", "a link in a desc", S, edit(S, (s) => { s.categories[0].services[0].desc = "Book at taitam-d.com"; }), /link/);
+}
+
+// ---- copy: values of the declared slots change, keys never
+{
+  const SLOTS = { "home.hero.h1": { kind: "line", max: 50 }, "home.hero.lead": { kind: "paragraph", max: 300 }, "home.location.h2": { kind: "line", max: 40 } };
+  const K = { updated_at: "2026-11-19T00:00:00Z", slots: { "home.hero.h1": "Thai massage and beauty in", "home.hero.lead": "A calm place in King\u{2019}s Cross.", "home.location.h2": "{{walk_minutes}} minutes from" } };
+  const x = { copySlots: SLOTS };
+  okC("copy", "the hero H1 changed", K, edit(K, (k) => { k.slots["home.hero.h1"] = "Massage and beauty near"; k.updated_at = "2026-11-20T09:15:00Z"; }), x);
+  okC("copy", "a paragraph with a line break and a token", K, edit(K, (k) => { k.slots["home.hero.lead"] = "Open {{hours}}.\nMessage us on WhatsApp \u{2022} we reply fast."; }), x);
+  noC("copy", "a slot added", K, edit(K, (k) => { k.slots["home.hero.extra"] = "Hi"; }), /not a declared slot/, x);
+  noC("copy", "a slot removed", K, edit(K, (k) => { delete k.slots["home.location.h2"]; }), /slot is missing/, x);
+  noC("copy", "an unknown top-level field", K, { ...clone(K), theme: "dark" }, /unknown field theme/, x);
+  noC("copy", "a bad updated_at", K, { ...clone(K), updated_at: "today" }, /updated_at/, x);
+  noC("copy", "a price", K, edit(K, (k) => { k.slots["home.hero.h1"] = "Massage from \u{00A3}35"; }), /price or currency/, x);
+  noC("copy", "a link", K, edit(K, (k) => { k.slots["home.hero.lead"] = "Book at www.example.com"; }), /link/, x);
+  noC("copy", "an unknown token", K, edit(K, (k) => { k.slots["home.hero.lead"] = "Near {{address}}."; }), /unknown token/, x);
+  noC("copy", "a line break in a line slot", K, edit(K, (k) => { k.slots["home.hero.h1"] = "Thai massage\nand beauty"; }), /control character/, x);
+  noC("copy", "a value over the slot limit", K, edit(K, (k) => { k.slots["home.location.h2"] = "Only a few minutes on foot from the station"; }), /limit 40/, x);
+  noC("copy", "an empty value", K, edit(K, (k) => { k.slots["home.hero.h1"] = " "; }), /non-empty/, x);
+  noC("copy", "a staff name", K, edit(K, (k) => { k.slots["home.hero.lead"] = "Ask for Somchai Jaidee."; }), /team member/, x);
+}
+
+// ---- photos: src and alt of the declared slots, plus new pictures public/images/sp-<name>.jpg|.webp
+{
+  const SLOTS = { "home.hero": { alt_max: 160 }, "home.gallery.1": { alt_max: 160 } };
+  const P = {
+    updated_at: "2026-11-19T00:00:00Z",
+    slots: { "home.hero": { src: "/images/gallery/massage-1600x900.jpg", alt: "Massage treatment" }, "home.gallery.1": { src: "/images/gallery/spa-1200x800.jpg", alt: "Spa atmosphere" } },
+  };
+  const JPEG = new Uint8Array([0xff, 0xd8, 0xff, 0xe0, 0, 0x10, 0x4a, 0x46, 0x49, 0x46, 0, 1]);
+  const WEBP = new Uint8Array([0x52, 0x49, 0x46, 0x46, 0x24, 0, 0, 0, 0x57, 0x45, 0x42, 0x50]);
+  const PNG = new Uint8Array([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a, 0, 0, 0, 0]);
+  const file = (p, head = JPEG, over = {}) => ({ path: p, size: 120 * 1024, regular: true, head, ...over });
+  const use = (src) => edit(P, (p) => { p.slots["home.hero"].src = src; });
+  const x = { photoSlots: SLOTS };
+  okC("photos", "a slot pointed at another existing picture", P, use("/images/tour/infrared-sauna.jpg"), x);
+  okC("photos", "an alt changed (therapist is an ordinary word)", P, edit(P, (p) => { p.slots["home.hero"].alt = "A therapist working on a client\u{2019}s shoulders"; }), x);
+  okC("photos", "a new JPEG added and used", P, use("/images/sp-hero-nov.jpg"), { ...x, added: [file("public/images/sp-hero-nov.jpg")] });
+  okC("photos", "a new WebP added and used", P, use("/images/sp-hero-nov.webp"), { ...x, added: [file("public/images/sp-hero-nov.webp", WEBP)] });
+  noC("photos", "a picture that is not there", P, use("/images/gallery/nope.jpg"), /not a file under public\/images/, x);
+  noC("photos", "a src outside /images/", P, use("/favicon.ico"), /must be a path like/, x);
+  noC("photos", "a src with ..", P, use("/images/../favicon.jpg"), /must be a path like/, x);
+  noC("photos", "an added picture no slot uses", P, clone(P), /no slot in data\/photos.json uses it/, { ...x, added: [file("public/images/sp-spare.jpg")] });
+  noC("photos", "an added picture over 600 KB", P, use("/images/sp-big.jpg"), /limit is 600 KB/, { ...x, added: [file("public/images/sp-big.jpg", JPEG, { size: 601 * 1024 })] });
+  noC("photos", "an added empty file", P, use("/images/sp-empty.jpg"), /limit is 600 KB/, { ...x, added: [file("public/images/sp-empty.jpg", new Uint8Array(), { size: 0 })] });
+  noC("photos", "a PNG named .jpg", P, use("/images/sp-fake.jpg"), /not a JPEG/, { ...x, added: [file("public/images/sp-fake.jpg", PNG)] });
+  noC("photos", "a JPEG named .webp", P, use("/images/sp-fake.webp"), /not a WebP/, { ...x, added: [file("public/images/sp-fake.webp", JPEG)] });
+  noC("photos", "an added link", P, use("/images/sp-link.jpg"), /regular file/, { ...x, added: [file("public/images/sp-link.jpg", JPEG, { regular: false })] });
+  noC("photos", "an added file outside the sp- name", P, use("/images/gallery/new.jpg"), /only public\/images\/sp-/, { ...x, added: [file("public/images/gallery/new.jpg")] });
+  noC("photos", "an added .png", P, use("/images/sp-x.png"), /only public\/images\/sp-/, { ...x, added: [file("public/images/sp-x.png", PNG)] });
+  noC("photos", "a slot added", P, edit(P, (p) => { p.slots["home.gallery.9"] = { src: "/images/gallery/spa-1200x800.jpg", alt: "Spa" }; }), /not a declared slot/, x);
+  noC("photos", "a slot removed", P, edit(P, (p) => { delete p.slots["home.gallery.1"]; }), /slot is missing/, x);
+  noC("photos", "an extra field in a slot", P, edit(P, (p) => { p.slots["home.hero"].caption = "Hi"; }), /unknown fields caption/, x);
+  noC("photos", "a health claim in an alt", P, edit(P, (p) => { p.slots["home.hero"].alt = "Massage that eases back pain"; }), /health-result/, x);
+  const SP = edit(P, (p) => { p.slots["home.hero"].src = "/images/sp-hero-oct.jpg"; });
+  okC("photos", "an earlier upload deleted once no slot uses it", SP, use("/images/sp-hero-nov.jpg"), { ...x, added: [file("public/images/sp-hero-nov.jpg")], deleted: ["public/images/sp-hero-oct.jpg"] });
+  noC("photos", "a deleted upload still in use", SP, clone(SP), /still uses it/, { ...x, deleted: ["public/images/sp-hero-oct.jpg"] });
+  noC("photos", "a site picture deleted", P, use("/images/tour/infrared-sauna.jpg"), /only earlier public\/images\/sp-/, { ...x, deleted: ["public/images/gallery/massage-1600x900.jpg"] });
+  noC("promotions", "a deleted file outside photos", base, clone(base), /only a photos pull request may add or delete files/, { deleted: ["public/images/sp-x.jpg"] });
+  noC("photos", "a price in an alt", P, edit(P, (p) => { p.slots["home.hero"].alt = "Massage for \u{00A3}35"; }), /price or currency/, x);
 }
 
 console.log(`shop-agent diff rules: ${passed} passed, ${failed} failed`);

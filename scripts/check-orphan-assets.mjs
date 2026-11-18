@@ -23,7 +23,10 @@ import { join, relative, extname } from "node:path";
 const BASELINE = "scripts/orphan-assets-baseline.txt";
 // data/ holds content files that name pictures, such as data/promotions.json.
 const CODE_DIRS = ["app", "components", "lib", "data"];
-const CODE_FILES = ["next.config.mjs", "package.json"];
+// scripts/lib/photo-pool.json: pictures the home page photo slots (data/photos.json) may point at. They stay
+// published when the shop system points a slot at another picture, so a slot can be switched back without a
+// new upload, and swapping a picture does not turn the old one into a new orphan that stops its pull request.
+const CODE_FILES = ["next.config.mjs", "package.json", "scripts/lib/photo-pool.json"];
 const CODE_EXT = new Set([".tsx", ".ts", ".mjs", ".js", ".json", ".css"]);
 
 // Files fetched by URL by convention, with no markup pointing at them. Keep this list

@@ -26,3 +26,19 @@
 
 ดูรายการเต็มที่ `scripts/lib/copy-slots.json` · กลุ่ม: `home.hero.*` · `home.campaigns.*` · `home.bento.*` (1–6) · `home.services.*` ·
 `home.roomband.*` · `home.gallery.*` (หัวข้อ + แผ่น 1–6 `kicker` `title`) · `home.awards.*` · `home.location.*` · `home.cta.*` · `contact.hero.*` · `book.hero.*`
+
+## การเปลี่ยนจากระบบร้าน (shop system)
+
+สาขา `shop-agent/copy-<id>` · ไฟล์ `data/copy.json` · workflow `.github/workflows/auto-merge-shop-agent.yml` merge เองเมื่อด่านผ่าน แล้วสั่ง deploy
+
+ระบบทำได้ / ห้าม
+- แก้ **ค่า** ของช่องใดก็ได้ใน `slots` ที่ประกาศไว้ใน `scripts/lib/copy-slots.json` (ของ main) รวม H1 ของหน้าแรก · ห้ามเพิ่มหรือลบ key
+- ค่าที่แก้ผ่านกติกาเนื้อหา · ไม่เกิน `max` ของช่อง · ช่อง `line` ห้ามขึ้นบรรทัด · token เฉพาะ `{{walk_minutes}}` `{{hours}}`
+- `updated_at` ต้องเป็นเวลา UTC แบบ `2026-11-19T10:00:00Z`
+
+ด่านทั้งหมดเหมือนโปรโมชัน (ดู `data/PROMOTIONS.md` หัวข้อ "การเปลี่ยนจากระบบร้าน"): PR แก้ไฟล์นี้ไฟล์เดียว ·
+`npm run test:shop-agent` · `check-orphan-assets` · `next build` (ตัวตรวจของไฟล์นี้ใน `lib/`) · lint · `check:css` ·
+`scripts/check-shop-agent-diff.mjs copy` · และ `main` ต้องยังไม่ขยับตอน merge · ไม่ผ่านข้อใด PR ค้างไว้ให้คน พร้อมคอมเมนต์ `shop-agent-merge-failed`
+ข้อความที่เพิ่มหรือแก้ต้องผ่านกติกาเนื้อหาชุดเดียวกับโปรโมชัน (ไม่อ้างผลต่อสุขภาพ · ไม่มีลิงก์ โดเมน อีเมล เบอร์โทร · อักษรอังกฤษเท่านั้น ·
+ไม่มีอีโมจิหรืออักขระล่องหน · ไม่มีชื่อคนในทีม · คำเดียวไม่เกิน 24 ตัวอักษร · ห้าม `<` `>`) · **ห้ามเขียนราคาหรือสัญลักษณ์เงิน** (`£` `€` `$`) ราคาอยู่ที่ `data/services.json` ที่เดียว · คำว่า therapist ใช้ได้
+ข้อความเดิมที่ไม่ได้แตะ ไม่ถูกตรวจซ้ำ
