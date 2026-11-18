@@ -1,0 +1,2044 @@
+{
+  "categories": [
+    {
+      "slug": "massage",
+      "title": "Massage",
+      "blurb": "Thai, deep tissue, Swedish, aromatherapy, hot stone and targeted therapeutic work.",
+      "image": "/images/services/massage.jpg",
+      "services": [
+        {
+          "name": "Deep Tissue Massage",
+          "variants": [
+            {
+              "minutes": 30,
+              "price": {
+                "gbp": 39,
+                "wasGbp": 45
+              },
+              "treatwell_sku": null
+            },
+            {
+              "minutes": 60,
+              "price": {
+                "gbp": 69,
+                "wasGbp": 79
+              },
+              "treatwell_sku": null
+            },
+            {
+              "minutes": 90,
+              "price": {
+                "gbp": 99,
+                "wasGbp": 109
+              },
+              "treatwell_sku": null
+            },
+            {
+              "minutes": 120,
+              "price": {
+                "gbp": 129,
+                "wasGbp": 139
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Aromatherapy Massage",
+          "desc": "Flowing, gentle massage with essential oils chosen to calm or uplift.",
+          "variants": [
+            {
+              "minutes": 30,
+              "price": {
+                "gbp": 39,
+                "wasGbp": 45
+              },
+              "treatwell_sku": null
+            },
+            {
+              "minutes": 60,
+              "price": {
+                "gbp": 69,
+                "wasGbp": 79
+              },
+              "treatwell_sku": null
+            },
+            {
+              "minutes": 90,
+              "price": {
+                "gbp": 99,
+                "wasGbp": 109
+              },
+              "treatwell_sku": null
+            },
+            {
+              "minutes": 120,
+              "price": {
+                "gbp": 129,
+                "wasGbp": 139
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Hot Stone Massage",
+          "desc": "Warm basalt stones melt deep tension and ease circulation.",
+          "variants": [
+            {
+              "minutes": 60,
+              "price": {
+                "gbp": 74,
+                "wasGbp": 89
+              },
+              "treatwell_sku": null
+            },
+            {
+              "minutes": 90,
+              "price": {
+                "gbp": 109,
+                "wasGbp": 119
+              },
+              "treatwell_sku": null
+            },
+            {
+              "minutes": 120,
+              "price": {
+                "gbp": 139,
+                "wasGbp": 149
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Swedish Massage",
+          "variants": [
+            {
+              "minutes": 30,
+              "price": {
+                "gbp": 35
+              },
+              "treatwell_sku": null
+            },
+            {
+              "minutes": 60,
+              "price": {
+                "gbp": 59,
+                "wasGbp": 64
+              },
+              "treatwell_sku": null
+            },
+            {
+              "minutes": 90,
+              "price": {
+                "gbp": 89,
+                "wasGbp": 99
+              },
+              "treatwell_sku": null
+            },
+            {
+              "minutes": 120,
+              "price": {
+                "gbp": 109,
+                "wasGbp": 119
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Thai Combination Massage",
+          "desc": "Thai stretching and energy-line work combined with flowing oil massage.",
+          "variants": [
+            {
+              "minutes": 30,
+              "price": {
+                "gbp": 39,
+                "wasGbp": 45
+              },
+              "treatwell_sku": null
+            },
+            {
+              "minutes": 60,
+              "price": {
+                "gbp": 69,
+                "wasGbp": 79
+              },
+              "treatwell_sku": null
+            },
+            {
+              "minutes": 90,
+              "price": {
+                "gbp": 99,
+                "wasGbp": 109
+              },
+              "treatwell_sku": null
+            },
+            {
+              "minutes": 120,
+              "price": {
+                "gbp": 129,
+                "wasGbp": 139
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Thai Foot Massage",
+          "variants": [
+            {
+              "minutes": 30,
+              "price": {
+                "gbp": 35,
+                "wasGbp": 45
+              },
+              "treatwell_sku": null
+            },
+            {
+              "minutes": 60,
+              "price": {
+                "gbp": 59,
+                "wasGbp": 75
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Pain Relief Massage",
+          "desc": "Focused pressure on the areas that ache the most.",
+          "variants": [
+            {
+              "minutes": 30,
+              "price": {
+                "gbp": 44,
+                "wasGbp": 55
+              },
+              "treatwell_sku": null
+            },
+            {
+              "minutes": 60,
+              "price": {
+                "gbp": 79,
+                "wasGbp": 89
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Therapeutic Massage",
+          "desc": "A treatment tailored around your specific tension and needs.",
+          "variants": [
+            {
+              "minutes": 30,
+              "price": {
+                "gbp": 44,
+                "wasGbp": 60
+              },
+              "treatwell_sku": null
+            },
+            {
+              "minutes": 60,
+              "price": {
+                "gbp": 79,
+                "wasGbp": 99
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Sports Massage",
+          "variants": [
+            {
+              "minutes": 30,
+              "price": {
+                "gbp": 44,
+                "wasGbp": 55
+              },
+              "treatwell_sku": null
+            },
+            {
+              "minutes": 60,
+              "price": {
+                "gbp": 79,
+                "wasGbp": 89
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Back, Neck & Shoulder Massage",
+          "variants": [
+            {
+              "minutes": 15,
+              "price": {
+                "gbp": 20,
+                "wasGbp": 25
+              },
+              "treatwell_sku": null
+            },
+            {
+              "minutes": 30,
+              "price": {
+                "gbp": 39,
+                "wasGbp": 45
+              },
+              "treatwell_sku": null
+            },
+            {
+              "minutes": 45,
+              "price": {
+                "gbp": 54,
+                "wasGbp": 59
+              },
+              "treatwell_sku": null
+            },
+            {
+              "minutes": 60,
+              "price": {
+                "gbp": 64,
+                "wasGbp": 69
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Head Massage",
+          "variants": [
+            {
+              "minutes": 30,
+              "price": {
+                "gbp": 35,
+                "wasGbp": 45
+              },
+              "treatwell_sku": null
+            },
+            {
+              "minutes": 60,
+              "price": {
+                "gbp": 59,
+                "wasGbp": 69
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Foot Massage",
+          "variants": [
+            {
+              "minutes": 30,
+              "price": {
+                "gbp": 35,
+                "wasGbp": 45
+              },
+              "treatwell_sku": null
+            },
+            {
+              "minutes": 60,
+              "price": {
+                "gbp": 59,
+                "wasGbp": 69
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Foot Massage Express",
+          "variants": [
+            {
+              "minutes": 20,
+              "price": {
+                "gbp": 20,
+                "wasGbp": 25
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Thai Remedy",
+          "desc": "Our signature remedial blend of Thai techniques for deep, lasting relief.",
+          "variants": [
+            {
+              "minutes": 60,
+              "price": {
+                "gbp": 74,
+                "wasGbp": 89
+              },
+              "treatwell_sku": null
+            },
+            {
+              "minutes": 90,
+              "price": {
+                "gbp": 104,
+                "wasGbp": 119
+              },
+              "treatwell_sku": null
+            },
+            {
+              "minutes": 120,
+              "price": {
+                "gbp": 129,
+                "wasGbp": 139
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Pregnancy Massage",
+          "note": "Please tell us how many weeks along you are when you book.",
+          "variants": [
+            {
+              "minutes": 30,
+              "price": {
+                "gbp": 44,
+                "wasGbp": 50
+              },
+              "treatwell_sku": null
+            },
+            {
+              "minutes": 60,
+              "price": {
+                "gbp": 79,
+                "wasGbp": 89
+              },
+              "treatwell_sku": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "hair",
+      "title": "Hair",
+      "blurb": "Cut, colour, highlights, balayage, keratin and Japanese straightening — priced by hair length.",
+      "image": "/images/services/hair.jpg",
+      "services": [
+        {
+          "name": "Balayage & Ombré with Haircut & Blow Dry",
+          "variants": [
+            {
+              "option": "Medium hair",
+              "minutes": 150,
+              "price": {
+                "gbp": 129
+              },
+              "treatwell_sku": null
+            },
+            {
+              "option": "Long hair",
+              "minutes": 180,
+              "price": {
+                "gbp": 149
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Half Head Highlights with Blow Dry",
+          "variants": [
+            {
+              "option": "Short hair",
+              "minutes": 80,
+              "price": {
+                "gbp": 69
+              },
+              "treatwell_sku": null
+            },
+            {
+              "option": "Medium hair",
+              "minutes": 90,
+              "price": {
+                "gbp": 79
+              },
+              "treatwell_sku": null
+            },
+            {
+              "option": "Long hair",
+              "minutes": 105,
+              "price": {
+                "gbp": 89
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Full Head Highlights with Blow Dry",
+          "variants": [
+            {
+              "option": "Short hair",
+              "minutes": 105,
+              "price": {
+                "gbp": 89
+              },
+              "treatwell_sku": null
+            },
+            {
+              "option": "Medium hair",
+              "minutes": 120,
+              "price": {
+                "gbp": 99
+              },
+              "treatwell_sku": null
+            },
+            {
+              "option": "Long hair",
+              "minutes": 135,
+              "price": {
+                "gbp": 109
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "T-Section Highlights with Blow Dry",
+          "variants": [
+            {
+              "option": "Short hair",
+              "minutes": 80,
+              "price": {
+                "gbp": 69
+              },
+              "treatwell_sku": null
+            },
+            {
+              "option": "Medium hair",
+              "minutes": 90,
+              "price": {
+                "gbp": 79
+              },
+              "treatwell_sku": null
+            },
+            {
+              "option": "Long hair",
+              "minutes": 105,
+              "price": {
+                "gbp": 89
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Half Head Highlights with Haircut & Blow Dry",
+          "variants": [
+            {
+              "option": "Short hair",
+              "minutes": 120,
+              "price": {
+                "gbp": 99
+              },
+              "treatwell_sku": null
+            },
+            {
+              "option": "Medium hair",
+              "minutes": 135,
+              "price": {
+                "gbp": 114
+              },
+              "treatwell_sku": null
+            },
+            {
+              "option": "Long hair",
+              "minutes": 150,
+              "price": {
+                "gbp": 129
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Full Head Colour with Haircut & Blow Dry",
+          "variants": [
+            {
+              "option": "Short hair",
+              "minutes": 90,
+              "price": {
+                "gbp": 69
+              },
+              "treatwell_sku": null
+            },
+            {
+              "option": "Medium hair",
+              "minutes": 105,
+              "price": {
+                "gbp": 79
+              },
+              "treatwell_sku": null
+            },
+            {
+              "option": "Long hair",
+              "minutes": 135,
+              "price": {
+                "gbp": 99
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Full Head Colour with Blow Dry",
+          "variants": [
+            {
+              "option": "Short hair",
+              "minutes": 75,
+              "price": {
+                "gbp": 59
+              },
+              "treatwell_sku": null
+            },
+            {
+              "option": "Medium hair",
+              "minutes": 90,
+              "price": {
+                "gbp": 69
+              },
+              "treatwell_sku": null
+            },
+            {
+              "option": "Long hair",
+              "minutes": 120,
+              "price": {
+                "gbp": 89
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Creative Colour",
+          "variants": [
+            {
+              "minutes": 90,
+              "price": {
+                "gbp": 79
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Wash, Haircut & Blow Dry",
+          "variants": [
+            {
+              "option": "Short hair",
+              "minutes": 50,
+              "price": {
+                "gbp": 49
+              },
+              "treatwell_sku": null
+            },
+            {
+              "option": "Medium hair",
+              "minutes": 70,
+              "price": {
+                "gbp": 59
+              },
+              "treatwell_sku": null
+            },
+            {
+              "option": "Long hair",
+              "minutes": 90,
+              "price": {
+                "gbp": 69
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Keratin Treatment",
+          "variants": [
+            {
+              "option": "Short hair",
+              "minutes": 90,
+              "price": {
+                "gbp": 79
+              },
+              "treatwell_sku": null
+            },
+            {
+              "option": "Medium hair",
+              "minutes": 105,
+              "price": {
+                "gbp": 99
+              },
+              "treatwell_sku": null
+            },
+            {
+              "option": "Long hair",
+              "minutes": 120,
+              "price": {
+                "gbp": 119
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Japanese Straightening",
+          "variants": [
+            {
+              "option": "Short hair",
+              "minutes": 240,
+              "price": {
+                "gbp": 249
+              },
+              "treatwell_sku": null
+            },
+            {
+              "option": "Medium hair",
+              "minutes": 300,
+              "price": {
+                "gbp": 299
+              },
+              "treatwell_sku": null
+            },
+            {
+              "option": "Long hair",
+              "minutes": 330,
+              "price": {
+                "gbp": 349
+              },
+              "treatwell_sku": null
+            },
+            {
+              "option": "Extra long / thick hair",
+              "minutes": 360,
+              "price": {
+                "gbp": 399
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Wash & Blow Dry",
+          "variants": [
+            {
+              "option": "Short hair",
+              "minutes": 40,
+              "price": {
+                "gbp": 30
+              },
+              "treatwell_sku": null
+            },
+            {
+              "option": "Medium hair",
+              "minutes": 45,
+              "price": {
+                "gbp": 35
+              },
+              "treatwell_sku": null
+            },
+            {
+              "option": "Long hair",
+              "minutes": 50,
+              "price": {
+                "gbp": 40
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Blow Dry",
+          "variants": [
+            {
+              "option": "Short hair",
+              "minutes": 30,
+              "price": {
+                "gbp": 20
+              },
+              "treatwell_sku": null
+            },
+            {
+              "option": "Medium hair",
+              "minutes": 35,
+              "price": {
+                "gbp": 25
+              },
+              "treatwell_sku": null
+            },
+            {
+              "option": "Long hair",
+              "minutes": 40,
+              "price": {
+                "gbp": 30
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Nano Hair Spa",
+          "desc": "An intensive scalp-and-hair conditioning ritual for softness and shine.",
+          "variants": [
+            {
+              "option": "Short hair",
+              "minutes": 60,
+              "price": {
+                "gbp": 79
+              },
+              "treatwell_sku": null
+            },
+            {
+              "option": "Medium hair",
+              "minutes": 60,
+              "price": {
+                "gbp": 84
+              },
+              "treatwell_sku": null
+            },
+            {
+              "option": "Long hair",
+              "minutes": 60,
+              "price": {
+                "gbp": 89
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Hair Spa — treatment, head massage & blow dry",
+          "variants": [
+            {
+              "minutes": 60,
+              "price": {
+                "gbp": 99
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Hair Spa — treatment, head massage, blow dry & deep face massage",
+          "variants": [
+            {
+              "minutes": 90,
+              "price": {
+                "gbp": 129
+              },
+              "treatwell_sku": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "nails",
+      "title": "Nails",
+      "blurb": "Classic and spa manicures & pedicures, gel, and acrylic or fibre-gel extensions.",
+      "image": "/images/services/nails.jpg",
+      "services": [
+        {
+          "name": "Classic Manicure (no colour)",
+          "variants": [
+            {
+              "minutes": 15,
+              "price": {
+                "gbp": 10
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Classic Manicure (no colour, incl. gel removal)",
+          "variants": [
+            {
+              "minutes": 25,
+              "price": {
+                "gbp": 20
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Classic Manicure with Polish",
+          "variants": [
+            {
+              "minutes": 25,
+              "price": {
+                "gbp": 20,
+                "wasGbp": 25
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Classic Manicure with Gel (UV)",
+          "variants": [
+            {
+              "minutes": 30,
+              "price": {
+                "gbp": 30,
+                "wasGbp": 35
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Spa Manicure (no colour)",
+          "variants": [
+            {
+              "minutes": 25,
+              "price": {
+                "gbp": 25,
+                "wasGbp": 28
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Spa Manicure with Polish",
+          "variants": [
+            {
+              "minutes": 45,
+              "price": {
+                "gbp": 30,
+                "wasGbp": 35
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Spa Manicure with Gel (UV)",
+          "variants": [
+            {
+              "minutes": 45,
+              "price": {
+                "gbp": 40,
+                "wasGbp": 45
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Classic Pedicure (no colour)",
+          "variants": [
+            {
+              "minutes": 20,
+              "price": {
+                "gbp": 25,
+                "wasGbp": 28
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Classic Pedicure with Polish",
+          "variants": [
+            {
+              "minutes": 30,
+              "price": {
+                "gbp": 30,
+                "wasGbp": 35
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Classic Pedicure with Gel (UV)",
+          "variants": [
+            {
+              "minutes": 30,
+              "price": {
+                "gbp": 40,
+                "wasGbp": 45
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Spa Pedicure (no colour)",
+          "variants": [
+            {
+              "minutes": 30,
+              "price": {
+                "gbp": 30,
+                "wasGbp": 35
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Spa Pedicure with Polish",
+          "variants": [
+            {
+              "minutes": 50,
+              "price": {
+                "gbp": 40,
+                "wasGbp": 45
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Spa Pedicure with Gel (UV)",
+          "featured": true,
+          "variants": [
+            {
+              "minutes": 60,
+              "price": {
+                "gbp": 45,
+                "wasGbp": 50
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Classic Manicure & Pedicure with Polish",
+          "variants": [
+            {
+              "minutes": 55,
+              "price": {
+                "gbp": 45
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Classic Manicure & Pedicure with Gel (UV)",
+          "variants": [
+            {
+              "minutes": 60,
+              "price": {
+                "gbp": 65
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Spa Manicure & Pedicure with Polish",
+          "variants": [
+            {
+              "minutes": 95,
+              "price": {
+                "gbp": 65
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Spa Manicure & Pedicure with Gel (UV)",
+          "variants": [
+            {
+              "minutes": 105,
+              "price": {
+                "gbp": 80
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Gel (Shellac) Removal",
+          "variants": [
+            {
+              "minutes": 15,
+              "price": {
+                "gbp": 10
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Hand Treatment with Thermomist / Paraffin",
+          "variants": [
+            {
+              "minutes": 15,
+              "price": {
+                "gbp": 15
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Hand Treatment with Hot Oil & Nail Refresh",
+          "variants": [
+            {
+              "minutes": 15,
+              "price": {
+                "gbp": 15
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Foot Care",
+          "variants": [
+            {
+              "minutes": 60,
+              "price": {
+                "gbp": 60
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Acrylic Full Set with Polish",
+          "variants": [
+            {
+              "minutes": 60,
+              "price": {
+                "gbp": 45,
+                "wasGbp": 50
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Acrylic Full Set with UV Colour",
+          "variants": [
+            {
+              "minutes": 60,
+              "price": {
+                "gbp": 45,
+                "wasGbp": 50
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Gel Fibre Powder Full Set with Polish",
+          "variants": [
+            {
+              "minutes": 60,
+              "price": {
+                "gbp": 45,
+                "wasGbp": 50
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Gel Fibre Powder Full Set with UV Colour",
+          "variants": [
+            {
+              "minutes": 60,
+              "price": {
+                "gbp": 45,
+                "wasGbp": 50
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Infill — Acrylic with Polish",
+          "variants": [
+            {
+              "minutes": 60,
+              "price": {
+                "gbp": 40,
+                "wasGbp": 45
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Infill — Acrylic with UV Colour",
+          "variants": [
+            {
+              "minutes": 60,
+              "price": {
+                "gbp": 40,
+                "wasGbp": 45
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Infill — Fibre Gel Powder with Polish",
+          "variants": [
+            {
+              "minutes": 60,
+              "price": {
+                "gbp": 40,
+                "wasGbp": 45
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Infill — Fibre Gel Powder with UV Colour",
+          "variants": [
+            {
+              "minutes": 60,
+              "price": {
+                "gbp": 40,
+                "wasGbp": 45
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Extension Removal",
+          "variants": [
+            {
+              "minutes": 15,
+              "price": {
+                "gbp": 20
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Extension Removal & Express Manicure (no colour)",
+          "variants": [
+            {
+              "minutes": 35,
+              "price": {
+                "gbp": 25
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Extension Removal & New Set (Polish)",
+          "variants": [
+            {
+              "minutes": 75,
+              "price": {
+                "gbp": 55,
+                "wasGbp": 60
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Extension Removal & New Set (UV)",
+          "variants": [
+            {
+              "minutes": 75,
+              "price": {
+                "gbp": 60,
+                "wasGbp": 65
+              },
+              "treatwell_sku": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "facials",
+      "title": "Facials",
+      "blurb": "Deep-cleansing, lifting and anti-ageing facials, including the Eberlin package range.",
+      "image": "/images/services/facials.jpg",
+      "services": [
+        {
+          "name": "Luxury Facial",
+          "desc": "A relaxing deep-cleanse and deep-hydration facial.",
+          "variants": [
+            {
+              "minutes": 60,
+              "price": {
+                "gbp": 69,
+                "wasGbp": 79
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Non-Surgical Face Lift Facial",
+          "desc": "Lifting and firming techniques for a toned, refreshed look.",
+          "variants": [
+            {
+              "minutes": 60,
+              "price": {
+                "gbp": 89,
+                "wasGbp": 99
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Anti-Ageing Facial",
+          "desc": "Intensive nourishing care that targets the look of fine lines.",
+          "variants": [
+            {
+              "minutes": 90,
+              "price": {
+                "gbp": 120,
+                "wasGbp": 129
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Eberlin Facial — Equilibrium Package",
+          "desc": "Professional Eberlin skincare to rebalance and calm the skin.",
+          "variants": [
+            {
+              "minutes": 65,
+              "price": {
+                "gbp": 89,
+                "wasGbp": 99
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Eberlin Facial — Infinity Package",
+          "desc": "Professional Eberlin skincare for deep hydration and glow.",
+          "variants": [
+            {
+              "minutes": 65,
+              "price": {
+                "gbp": 99,
+                "wasGbp": 119
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Eberlin Facial — White Package",
+          "desc": "Professional Eberlin brightening skincare for a more even tone.",
+          "variants": [
+            {
+              "minutes": 65,
+              "price": {
+                "gbp": 99,
+                "wasGbp": 119
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Eberlin Facial — Gold Package",
+          "desc": "Our most indulgent Eberlin facial, for radiance and firmness.",
+          "variants": [
+            {
+              "minutes": 95,
+              "price": {
+                "gbp": 120,
+                "wasGbp": 139
+              },
+              "treatwell_sku": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "body",
+      "title": "Body & Spa",
+      "blurb": "Detox, rebalancing and exfoliation programmes for the whole body.",
+      "image": "/images/services/body.jpg",
+      "services": [
+        {
+          "name": "Body Detox / Weight-Loss Program",
+          "desc": "A stimulating body treatment to de-bloat and reset.",
+          "variants": [
+            {
+              "minutes": 60,
+              "price": {
+                "gbp": 69,
+                "wasGbp": 89
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Facial & Body Treatment",
+          "desc": "Face and body cared for together in a single visit.",
+          "variants": [
+            {
+              "minutes": 60,
+              "price": {
+                "gbp": 79,
+                "wasGbp": 99
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Body Rebalance",
+          "desc": "A full-body treatment to restore balance and ease tension.",
+          "variants": [
+            {
+              "minutes": 60,
+              "price": {
+                "gbp": 69,
+                "wasGbp": 89
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Mind & Body",
+          "desc": "A calming session pairing bodywork with deep relaxation.",
+          "variants": [
+            {
+              "minutes": 60,
+              "price": {
+                "gbp": 69,
+                "wasGbp": 84
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Body Exfoliation Treatment",
+          "desc": "A full-body scrub that smooths and renews the skin.",
+          "variants": [
+            {
+              "minutes": 25,
+              "price": {
+                "gbp": 35
+              },
+              "treatwell_sku": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "waxing",
+      "title": "Waxing",
+      "blurb": "Gentle, hygienic waxing for face and body — for women and men.",
+      "image": "/images/services/waxing.jpg",
+      "services": [
+        {
+          "name": "Ladies' Waxing — Hollywood",
+          "variants": [
+            {
+              "minutes": 40,
+              "price": {
+                "gbp": 40,
+                "wasGbp": 50
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Ladies' Waxing — Brazilian",
+          "variants": [
+            {
+              "minutes": 30,
+              "price": {
+                "gbp": 35,
+                "wasGbp": 45
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Ladies' Waxing — Legs",
+          "variants": [
+            {
+              "option": "Lower legs",
+              "minutes": 25,
+              "price": {
+                "gbp": 25
+              },
+              "treatwell_sku": null
+            },
+            {
+              "option": "Upper legs",
+              "minutes": 15,
+              "price": {
+                "gbp": 25
+              },
+              "treatwell_sku": null
+            },
+            {
+              "option": "Full legs",
+              "minutes": 30,
+              "price": {
+                "gbp": 40
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Ladies' Waxing — Arms",
+          "variants": [
+            {
+              "option": "Underarms",
+              "minutes": 10,
+              "price": {
+                "gbp": 15
+              },
+              "treatwell_sku": null
+            },
+            {
+              "option": "Half arms",
+              "minutes": 15,
+              "price": {
+                "gbp": 25
+              },
+              "treatwell_sku": null
+            },
+            {
+              "option": "Full arms",
+              "minutes": 25,
+              "price": {
+                "gbp": 30
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Ladies' Waxing — Face",
+          "variants": [
+            {
+              "option": "Chin",
+              "minutes": 10,
+              "price": {
+                "gbp": 5
+              },
+              "treatwell_sku": null
+            },
+            {
+              "option": "Upper lip",
+              "minutes": 10,
+              "price": {
+                "gbp": 5
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Ladies' Waxing — Bikini",
+          "variants": [
+            {
+              "minutes": 20,
+              "price": {
+                "gbp": 25,
+                "wasGbp": 35
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Ladies' Waxing — Hollywood & Full Leg",
+          "variants": [
+            {
+              "minutes": 60,
+              "price": {
+                "gbp": 70,
+                "wasGbp": 80
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Ladies' Waxing — Brazilian & Full Leg",
+          "variants": [
+            {
+              "minutes": 60,
+              "price": {
+                "gbp": 65,
+                "wasGbp": 75
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Ladies' Waxing — Buttocks",
+          "variants": [
+            {
+              "minutes": 20,
+              "price": {
+                "gbp": 25
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Ladies' Waxing — Back",
+          "variants": [
+            {
+              "minutes": 30,
+              "price": {
+                "gbp": 35
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Men's Waxing — Shoulder & Chest",
+          "variants": [
+            {
+              "minutes": 30,
+              "price": {
+                "gbp": 30
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Men's Waxing — Back",
+          "variants": [
+            {
+              "minutes": 30,
+              "price": {
+                "gbp": 30
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Men's Waxing — Intimate",
+          "note": "Please call to confirm before booking.",
+          "variants": [
+            {
+              "minutes": 30,
+              "price": {
+                "gbp": 65
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Men's Waxing — Hollywood & Buttocks",
+          "variants": [
+            {
+              "minutes": 30,
+              "price": {
+                "gbp": 65
+              },
+              "treatwell_sku": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "lashes",
+      "title": "Eyelash Extensions",
+      "blurb": "Classic, hybrid and Russian volume lash extensions, plus infills and removal.",
+      "image": "/images/services/lashes.jpg",
+      "services": [
+        {
+          "name": "Eyelash Extensions — Classic",
+          "variants": [
+            {
+              "minutes": 60,
+              "price": {
+                "gbp": 70,
+                "wasGbp": 75
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Eyelash Extensions — Hybrid",
+          "variants": [
+            {
+              "minutes": 60,
+              "price": {
+                "gbp": 80,
+                "wasGbp": 90
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Eyelash Extensions — Russian Volume",
+          "variants": [
+            {
+              "minutes": 60,
+              "price": {
+                "gbp": 85,
+                "wasGbp": 90
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Eyelash Extensions — Classic Infill",
+          "variants": [
+            {
+              "minutes": 30,
+              "price": {
+                "gbp": 35,
+                "wasGbp": 45
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Eyelash Extensions — Hybrid Infill",
+          "variants": [
+            {
+              "minutes": 45,
+              "price": {
+                "gbp": 45,
+                "wasGbp": 55
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Eyelash Extensions — Russian Volume Infill",
+          "variants": [
+            {
+              "minutes": 45,
+              "price": {
+                "gbp": 55,
+                "wasGbp": 65
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Eyelash Extensions — Removal",
+          "variants": [
+            {
+              "minutes": 20,
+              "price": {
+                "gbp": 15
+              },
+              "treatwell_sku": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "brows",
+      "title": "Brows, Lashes & Threading",
+      "blurb": "Threading, tinting, brow shaping and lash lifts.",
+      "image": "/images/services/brows.jpg",
+      "services": [
+        {
+          "name": "Eyebrow Tint",
+          "variants": [
+            {
+              "minutes": 10,
+              "price": {
+                "gbp": 10
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Eyelash Tint",
+          "variants": [
+            {
+              "minutes": 15,
+              "price": {
+                "gbp": 15
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Eyebrow Threading",
+          "variants": [
+            {
+              "minutes": 10,
+              "price": {
+                "gbp": 10
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Eyebrow Waxing",
+          "variants": [
+            {
+              "minutes": 10,
+              "price": {
+                "gbp": 10
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Eyebrow Waxing & Tint",
+          "variants": [
+            {
+              "minutes": 10,
+              "price": {
+                "gbp": 18
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Eyebrow Threading & Tint",
+          "variants": [
+            {
+              "minutes": 20,
+              "price": {
+                "gbp": 20
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Eyelash Perm & Tint",
+          "variants": [
+            {
+              "minutes": 50,
+              "price": {
+                "gbp": 45
+              },
+              "treatwell_sku": null
+            }
+          ]
+        },
+        {
+          "name": "Facial Threading",
+          "variants": [
+            {
+              "option": "Chin",
+              "minutes": 10,
+              "price": {
+                "gbp": 5
+              },
+              "treatwell_sku": null
+            },
+            {
+              "option": "Lower lip",
+              "minutes": 10,
+              "price": {
+                "gbp": 5
+              },
+              "treatwell_sku": null
+            },
+            {
+              "option": "Upper lip",
+              "minutes": 10,
+              "price": {
+                "gbp": 5
+              },
+              "treatwell_sku": null
+            },
+            {
+              "option": "Forehead",
+              "minutes": 10,
+              "price": {
+                "gbp": 8
+              },
+              "treatwell_sku": null
+            },
+            {
+              "option": "Eyebrows",
+              "minutes": 10,
+              "price": {
+                "gbp": 10
+              },
+              "treatwell_sku": null
+            },
+            {
+              "option": "Lip & chin",
+              "minutes": 15,
+              "price": {
+                "gbp": 10
+              },
+              "treatwell_sku": null
+            },
+            {
+              "option": "Eyebrow & upper lip",
+              "minutes": 20,
+              "price": {
+                "gbp": 13,
+                "wasGbp": 15
+              },
+              "treatwell_sku": null
+            },
+            {
+              "option": "Sides",
+              "minutes": 20,
+              "price": {
+                "gbp": 15
+              },
+              "treatwell_sku": null
+            },
+            {
+              "option": "Full face",
+              "minutes": 30,
+              "price": {
+                "gbp": 25
+              },
+              "treatwell_sku": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "sauna",
+      "title": "Infrared Sauna",
+      "blurb": "Far-infrared sauna sessions — please book at least 45 minutes before arrival.",
+      "image": "/images/services/sauna.jpg",
+      "services": [
+        {
+          "name": "Infrared Sauna",
+          "variants": [
+            {
+              "option": "30 min · 1 person",
+              "minutes": 30,
+              "price": {
+                "gbp": 30,
+                "wasGbp": 40
+              },
+              "treatwell_sku": null
+            },
+            {
+              "option": "30 min · 2 people",
+              "minutes": 30,
+              "price": {
+                "gbp": 40,
+                "wasGbp": 50
+              },
+              "treatwell_sku": null
+            },
+            {
+              "option": "1 hour · 1 person",
+              "minutes": 60,
+              "price": {
+                "gbp": 50,
+                "wasGbp": 60
+              },
+              "treatwell_sku": null
+            },
+            {
+              "option": "1 hour · 2 people",
+              "minutes": 60,
+              "price": {
+                "gbp": 60,
+                "wasGbp": 70
+              },
+              "treatwell_sku": null
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "service_categories": [
+    {
+      "slug": "massage",
+      "title": "Massage",
+      "subtitle": "Thai • Deep Tissue • Swedish • Aromatherapy",
+      "highlights": ["Thai Massage (stretch + energy-line work)", "Deep Tissue for chronic tension", "Aromatherapy with essential oils", "Foot & head-to-toe options"]
+    },
+    {
+      "slug": "hair",
+      "title": "Hair",
+      "subtitle": "Master cut • Colour • Straightening • Nano Hair Spa",
+      "highlights": ["Asian stylist master cut", "Japanese straightening & hair straightening", "Colour & gloss", "Nano Hair Spa restoration"]
+    },
+    {
+      "slug": "face",
+      "title": "Face",
+      "subtitle": "Gua Sha • Deep cleanse • Hydration • Glow",
+      "highlights": ["Gua Sha facial massage", "Deep cleansing", "Hydration & barrier care", "Lift, tone, and rejuvenate"]
+    },
+    {
+      "slug": "nails",
+      "title": "Nails",
+      "subtitle": "Mani • Pedi • Gel",
+      "highlights": ["Gel application", "Clean, precise finishing", "Cuticle care", "Long-lasting shine"]
+    },
+    {
+      "slug": "waxing",
+      "title": "Waxing",
+      "subtitle": "Smooth, fast, professional",
+      "highlights": ["Gentle technique", "Hygiene-first", "Aftercare guidance", "All areas"]
+    },
+    {
+      "slug": "lashes",
+      "title": "Eyelash",
+      "subtitle": "Extensions • Lift • Tint",
+      "highlights": ["Natural to glam", "Safe, gentle products", "Custom styling", "Mascara-free days"]
+    },
+    {
+      "slug": "micro",
+      "title": "Micropigmentation",
+      "subtitle": "Brows • Lips • Eyeliner",
+      "highlights": ["Semi-permanent definition", "Natural-looking results", "Precision pigments", "Low-maintenance routine"]
+    },
+    {
+      "slug": "aesthetic",
+      "title": "Aesthetic Injections",
+      "subtitle": "Expert-led, premium products",
+      "highlights": ["Tailored plan", "Safety & consultation", "Natural enhancement", "Rejuvenation"]
+    }
+  ]
+}

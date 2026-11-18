@@ -37,6 +37,7 @@ import Footer from "@/components/Footer";
 import StickyBookBar from "@/components/StickyBookBar";
 import StructuredData from "@/components/StructuredData";
 import Analytics from "@/components/Analytics";
+import "@/lib/content-assets";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.baseUrl),
