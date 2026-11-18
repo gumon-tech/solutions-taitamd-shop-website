@@ -8,6 +8,7 @@ import TreatwellFallback from "@/components/TreatwellFallback";
 import CTA from "@/components/CTA";
 import { CATALOG } from "@/lib/catalog";
 import { SITE } from "@/lib/site";
+import { pageFaq } from "@/lib/faq";
 import { HOURS } from "@/lib/hours";
 import { buildWhatsAppLink, SOURCE_NAILS_LANDING } from "@/lib/whatsapp";
 
@@ -34,33 +35,8 @@ const TITLE = "Nails and Pedicure in King's Cross, London | Taitam-D";
 const DESCRIPTION =
   `Manicures, pedicures, gel and nail extensions in King's Cross, a ${SITE.walkMinutes}-minute walk from the station. Open every day. Message us on WhatsApp to check availability.`;
 
-const FAQ: Array<[string, string]> = [
-  [
-    "Where are you?",
-    `We are at ${SITE.address}, a ${SITE.walkMinutes}-minute walk from King's Cross St Pancras.`,
-  ],
-  ["What are your opening hours?", `We are open every day from ${HOURS.words}.`],
-  [
-    "How much is a manicure or pedicure?",
-    "A classic manicure with polish is £20 and with gel it is £30. A classic pedicure with polish is £30 and with gel it is £40. Spa versions and manicure-and-pedicure bookings are priced on this page.",
-  ],
-  [
-    "How long does gel last?",
-    "Usually 2 to 3 weeks on hands and longer on toes. Extensions are normally infilled at about 3 weeks rather than replaced.",
-  ],
-  [
-    "Do you remove gel or extensions from somewhere else?",
-    "Yes. Gel removal is £10 and extension removal is £20, and both can be booked with a new set in the same appointment at a lower combined price.",
-  ],
-  [
-    "Can I walk in without booking?",
-    "Yes, and people do. We still suggest messaging first, because you may have to wait when the rooms are full.",
-  ],
-  [
-    "Do you come to my home or hotel?",
-    "No. Every treatment is done at the shop, with no exceptions.",
-  ],
-];
+// The questions and answers live in data/faq.json (pages.nails-kings-cross); see data/FAQ.md.
+const FAQ = pageFaq("nails-kings-cross");
 
 export const metadata: Metadata = {
   title: { absolute: TITLE },

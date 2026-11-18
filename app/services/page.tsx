@@ -5,8 +5,10 @@ import CTA from "@/components/CTA";
 import TreatwellFallback from "@/components/TreatwellFallback";
 import ServiceCatalogStructuredData from "@/components/ServiceCatalogStructuredData";
 import { TOUR_SHOT_COUNT } from "@/lib/tour";
-import { SITE } from "@/lib/site";
-import { HOURS } from "@/lib/hours";
+import { faqJsonLd, MASSAGE_EXPECTATION, pageFaq } from "@/lib/faq";
+
+// Questions and answers: data/faq.json (pages.services and massage_expectation).
+const SERVICES_FAQ = pageFaq("services");
 
 export const metadata: Metadata = {
   title: "Massage, Hair, Nails & Beauty Services in King's Cross",
@@ -50,31 +52,14 @@ export default function ServicesPage() {
         <p className="text-xs tracking-[0.28em] uppercase text-ink">Helpful answers</p>
         <h2 id="services-faq" className="mt-3 text-2xl md:text-3xl font-semibold">Frequently asked questions</h2>
         <div className="mt-6 grid gap-5 md:grid-cols-2">
-          <div><h3 className="font-semibold">Where is Taitam-D Beauty & Spa?</h3><p className="mt-2 text-sm leading-relaxed text-ink/75">We are at 72-74 Caledonian Road, King&apos;s Cross, London, N1 9DN — a {SITE.walkMinutes}-minute walk from King&apos;s Cross and St Pancras.</p></div>
-          <div><h3 className="font-semibold">How do I book a treatment?</h3><p className="mt-2 text-sm leading-relaxed text-ink/75">Message us on WhatsApp for availability, treatment advice and current offers. Our team will help you choose the right service and time.</p></div>
-          <div><h3 className="font-semibold">What treatments are available?</h3><p className="mt-2 text-sm leading-relaxed text-ink/75">Our menu includes Thai, deep tissue and aromatherapy massage, hair, facials, nails, waxing, eyelash services, micropigmentation and aesthetic injections.</p></div>
-          <div><h3 className="font-semibold">When are you open?</h3><p className="mt-2 text-sm leading-relaxed text-ink/75">{`We are open daily from ${HOURS.words}. Availability can change, so please contact us before visiting.`}</p></div>
-          <div className="md:col-span-2"><h3 className="font-semibold">{SITE.massageExpectationFaq.q}</h3>{SITE.massageExpectationFaq.a.map((para, i) => (<p key={i} className="mt-2 text-sm leading-relaxed text-ink/75">{para}</p>))}</div>
+          {SERVICES_FAQ.map(({ id, q, a }) => (
+            <div key={id}><h3 className="font-semibold">{q}</h3><p className="mt-2 text-sm leading-relaxed text-ink/75">{a.join(" ")}</p></div>
+          ))}
+          <div className="md:col-span-2"><h3 className="font-semibold">{MASSAGE_EXPECTATION.q}</h3>{MASSAGE_EXPECTATION.a.map((para, i) => (<p key={i} className="mt-2 text-sm leading-relaxed text-ink/75">{para}</p>))}</div>
         </div>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "FAQPage",
-              mainEntity: [
-                ["Where is Taitam-D Beauty & Spa?", `We are at 72-74 Caledonian Road, King's Cross, London, N1 9DN — a ${SITE.walkMinutes}-minute walk from King's Cross and St Pancras.`],
-                ["How do I book a treatment?", "Message us on WhatsApp for availability, treatment advice and current offers. Our team will help you choose the right service and time."],
-                ["What treatments are available?", "Our menu includes Thai, deep tissue and aromatherapy massage, hair, facials, nails, waxing, eyelash services, micropigmentation and aesthetic injections."],
-                ["When are you open?", `We are open daily from ${HOURS.words}. Availability can change, so please contact us before visiting.`],
-                [SITE.massageExpectationFaq.q, SITE.massageExpectationFaq.a.join(" ")],
-              ].map(([name, text]) => ({
-                "@type": "Question",
-                name,
-                acceptedAnswer: { "@type": "Answer", text },
-              })),
-            }),
-          }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", ...faqJsonLd([...SERVICES_FAQ, MASSAGE_EXPECTATION]) }) }}
         />
       </section>
 

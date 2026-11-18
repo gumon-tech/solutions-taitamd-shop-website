@@ -1,0 +1,295 @@
+{
+  "shop": [
+    {
+      "id": "where-are-you",
+      "q": "Where are you?",
+      "a": "We are at {{address}}, a {{walk_minutes}}-minute walk from King's Cross St Pancras."
+    },
+    {
+      "id": "what-are-your-opening-hours",
+      "q": "What are your opening hours?",
+      "a": "We are open every day from {{hours}}."
+    },
+    {
+      "id": "how-much-is-an-hour",
+      "q": "How much is an hour of massage?",
+      "a": "Deep tissue, Thai Combination and Aromatherapy are £69 for 60 minutes. Swedish is £59 and Hot Stone is £74. Thirty-minute treatments start at £35."
+    },
+    {
+      "id": "which-treatments-do-most-people",
+      "q": "Which treatments do most people book?",
+      "a": "Deep tissue and Thai Combination, both at 60 minutes. Of the 22 appointments booked between 20 August and 8 September 2026, 16 were 60-minute treatments."
+    },
+    {
+      "id": "can-i-book-for-today",
+      "q": "Can I book for today?",
+      "a": "Message us any time and we will check the diary and reply. We cannot promise a slot in advance, because availability changes through the day."
+    },
+    {
+      "id": "can-i-walk-in-without",
+      "q": "Can I walk in without booking?",
+      "a": "Yes, and people do. We still suggest messaging first, because you may have to wait when the rooms are full."
+    },
+    {
+      "id": "do-you-come-to-my",
+      "q": "Do you come to my home or hotel?",
+      "a": "No. Every treatment is done at the shop, with no exceptions."
+    },
+    {
+      "id": "can-i-see-the-rooms",
+      "q": "Can I see the rooms before I book?",
+      "a": "Yes. There are photographs of every room on our tour page, taken in the order you meet them walking in."
+    },
+    {
+      "id": "how-can-i-pay",
+      "q": "How can I pay?",
+      "a": "Credit and debit cards, contactless including Apple Pay and Google Pay, and cash."
+    },
+    {
+      "id": "do-you-sell-gift-vouchers",
+      "q": "Do you sell gift vouchers?",
+      "a": "Yes, gift vouchers are available. Message us on WhatsApp to arrange one."
+    }
+  ],
+  "massage_expectation": {
+    "id": "massage-expectation",
+    "q": "What should I expect during a massage?",
+    "a": ["Taitam-D is a professional therapeutic massage and beauty salon. All treatments are non-sexual.", "You will be given privacy to undress. Underwear is worn throughout, and you are covered with a towel at all times, with only the area being worked on uncovered. Our therapists do not treat intimate areas.", "If you have pain or a medical condition, please tell your therapist before the treatment starts so they can adjust the pressure and the areas they work on."]
+  },
+  "pages": {
+    "nails-kings-cross": [
+      {
+        "id": "where-are-you",
+        "q": "Where are you?",
+        "a": "We are at {{address}}, a {{walk_minutes}}-minute walk from King's Cross St Pancras."
+      },
+      {
+        "id": "what-are-your-opening-hours",
+        "q": "What are your opening hours?",
+        "a": "We are open every day from {{hours}}."
+      },
+      {
+        "id": "how-much-is-a-manicure",
+        "q": "How much is a manicure or pedicure?",
+        "a": "A classic manicure with polish is £20 and with gel it is £30. A classic pedicure with polish is £30 and with gel it is £40. Spa versions and manicure-and-pedicure bookings are priced on this page."
+      },
+      {
+        "id": "how-long-does-gel-last",
+        "q": "How long does gel last?",
+        "a": "Usually 2 to 3 weeks on hands and longer on toes. Extensions are normally infilled at about 3 weeks rather than replaced."
+      },
+      {
+        "id": "do-you-remove-gel-or",
+        "q": "Do you remove gel or extensions from somewhere else?",
+        "a": "Yes. Gel removal is £10 and extension removal is £20, and both can be booked with a new set in the same appointment at a lower combined price."
+      },
+      {
+        "id": "can-i-walk-in-without",
+        "q": "Can I walk in without booking?",
+        "a": "Yes, and people do. We still suggest messaging first, because you may have to wait when the rooms are full."
+      },
+      {
+        "id": "do-you-come-to-my",
+        "q": "Do you come to my home or hotel?",
+        "a": "No. Every treatment is done at the shop, with no exceptions."
+      }
+    ],
+    "facial-kings-cross": [
+      {
+        "id": "where-are-you",
+        "q": "Where are you?",
+        "a": "We are at {{address}}, a {{walk_minutes}}-minute walk from King's Cross St Pancras."
+      },
+      {
+        "id": "what-are-your-opening-hours",
+        "q": "What are your opening hours?",
+        "a": "We are open every day from {{hours}}."
+      },
+      {
+        "id": "how-much-is-a-facial",
+        "q": "How much is a facial?",
+        "a": "Our Luxury Facial is £69 for 60 minutes. The Non-Surgical Face Lift Facial is £89, the Eberlin packages are £89, £99 and £120, and the 90-minute Anti-Ageing Facial is £120. Every option and price is listed on this page."
+      },
+      {
+        "id": "how-long-does-a-facial",
+        "q": "How long does a facial take?",
+        "a": "Most are 60 to 65 minutes. The Anti-Ageing Facial is 90 minutes and the Eberlin Gold package is 95 minutes."
+      },
+      {
+        "id": "can-i-book-for-today",
+        "q": "Can I book for today?",
+        "a": "Message us any time and we will check the diary and reply. We cannot promise a slot in advance, because availability changes through the day."
+      },
+      {
+        "id": "can-i-walk-in-without",
+        "q": "Can I walk in without booking?",
+        "a": "Yes, and people do. We still suggest messaging first, because you may have to wait when the rooms are full."
+      },
+      {
+        "id": "do-you-come-to-my",
+        "q": "Do you come to my home or hotel?",
+        "a": "No. Every treatment is done at the shop, with no exceptions."
+      }
+    ],
+    "waxing-kings-cross": [
+      {
+        "id": "where-are-you",
+        "q": "Where are you?",
+        "a": "We are at {{address}}, a {{walk_minutes}}-minute walk from King's Cross St Pancras."
+      },
+      {
+        "id": "what-are-your-opening-hours",
+        "q": "What are your opening hours?",
+        "a": "We are open every day from {{hours}}."
+      },
+      {
+        "id": "how-much-is-a-hollywood",
+        "q": "How much is a Hollywood or Brazilian wax?",
+        "a": "A Hollywood is £40 for 40 minutes and a Brazilian is £35 for 30 minutes. Booked with a full leg wax, the Hollywood is £70 and the Brazilian is £65. Every area and price is listed on this page."
+      },
+      {
+        "id": "how-long-should-the-hair",
+        "q": "How long should the hair be?",
+        "a": "About the length of a grain of rice, which is usually 2 to 3 weeks of growth. Shorter than that and the wax has nothing to hold; much longer is fine, and we can trim it first."
+      },
+      {
+        "id": "do-you-wax-men-as",
+        "q": "Do you wax men as well?",
+        "a": "Yes. Back, shoulder and chest waxing are on this page, and intimate waxing for men is by arrangement — please call before booking that one."
+      },
+      {
+        "id": "can-i-walk-in-without",
+        "q": "Can I walk in without booking?",
+        "a": "Yes, and people do. We still suggest messaging first, because you may have to wait when the rooms are full."
+      },
+      {
+        "id": "do-you-come-to-my",
+        "q": "Do you come to my home or hotel?",
+        "a": "No. Every treatment is done at the shop, with no exceptions."
+      }
+    ],
+    "lash-extensions-kings-cross": [
+      {
+        "id": "where-are-you",
+        "q": "Where are you?",
+        "a": "We are at {{address}}, a {{walk_minutes}}-minute walk from King's Cross St Pancras."
+      },
+      {
+        "id": "what-are-your-opening-hours",
+        "q": "What are your opening hours?",
+        "a": "We are open every day from {{hours}}."
+      },
+      {
+        "id": "how-much-are-lash-extensions",
+        "q": "How much are lash extensions?",
+        "a": "A classic set is £70, hybrid is £80 and Russian volume is £85, each about an hour. Infills are £35, £45 and £55, and removal is £15."
+      },
+      {
+        "id": "how-often-do-they-need",
+        "q": "How often do they need infilling?",
+        "a": "Every 2 to 3 weeks for most people. Your own lashes shed on their own cycle, and an infill replaces what has gone rather than starting again."
+      },
+      {
+        "id": "what-is-the-difference-between",
+        "q": "What is the difference between classic, hybrid and Russian volume?",
+        "a": "Classic puts one extension on one natural lash, for a defined but natural look. Russian volume uses several very fine extensions per lash, for a fuller line. Hybrid mixes the two."
+      },
+      {
+        "id": "can-i-walk-in-without",
+        "q": "Can I walk in without booking?",
+        "a": "Yes, and people do. We still suggest messaging first, because lash sets take an hour and the room may be busy."
+      },
+      {
+        "id": "do-you-come-to-my",
+        "q": "Do you come to my home or hotel?",
+        "a": "No. Every treatment is done at the shop, with no exceptions."
+      }
+    ],
+    "deep-tissue-massage-kings-cross": [
+      {
+        "id": "where-are-you",
+        "q": "Where are you?",
+        "a": "We are at {{address}}, a {{walk_minutes}}-minute walk from King's Cross St Pancras."
+      },
+      {
+        "id": "what-are-your-opening-hours",
+        "q": "What are your opening hours?",
+        "a": "We are open every day from {{hours}}."
+      },
+      {
+        "id": "how-much-is-an-hour",
+        "q": "How much is an hour of deep tissue massage?",
+        "a": "A 60-minute deep tissue massage is £69. Thai Combination and Aromatherapy are also £69, Swedish is £59 and Hot Stone is £74. Every length and price is listed on this page."
+      },
+      {
+        "id": "which-massage-do-most-people",
+        "q": "Which massage do most people book?",
+        "a": "Deep tissue and Thai Combination, both at 60 minutes. Of the 22 appointments booked between 20 August and 8 September 2026, 16 were 60-minute treatments."
+      },
+      {
+        "id": "can-i-book-for-today",
+        "q": "Can I book for today?",
+        "a": "Message us any time and we will check the diary and reply. We cannot promise a slot in advance, because availability changes through the day."
+      },
+      {
+        "id": "can-i-walk-in-without",
+        "q": "Can I walk in without booking?",
+        "a": "Yes, and people do. We still suggest messaging first, because you may have to wait when the rooms are full."
+      },
+      {
+        "id": "do-you-come-to-my",
+        "q": "Do you come to my home or hotel?",
+        "a": "No. Every treatment is done at the shop, with no exceptions."
+      }
+    ],
+    "signature": [
+      {
+        "id": "how-is-this-different-from",
+        "q": "How is this different from a standard Thai massage?",
+        "a": "A standard treatment follows a set routine. The Taitam-D Signature starts with a master-level assessment, and the therapist then blends traditional Thai, stretching, deep tissue, Swedish, sports, aromatherapy and Thai yoga around what that assessment finds."
+      },
+      {
+        "id": "how-much-is-it-and",
+        "q": "How much is it and how long does it take?",
+        "a": "The Taitam-D Signature is £69 for 60 minutes. That is the full price for the treatment, not a starting rate."
+      },
+      {
+        "id": "do-i-need-to-undress",
+        "q": "Do I need to undress?",
+        "a": "It depends on the blend your therapist chooses. Oil work needs skin access and is done under draping; traditional Thai and stretching are done clothed. Your therapist will talk you through it before starting."
+      },
+      {
+        "id": "where-are-you-and-how",
+        "q": "Where are you and how do I get there?",
+        "a": "72-74 Caledonian Road, King's Cross, London N1 9DN — a {{walk_minutes}}-minute walk from King's Cross and St Pancras."
+      },
+      {
+        "id": "how-do-i-book",
+        "q": "How do I book?",
+        "a": "Message us on WhatsApp. We will confirm a time and answer anything you want to ask first — you do not need an account or a deposit."
+      }
+    ],
+    "services": [
+      {
+        "id": "where-is-taitam-d-beauty",
+        "q": "Where is Taitam-D Beauty & Spa?",
+        "a": "We are at {{address}} — a {{walk_minutes}}-minute walk from King's Cross and St Pancras."
+      },
+      {
+        "id": "how-do-i-book-a",
+        "q": "How do I book a treatment?",
+        "a": "Message us on WhatsApp for availability, treatment advice and current offers. Our team will help you choose the right service and time."
+      },
+      {
+        "id": "what-treatments-are-available",
+        "q": "What treatments are available?",
+        "a": "Our menu includes Thai, deep tissue and aromatherapy massage, hair, facials, nails, waxing, eyelash services, micropigmentation and aesthetic injections."
+      },
+      {
+        "id": "when-are-you-open",
+        "q": "When are you open?",
+        "a": "We are open daily from {{hours}}. Availability can change, so please contact us before visiting."
+      }
+    ]
+  }
+}

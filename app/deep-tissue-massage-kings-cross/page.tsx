@@ -8,6 +8,7 @@ import TreatwellFallback from "@/components/TreatwellFallback";
 import CTA from "@/components/CTA";
 import { CATALOG } from "@/lib/catalog";
 import { SITE } from "@/lib/site";
+import { pageFaq } from "@/lib/faq";
 import { HOURS } from "@/lib/hours";
 import { buildWhatsAppLink, SOURCE_DEEP_TISSUE_LANDING } from "@/lib/whatsapp";
 
@@ -25,33 +26,8 @@ const DESCRIPTION =
 // Answers come from the shop, not from this page. OFFICE counted the questions across 51
 // enquiries between 20 August and 8 September 2026 and marked which answers it could stand
 // behind; the two it could not — card payment and gift cards — are not here (Q-MKT-079).
-const FAQ: Array<[string, string]> = [
-  [
-    "Where are you?",
-    `We are at ${SITE.address}, a ${SITE.walkMinutes}-minute walk from King's Cross St Pancras.`,
-  ],
-  ["What are your opening hours?", `We are open every day from ${HOURS.words}.`],
-  [
-    "How much is an hour of deep tissue massage?",
-    "A 60-minute deep tissue massage is £69. Thai Combination and Aromatherapy are also £69, Swedish is £59 and Hot Stone is £74. Every length and price is listed on this page.",
-  ],
-  [
-    "Which massage do most people book?",
-    "Deep tissue and Thai Combination, both at 60 minutes. Of the 22 appointments booked between 20 August and 8 September 2026, 16 were 60-minute treatments.",
-  ],
-  [
-    "Can I book for today?",
-    "Message us any time and we will check the diary and reply. We cannot promise a slot in advance, because availability changes through the day.",
-  ],
-  [
-    "Can I walk in without booking?",
-    "Yes, and people do. We still suggest messaging first, because you may have to wait when the rooms are full.",
-  ],
-  [
-    "Do you come to my home or hotel?",
-    "No. Every treatment is done at the shop, with no exceptions.",
-  ],
-];
+// The questions and answers live in data/faq.json (pages.deep-tissue-massage-kings-cross); see data/FAQ.md.
+const FAQ = pageFaq("deep-tissue-massage-kings-cross");
 
 export const metadata: Metadata = {
   title: { absolute: TITLE },

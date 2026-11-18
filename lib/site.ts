@@ -109,15 +109,6 @@ export const SITE = {
   // Only neutral words are allowed: professional · therapeutic · non-sexual.
   standardsNotice:
     "Taitam-D is a professional therapeutic massage and beauty salon. All treatments are non-sexual.",
-  massageExpectationFaq: {
-    q: "What should I expect during a massage?",
-    a: [
-      "Taitam-D is a professional therapeutic massage and beauty salon. All treatments are non-sexual.",
-      "You will be given privacy to undress. Underwear is worn throughout, and you are covered with a towel at all times, with only the area being worked on uncovered. Our therapists do not treat intimate areas.",
-      "If you have pain or a medical condition, please tell your therapist before the treatment starts so they can adjust the pressure and the areas they work on.",
-    ],
-  },
-
   // Prefilled WhatsApp messages (lead capture)
   whatsappTemplates: {
     signature:

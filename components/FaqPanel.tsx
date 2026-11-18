@@ -16,6 +16,8 @@
  * showed up as a lost rich result. Verified identical across all six pages after this was
  * extracted, by hashing the parsed object out of the built HTML on both sides.
  */
+import { faqJsonLd, type FaqItem } from "@/lib/faq";
+
 export default function FaqPanel({
   id,
   items,
@@ -23,7 +25,7 @@ export default function FaqPanel({
   title = "Frequently asked questions",
 }: {
   id: string;
-  items: Array<[string, string]>;
+  items: FaqItem[];
   eyebrow?: string;
   title?: string;
 }) {
@@ -37,25 +39,19 @@ export default function FaqPanel({
         {title}
       </h2>
       <div className="mt-6 grid gap-5 md:grid-cols-2">
-        {items.map(([q, a]) => (
-          <div key={q}>
+        {items.map(({ id: itemId, q, a }) => (
+          <div key={itemId}>
             <h3 className="font-semibold text-[#183b2d]">{q}</h3>
-            <p className="mt-2 text-sm leading-relaxed text-[#2c4a3c]">{a}</p>
+            {a.map((para, i) => (
+              <p key={i} className="mt-2 text-sm leading-relaxed text-[#2c4a3c]">{para}</p>
+            ))}
           </div>
         ))}
       </div>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            mainEntity: items.map(([name, text]) => ({
-              "@type": "Question",
-              name,
-              acceptedAnswer: { "@type": "Answer", text },
-            })),
-          }),
+          __html: JSON.stringify({ "@context": "https://schema.org", ...faqJsonLd(items) }),
         }}
       />
     </section>

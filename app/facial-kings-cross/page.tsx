@@ -8,6 +8,7 @@ import TreatwellFallback from "@/components/TreatwellFallback";
 import CTA from "@/components/CTA";
 import { CATALOG } from "@/lib/catalog";
 import { SITE } from "@/lib/site";
+import { pageFaq } from "@/lib/faq";
 import { HOURS } from "@/lib/hours";
 import { buildWhatsAppLink, SOURCE_FACIAL_LANDING } from "@/lib/whatsapp";
 
@@ -22,33 +23,8 @@ const DESCRIPTION =
 // OFFICE's answers, from 51 enquiries between 20 August and 8 September 2026. Card payment
 // and gift cards are absent because OFFICE could not confirm them, and an FAQ answer is a
 // promise made in advance to somebody who cannot ask a follow-up question.
-const FAQ: Array<[string, string]> = [
-  [
-    "Where are you?",
-    `We are at ${SITE.address}, a ${SITE.walkMinutes}-minute walk from King's Cross St Pancras.`,
-  ],
-  ["What are your opening hours?", `We are open every day from ${HOURS.words}.`],
-  [
-    "How much is a facial?",
-    "Our Luxury Facial is £69 for 60 minutes. The Non-Surgical Face Lift Facial is £89, the Eberlin packages are £89, £99 and £120, and the 90-minute Anti-Ageing Facial is £120. Every option and price is listed on this page.",
-  ],
-  [
-    "How long does a facial take?",
-    "Most are 60 to 65 minutes. The Anti-Ageing Facial is 90 minutes and the Eberlin Gold package is 95 minutes.",
-  ],
-  [
-    "Can I book for today?",
-    "Message us any time and we will check the diary and reply. We cannot promise a slot in advance, because availability changes through the day.",
-  ],
-  [
-    "Can I walk in without booking?",
-    "Yes, and people do. We still suggest messaging first, because you may have to wait when the rooms are full.",
-  ],
-  [
-    "Do you come to my home or hotel?",
-    "No. Every treatment is done at the shop, with no exceptions.",
-  ],
-];
+// The questions and answers live in data/faq.json (pages.facial-kings-cross); see data/FAQ.md.
+const FAQ = pageFaq("facial-kings-cross");
 
 export const metadata: Metadata = {
   title: { absolute: TITLE },

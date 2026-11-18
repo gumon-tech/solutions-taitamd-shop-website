@@ -2,6 +2,7 @@ import Image from "next/image";
 import { ArrowUpRight, MessageCircle, Clock, MapPin, Sparkles, Check } from "lucide-react";
 import Reveal from "@/components/Reveal";
 import { SITE } from "@/lib/site";
+import { faqJsonLd, pageFaq } from "@/lib/faq";
 import { buildWhatsAppLink, SOURCE_SIGNATURE, SOURCE_SIGNATURE_QUESTION } from "@/lib/whatsapp";
 import type { Metadata } from "next";
 
@@ -98,28 +99,8 @@ const FOR_YOU = [
   "Sleep that has not been deep for a while",
 ];
 
-const FAQ: Array<[string, string]> = [
-  [
-    "How is this different from a standard Thai massage?",
-    "A standard treatment follows a set routine. The Taitam-D Signature starts with a master-level assessment, and the therapist then blends traditional Thai, stretching, deep tissue, Swedish, sports, aromatherapy and Thai yoga around what that assessment finds.",
-  ],
-  [
-    "How much is it and how long does it take?",
-    "The Taitam-D Signature is £69 for 60 minutes. That is the full price for the treatment, not a starting rate.",
-  ],
-  [
-    "Do I need to undress?",
-    "It depends on the blend your therapist chooses. Oil work needs skin access and is done under draping; traditional Thai and stretching are done clothed. Your therapist will talk you through it before starting.",
-  ],
-  [
-    "Where are you and how do I get there?",
-    `72-74 Caledonian Road, King's Cross, London N1 9DN — a ${SITE.walkMinutes}-minute walk from King's Cross and St Pancras.`,
-  ],
-  [
-    "How do I book?",
-    "Message us on WhatsApp. We will confirm a time and answer anything you want to ask first — you do not need an account or a deposit.",
-  ],
-];
+// The questions and answers live in data/faq.json (pages.signature); see data/FAQ.md.
+const FAQ = pageFaq("signature");
 
 const TITLE = "Taitam-D Signature Thai Massage — £69 / 60 minutes";
 
@@ -158,14 +139,7 @@ const jsonLd = {
         url: `${SITE.baseUrl}/signature/`,
       },
     },
-    {
-      "@type": "FAQPage",
-      mainEntity: FAQ.map(([name, text]) => ({
-        "@type": "Question",
-        name,
-        acceptedAnswer: { "@type": "Answer", text },
-      })),
-    },
+    faqJsonLd(FAQ),
   ],
 };
 
@@ -522,10 +496,12 @@ export default function SignaturePage() {
             Frequently asked questions
           </h2>
           <div className="mt-7 grid gap-5 md:grid-cols-2">
-            {FAQ.map(([q, a]) => (
-              <div key={q} className="rounded-[26px] border border-ink/10 bg-ink/5 p-6">
+            {FAQ.map(({ id, q, a }) => (
+              <div key={id} className="rounded-[26px] border border-ink/10 bg-ink/5 p-6">
                 <h3 className="font-semibold">{q}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-mist">{a}</p>
+                {a.map((para, i) => (
+                  <p key={i} className="mt-2 text-sm leading-relaxed text-mist">{para}</p>
+                ))}
               </div>
             ))}
           </div>

@@ -8,6 +8,7 @@ import TreatwellFallback from "@/components/TreatwellFallback";
 import CTA from "@/components/CTA";
 import { CATALOG } from "@/lib/catalog";
 import { SITE } from "@/lib/site";
+import { pageFaq } from "@/lib/faq";
 import { HOURS } from "@/lib/hours";
 import { buildWhatsAppLink, SOURCE_LASH_LANDING } from "@/lib/whatsapp";
 
@@ -23,33 +24,8 @@ const TITLE = "Lash Extensions in King's Cross, London | Taitam-D";
 const DESCRIPTION =
   `Classic, hybrid and Russian volume lash extensions in King's Cross, a ${SITE.walkMinutes}-minute walk from the station. Open every day. Message us on WhatsApp to check availability.`;
 
-const FAQ: Array<[string, string]> = [
-  [
-    "Where are you?",
-    `We are at ${SITE.address}, a ${SITE.walkMinutes}-minute walk from King's Cross St Pancras.`,
-  ],
-  ["What are your opening hours?", `We are open every day from ${HOURS.words}.`],
-  [
-    "How much are lash extensions?",
-    "A classic set is £70, hybrid is £80 and Russian volume is £85, each about an hour. Infills are £35, £45 and £55, and removal is £15.",
-  ],
-  [
-    "How often do they need infilling?",
-    "Every 2 to 3 weeks for most people. Your own lashes shed on their own cycle, and an infill replaces what has gone rather than starting again.",
-  ],
-  [
-    "What is the difference between classic, hybrid and Russian volume?",
-    "Classic puts one extension on one natural lash, for a defined but natural look. Russian volume uses several very fine extensions per lash, for a fuller line. Hybrid mixes the two.",
-  ],
-  [
-    "Can I walk in without booking?",
-    "Yes, and people do. We still suggest messaging first, because lash sets take an hour and the room may be busy.",
-  ],
-  [
-    "Do you come to my home or hotel?",
-    "No. Every treatment is done at the shop, with no exceptions.",
-  ],
-];
+// The questions and answers live in data/faq.json (pages.lash-extensions-kings-cross); see data/FAQ.md.
+const FAQ = pageFaq("lash-extensions-kings-cross");
 
 export const metadata: Metadata = {
   title: { absolute: TITLE },

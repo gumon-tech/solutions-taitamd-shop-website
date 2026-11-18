@@ -8,6 +8,7 @@ import TreatwellFallback from "@/components/TreatwellFallback";
 import CTA from "@/components/CTA";
 import { CATALOG } from "@/lib/catalog";
 import { SITE } from "@/lib/site";
+import { pageFaq } from "@/lib/faq";
 import { HOURS } from "@/lib/hours";
 import { buildWhatsAppLink, SOURCE_WAXING_LANDING } from "@/lib/whatsapp";
 
@@ -23,33 +24,8 @@ const TITLE = "Waxing in King's Cross, London | Taitam-D";
 const DESCRIPTION =
   `Waxing for women and men in King's Cross, a ${SITE.walkMinutes}-minute walk from the station. Hollywood, Brazilian, legs, arms and face. Message us on WhatsApp to check availability.`;
 
-const FAQ: Array<[string, string]> = [
-  [
-    "Where are you?",
-    `We are at ${SITE.address}, a ${SITE.walkMinutes}-minute walk from King's Cross St Pancras.`,
-  ],
-  ["What are your opening hours?", `We are open every day from ${HOURS.words}.`],
-  [
-    "How much is a Hollywood or Brazilian wax?",
-    "A Hollywood is £40 for 40 minutes and a Brazilian is £35 for 30 minutes. Booked with a full leg wax, the Hollywood is £70 and the Brazilian is £65. Every area and price is listed on this page.",
-  ],
-  [
-    "How long should the hair be?",
-    "About the length of a grain of rice, which is usually 2 to 3 weeks of growth. Shorter than that and the wax has nothing to hold; much longer is fine, and we can trim it first.",
-  ],
-  [
-    "Do you wax men as well?",
-    "Yes. Back, shoulder and chest waxing are on this page, and intimate waxing for men is by arrangement — please call before booking that one.",
-  ],
-  [
-    "Can I walk in without booking?",
-    "Yes, and people do. We still suggest messaging first, because you may have to wait when the rooms are full.",
-  ],
-  [
-    "Do you come to my home or hotel?",
-    "No. Every treatment is done at the shop, with no exceptions.",
-  ],
-];
+// The questions and answers live in data/faq.json (pages.waxing-kings-cross); see data/FAQ.md.
+const FAQ = pageFaq("waxing-kings-cross");
 
 export const metadata: Metadata = {
   title: { absolute: TITLE },
