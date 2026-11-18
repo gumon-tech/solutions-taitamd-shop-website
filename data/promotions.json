@@ -1,6 +1,36 @@
 {
-  "updated_at": "2026-10-19T13:41:36Z",
+  "updated_at": "2026-11-18T17:59:22Z",
   "promotions": [
+    {
+      "code": "P-TLP9",
+      "title": "Book a gel manicure or pedicure, and get your old gel removed for free",
+      "eyebrow": "Special offer",
+      "detail": "Book a gel manicure or pedicure, and get your old gel removed for free in the same appointment.",
+      "points": [],
+      "offer": "Mention this offer on WhatsApp or when you arrive",
+      "message": "Hi Taitam-D, I'd like to book with your offer: Book a gel manicure or pedicure, and get your old gel removed for free.",
+      "image": "/images/tour/pedicure-spa-chairs.jpg",
+      "illustrative": false,
+      "starts": "2026-11-26",
+      "ends": "2026-12-24",
+      "ends_label": "Thursday 24 December 2026",
+      "status": "live"
+    },
+    {
+      "code": "P-JYDW",
+      "title": "Massage promotion: 90-minute massage on all massage types",
+      "eyebrow": "Special offer",
+      "detail": "Massage promotion: 90-minute massage on all massage types. For any booking of 90 minutes or more, we will include a free 30-minute sauna worth £35.",
+      "points": [],
+      "offer": "Mention this offer on WhatsApp or when you arrive",
+      "message": "Hi Taitam-D, I'd like to book with your offer: Massage promotion: 90-minute massage on all massage types.",
+      "image": "/images/tour/infrared-sauna.jpg",
+      "illustrative": false,
+      "starts": "2026-11-26",
+      "ends": "2027-01-03",
+      "ends_label": "Sunday 3 January 2027",
+      "status": "live"
+    },
     {
       "code": "P-SAUNA90",
       "title": "Free infrared sauna session",
