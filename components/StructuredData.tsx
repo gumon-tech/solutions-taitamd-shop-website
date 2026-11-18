@@ -1,4 +1,5 @@
 import { SITE } from "@/lib/site";
+import { openingHoursSpecification } from "@/lib/hours";
 
 const absolute = (path: string) => new URL(path, SITE.baseUrl).toString();
 
@@ -43,14 +44,8 @@ export default function StructuredData() {
         addressCountry: "GB",
       },
       areaServed: ["King's Cross", "Islington", "London"],
-      openingHoursSpecification: [
-        {
-          "@type": "OpeningHoursSpecification",
-          dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-          opens: "10:30",
-          closes: "21:00",
-        },
-      ],
+      // Computed from data/hours.json (lib/hours.ts), one entry per run of days with the same times.
+      openingHoursSpecification: openingHoursSpecification(),
       // One entry, on purpose. `sameAs` is a claim that a channel is us, so an unverified
       // entry is worse than a missing one. Instagram has no linked business account yet and
       // the old Google Maps value was a `?q=<address>` search, not a Business Profile —

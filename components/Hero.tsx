@@ -7,6 +7,7 @@ import PromoGate from "./PromoGate";
 import type { PromotionWindow } from "@/lib/promotions";
 import { ArrowUpRight, MapPin, Clock3, PhoneCall, MessageCircle } from "lucide-react";
 import { SITE } from "@/lib/site";
+import { HOURS } from "@/lib/hours";
 import Reveal from "./Reveal";
 import { buildWhatsAppLink, SOURCE_HOME } from "@/lib/whatsapp";
 
@@ -170,7 +171,7 @@ export default function Hero({ promotions }: { promotions: { windows: PromotionW
                     {[
                       { k: "Since", v: "2009" },
                       { k: `${SITE.walkMinutes} min`, v: "from King’s Cross" },
-                      { k: "Daily", v: "10:30am – 9pm" },
+                      { k: HOURS.compactLabel, v: HOURS.compact },
                       { k: "WhatsApp", v: "fast replies" }
                     ].map((b) => (
                       <div key={b.k} className="rounded-2xl bg-[#ebe3d4] border border-[#cdb887] p-4">

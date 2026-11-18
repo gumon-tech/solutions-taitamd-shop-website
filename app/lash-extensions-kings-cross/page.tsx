@@ -8,6 +8,7 @@ import TreatwellFallback from "@/components/TreatwellFallback";
 import CTA from "@/components/CTA";
 import { CATALOG } from "@/lib/catalog";
 import { SITE } from "@/lib/site";
+import { HOURS } from "@/lib/hours";
 import { buildWhatsAppLink, SOURCE_LASH_LANDING } from "@/lib/whatsapp";
 
 const lashes = CATALOG.find((c) => c.slug === "lashes")!;
@@ -27,7 +28,7 @@ const FAQ: Array<[string, string]> = [
     "Where are you?",
     `We are at ${SITE.address}, a ${SITE.walkMinutes}-minute walk from King's Cross St Pancras.`,
   ],
-  ["What are your opening hours?", "We are open every day from 10:30am to 9:00pm."],
+  ["What are your opening hours?", `We are open every day from ${HOURS.words}.`],
   [
     "How much are lash extensions?",
     "A classic set is £70, hybrid is £80 and Russian volume is £85, each about an hour. Infills are £35, £45 and £55, and removal is £15.",
@@ -74,7 +75,7 @@ export default function LashExtensionsKingsCrossPage() {
         <div className="mt-5 max-w-2xl space-y-4 text-ink">
           <p>
             Our salon is on Caledonian Road, a {SITE.walkMinutes}-minute walk from King’s Cross
-            station. We are open every day, {SITE.hours.replace("Mon – Sun ", "")}. Classic, hybrid
+            station. We are open every day, {HOURS.range}. Classic, hybrid
             and Russian volume sets take about an hour, and infills are quicker.
           </p>
           <p>

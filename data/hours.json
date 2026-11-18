@@ -1,0 +1,11 @@
+{
+  "days": [
+    { "day": "Monday", "opens": "10:30", "closes": "21:00" },
+    { "day": "Tuesday", "opens": "10:30", "closes": "21:00" },
+    { "day": "Wednesday", "opens": "10:30", "closes": "21:00" },
+    { "day": "Thursday", "opens": "10:30", "closes": "21:00" },
+    { "day": "Friday", "opens": "10:30", "closes": "21:00" },
+    { "day": "Saturday", "opens": "10:30", "closes": "21:00" },
+    { "day": "Sunday", "opens": "10:30", "closes": "21:00" }
+  ]
+}

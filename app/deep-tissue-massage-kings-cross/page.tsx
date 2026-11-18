@@ -8,6 +8,7 @@ import TreatwellFallback from "@/components/TreatwellFallback";
 import CTA from "@/components/CTA";
 import { CATALOG } from "@/lib/catalog";
 import { SITE } from "@/lib/site";
+import { HOURS } from "@/lib/hours";
 import { buildWhatsAppLink, SOURCE_DEEP_TISSUE_LANDING } from "@/lib/whatsapp";
 
 // The firm-pressure half of the massage menu, selected by name from the catalogue so the
@@ -29,7 +30,7 @@ const FAQ: Array<[string, string]> = [
     "Where are you?",
     `We are at ${SITE.address}, a ${SITE.walkMinutes}-minute walk from King's Cross St Pancras.`,
   ],
-  ["What are your opening hours?", "We are open every day from 10:30am to 9:00pm."],
+  ["What are your opening hours?", `We are open every day from ${HOURS.words}.`],
   [
     "How much is an hour of deep tissue massage?",
     "A 60-minute deep tissue massage is £69. Thai Combination and Aromatherapy are also £69, Swedish is £59 and Hot Stone is £74. Every length and price is listed on this page.",
@@ -76,7 +77,7 @@ export default function DeepTissueKingsCrossPage() {
         <div className="mt-5 max-w-2xl space-y-4 text-ink">
           <p>
             Our treatment rooms are on Caledonian Road, a {SITE.walkMinutes}-minute walk from
-            King’s Cross station. We are open every day, {SITE.hours.replace("Mon – Sun ", "")}.
+            King’s Cross station. We are open every day, {HOURS.range}.
             Deep tissue is the firmest work on our menu, and it is what most people ask for after
             a week at a desk or a long run.
           </p>

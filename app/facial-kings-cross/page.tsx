@@ -8,6 +8,7 @@ import TreatwellFallback from "@/components/TreatwellFallback";
 import CTA from "@/components/CTA";
 import { CATALOG } from "@/lib/catalog";
 import { SITE } from "@/lib/site";
+import { HOURS } from "@/lib/hours";
 import { buildWhatsAppLink, SOURCE_FACIAL_LANDING } from "@/lib/whatsapp";
 
 // Whole category, straight from the catalogue (Q-MKT-079 group A). Unlike the deep tissue
@@ -26,7 +27,7 @@ const FAQ: Array<[string, string]> = [
     "Where are you?",
     `We are at ${SITE.address}, a ${SITE.walkMinutes}-minute walk from King's Cross St Pancras.`,
   ],
-  ["What are your opening hours?", "We are open every day from 10:30am to 9:00pm."],
+  ["What are your opening hours?", `We are open every day from ${HOURS.words}.`],
   [
     "How much is a facial?",
     "Our Luxury Facial is £69 for 60 minutes. The Non-Surgical Face Lift Facial is £89, the Eberlin packages are £89, £99 and £120, and the 90-minute Anti-Ageing Facial is £120. Every option and price is listed on this page.",
@@ -73,7 +74,7 @@ export default function FacialKingsCrossPage() {
         <div className="mt-5 max-w-2xl space-y-4 text-ink">
           <p>
             Our treatment rooms are on Caledonian Road, a {SITE.walkMinutes}-minute walk from
-            King’s Cross station. We are open every day, {SITE.hours.replace("Mon – Sun ", "")}.
+            King’s Cross station. We are open every day, {HOURS.range}.
             Facials here run from a straightforward deep cleanse to the Eberlin professional
             packages, and every one of them starts with a look at your skin rather than a script.
           </p>

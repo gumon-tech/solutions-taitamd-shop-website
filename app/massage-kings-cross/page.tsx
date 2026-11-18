@@ -8,6 +8,7 @@ import ShopFaq from "@/components/ShopFaq";
 import TreatwellFallback from "@/components/TreatwellFallback";
 import { CATALOG } from "@/lib/catalog";
 import { SITE } from "@/lib/site";
+import { HOURS } from "@/lib/hours";
 import { buildWhatsAppLink, SOURCE_MASSAGE_LANDING } from "@/lib/whatsapp";
 
 // The massage rows come from the catalogue, never from this file. A price typed here
@@ -43,7 +44,7 @@ export default function MassageKingsCrossPage() {
         <div className="mt-5 max-w-2xl space-y-4 text-ink">
           <p>
             Our treatment rooms are a {SITE.walkMinutes}-minute walk from King’s Cross station,
-            on Caledonian Road. We are open every day, {SITE.hours.replace("Mon – Sun ", "")}.
+            on Caledonian Road. We are open every day, {HOURS.range}.
           </p>
           <p>
             The massage menu runs from Thai and Thai foot massage through deep tissue, Swedish,

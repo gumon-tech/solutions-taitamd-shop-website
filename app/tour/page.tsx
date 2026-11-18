@@ -4,6 +4,7 @@ import CTA from "@/components/CTA";
 import Reveal from "@/components/Reveal";
 import TourGallery from "@/components/TourGallery";
 import { TOUR_SHOT_COUNT } from "@/lib/tour";
+import { HOURS } from "@/lib/hours";
 
 const TITLE = "Inside the Shop — Taitam-D Beauty & Spa, King's Cross";
 const DESCRIPTION =
@@ -44,8 +45,7 @@ export default function TourPage() {
             72-74 Caledonian Road, King&apos;s Cross
           </h2>
           <p className="mt-3 max-w-2xl text-sm leading-relaxed text-ink/75">
-            Open daily, 10:30am to 9:00pm. Availability changes through the day, so message us before you set
-            off and we will tell you what is free.
+            {`Open daily, ${HOURS.words}. Availability changes through the day, so message us before you set off and we will tell you what is free.`}
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <Link

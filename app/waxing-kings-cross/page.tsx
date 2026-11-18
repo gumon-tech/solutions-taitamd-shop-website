@@ -8,6 +8,7 @@ import TreatwellFallback from "@/components/TreatwellFallback";
 import CTA from "@/components/CTA";
 import { CATALOG } from "@/lib/catalog";
 import { SITE } from "@/lib/site";
+import { HOURS } from "@/lib/hours";
 import { buildWhatsAppLink, SOURCE_WAXING_LANDING } from "@/lib/whatsapp";
 
 const waxing = CATALOG.find((c) => c.slug === "waxing")!;
@@ -27,7 +28,7 @@ const FAQ: Array<[string, string]> = [
     "Where are you?",
     `We are at ${SITE.address}, a ${SITE.walkMinutes}-minute walk from King's Cross St Pancras.`,
   ],
-  ["What are your opening hours?", "We are open every day from 10:30am to 9:00pm."],
+  ["What are your opening hours?", `We are open every day from ${HOURS.words}.`],
   [
     "How much is a Hollywood or Brazilian wax?",
     "A Hollywood is £40 for 40 minutes and a Brazilian is £35 for 30 minutes. Booked with a full leg wax, the Hollywood is £70 and the Brazilian is £65. Every area and price is listed on this page.",
@@ -74,7 +75,7 @@ export default function WaxingKingsCrossPage() {
         <div className="mt-5 max-w-2xl space-y-4 text-ink">
           <p>
             Our treatment rooms are on Caledonian Road, a {SITE.walkMinutes}-minute walk from
-            King’s Cross station. We are open every day, {SITE.hours.replace("Mon – Sun ", "")}.
+            King’s Cross station. We are open every day, {HOURS.range}.
             We wax face and body for women and men, from an upper lip to a Hollywood, in a private
             room with the door closed.
           </p>

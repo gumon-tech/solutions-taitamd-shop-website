@@ -1,3 +1,5 @@
+import { HOURS } from "./hours";
+
 export const SITE = {
   baseUrl: "https://taitam-d.com",
   name: "Taitam-D Beauty & Spa",
@@ -33,7 +35,8 @@ export const SITE = {
   // commit 4f28e39 — the sha is here because a pointer to a heading in a file that
   // keeps growing is a pointer that stops resolving.
   walkMinutes: 5,
-  hours: "Mon – Sun 10:30 AM – 9:00 PM",
+  // Computed from data/hours.json (lib/hours.ts), so the shop's hours are edited in one place.
+  hours: HOURS.display,
   phone: "07564292247",
   email: "info@taitam-d.com",
   priceRange: "££",

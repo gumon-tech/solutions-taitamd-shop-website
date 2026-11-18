@@ -8,6 +8,7 @@ import TreatwellFallback from "@/components/TreatwellFallback";
 import CTA from "@/components/CTA";
 import { CATALOG } from "@/lib/catalog";
 import { SITE } from "@/lib/site";
+import { HOURS } from "@/lib/hours";
 import { buildWhatsAppLink, SOURCE_NAILS_LANDING } from "@/lib/whatsapp";
 
 const nails = CATALOG.find((c) => c.slug === "nails")!;
@@ -38,7 +39,7 @@ const FAQ: Array<[string, string]> = [
     "Where are you?",
     `We are at ${SITE.address}, a ${SITE.walkMinutes}-minute walk from King's Cross St Pancras.`,
   ],
-  ["What are your opening hours?", "We are open every day from 10:30am to 9:00pm."],
+  ["What are your opening hours?", `We are open every day from ${HOURS.words}.`],
   [
     "How much is a manicure or pedicure?",
     "A classic manicure with polish is £20 and with gel it is £30. A classic pedicure with polish is £30 and with gel it is £40. Spa versions and manicure-and-pedicure bookings are priced on this page.",
@@ -85,7 +86,7 @@ export default function NailsKingsCrossPage() {
         <div className="mt-5 max-w-2xl space-y-4 text-ink">
           <p>
             Our salon is on Caledonian Road, a {SITE.walkMinutes}-minute walk from King’s Cross
-            station. We are open every day, {SITE.hours.replace("Mon – Sun ", "")}. Manicures,
+            station. We are open every day, {HOURS.range}. Manicures,
             pedicures, gel and extensions, from a 15-minute tidy-up to a spa manicure and pedicure
             together.
           </p>

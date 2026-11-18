@@ -1,4 +1,5 @@
 import { SITE } from "@/lib/site";
+import { HOURS } from "@/lib/hours";
 import FaqPanel from "./FaqPanel";
 
 /**
@@ -30,7 +31,7 @@ export const SHOP_FAQ: Array<[string, string]> = [
     "Where are you?",
     `We are at ${SITE.address}, a ${SITE.walkMinutes}-minute walk from King's Cross St Pancras.`,
   ],
-  ["What are your opening hours?", "We are open every day from 10:30am to 9:00pm."],
+  ["What are your opening hours?", `We are open every day from ${HOURS.words}.`],
   [
     "How much is an hour of massage?",
     "Deep tissue, Thai Combination and Aromatherapy are £69 for 60 minutes. Swedish is £59 and Hot Stone is £74. Thirty-minute treatments start at £35.",
