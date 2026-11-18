@@ -298,22 +298,34 @@ function hoursDiff() {
 }
 
 const CLOSURE_CODE = /^[A-Za-z0-9-]{2,40}$/;
+const CLOCK = /^([01]\d|2[0-3]):([0-5]\d)$/;
 function closureDates(at, c) {
   const out = [];
   for (const k of ["from", "to"]) if (!isDay(c?.[k])) out.push(`${at}: ${k} must be a date like 2026-12-25`);
   if (!out.length && c.from > c.to) out.push(`${at}: from ${c.from} is after to ${c.to}`);
   return out;
 }
+// Special hours: `opens` and `closes` both (open on those days with these hours) or neither (closed), as lib/closures.ts.
+function closureHours(at, c) {
+  const has = (k) => c[k] !== undefined;
+  if (!has("opens") && !has("closes")) return [];
+  if (has("opens") !== has("closes")) return [`${at}: opens and closes go together (both for special hours, neither for closed)`];
+  const out = [];
+  for (const k of ["opens", "closes"]) if (typeof c[k] !== "string" || !CLOCK.test(c[k])) out.push(`${at}: ${k} must be a 24-hour time like 12:00`);
+  if (!out.length && c.closes <= c.opens) out.push(`${at}: closes ${c.closes} is not after opens ${c.opens}`);
+  return out;
+}
 function closuresDiff(before, after, ctx) {
   return listDiff("closures", before?.closures, after.closures, {
     id: "code",
-    mayChange: ["status", "from", "to", "label"],
+    mayChange: ["status", "from", "to", "label", "opens", "closes"],
     removedHint: "set its status to ended instead; entries are never deleted",
     changed: (old, cur, id) => {
       const out = [];
       if (!same(old.from, cur.from) || !same(old.to, cur.to)) out.push(...closureDates(id, cur));
       if (!same(old.label, cur.label)) out.push(...textField(`${id}.label`, cur.label, 80, ctx));
       if (cur.status !== "live" && cur.status !== "ended") out.push(`${id}: status must be live or ended`);
+      if (!same(old.opens, cur.opens) || !same(old.closes, cur.closes)) out.push(...closureHours(id, cur));
       return out;
     },
     added: (c) => {
@@ -321,9 +333,9 @@ function closuresDiff(before, after, ctx) {
       const out = [];
       if (!isObj(c)) return [`${at}: must be an object`];
       if (typeof c.code !== "string" || !CLOSURE_CODE.test(c.code)) out.push(`${at}: code must be letters, digits and - (2 to 40), like C-XMAS26`);
-      const extra = Object.keys(c).filter((k) => !["code", "from", "to", "label", "status"].includes(k));
+      const extra = Object.keys(c).filter((k) => !["code", "from", "to", "label", "status", "opens", "closes"].includes(k));
       if (extra.length) out.push(`${at}: unknown fields ${extra.join(", ")}`);
-      out.push(...closureDates(at, c), ...textField(`${at}.label`, c.label, 80, ctx));
+      out.push(...closureDates(at, c), ...textField(`${at}.label`, c.label, 80, ctx), ...closureHours(at, c));
       if (c.status !== "live" && c.status !== "ended") out.push(`${at}: status must be live or ended`);
       return out;
     },

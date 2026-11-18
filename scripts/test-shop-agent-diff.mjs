@@ -334,6 +334,21 @@ const edit = (x, fn) => {
   noC("closures", "a price in the label", C, edit(C, (c) => { c.closures[0].label = "Christmas, \u{00A3}10 off"; }), /price or currency/);
   noC("closures", "a link in the label", C, edit(C, (c) => { c.closures[0].label = "See bit.ly/xmas"; }), /link/);
   noC("closures", "a label over 80 characters", C, edit(C, (c) => { c.closures[0].label = "Closed ".repeat(13); }), /limit 80/);
+  // Special hours: opens and closes together turn a closed day into an open one with those hours.
+  const EVE = { code: "C-EVE26", from: "2026-12-24", to: "2026-12-24", label: "Christmas Eve", status: "live", opens: "12:00", closes: "18:00" };
+  const S = { closures: [...clone(C.closures), clone(EVE)] };
+  okC("closures", "a new closure with special hours", C, edit(C, (c) => c.closures.push(clone(EVE))));
+  okC("closures", "special hours set on an existing closure", C, edit(C, (c) => Object.assign(c.closures[0], { opens: "11:00", closes: "17:30" })));
+  okC("closures", "special hours changed", S, edit(S, (c) => Object.assign(c.closures[1], { opens: "10:30", closes: "16:00" })));
+  okC("closures", "special hours taken off (closed again)", S, edit(S, (c) => { delete c.closures[1].opens; delete c.closures[1].closes; }));
+  noC("closures", "opens without closes on a new one", C, edit(C, (c) => c.closures.push({ ...clone(EVE), closes: undefined })), /go together/);
+  noC("closures", "closes without opens on an existing one", C, edit(C, (c) => { c.closures[0].closes = "18:00"; }), /go together/);
+  noC("closures", "closes before opens", C, edit(C, (c) => c.closures.push({ ...clone(EVE), opens: "18:00", closes: "12:00" })), /not after opens/);
+  noC("closures", "closes equal to opens", S, edit(S, (c) => { c.closures[1].closes = "12:00"; }), /not after opens/);
+  noC("closures", "a time without a leading zero", C, edit(C, (c) => c.closures.push({ ...clone(EVE), opens: "9:00" })), /opens must be a 24-hour time/);
+  noC("closures", "an impossible time", S, edit(S, (c) => { c.closures[1].closes = "24:00"; }), /closes must be a 24-hour time/);
+  noC("closures", "a time in words", C, edit(C, (c) => c.closures.push({ ...clone(EVE), opens: "noon" })), /opens must be a 24-hour time/);
+  noC("closures", "a time that is a number", C, edit(C, (c) => c.closures.push({ ...clone(EVE), closes: 1800 })), /closes must be a 24-hour time/);
 }
 
 // ---- notice: the slot is replaced whole (null or one notice)

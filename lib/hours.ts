@@ -11,7 +11,8 @@ const WEEK = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
 const SHORT: Record<string, string> = {
   Monday: "Mon", Tuesday: "Tue", Wednesday: "Wed", Thursday: "Thu", Friday: "Fri", Saturday: "Sat", Sunday: "Sun",
 };
-const CLOCK = /^([01]\d|2[0-3]):([0-5]\d)$/;
+/** A 24-hour time like "10:30" (also used by lib/closures.ts for special opening hours). */
+export const CLOCK = /^([01]\d|2[0-3]):([0-5]\d)$/;
 
 export type OpeningDay = { day: string; opens: string; closes: string } | { day: string; closed: true };
 
@@ -105,6 +106,11 @@ export const HOURS = {
   /** "Daily" when every day is the same, otherwise "Hours". */
   compactLabel: uniform ? "Daily" : "Hours",
 };
+
+/** "12:00 PM – 6:00 PM": one day's times in the style of HOURS.display (special hours on a closure day). */
+export function timeRange(opens: string, closes: string) {
+  return FORMAT.long(opens, closes);
+}
 
 /** schema.org openingHoursSpecification: one entry per run of days that share the same times. */
 export function openingHoursSpecification() {
