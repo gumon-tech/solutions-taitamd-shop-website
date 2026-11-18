@@ -5,8 +5,9 @@ import { DAY, londonMidnight, withinWindow } from "./london-day";
 // (KBOT) read the same thing. The agent fetches that file over https, the way it already
 // fetches promotions, so there is no second copy of the vacancy list to drift.
 //
-// Every check below throws, so a malformed or out-of-date file stops `next build` — locally
-// and in CI, before deploy — instead of reaching a page that people apply through.
+// Every shape check below throws, so a malformed file stops `next build` — locally and in CI,
+// before deploy — instead of reaching a page that people apply through. The calendar does not
+// fail the build (see auditCalendar): a closed position is simply left out.
 
 export type VacancyStatus = "live" | "draft" | "closed";
 export type VacancyGroup = "A" | "B" | "C";
@@ -79,7 +80,6 @@ function validate(raw: unknown): Vacancy[] {
 const vacancies = validate(data);
 
 const note: unknown = (data as { note?: unknown }).note;
-export const vacanciesNote: string | undefined = isText(note) ? note : undefined;
 
 /** From midnight at the shop on `posted` until midnight at the end of `closes`. */
 export function vacancyWindow(v: Vacancy): [number, number] {
@@ -98,18 +98,23 @@ export function vacanciesGate(now = Date.now()) {
 }
 
 /**
- * The calendar, which the shape checks above cannot see. A promotion left live past its end
- * date cost three days of an expired offer sitting in the HTML; a vacancy left live past its
- * closing date costs someone an application for a job that is gone, which is worse. Same gate,
- * same reason: it runs at import, so `next build` fails and the message says what to change.
+ * The calendar, which the shape checks above cannot see: a position still marked `live` after
+ * its closing date, and a note left behind once nothing is open. These used to fail `next build`,
+ * which meant that once a closing date passed, every deploy of the site (a promotion from the
+ * shop system included) failed until someone edited this file by hand. The build now leaves such
+ * a position out — openVacancies already filters by date, so the closed job is not in the HTML —
+ * drops the stale note, and prints a warning so the file can still be tidied.
  */
 function auditCalendar(list: Vacancy[], now: number) {
   for (const v of list.filter((x) => x.status === "live" && now >= vacancyWindow(x)[1])) {
-    fail(v.code, `\`status\` is still "live" but the position closed on ${v.closes} — set it to "closed"`);
+    console.warn(`data/vacancies.json: ${v.code}: \`status\` is still "live" but the position closed on ${v.closes}; built as closed`);
   }
   if (isText(note) && !list.some((v) => v.status === "live" && now < vacancyWindow(v)[1])) {
-    fail("(file)", "`note` is still set while nothing is open — take the field out, or send \"\"");
+    console.warn("data/vacancies.json: (file): `note` is still set while nothing is open; not shown");
   }
 }
+
+/** The sentence under the heading, only while at least one position is open. */
+export const vacanciesNote: string | undefined = isText(note) && openVacancies().length > 0 ? note : undefined;
 
 auditCalendar(vacancies, Date.now());
