@@ -2,13 +2,15 @@ import data from "@/data/copy.json";
 import slots from "@/scripts/lib/copy-slots.json";
 import { HOURS } from "./hours";
 import { SITE } from "./site";
-import { failAt } from "./content-check";
+import { checkKeys, checkObject, failAt } from "./content-check";
 
-// Page copy — headings, lead paragraphs, card texts — is a flat map of named slots in
-// data/copy.json (rules and slot list: data/COPY.md). The site declares the slots in
-// scripts/lib/copy-slots.json, each with a kind and a length cap; whoever edits the data may
-// change values only, never add or remove a key. A malformed file throws, which stops
-// `next build`. Layout, colours, links and everything with legal weight stay in code.
+// Page copy — headings, lead paragraphs, card texts — is a flat map of named slots under
+// `slots` in data/copy.json, next to `updated_at` (the same file shape as the other shop site,
+// so the shop system writes both with one piece of code; rules and slot list: data/COPY.md).
+// The site declares the slots in scripts/lib/copy-slots.json, each with a kind and a length
+// cap; whoever edits the data may change values only, never add or remove a key. A malformed
+// file throws, which stops `next build`. Layout, colours, links and everything with legal
+// weight stay in code.
 //
 // Tokens a value may use, replaced here: {{walk_minutes}} (lib/site.ts) and {{hours}}
 // (data/hours.json).
@@ -21,9 +23,13 @@ const SLOTS = slots as Record<string, SlotSpec>;
 
 export type CopyKey = keyof typeof slots;
 
+const UPDATED_AT = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(:\d{2}(\.\d{1,9})?)?Z$/;
+
 function validate(raw: unknown): Record<string, string> {
-  if (typeof raw !== "object" || raw === null || Array.isArray(raw)) failAt(FILE, "(file)", "must be an object of slot keys to text");
-  const o = raw as Record<string, unknown>;
+  const root = checkObject(FILE, "(file)", raw);
+  checkKeys(FILE, "(file)", root, ["updated_at", "slots"]);
+  if (typeof root.updated_at !== "string" || !UPDATED_AT.test(root.updated_at)) failAt(FILE, "updated_at", "must be a UTC time like 2026-11-19T10:00:00Z");
+  const o = checkObject(FILE, "slots", root.slots);
   for (const key of Object.keys(SLOTS)) if (!(key in o)) failAt(FILE, key, "slot is missing (the slot list is scripts/lib/copy-slots.json)");
   for (const key of Object.keys(o)) if (!(key in SLOTS)) failAt(FILE, key, "is not a slot declared in scripts/lib/copy-slots.json (values may change; keys may not)");
   const out: Record<string, string> = {};
