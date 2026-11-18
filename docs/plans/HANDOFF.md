@@ -22,6 +22,15 @@ QR ใหม่สร้างจาก `qrencode`-เทียบเท่า: 
 ```
 เวลาทุกค่าที่เขียนลงไฟล์มาจาก `date -u` เท่านั้น (`stat -f '%Sm'` พิมพ์เวลาเครื่อง +07 ได้วันคนละวัน)
 
+## ล่าสุด 2026-11-18T22:25Z · Q-TWS-055 บอทร้านแก้เนื้อหาเว็บเองได้ (KWEB@air)
+
+- main `10c307e` live · บอทร้าน (shop-agent) เปิด PR จาก `shop-agent/<concern>-<id>` แล้ว `.github/workflows/auto-merge-shop-agent.yml` merge + deploy เอง ไม่มีคนกด
+- concern: promotions hours closures notice faq services copy photos · สัญญาต่อหมวดอยู่ที่ `data/*.md` · กฎ `scripts/lib/shop-agent-diff.mjs` · ทดสอบ `npm run test:shop-agent` (fixture ไม่อ่านข้อมูลจริง)
+- เนื้อหาย้ายออกจากโค้ดแล้ว: `data/hours.json` `closures.json` `notice.json` `faq.json` `services.json` `copy.json` `photos.json` (slot list ที่ `scripts/lib/copy-slots.json` `photo-slots.json` `photo-pool.json` = ห้องนี้แก้เท่านั้น)
+- `out/build.json` (sha + sha256 ต่อไฟล์ data) ให้บอทยืนยันว่าขึ้นจริง · `next build` ลองซ้ำ 3 ครั้งกันฟอนต์ Google สะดุด
+- ⚠️ main ขยับได้จากบอทตลอดเวลา ⇒ `git fetch` ก่อนทำงานทุกครั้ง · งานโค้ดของห้องนี้ยัง push ตรงได้ (ไม่มี ruleset)
+- การ์ดโปรจัดแถวตามจำนวนที่แสดง (`ca68a35`) · ใบ: gumon-workspace `queue/KWS/ack/Q-TWS-055/KWEB@komphet-air.md`
+
 ## สถานะปัจจุบัน (วัด 2026-10-20T20:3xZ · หยุดตามคำสั่งสลับบัญชี Q-KWS-124)
 
 ```
