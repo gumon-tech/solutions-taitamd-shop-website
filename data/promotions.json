@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-18T21:55:23Z",
+  "updated_at": "2026-11-18T22:02:41Z",
   "promotions": [
     {
       "code": "P-SAUNA90",
@@ -56,7 +56,7 @@
       "message": "Hi Taitam-D, I'd like to book with your offer: Massage promotion: 90-minute massage on all massage types.",
       "image": "/images/tour/infrared-sauna.jpg",
       "illustrative": false,
-      "starts": "2026-11-26",
+      "starts": "2026-11-18",
       "ends": "2027-01-31",
       "ends_label": "Sunday 31 January 2027",
       "status": "live"
@@ -71,7 +71,7 @@
       "message": "Hi Taitam-D, I'd like to book with your offer: Book a gel manicure or pedicure, and get your old gel removed for free.",
       "image": "/images/tour/pedicure-spa-chairs.jpg",
       "illustrative": false,
-      "starts": "2026-11-26",
+      "starts": "2026-11-18",
       "ends": "2027-01-31",
       "ends_label": "Sunday 31 January 2027",
       "status": "live"
