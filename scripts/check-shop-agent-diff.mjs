@@ -1,11 +1,12 @@
 // Diff rules for shop-agent pull requests: compares data/<concern>.json on main (HEAD^1) with the merge result (HEAD).
 // Existing entries keep their wording and their place, nothing is removed, new entries go at the end and pass the
-// text rules in scripts/lib/shop-agent-diff.mjs. Run by .github/workflows/auto-merge-shop-agent.yml.
+// text and picture rules in scripts/lib/shop-agent-diff.mjs (pictures are looked up under public/images of the
+// current directory, the repository root). Run by .github/workflows/auto-merge-shop-agent.yml.
 //   node scripts/check-shop-agent-diff.mjs <concern> [beforeFile afterFile]
 // With two files it compares them instead of the two commits (for a local try).
 import { spawnSync } from "node:child_process";
 import { readFileSync } from "node:fs";
-import { checkDiff, CONCERNS } from "./lib/shop-agent-diff.mjs";
+import { checkDiff, CONCERNS, imageFileCheck } from "./lib/shop-agent-diff.mjs";
 
 const [, , concern, beforeFile, afterFile] = process.argv;
 if (!CONCERNS.includes(concern ?? "")) {
@@ -37,7 +38,7 @@ try {
 } catch {
   // No team file means no names to look for.
 }
-const errors = checkDiff(concern, before, after, { staffNames });
+const errors = checkDiff(concern, before, after, { staffNames, isImageFile: imageFileCheck(process.cwd()) });
 if (errors.length) {
   console.error(`${file}: changes the shop system may not make:\n- ` + errors.join("\n- "));
   process.exit(1);

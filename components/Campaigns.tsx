@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { ArrowUpRight, MessageCircle, Sparkles } from "lucide-react";
 import Reveal from "./Reveal";
-import { existsSync } from "node:fs";
+import { statSync } from "node:fs";
 import { join } from "node:path";
 import PromoGate from "./PromoGate";
 import {
@@ -39,8 +39,8 @@ import { buildWhatsAppLink, SOURCE_OFFER, SOURCE_OFFER_ENQUIRY } from "@/lib/wha
 // shipping a broken image to the home page. `image: null` is a text-only card (below).
 function assertImages(list: Promotion[]) {
   for (const p of list) {
-    if (p.image !== null && !existsSync(join(process.cwd(), "public", p.image))) {
-      throw new Error(`data/promotions.json: ${p.code}: image ${p.image} is not in public/`);
+    if (p.image !== null && !statSync(join(process.cwd(), "public", p.image), { throwIfNoEntry: false })?.isFile()) {
+      throw new Error(`data/promotions.json: ${p.code}: image ${p.image} is not a file in public/`);
     }
   }
 }

@@ -68,9 +68,9 @@ jobs:
             .next/cache
           # Generate a new cache whenever packages or source files change.
           key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
-          # If source files changed but packages didn't, rebuild from a prior cache.
-          restore-keys: |
-            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-
+          # Exact key only, no restore-keys: a partial-key restore could pick up a cache entry
+          # saved by another workflow run on a pull request (pull_request_target), so the deploy
+          # starts from its own cache or from nothing.
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
       # Runs before the build so a new orphan stops the deploy rather than shipping and

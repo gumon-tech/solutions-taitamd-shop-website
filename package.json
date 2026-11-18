@@ -8,7 +8,8 @@
     "check:css": "node scripts/check-opacity-classes.mjs",
     "start": "next start",
     "lint": "eslint . --max-warnings=0",
-    "check:assets": "node scripts/check-orphan-assets.mjs"
+    "check:assets": "node scripts/check-orphan-assets.mjs",
+    "test:shop-agent": "node scripts/test-shop-agent-diff.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",

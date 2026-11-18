@@ -6,17 +6,22 @@ name: Merge shop system data changes
 #   2. against main it changes exactly one file, data/<concern>.json (M: not added, renamed or deleted)
 #   3. the site's own checks pass on the merged result: scripts/check-orphan-assets.mjs, next build, npm run lint and
 #      npm run check:css (the same steps the Pages deploy runs, plus lint)
-#   4. scripts/check-shop-agent-diff.mjs passes: wording already on the site is not edited, nothing is removed or
-#      reordered, and every new card passes the text rules (no health claims, no Thai, no staff names, no links, ...)
+#   4. npm run test:shop-agent and scripts/check-shop-agent-diff.mjs pass: wording already on the site is not edited,
+#      nothing is removed or reordered, the note and every new card pass the text rules (no health claims, no links or
+#      bare domains, no phone numbers, English letters only, no invisible characters, ...) and new pictures are real
+#      files under public/images with the same `illustrative` as cards already using them
+#   5. main is still the commit the checks ran against when the merge starts
 # Anything else stays open for a person, and a comment says which stage failed (the shop system reads it and tells
 # the manager). Uses the built-in GITHUB_TOKEN only. Modelled on the same workflow in the Sri Siam site repository.
 #
 # Jobs, so a write token never meets npm:
 #   check  (check run name "site-check") runs for EVERY pull request from a branch in this repository, so a ruleset on
-#          main could require it later. permissions {}: checkout with no stored credentials, npm ci, the checks. For
-#          shop-agent/* it also enforces rules 1, 2 and 4. Rule 2 runs before npm, so the scripts that run are always
+#          main could require it later. permissions {}. For a person's pull request it only prints a line and succeeds:
+#          no checkout, no npm (visual-gate.yml builds those under pull_request). For shop-agent/* it checks out with
+#          no stored credentials and enforces rules 1 to 4. Rule 2 runs before npm, so the scripts that run are always
 #          the ones on main (a shop-agent pull request cannot change a script, a workflow or a page, only its data file).
-#   merge  needs check, only for shop-agent/* pull requests that are not drafts: no checkout, no npm.
+#          It outputs the main commit it checked against (rule 5).
+#   merge  needs check, only for shop-agent/* pull requests that are not drafts: no checkout, no npm. Rule 5 first.
 #   report comments on a failed check of a shop-agent/* pull request.
 #
 # pull_request_target is deliberate: the workflow definition always comes from main, so a pull request cannot edit this
@@ -28,6 +33,7 @@ name: Merge shop system data changes
 #
 # Failure comments carry a marker line the shop system parses:
 #   shop-agent-merge-failed stage=<check|merge|publish> concern=<concern|unknown> sha=<pull request head> run=<url>
+# stage=merge covers both "main moved after the checks" (the comment says so) and "GitHub refused the merge".
 # A run that was replaced by a newer commit on the pull request (the system edits its branch) stays silent.
 on:
   pull_request_target:
@@ -49,11 +55,21 @@ jobs:
     permissions: {}
     outputs:
       concern: ${{ steps.concern.outputs.concern }}
+      base: ${{ steps.files.outputs.base }}
     env:
       SHA: ${{ github.event.pull_request.head.sha }}
       HEAD_REF: ${{ github.event.pull_request.head.ref }}
     steps:
+      # A pull request from a person: none of its code runs here. pull_request_target hands every job a runtime token
+      # that can write to the Actions cache, so running npm ci or next build from an unchecked branch could plant a
+      # cache entry for a later run to restore. visual-gate.yml already builds such pull requests under pull_request.
+      # This job still runs and succeeds, so site-check exists on every pull request.
+      - name: Not a shop-agent pull request, nothing runs here (visual-gate.yml builds it)
+        if: ${{ !startsWith(github.event.pull_request.head.ref, 'shop-agent/') }}
+        run: echo "Not a shop-agent/ branch. This pull request is built and measured by visual-gate.yml."
+
       - uses: actions/checkout@v4
+        if: startsWith(github.event.pull_request.head.ref, 'shop-agent/')
         with:
           ref: refs/pull/${{ github.event.pull_request.number }}/merge
           fetch-depth: 2   # the merge commit and both parents
@@ -84,7 +100,10 @@ jobs:
             exit 1
           fi
 
+      # Also records which main the merge result was built on (HEAD^1), so the merge job can refuse to merge once main
+      # has moved: the checks below only speak for this exact main.
       - name: Rule 2, only the file of this concern changes, and this is the head that was checked
+        id: files
         if: startsWith(github.event.pull_request.head.ref, 'shop-agent/')
         env:
           CONCERN: ${{ steps.concern.outputs.concern }}
@@ -97,24 +116,39 @@ jobs:
             exit 1
           fi
           test "$(git rev-parse HEAD^2)" = "$SHA"
+          base=$(git rev-parse HEAD^1)
+          echo "base=$base" >> "$GITHUB_OUTPUT"
+          echo "main at check time: $base"
 
+      # From here on every script is main's own: rule 2 allowed only the data file to differ.
       - uses: actions/setup-node@v4
+        if: startsWith(github.event.pull_request.head.ref, 'shop-agent/')
         with:
           node-version: "22"
           cache: ""
 
-      - run: npm ci
+      - name: Rule 4, the diff rules pass their own tests
+        if: startsWith(github.event.pull_request.head.ref, 'shop-agent/')
+        run: npm run test:shop-agent
+
+      - name: Install dependencies
+        if: startsWith(github.event.pull_request.head.ref, 'shop-agent/')
+        run: npm ci
 
       - name: Rule 3, no new unreferenced files in public/
+        if: startsWith(github.event.pull_request.head.ref, 'shop-agent/')
         run: node scripts/check-orphan-assets.mjs
 
       - name: Rule 3, build
+        if: startsWith(github.event.pull_request.head.ref, 'shop-agent/')
         run: npx --no-install next build
 
       - name: Rule 3, lint
+        if: startsWith(github.event.pull_request.head.ref, 'shop-agent/')
         run: npm run lint
 
       - name: Rule 3, every opacity utility produced a rule
+        if: startsWith(github.event.pull_request.head.ref, 'shop-agent/')
         run: npm run check:css
 
       - name: Rule 4, wording already on the site is not edited, nothing is removed, new cards pass the text rules
@@ -138,9 +172,30 @@ jobs:
       REPO: ${{ github.repository }}
       PR: ${{ github.event.pull_request.number }}
       SHA: ${{ github.event.pull_request.head.sha }}
+      BASE: ${{ needs.check.outputs.base }}
       CONCERN: ${{ needs.check.outputs.concern }}
       RUN: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
     steps:
+      # --match-head-commit pins the pull request's side of the merge; this pins main's side. If main moved after the
+      # check, the squash would land on a main the checks never saw, so stop and let the shop system rebuild its branch
+      # (its push is a synchronize event, which runs this workflow again).
+      - name: Main is still the one the checks ran against
+        id: base
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if ! main=$(gh api "repos/$REPO/commits/main" --jq .sha); then
+            echo "reason=lookup" >> "$GITHUB_OUTPUT"
+            echo "::error::could not read the current main"
+            exit 1
+          fi
+          echo "checked against $BASE, main is now $main"
+          if [ -z "$BASE" ] || [ "$main" != "$BASE" ]; then
+            echo "reason=moved" >> "$GITHUB_OUTPUT"
+            echo "::error::main moved after the checks ran; not merging"
+            exit 1
+          fi
+
       - name: Merge (squash, only if the head is still the one that was checked)
         id: merge
         env:
@@ -153,14 +208,20 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: gh workflow run nextjs.yml --repo "$REPO" --ref main
 
-      - name: Comment if the merge failed
-        if: failure() && steps.merge.outcome == 'failure'
+      - name: Comment if the merge did not happen
+        if: failure() && (steps.base.outcome == 'failure' || steps.merge.outcome == 'failure')
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REASON: ${{ steps.base.outputs.reason }}
         run: |
           head=$(gh pr view "$PR" --repo "$REPO" --json headRefOid --jq .headRefOid)
           if [ "$head" != "$SHA" ]; then echo "replaced by a newer commit, staying silent"; exit 0; fi
-          gh pr comment "$PR" --repo "$REPO" --body "Automatic merge did not happen: GitHub refused the merge. shop-agent-merge-failed stage=merge concern=${CONCERN:-unknown} sha=$SHA run=$RUN"
+          case "$REASON" in
+            moved)  why="main moved after the checks ran, so the checked result is not what would be merged; rebuilding the branch from the new main runs the checks again" ;;
+            lookup) why="the current main could not be read, so it could not be confirmed that main had not moved" ;;
+            *)      why="GitHub refused the merge" ;;
+          esac
+          gh pr comment "$PR" --repo "$REPO" --body "Automatic merge did not happen: $why. shop-agent-merge-failed stage=merge concern=${CONCERN:-unknown} sha=$SHA run=$RUN"
 
       - name: Comment if starting the site publish failed (the merge itself worked)
         if: failure() && steps.publish.outcome == 'failure'

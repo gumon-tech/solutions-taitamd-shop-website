@@ -35,6 +35,10 @@ export type Promotion = {
 export type PromotionWindow = [number, number];
 
 const STATUSES: PromotionStatus[] = ["live", "draft", "ended"];
+// The same picture rule as scripts/lib/shop-agent-diff.mjs. No dots in folder names, so a path cannot climb out of
+// /images/; components/Campaigns.tsx then checks the file is really there (this module is also imported by a client
+// component, so it cannot read the disk).
+const IMAGE = /^\/images\/[a-z0-9_/-]+\.(jpe?g|png|webp)$/;
 
 function fail(code: string, why: string): never {
   throw new Error(`data/promotions.json: ${code}: ${why}`);
@@ -56,7 +60,9 @@ function validate(raw: unknown): Promotion[] {
       if (!isText(p[key])) fail(code, `\`${key}\` must be non-empty text`);
     }
     if (!Array.isArray(p.points) || !p.points.every(isText)) fail(code, "`points` must be a list of text");
-    if (p.image !== null && (!isText(p.image) || !p.image.startsWith("/images/"))) fail(code, "`image` must be null or a path under /images/");
+    if (p.image !== null && (typeof p.image !== "string" || !IMAGE.test(p.image) || p.image.includes("..") || p.image.includes("//"))) {
+      fail(code, "`image` must be null or a path like /images/tour/name.jpg (lower case, .jpg .png or .webp)");
+    }
     if (typeof p.illustrative !== "boolean") fail(code, "`illustrative` must be true or false");
     if (!STATUSES.includes(p.status as PromotionStatus)) fail(code, `\`status\` must be one of ${STATUSES.join(", ")}`);
     for (const key of ["starts", "ends"]) {
