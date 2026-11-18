@@ -386,6 +386,26 @@ const edit = (x, fn) => {
   noC("faq", "seven paragraphs", F, edit(F, (f) => { f.shop[0].a = ["a", "b", "c", "d", "e", "f", "g"]; }), /1 to 6 paragraphs/);
   noC("faq", "a question over 160 characters", F, edit(F, (f) => { f.shop[0].q = "Where? ".repeat(25); }), /limit 160/);
   noC("faq", "angle brackets", F, edit(F, (f) => { f.shop[0].a = "We are <b>here</b>."; }), /< or >/);
+  // status: "live" (or absent) shows the answer, "hidden" keeps it in the file and off the page.
+  okC("faq", "an existing shop answer hidden", F, edit(F, (f) => { f.shop[0].status = "hidden"; }));
+  okC("faq", "an existing answer marked live explicitly", F, edit(F, (f) => { f.shop[1].status = "live"; }));
+  const H = edit(F, (f) => { f.shop[0].status = "hidden"; });
+  okC("faq", "a hidden answer shown again", H, edit(H, (f) => { f.shop[0].status = "live"; }));
+  okC("faq", "a hidden answer shown again by removing status", H, edit(H, (f) => { delete f.shop[0].status; }));
+  okC("faq", "a hidden answer edited while hidden", H, edit(H, (f) => { f.shop[0].a = "Near King's Cross."; }));
+  okC("faq", "an answer appended hidden", F, edit(F, (f) => f.shop.push({ ...clone(NEW), status: "hidden" })));
+  okC("faq", "an answer appended live", F, edit(F, (f) => f.pages["nails-kings-cross"].push({ ...clone(NEW), status: "live" })));
+  const OWN = edit(F, (f) => f.pages["nails-kings-cross"].push(clone(NEW)));
+  okC("faq", "the system's own appended answer hidden later", OWN, edit(OWN, (f) => { f.pages["nails-kings-cross"][1].status = "hidden"; }));
+  okC("faq", "a page answer hidden while another stays", OWN, edit(OWN, (f) => { f.pages["nails-kings-cross"][0].status = "hidden"; }));
+  noC("faq", "a status other than live or hidden", F, edit(F, (f) => { f.shop[0].status = "draft"; }), /status: must be live or hidden/);
+  noC("faq", "a status that is not text", F, edit(F, (f) => { f.shop[0].status = false; }), /status: must be live or hidden/);
+  noC("faq", "a new answer with a bad status", F, edit(F, (f) => f.shop.push({ ...clone(NEW), status: "ended" })), /status: must be live or hidden/);
+  noC("faq", "every answer of a page hidden", F, edit(F, (f) => { f.pages["nails-kings-cross"][0].status = "hidden"; }), /every answer is hidden/);
+  noC("faq", "every shop answer hidden", F, edit(F, (f) => { f.shop.forEach((e) => { e.status = "hidden"; }); }), /every answer is hidden/);
+  noC("faq", "a status on the massage expectation answer", F, edit(F, (f) => { f.massage_expectation.status = "hidden"; }), /massage_expectation/);
+  noC("faq", "a hidden answer removed", H, edit(H, (f) => f.shop.shift()), /was removed \(set its status to hidden/);
+  noC("faq", "a hidden answer moved", H, edit(H, (f) => f.shop.reverse()), /moved/);
 }
 
 // ---- services: services added, renamed, re-priced or removed inside the existing categories

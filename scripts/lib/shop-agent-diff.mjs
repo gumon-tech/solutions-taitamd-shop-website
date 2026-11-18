@@ -349,31 +349,40 @@ function noticeDiff(before, after, ctx) {
 }
 
 const FAQ_ID = /^[a-z0-9-]{1,60}$/;
+// `status` on a shop or page answer: "live" (the same as no status) or "hidden" (kept in the file, left off the page).
+const FAQ_STATUS = ["live", "hidden"];
 function faqAnswer(at, a, ctx) {
   const paras = typeof a === "string" ? [a] : a;
   if (!Array.isArray(paras) || !paras.length || paras.length > 6) return [`${at}: must be text or a list of 1 to 6 paragraphs`];
   return paras.flatMap((p, i) => textField(paras.length > 1 ? `${at}[${i}]` : at, p, 700, ctx));
 }
+function faqStatus(at, e) {
+  return !("status" in e) || FAQ_STATUS.includes(e.status) ? [] : [`${at}.status: must be live or hidden (or left out, which means live)`];
+}
 function faqList(name, was, now, ctx) {
-  return listDiff(name, was, now, {
+  const out = listDiff(name, was, now, {
     id: "id",
-    mayChange: ["q", "a"],
-    removedHint: "answers are edited or added, never removed by the shop system",
+    mayChange: ["q", "a", "status"],
+    removedHint: "set its status to hidden instead; answers are never removed by the shop system",
     changed: (old, cur, id) => [
       ...(same(old.q, cur.q) ? [] : textField(`${name}.${id}.q`, cur.q, 160, ctx)),
       ...(same(old.a, cur.a) ? [] : faqAnswer(`${name}.${id}.a`, cur.a, ctx)),
+      ...(same(old.status, cur.status) ? [] : faqStatus(`${name}.${id}`, cur)),
     ],
     added: (e) => {
       const at = `${name}.${typeof e?.id === "string" ? e.id : "(new answer)"}`;
       if (!isObj(e)) return [`${at}: must be an object`];
       const out = [];
       if (typeof e.id !== "string" || !FAQ_ID.test(e.id)) out.push(`${at}: id must be lowercase letters, digits and - (1 to 60)`);
-      const extra = Object.keys(e).filter((k) => !["id", "q", "a"].includes(k));
+      const extra = Object.keys(e).filter((k) => !["id", "q", "a", "status"].includes(k));
       if (extra.length) out.push(`${at}: unknown fields ${extra.join(", ")}`);
-      out.push(...textField(`${at}.q`, e.q, 160, ctx), ...faqAnswer(`${at}.a`, e.a, ctx));
+      out.push(...textField(`${at}.q`, e.q, 160, ctx), ...faqAnswer(`${at}.a`, e.a, ctx), ...faqStatus(at, e));
       return out;
     },
   });
+  // lib/faq.ts refuses a list with every answer hidden (an empty panel and an empty FAQPage): taking the last one down is a person's edit.
+  if (Array.isArray(now) && now.length && now.every((e) => e?.status === "hidden")) out.push(`${name}: every answer is hidden; at least one must stay live`);
+  return out;
 }
 function faqDiff(before, after, ctx) {
   const out = [];

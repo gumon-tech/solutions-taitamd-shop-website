@@ -7,7 +7,7 @@ name: Merge shop system data changes
 #   hours      data/hours.json        the whole week (lib/hours.ts holds the rules)
 #   closures   data/closures.json     new closures; status, dates and label of existing ones (never removed)
 #   notice     data/notice.json       the one-line notice, replaced whole (null or one notice)
-#   faq        data/faq.json          questions and answers edited or appended (never removed); not the massage answer
+#   faq        data/faq.json          questions and answers edited, appended or hidden (never removed); not the massage answer
 #   services   data/services.json     services added, renamed, re-priced or removed inside the existing categories
 #   copy       data/copy.json         the value of any slot declared in scripts/lib/copy-slots.json
 #   photos     data/photos.json       src and alt of any slot declared in scripts/lib/photo-slots.json, plus new
