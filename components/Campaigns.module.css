@@ -1,0 +1,110 @@
+/* Promotion cards: a layout that follows however many offers are showing this month.
+ *
+ * The shop system adds and ends offers on its own, so the count changes from month to month and nobody
+ * should have to touch the layout for it. Every rule below counts the cards actually rendered: an offer
+ * outside its dates renders nothing (PromoGate), so it is not counted.
+ *
+ * Desktop works on six columns. A full row is three cards (two columns each). What is left over in the
+ * last row never leaves a gap:
+ *   1 offer          one full-width card, photo beside the text
+ *   2, 5, 8 ...      the last two cards share the last row in halves
+ *   4, 7, 10 ...     the last four cards go two by two
+ *   3, 6, 9 ...      rows of three
+ * The photo is a band of fixed proportion, never taller than 18rem, so the offer's words lead
+ * (a 4:3 picture across half the page was almost 600 px tall).
+ * Tablet works on two columns, and an odd card out takes the whole last row on its side.
+ * Phone: one column, photo 4:3.
+ *
+ * Layout only: no colours here (T11).
+ */
+
+.grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.cell {
+  height: 100%;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.media {
+  aspect-ratio: 4 / 3;
+  flex-shrink: 0;
+}
+
+/* Tablet */
+@media (min-width: 768px) and (max-width: 1023.98px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .media {
+    aspect-ratio: 3 / 2;
+  }
+  .grid > .cell:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+  .grid > .cell:last-child:nth-child(odd) .card {
+    flex-direction: row;
+  }
+  .grid > .cell:last-child:nth-child(odd) .media {
+    aspect-ratio: auto;
+    width: 45%;
+    min-height: 17rem;
+  }
+  .grid > .cell:last-child:nth-child(odd) .body {
+    justify-content: center;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+  .grid > .cell {
+    grid-column: span 2;
+  }
+  .media {
+    aspect-ratio: 3 / 2;
+    max-height: 18rem;
+  }
+
+  /* 2, 5, 8 ... offers: the last two take half a row each */
+  .grid:has(> .cell:first-child:nth-last-child(3n + 2)) > .cell:nth-last-child(-n + 2),
+  /* 4, 7, 10 ... offers: the last four go two by two */
+  .grid:has(> .cell:first-child:nth-last-child(3n + 4)) > .cell:nth-last-child(-n + 4) {
+    grid-column: span 3;
+  }
+  .grid:has(> .cell:first-child:nth-last-child(3n + 2)) > .cell:nth-last-child(-n + 2) .media,
+  .grid:has(> .cell:first-child:nth-last-child(3n + 4)) > .cell:nth-last-child(-n + 4) .media {
+    aspect-ratio: 16 / 7;
+  }
+
+  /* 1 offer: the whole row, photo beside the text */
+  .grid > .cell:only-child {
+    grid-column: 1 / -1;
+  }
+  .grid > .cell:only-child .card {
+    flex-direction: row;
+  }
+  .grid > .cell:only-child .media {
+    aspect-ratio: auto;
+    max-height: none;
+    width: 50%;
+    min-height: 21rem;
+  }
+  .grid > .cell:only-child .body {
+    justify-content: center;
+    padding: 2.5rem;
+  }
+}
+
+/* A visitor whose browser has no :has() (older than 2023) gets rows of three with the same short
+   photos: still tidy, only the last row may be short. */
