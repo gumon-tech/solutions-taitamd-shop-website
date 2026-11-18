@@ -12,6 +12,7 @@ import AcademyPromo from "@/components/AcademyPromo";
 import Campaigns from "@/components/Campaigns";
 import ShopFaq from "@/components/ShopFaq";
 import RoomBand from "@/components/RoomBand";
+import HomeNotice from "@/components/HomeNotice";
 
 // The home page states its own title rather than inheriting `title.default` from the
 // layout (Q-MKT-077). `absolute` is what keeps the layout's "%s — Taitam-D Beauty & Spa"
@@ -30,6 +31,7 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <main className="mx-auto max-w-7xl px-5 md:px-8 pb-14 md:pb-12">
+      <HomeNotice />
       <Hero promotions={promotionsGate()} />
       <Campaigns />
       <LuxeBento />

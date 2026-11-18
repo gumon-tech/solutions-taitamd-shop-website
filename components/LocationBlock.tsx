@@ -1,5 +1,6 @@
 import Reveal from "./Reveal";
 import { SITE } from "@/lib/site";
+import Closures from "./Closures";
 import Image from "next/image";
 import Link from "next/link";
 import { MapPin, TrainFront, Clock3, ArrowUpRight } from "lucide-react";
@@ -24,6 +25,7 @@ export default function LocationBlock() {
               <br />
               <span className="text-ink/90">{SITE.hours}</span>
             </p>
+            <Closures className="mt-3 text-sm text-ink/90" />
 
             {/* Quick facts (fills the “empty” feel without clutter) */}
             <div className="mt-8 md:mt-9 grid gap-3 text-sm">

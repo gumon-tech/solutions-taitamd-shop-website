@@ -1,6 +1,7 @@
 import Reveal from "./Reveal";
 import { SITE } from "@/lib/site";
 import CTA from "./CTA";
+import Closures from "./Closures";
 import FollowUs from "./FollowUs";
 import Image from "next/image";
 import Link from "next/link";
@@ -37,7 +38,7 @@ export default function Contact() {
                 went with them: its only job was making white text legible on the photo. */}
             <div className="relative aspect-[16/9]"><Image src="/images/contact/contact-ritual-gemini.jpg" alt="Calm spa ritual with towels, frangipani and an emerald bowl" fill className="object-cover" priority /></div>
             <div className="px-5 pt-5 md:px-6"><p className="text-[10px] uppercase tracking-[0.25em] text-mist">King’s Cross · London</p><p className="mt-2 text-xl font-semibold md:text-2xl">A calm welcome, {SITE.walkMinutes} minutes from the station.</p></div>
-            <div className="grid gap-3 p-5 sm:grid-cols-2 md:p-6"><div className="rounded-2xl bg-ink/5 p-4"><div className="flex items-center gap-2 text-xs uppercase tracking-[0.18em] text-mist"><MapPin className="h-4 w-4 text-gold" /> Visit us</div><p className="mt-2 text-sm leading-relaxed">{SITE.address}</p><Link href={SITE.social.googleMaps} target="_blank" rel="noreferrer" className="mt-3 inline-flex items-center gap-1 text-xs text-gold underline underline-offset-4">Get directions <ArrowUpRight className="h-3 w-3" /></Link></div><div className="rounded-2xl bg-ink/5 p-4"><div className="flex items-center gap-2 text-xs uppercase tracking-[0.18em] text-mist"><Clock3 className="h-4 w-4 text-gold" /> Open daily</div><p className="mt-2 text-sm leading-relaxed">{SITE.hours}</p><Link href={`tel:${SITE.phone}`} className="mt-3 inline-flex items-center gap-1 text-xs text-gold underline underline-offset-4">Call {SITE.phone} <Phone className="h-3 w-3" /></Link></div></div>
+            <div className="grid gap-3 p-5 sm:grid-cols-2 md:p-6"><div className="rounded-2xl bg-ink/5 p-4"><div className="flex items-center gap-2 text-xs uppercase tracking-[0.18em] text-mist"><MapPin className="h-4 w-4 text-gold" /> Visit us</div><p className="mt-2 text-sm leading-relaxed">{SITE.address}</p><Link href={SITE.social.googleMaps} target="_blank" rel="noreferrer" className="mt-3 inline-flex items-center gap-1 text-xs text-gold underline underline-offset-4">Get directions <ArrowUpRight className="h-3 w-3" /></Link></div><div className="rounded-2xl bg-ink/5 p-4"><div className="flex items-center gap-2 text-xs uppercase tracking-[0.18em] text-mist"><Clock3 className="h-4 w-4 text-gold" /> Open daily</div><p className="mt-2 text-sm leading-relaxed">{SITE.hours}</p><Closures className="mt-2 text-sm leading-relaxed" /><Link href={`tel:${SITE.phone}`} className="mt-3 inline-flex items-center gap-1 text-xs text-gold underline underline-offset-4">Call {SITE.phone} <Phone className="h-3 w-3" /></Link></div></div>
           </div>
         </Reveal>
 
