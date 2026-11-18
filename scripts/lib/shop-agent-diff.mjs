@@ -30,6 +30,7 @@ const WORD_MAX = 24;
 const CODE = /^P-[A-Z0-9]{2,20}$/;
 const UPDATED_AT = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(:\d{2}(\.\d{1,9})?)?Z$/;
 export const IMAGE = /^\/images\/[a-z0-9_/-]+\.(jpe?g|png|webp)$/;
+const TOUR = "/images/tour/"; // photographs of our own premises
 const LINK = /https?:\/\/|www\.|:\/\//i;
 // A domain without a scheme: example.co.uk, bit.ly/x, taitam-d.com. Two forms: a host followed by a path, or a host
 // that ends in a common top-level domain. "dot com" written out counts too.
@@ -126,6 +127,12 @@ function imageProblems(p, beforeList, isImageFile) {
   }
   const out = [];
   if (typeof isImageFile !== "function" || !isImageFile(img)) out.push(`${at}: image ${img} is not a file under public/images`);
+  // Pictures under /images/tour/ are photographs of the shop itself, so either value is honest there (Lead, 2026-11-19).
+  // Anywhere else: as on the cards on main using the same picture, or true for one no card has used yet.
+  if (img.startsWith(TOUR)) {
+    if (typeof p.illustrative !== "boolean") out.push(`${at}: illustrative must be true or false`);
+    return out;
+  }
   const known = new Set(beforeList.filter((e) => e?.image === img).map((e) => e?.illustrative));
   if (known.size ? !known.has(p.illustrative) : p.illustrative !== true) {
     out.push(

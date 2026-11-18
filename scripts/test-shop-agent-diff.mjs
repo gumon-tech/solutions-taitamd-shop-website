@@ -40,7 +40,7 @@ const TLP9 = card({
   detail: "Book a gel manicure or pedicure, and get your old gel removed for free in the same appointment.",
   message: "Hi Taitam-D, I'd like to book with your offer: Book a gel manicure or pedicure, and get your old gel removed for free.",
   image: "/images/tour/pedicure-spa-chairs.jpg",
-  illustrative: true, // no card on main uses this picture yet
+  illustrative: true, // either value: /images/tour/ is our own premises
 });
 const JYDW = card({
   code: "P-JYDW",
@@ -49,7 +49,7 @@ const JYDW = card({
     "Massage promotion: 90-minute massage on all massage types. For any booking of 90 minutes or more, we will include a free 30-minute sauna worth \u{00A3}35.",
   message: "Hi Taitam-D, I'd like to book with your offer: Massage promotion: 90-minute massage on all massage types.",
   image: "/images/tour/infrared-sauna.jpg",
-  illustrative: false, // as P-SAUNA90 on main
+  illustrative: false, // /images/tour/, as P-SAUNA90 on main
 });
 
 let failed = 0;
@@ -126,9 +126,11 @@ no("an image with a query string", withCard(card({ image: "/images/tour/infrared
 no("an image that is not text", withCard(card({ image: 5 })), /image must be/);
 no("an image that does not exist", withCard(card({ image: "/images/tour/no-such-picture.jpg", illustrative: true })), /not a file/);
 no("an image that is a directory", withCard(card({ image: "/images/tour", illustrative: true })), /image must be/);
-no("illustrative true on our own sauna room", withCard({ ...clone(JYDW), illustrative: true }), /illustrative must be false/);
-no("illustrative false on generated artwork", withCard(card({ image: "/images/landing/massage.jpg", illustrative: false })), /illustrative must be true/);
-no("illustrative false on a picture no card has used", withCard({ ...clone(TLP9), illustrative: false }), /illustrative must be true/);
+ok("P-TLP9 with illustrative false (a premises photo under /images/tour/)", withCard({ ...clone(TLP9), illustrative: false }));
+ok("P-JYDW with illustrative true (either value under /images/tour/)", withCard({ ...clone(JYDW), illustrative: true }));
+no("illustrative missing on a /images/tour/ picture", withCard({ ...clone(TLP9), illustrative: "no" }), /illustrative must be true or false/);
+no("illustrative false on /images/landing/massage.jpg (main marks it true)", withCard(card({ image: "/images/landing/massage.jpg", illustrative: false })), /illustrative must be true/);
+no("illustrative false on a non-tour picture no card has used", withCard(card({ image: "/images/landing/nails.jpg", illustrative: false })), /illustrative must be true/);
 test("refuses: every picture when nothing can check the disk", () =>
   assert.ok(checkDiff("promotions", base, withCard(clone(JYDW)), { staffNames: [] }).some((e) => /not a file/.test(e))));
 test("imageFileCheck: a real picture, a directory, a path out of public/images", () => {
