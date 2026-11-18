@@ -58,11 +58,15 @@ jobs:
 
       - name: Build the pull request
         working-directory: pr
-        run: npm ci && npx --no-install next build
+        run: |
+          npm ci
+          for i in 1 2 3; do npx --no-install next build && exit 0; echo "::warning::next build failed (try $i of 3; next/font downloads Google Fonts at build time, a network blip fails it)"; sleep 20; done; exit 1
 
       - name: Build the base branch
         working-directory: base
-        run: npm ci && npx --no-install next build
+        run: |
+          npm ci
+          for i in 1 2 3; do npx --no-install next build && exit 0; echo "::warning::next build failed (try $i of 3; next/font downloads Google Fonts at build time, a network blip fails it)"; sleep 20; done; exit 1
 
       # Static export, so a plain file server is the whole runtime. Trailing-slash routes land
       # on <route>/index.html, which is how the site is served in production too.

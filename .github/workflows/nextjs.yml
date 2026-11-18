@@ -79,7 +79,8 @@ jobs:
       - name: Check for unreferenced files in public/
         run: node scripts/check-orphan-assets.mjs
       - name: Build with Next.js
-        run: ${{ steps.detect-package-manager.outputs.runner }} next build
+        run: |
+          for i in 1 2 3; do ${{ steps.detect-package-manager.outputs.runner }} next build && exit 0; echo "::warning::next build failed (try $i of 3; next/font downloads Google Fonts at build time, a network blip fails it)"; sleep 20; done; exit 1
       # out/build.json: the commit and a sha256 of each data/*.json; the shop system reads it to
       # confirm that a change it merged is live (same fields as the Sri Siam site).
       - name: Write build.json

@@ -141,7 +141,8 @@ jobs:
 
       - name: Rule 3, build
         if: startsWith(github.event.pull_request.head.ref, 'shop-agent/')
-        run: npx --no-install next build
+        run: |
+          for i in 1 2 3; do npx --no-install next build && exit 0; echo "::warning::next build failed (try $i of 3; next/font downloads Google Fonts at build time, a network blip fails it)"; sleep 20; done; exit 1
 
       - name: Rule 3, lint
         if: startsWith(github.event.pull_request.head.ref, 'shop-agent/')
