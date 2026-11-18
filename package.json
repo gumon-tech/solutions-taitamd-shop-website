@@ -9,7 +9,8 @@
     "start": "next start",
     "lint": "eslint . --max-warnings=0",
     "check:assets": "node scripts/check-orphan-assets.mjs",
-    "test:shop-agent": "node scripts/test-shop-agent-diff.mjs"
+    "test:shop-agent": "node scripts/test-shop-agent-diff.mjs",
+    "build:json": "node scripts/write-build-json.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",

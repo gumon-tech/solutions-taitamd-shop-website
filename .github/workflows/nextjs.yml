@@ -80,6 +80,10 @@ jobs:
         run: node scripts/check-orphan-assets.mjs
       - name: Build with Next.js
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
+      # out/build.json: the commit and a sha256 of each data/*.json; the shop system reads it to
+      # confirm that a change it merged is live (same fields as the Sri Siam site).
+      - name: Write build.json
+        run: node scripts/write-build-json.mjs
       # After the build, because it compares the classes in the source against the stylesheet
       # the build actually produced. Tailwind makes opacity modifiers from a scale in steps of
       # five and emits nothing at all for a value off it — no error, no warning, and a page

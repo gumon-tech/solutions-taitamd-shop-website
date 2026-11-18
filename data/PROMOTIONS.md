@@ -75,6 +75,12 @@
 สำหรับ PR ของคน ด่าน `site-check` ใน workflow นี้ไม่รันโค้ดของ PR เลย (กันการวางแคชผ่าน `pull_request_target`) ผ่านเองทันที
 ส่วนการ build และวัดผลของ PR คนอยู่ที่ `visual-gate.yml` ตามเดิม
 
+## build.json
+
+หลัง `next build` workflow deploy (`nextjs.yml`) เขียน `out/build.json` ด้วย `scripts/write-build-json.mjs` (`npm run build:json`)
+`{ "sha": commit ที่ build, "built_at": เวลา UTC, "data": { "<ชื่อไฟล์>": sha256 ของ data/<ชื่อไฟล์>.json } }` ช่องชื่อเดียวกับเว็บ Sri Siam
+ระบบร้านอ่าน `https://taitam-d.com/build.json` เพื่อยืนยันว่าสิ่งที่ merge ขึ้นเว็บจริงแล้ว (sha ตรงกับ merge commit หรือ hash ของไฟล์ตรง)
+
 ## ด่านปฏิทิน
 
 เรื่องที่ขึ้นกับวันที่ **ไม่ทำให้ `next build` ล้ม** เพราะถ้าล้ม เวลาที่ผ่านไปเฉย ๆ จะทำให้ deploy ทุกอย่างติด
