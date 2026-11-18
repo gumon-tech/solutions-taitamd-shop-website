@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { copyText } from "@/lib/copy";
 import { SERVICE_CATEGORIES } from "@/lib/site";
 import Reveal from "./Reveal";
 import { ArrowRight } from "lucide-react";
@@ -40,9 +41,9 @@ export default function ServicesPreview() {
       <Reveal>
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
           <div>
-            <p className="text-xs tracking-[0.28em] uppercase text-ink">Service menu</p>
+            <p className="text-xs tracking-[0.28em] uppercase text-ink">{copyText("home.services.eyebrow")}</p>
             <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-[-0.01em] text-ink leading-tight">
-              Thai massage, facials, nails and <span className="text-gold">waxing</span>
+              {`${copyText("home.services.h2")} `}<span className="text-gold">{copyText("home.services.h2_accent")}</span>
             </h2>
           </div>
           <Link

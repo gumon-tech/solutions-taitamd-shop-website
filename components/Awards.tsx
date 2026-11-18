@@ -1,4 +1,5 @@
 import Reveal from "./Reveal";
+import { copyText } from "@/lib/copy";
 
 /**
  * One of the two light bands phase 3 puts on the home page (Q-SHOP-033, ruled by WS).
@@ -31,12 +32,12 @@ export default function Awards() {
               ground, where they read as depth. Over cream they read as a stain, so they are
               gone rather than recoloured — the panel does not need them to have a shape. */}
           <div className="relative">
-            <p className="text-xs tracking-[0.28em] uppercase text-[#6d5223]">Social proof</p>
+            <p className="text-xs tracking-[0.28em] uppercase text-[#6d5223]">{copyText("home.awards.eyebrow")}</p>
             <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-[-0.01em] text-[#183b2d] leading-tight">
-              Loved by thousands — <span className="text-[#6d5223]">earned</span>, not claimed.
+              {`${copyText("home.awards.h2")} `}<span className="text-[#6d5223]">{copyText("home.awards.h2_accent")}</span>{copyText("home.awards.h2_end")}
             </h2>
             <p className="mt-4 text-sm md:text-base text-[#2c4a3c] max-w-2xl">
-              A founder-led Thai beauty and wellness destination, open every day in the heart of King’s Cross.
+              {copyText("home.awards.lead")}
             </p>
 
             <div className="mt-10 md:mt-11 grid sm:grid-cols-2 lg:grid-cols-4 gap-3">

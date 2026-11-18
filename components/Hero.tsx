@@ -1,6 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import { copyText } from "@/lib/copy";
+import { photo } from "@/lib/photos";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import PromoGate from "./PromoGate";
@@ -10,6 +12,8 @@ import { SITE } from "@/lib/site";
 import { HOURS } from "@/lib/hours";
 import Reveal from "./Reveal";
 import { buildWhatsAppLink, SOURCE_HOME } from "@/lib/whatsapp";
+
+const heroPhoto = photo("home.hero");
 
 // `promotions` comes from the home page (a server component), so the link's state at build time
 // matches the HTML; PromoGate re-checks it on the visitor's clock.
@@ -25,22 +29,21 @@ export default function Hero({ promotions }: { promotions: { windows: PromotionW
       <div className="grid lg:grid-cols-12 gap-10 items-start">
         <div className="lg:col-span-7">
           <Reveal>
-            <p className="ui-kicker">King’s Cross • London</p>
+            <p className="ui-kicker">{copyText("home.hero.kicker")}</p>
             {/* The H1 names the treatment and the place because that is the phrase people
                 search (Q-MKT-077). The previous line, "Luxury Thai-inspired beauty &
                 wellness", read well and said neither. The gold span keeps the visual
                 rhythm the design had, moved onto the words that now carry the meaning. */}
             <h1 className="ui-h1">
-              Thai massage and beauty in{" "}
+              {copyText("home.hero.h1")}{" "}
               {/* nowrap because the line broke between "King's" and "Cross" at 1440 wide,
                   splitting the one phrase this heading exists to say. CSS, not a
                   non-breaking character — D-W10 was the reverse mistake, a U+2011 baked
                   into the brand string that then travelled into <title> and JSON-LD. */}
-              <span className="text-gold whitespace-nowrap">King’s Cross</span>
+              <span className="text-gold whitespace-nowrap">{copyText("home.hero.h1_accent")}</span>
             </h1>
             <p className="ui-lead">
-              A calm oasis in King’s Cross — massage, hair, nails, waxing and facials. Thoughtful technique, gentle atmosphere.
-              Message us on WhatsApp and we’ll help you find the right treatment.
+              {copyText("home.hero.lead")}
             </p>
           </Reveal>
 
@@ -121,16 +124,16 @@ export default function Hero({ promotions }: { promotions: { windows: PromotionW
                     and takes the type off it entirely (Q-SHOP-033 phase 3, ruled by WS
                     2026-09-11: fix the card before the cream sections). */}
                 <div className="relative h-44 md:h-52">
-                  <Image src="/images/hero/taitamd-hero-thai-massage.jpg" alt="Therapist pressing both palms into a client's upper back during a Thai massage" fill priority className="object-cover" />
+                  <Image src={heroPhoto.src} alt={heroPhoto.alt} fill priority className="object-cover" />
                   <div className="absolute inset-0 bg-[radial-gradient(700px_420px_at_20%_10%,rgba(200,176,124,0.16),rgba(0,0,0,0)),radial-gradient(600px_420px_at_85%_25%,rgba(127,155,82,0.12),rgba(0,0,0,0)),linear-gradient(135deg,rgba(15,51,20,0.34),rgba(11,42,16,0.16))]" />
                 </div>
                 <div className="bg-[#f5efe3] p-6 md:p-7">
-                  <div className="text-xs tracking-[0.32em] uppercase text-[#6d5223]">Signature experience</div>
+                  <div className="text-xs tracking-[0.32em] uppercase text-[#6d5223]">{copyText("home.hero.card_eyebrow")}</div>
                   <div className="mt-3 text-2xl font-semibold leading-tight text-[#183b2d]">
-                    Deep relief, soft luxury.
+                    {copyText("home.hero.card_title")}
                   </div>
                   <p className="mt-3 text-sm text-[#2c4a3c] leading-relaxed">
-                    Thai + Deep Tissue + Aromatherapy blends — tailored to your body. Clean, modern interiors inspired by Thai tradition.
+                    {copyText("home.hero.card_text")}
                   </p>
 
                   {/* This card has said "Signature experience" since long before the

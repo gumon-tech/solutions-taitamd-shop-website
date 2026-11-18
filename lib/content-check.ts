@@ -68,7 +68,7 @@ export function checkUnique(file: string, where: string, seen: Set<string>, id: 
 }
 
 /** Every image path a validated file names, for the server-side existence check. */
-export const contentImages: Array<{ file: string; where: string; path: string }> = [];
-export function registerImage(file: string, where: string, path: string) {
-  contentImages.push({ file, where, path });
+export const contentImages: Array<{ file: string; where: string; path: string; maxBytes?: number }> = [];
+export function registerImage(file: string, where: string, path: string, maxBytes?: number) {
+  contentImages.push({ file, where, path, maxBytes });
 }

@@ -1,0 +1,282 @@
+{
+  "home.hero.kicker": {
+    "kind": "line",
+    "max": 40
+  },
+  "home.hero.h1": {
+    "kind": "line",
+    "max": 50
+  },
+  "home.hero.h1_accent": {
+    "kind": "line",
+    "max": 40
+  },
+  "home.hero.lead": {
+    "kind": "paragraph",
+    "max": 300
+  },
+  "home.hero.card_eyebrow": {
+    "kind": "line",
+    "max": 40
+  },
+  "home.hero.card_title": {
+    "kind": "line",
+    "max": 40
+  },
+  "home.hero.card_text": {
+    "kind": "paragraph",
+    "max": 200
+  },
+  "home.campaigns.eyebrow": {
+    "kind": "line",
+    "max": 40
+  },
+  "home.campaigns.h2": {
+    "kind": "line",
+    "max": 40
+  },
+  "home.campaigns.h2_accent": {
+    "kind": "line",
+    "max": 40
+  },
+  "home.campaigns.lead": {
+    "kind": "paragraph",
+    "max": 200
+  },
+  "home.bento.eyebrow": {
+    "kind": "line",
+    "max": 40
+  },
+  "home.bento.h2": {
+    "kind": "line",
+    "max": 40
+  },
+  "home.bento.h2_accent": {
+    "kind": "line",
+    "max": 40
+  },
+  "home.bento.lead": {
+    "kind": "paragraph",
+    "max": 150
+  },
+  "home.bento.1.title": {
+    "kind": "line",
+    "max": 50
+  },
+  "home.bento.1.desc": {
+    "kind": "paragraph",
+    "max": 150
+  },
+  "home.bento.2.title": {
+    "kind": "line",
+    "max": 50
+  },
+  "home.bento.2.desc": {
+    "kind": "paragraph",
+    "max": 100
+  },
+  "home.bento.3.title": {
+    "kind": "line",
+    "max": 40
+  },
+  "home.bento.3.desc": {
+    "kind": "paragraph",
+    "max": 100
+  },
+  "home.bento.4.title": {
+    "kind": "line",
+    "max": 50
+  },
+  "home.bento.4.desc": {
+    "kind": "paragraph",
+    "max": 100
+  },
+  "home.bento.5.title": {
+    "kind": "line",
+    "max": 50
+  },
+  "home.bento.5.desc": {
+    "kind": "paragraph",
+    "max": 100
+  },
+  "home.bento.6.title": {
+    "kind": "line",
+    "max": 50
+  },
+  "home.bento.6.desc": {
+    "kind": "paragraph",
+    "max": 100
+  },
+  "home.services.eyebrow": {
+    "kind": "line",
+    "max": 40
+  },
+  "home.services.h2": {
+    "kind": "line",
+    "max": 60
+  },
+  "home.services.h2_accent": {
+    "kind": "line",
+    "max": 40
+  },
+  "home.roomband.eyebrow": {
+    "kind": "line",
+    "max": 40
+  },
+  "home.roomband.h2": {
+    "kind": "line",
+    "max": 40
+  },
+  "home.roomband.h2_accent": {
+    "kind": "line",
+    "max": 40
+  },
+  "home.roomband.lead": {
+    "kind": "paragraph",
+    "max": 250
+  },
+  "home.gallery.eyebrow": {
+    "kind": "line",
+    "max": 40
+  },
+  "home.gallery.h2": {
+    "kind": "line",
+    "max": 50
+  },
+  "home.gallery.h2_accent": {
+    "kind": "line",
+    "max": 40
+  },
+  "home.gallery.lead": {
+    "kind": "paragraph",
+    "max": 200
+  },
+  "home.gallery.1.kicker": {
+    "kind": "line",
+    "max": 40
+  },
+  "home.gallery.1.title": {
+    "kind": "line",
+    "max": 60
+  },
+  "home.gallery.2.kicker": {
+    "kind": "line",
+    "max": 40
+  },
+  "home.gallery.2.title": {
+    "kind": "line",
+    "max": 70
+  },
+  "home.gallery.3.kicker": {
+    "kind": "line",
+    "max": 40
+  },
+  "home.gallery.3.title": {
+    "kind": "line",
+    "max": 70
+  },
+  "home.gallery.4.kicker": {
+    "kind": "line",
+    "max": 40
+  },
+  "home.gallery.4.title": {
+    "kind": "line",
+    "max": 60
+  },
+  "home.gallery.5.kicker": {
+    "kind": "line",
+    "max": 40
+  },
+  "home.gallery.5.title": {
+    "kind": "line",
+    "max": 80
+  },
+  "home.gallery.6.kicker": {
+    "kind": "line",
+    "max": 40
+  },
+  "home.gallery.6.title": {
+    "kind": "line",
+    "max": 80
+  },
+  "home.awards.eyebrow": {
+    "kind": "line",
+    "max": 40
+  },
+  "home.awards.h2": {
+    "kind": "line",
+    "max": 40
+  },
+  "home.awards.h2_accent": {
+    "kind": "line",
+    "max": 40
+  },
+  "home.awards.h2_end": {
+    "kind": "line",
+    "max": 40
+  },
+  "home.awards.lead": {
+    "kind": "paragraph",
+    "max": 200
+  },
+  "home.location.eyebrow": {
+    "kind": "line",
+    "max": 40
+  },
+  "home.location.h2": {
+    "kind": "line",
+    "max": 50
+  },
+  "home.location.h2_accent": {
+    "kind": "line",
+    "max": 40
+  },
+  "home.cta.eyebrow": {
+    "kind": "line",
+    "max": 40
+  },
+  "home.cta.h2": {
+    "kind": "line",
+    "max": 40
+  },
+  "home.cta.h2_accent": {
+    "kind": "line",
+    "max": 40
+  },
+  "home.cta.lead": {
+    "kind": "paragraph",
+    "max": 150
+  },
+  "contact.hero.eyebrow": {
+    "kind": "line",
+    "max": 40
+  },
+  "contact.hero.h1": {
+    "kind": "line",
+    "max": 40
+  },
+  "contact.hero.h1_accent": {
+    "kind": "line",
+    "max": 40
+  },
+  "contact.hero.lead": {
+    "kind": "paragraph",
+    "max": 250
+  },
+  "book.hero.eyebrow": {
+    "kind": "line",
+    "max": 40
+  },
+  "book.hero.h1": {
+    "kind": "line",
+    "max": 40
+  },
+  "book.hero.h1_accent": {
+    "kind": "line",
+    "max": 40
+  },
+  "book.hero.lead": {
+    "kind": "paragraph",
+    "max": 250
+  }
+}

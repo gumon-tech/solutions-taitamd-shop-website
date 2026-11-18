@@ -1,0 +1,44 @@
+{
+  "slots": {
+    "home.hero": {
+      "src": "/images/hero/taitamd-hero-thai-massage.jpg",
+      "alt": "Therapist pressing both palms into a client's upper back during a Thai massage"
+    },
+    "home.roomband.1": {
+      "src": "/images/tour/band/treatment-room-wood-warm.jpg",
+      "alt": "A treatment room at Taitam-D, lit low and lined with warm wood"
+    },
+    "home.roomband.2": {
+      "src": "/images/tour/band/treatment-room-forest-mural.jpg",
+      "alt": "A treatment room at Taitam-D with a lit bamboo mural along the wall"
+    },
+    "home.roomband.3": {
+      "src": "/images/tour/band/thai-room-twin-beds.jpg",
+      "alt": "The couples room at Taitam-D, two beds dressed with Thai runners"
+    },
+    "home.gallery.1": {
+      "src": "/images/gallery/massage-1600x900.jpg",
+      "alt": "Massage treatment"
+    },
+    "home.gallery.2": {
+      "src": "/images/gallery/academy-tools-1200x800.jpg",
+      "alt": "Professional tools and hygiene standards"
+    },
+    "home.gallery.3": {
+      "src": "/images/gallery/spa-1200x800.jpg",
+      "alt": "Spa atmosphere"
+    },
+    "home.gallery.4": {
+      "src": "/images/gallery/brow-1200x800.jpg",
+      "alt": "Brow & beauty detail"
+    },
+    "home.gallery.5": {
+      "src": "/images/gallery/our-story-1200x800.jpg",
+      "alt": "Inside Taitam-D — calm, curated space"
+    },
+    "home.gallery.6": {
+      "src": "/images/gallery/giftcard-1200x800.jpg",
+      "alt": "Gift card"
+    }
+  }
+}

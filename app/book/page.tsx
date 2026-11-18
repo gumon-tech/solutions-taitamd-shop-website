@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { copyText } from "@/lib/copy";
 import { ArrowUpRight, MessageCircle } from "lucide-react";
 import { SITE } from "@/lib/site";
 import { HOURS } from "@/lib/hours";
@@ -31,9 +32,9 @@ export default function BookPage() {
         <div className="overflow-hidden rounded-[32px] border border-[#d6c198] bg-[#f5efe3] text-[#183b2d] shadow-[0_24px_60px_rgba(12,51,30,0.22)]">
           <div className="grid lg:grid-cols-[1fr_390px]">
             <div className="p-7 md:p-12">
-              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#6d5223]">WhatsApp booking</p>
-              <h1 className="mt-4 max-w-2xl text-4xl font-semibold leading-[1.02] tracking-[-0.04em] md:text-6xl">Book a little <span className="text-[#a37d37]">time for you.</span></h1>
-              <p className="mt-5 max-w-xl text-sm leading-relaxed text-[#5b6d62] md:text-base">Message Taitam-D directly for availability, treatment advice and our current comeback offers. We’ll help you find the right ritual and time.</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#6d5223]">{copyText("book.hero.eyebrow")}</p>
+              <h1 className="mt-4 max-w-2xl text-4xl font-semibold leading-[1.02] tracking-[-0.04em] md:text-6xl">{`${copyText("book.hero.h1")} `}<span className="text-[#a37d37]">{copyText("book.hero.h1_accent")}</span></h1>
+              <p className="mt-5 max-w-xl text-sm leading-relaxed text-[#5b6d62] md:text-base">{copyText("book.hero.lead")}</p>
               {/*
                 Both buttons carry a letter now (Q-MKT-064, second ruling). They still
                 differ in what they promise: the right one sends a finished request, the

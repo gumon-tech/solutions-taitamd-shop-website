@@ -1,0 +1,32 @@
+{
+  "home.hero": {
+    "alt_max": 160
+  },
+  "home.roomband.1": {
+    "alt_max": 160
+  },
+  "home.roomband.2": {
+    "alt_max": 160
+  },
+  "home.roomband.3": {
+    "alt_max": 160
+  },
+  "home.gallery.1": {
+    "alt_max": 160
+  },
+  "home.gallery.2": {
+    "alt_max": 160
+  },
+  "home.gallery.3": {
+    "alt_max": 160
+  },
+  "home.gallery.4": {
+    "alt_max": 160
+  },
+  "home.gallery.5": {
+    "alt_max": 160
+  },
+  "home.gallery.6": {
+    "alt_max": 160
+  }
+}

@@ -1,4 +1,5 @@
 import Reveal from "./Reveal";
+import { copyText } from "@/lib/copy";
 import { SITE } from "@/lib/site";
 import Closures from "./Closures";
 import Image from "next/image";
@@ -15,9 +16,9 @@ export default function LocationBlock() {
         <div className="grid lg:grid-cols-12 gap-6 items-stretch">
           {/* LEFT: info card */}
           <div className="lg:col-span-5 glass rounded-[28px] p-7 md:p-9">
-            <p className="text-xs tracking-[0.28em] uppercase text-ink">Location</p>
+            <p className="text-xs tracking-[0.28em] uppercase text-ink">{copyText("home.location.eyebrow")}</p>
             <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-[-0.01em] text-ink leading-tight">
-              {SITE.walkMinutes} minutes from <span className="text-gold">King’s Cross station</span>
+              {`${copyText("home.location.h2")} `}<span className="text-gold">{copyText("home.location.h2_accent")}</span>
             </h2>
 
             <p className="mt-4 text-sm md:text-base text-mist leading-relaxed">

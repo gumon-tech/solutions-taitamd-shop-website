@@ -1,4 +1,5 @@
 import Reveal from "./Reveal";
+import { copyText } from "@/lib/copy";
 import { SITE } from "@/lib/site";
 import CTA from "./CTA";
 import Closures from "./Closures";
@@ -21,7 +22,7 @@ export default function Contact() {
     <section className="pt-8 md:pt-10">
       <Reveal>
         <div className="grid items-end gap-6 lg:grid-cols-[1fr_360px]">
-          <div><p className="text-xs uppercase tracking-[0.28em] text-mist">Contact Taitam-D</p><h1 className="mt-3 max-w-3xl text-4xl font-semibold leading-[1.02] md:text-6xl">Make time for your <span className="text-gold">reset.</span></h1><p className="mt-5 max-w-2xl text-sm leading-relaxed text-mist md:text-base">Tell us what you need, and our team will help you choose the right treatment and time. WhatsApp is the quickest way to reach us.</p></div>
+          <div><p className="text-xs uppercase tracking-[0.28em] text-mist">{copyText("contact.hero.eyebrow")}</p><h1 className="mt-3 max-w-3xl text-4xl font-semibold leading-[1.02] md:text-6xl">{`${copyText("contact.hero.h1")} `}<span className="text-gold">{copyText("contact.hero.h1_accent")}</span></h1><p className="mt-5 max-w-2xl text-sm leading-relaxed text-mist md:text-base">{copyText("contact.hero.lead")}</p></div>
           <a href={buildOpenChatLink(OPEN_CHAT_MESSAGE.contactHeader, SOURCE_CONTACT_OPEN_CHAT)} target="_blank" rel="noreferrer" className="btn-shine inline-flex items-center justify-center gap-2 rounded-2xl px-5 py-3.5 text-sm font-semibold"><MessageCircle className="h-4 w-4" /> Start on WhatsApp <ArrowUpRight className="h-4 w-4" /></a>
         </div>
         <div className="mt-6"><FollowUs /></div>

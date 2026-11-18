@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { copyText } from "@/lib/copy";
+import { photo } from "@/lib/photos";
 import { ArrowUpRight } from "lucide-react";
 
 /**
@@ -20,24 +22,19 @@ import { ArrowUpRight } from "lucide-react";
 // like but sits badly beside a green and gold page when it is a wall of cyan. These three
 // carry the real character without fighting the palette: warm wood, a green mural, and the
 // couples room with its Thai runner, which also happens to be a treatment worth showing.
-const SHOTS = [
-  { src: "/images/tour/band/treatment-room-wood-warm.jpg", alt: "A treatment room at Taitam-D, lit low and lined with warm wood" },
-  { src: "/images/tour/band/treatment-room-forest-mural.jpg", alt: "A treatment room at Taitam-D with a lit bamboo mural along the wall" },
-  { src: "/images/tour/band/thai-room-twin-beds.jpg", alt: "The couples room at Taitam-D, two beds dressed with Thai runners" },
-];
+const SHOTS = [photo("home.roomband.1"), photo("home.roomband.2"), photo("home.roomband.3")];
 
 export default function RoomBand() {
   return (
     <section className="ui-section" aria-labelledby="rooms-band">
       <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
         <div>
-          <p className="text-xs tracking-[0.28em] uppercase text-ink">Inside the shop</p>
+          <p className="text-xs tracking-[0.28em] uppercase text-ink">{copyText("home.roomband.eyebrow")}</p>
           <h2 id="rooms-band" className="mt-3 text-3xl md:text-5xl font-bold tracking-[-0.01em] leading-tight">
-            These are our <span className="text-gold">rooms</span>
+            {`${copyText("home.roomband.h2")} `}<span className="text-gold">{copyText("home.roomband.h2_accent")}</span>
           </h2>
           <p className="mt-4 max-w-prose text-ink/80">
-            Photographed room by room, in the order you meet them walking in. You cannot see in
-            from the pavement, so we would rather you saw it here first.
+            {copyText("home.roomband.lead")}
           </p>
         </div>
         <Link

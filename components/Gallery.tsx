@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { copyText } from "@/lib/copy";
+import { photo } from "@/lib/photos";
 import { motion } from "framer-motion";
 import Reveal from "./Reveal";
 import { SITE } from "@/lib/site";
@@ -22,54 +24,54 @@ const TILES: Tile[] = [
   // Row 1: 7 | 5
   {
     variant: "hero",
-    src: "/images/gallery/massage-1600x900.jpg",
-    alt: "Massage treatment",
-    kicker: "Massage",
-    title: "Deep relief — tailored to your body.",
+    src: photo("home.gallery.1").src,
+    alt: photo("home.gallery.1").alt,
+    kicker: copyText("home.gallery.1.kicker"),
+    title: copyText("home.gallery.1.title"),
     href: "/services",
   },
   {
     variant: "a",
-    src: "/images/gallery/academy-tools-1200x800.jpg",
-    alt: "Professional tools and hygiene standards",
-    kicker: "Standards",
-    title: "Hygiene-first practice, curated tools.",
+    src: photo("home.gallery.2").src,
+    alt: photo("home.gallery.2").alt,
+    kicker: copyText("home.gallery.2.kicker"),
+    title: copyText("home.gallery.2.title"),
     href: "/story",
   },
 
   // Row 2: 5 | 7
   {
     variant: "b",
-    src: "/images/gallery/spa-1200x800.jpg",
-    alt: "Spa atmosphere",
-    kicker: "Atmosphere",
-    title: "Quiet, warm, intentional — a calm oasis.",
+    src: photo("home.gallery.3").src,
+    alt: photo("home.gallery.3").alt,
+    kicker: copyText("home.gallery.3.kicker"),
+    title: copyText("home.gallery.3.title"),
     href: "/story",
   },
   {
     variant: "c",
-    src: "/images/gallery/brow-1200x800.jpg",
-    alt: "Brow & beauty detail",
-    kicker: "Beauty",
-    title: "Clean technique. Precise finishing.",
+    src: photo("home.gallery.4").src,
+    alt: photo("home.gallery.4").alt,
+    kicker: copyText("home.gallery.4.kicker"),
+    title: copyText("home.gallery.4.title"),
     href: "/services",
   },
 
   // Row 3: 6 | 6  (close story, then close action)
   {
     variant: "e",
-    src: "/images/gallery/our-story-1200x800.jpg",
-    alt: "Inside Taitam-D — calm, curated space",
-    kicker: "Our Story",
-    title: "Rooted in Thai tradition — refined in London.",
+    src: photo("home.gallery.5").src,
+    alt: photo("home.gallery.5").alt,
+    kicker: copyText("home.gallery.5.kicker"),
+    title: copyText("home.gallery.5.title"),
     href: "/story",
   },
   {
     variant: "d",
-    src: "/images/gallery/giftcard-1200x800.jpg",
-    alt: "Gift card",
-    kicker: "Gift Card",
-    title: "Personalised via WhatsApp — ready in minutes.",
+    src: photo("home.gallery.6").src,
+    alt: photo("home.gallery.6").alt,
+    kicker: copyText("home.gallery.6.kicker"),
+    title: copyText("home.gallery.6.title"),
     href: buildWhatsAppLink(SITE.whatsappTemplates.giftCard, SOURCE_GIFT),
     external: true,
   },
@@ -128,12 +130,12 @@ export default function Gallery() {
       <Reveal>
         <div className="flex items-end justify-between gap-6">
           <div>
-            <p className="text-xs tracking-[0.28em] uppercase text-ink">Inside Taitam-D</p>
+            <p className="text-xs tracking-[0.28em] uppercase text-ink">{copyText("home.gallery.eyebrow")}</p>
             <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-[-0.01em] text-ink leading-tight">
-              Lash extensions, brows and the <span className="text-gold">infrared sauna</span>
+              {`${copyText("home.gallery.h2")} `}<span className="text-gold">{copyText("home.gallery.h2_accent")}</span>
             </h2>
             <p className="mt-4 text-sm md:text-base text-mist max-w-2xl">
-              A few real moments — clean technique, soft lighting, and the details that make you feel taken care of.
+              {copyText("home.gallery.lead")}
             </p>
           </div>
         </div>
@@ -141,7 +143,7 @@ export default function Gallery() {
         <div className="mt-10 md:mt-12 grid md:grid-cols-12 gap-3">
           {TILES.map((t, i) => (
             <motion.div
-              key={t.src}
+              key={t.variant}
               initial={{ opacity: 0, y: 14 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { copyText } from "@/lib/copy";
 import { ArrowUpRight, MessageCircle, Sparkles } from "lucide-react";
 import Reveal from "./Reveal";
 import { statSync } from "node:fs";
@@ -58,9 +59,9 @@ export default function Campaigns() {
         <div className="rounded-[32px] border border-gold/25 bg-[#f4eee2] p-6 text-[#19392a] shadow-[0_24px_60px_rgba(12,51,30,0.2)] md:p-8">
           <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <div className="max-w-2xl">
-              <div className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.28em] text-[#6d5223]"><Sparkles className="h-4 w-4" /> Current promotions</div>
-              <h2 className="mt-3 text-3xl font-semibold leading-tight tracking-[-0.03em] md:text-5xl">A better reason to <span className="text-[#a07b38]">come back.</span></h2>
-              <p className="mt-4 text-sm leading-relaxed text-[#53665a] md:text-base">Freshly made offers for the reopening season. Pick a ritual, then message us on WhatsApp and we’ll find a time for you.</p>
+              <div className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.28em] text-[#6d5223]"><Sparkles className="h-4 w-4" /> {copyText("home.campaigns.eyebrow")}</div>
+              <h2 className="mt-3 text-3xl font-semibold leading-tight tracking-[-0.03em] md:text-5xl">{`${copyText("home.campaigns.h2")} `}<span className="text-[#a07b38]">{copyText("home.campaigns.h2_accent")}</span></h2>
+              <p className="mt-4 text-sm leading-relaxed text-[#53665a] md:text-base">{copyText("home.campaigns.lead")}</p>
               {promotionsNote && <p className="mt-3 text-sm font-semibold leading-relaxed text-[#284b39]">{promotionsNote}</p>}
             </div>
             <a href={buildWhatsAppLink(

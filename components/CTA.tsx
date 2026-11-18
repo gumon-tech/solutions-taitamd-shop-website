@@ -1,4 +1,5 @@
 import Reveal from "./Reveal";
+import { copyText } from "@/lib/copy";
 import { buildWhatsAppLink, SOURCE_CTA, SOURCE_GIFT } from "@/lib/whatsapp";
 import { ArrowUpRight } from "lucide-react";
 import { SITE } from "@/lib/site";
@@ -12,13 +13,13 @@ export default function CTA() {
           <div className="relative grid md:grid-cols-12 gap-6 items-center">
             <div className="md:col-span-7">
               <p className="text-xs tracking-[0.28em] uppercase text-ink">
-                Ready
+                {copyText("home.cta.eyebrow")}
               </p>
               <h2 className="mt-3 text-3xl md:text-5xl font-semibold leading-tight">
-                Book a treatment in <span className="text-gold">King&rsquo;s Cross</span>
+                {`${copyText("home.cta.h2")} `}<span className="text-gold">{copyText("home.cta.h2_accent")}</span>
               </h2>
               <p className="mt-4 text-sm md:text-base text-mist max-w-2xl">
-                Message us directly for availability, treatment advice and today’s promotions.
+                {copyText("home.cta.lead")}
               </p>
             </div>
 

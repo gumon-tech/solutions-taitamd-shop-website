@@ -1,36 +1,37 @@
 import Reveal from "./Reveal";
+import { copyText } from "@/lib/copy";
 import { Sparkles, Waves, Flower2, Gem, ShieldCheck, Flame } from "lucide-react";
 
 const items = [
   {
     icon: Waves,
-    title: "Massage that actually works",
-    desc: "Thai, deep tissue, Swedish & aromatherapy — tailored per session."
+    title: copyText("home.bento.1.title"),
+    desc: copyText("home.bento.1.desc")
   },
   {
     icon: Flower2,
-    title: "Thai-inspired modern interior",
-    desc: "Progressive design + authentic touches. Calm on purpose."
+    title: copyText("home.bento.2.title"),
+    desc: copyText("home.bento.2.desc")
   },
   {
     icon: ShieldCheck,
-    title: "Hygiene-first, always",
-    desc: "Cleanliness and detail, from tools to treatment rooms."
+    title: copyText("home.bento.3.title"),
+    desc: copyText("home.bento.3.desc")
   },
   {
     icon: Gem,
-    title: "Beauty services, head-to-toe",
-    desc: "Nails, waxing, facials, lashes and more — one destination."
+    title: copyText("home.bento.4.title"),
+    desc: copyText("home.bento.4.desc")
   },
   {
     icon: Flame,
-    title: "Fast booking. Zero friction.",
-    desc: "Message us on WhatsApp and we’ll help you choose a time."
+    title: copyText("home.bento.5.title"),
+    desc: copyText("home.bento.5.desc")
   },
   {
     icon: Sparkles,
-    title: "A calm, premium experience",
-    desc: "Luxury visuals + motion — premium without clutter."
+    title: copyText("home.bento.6.title"),
+    desc: copyText("home.bento.6.desc")
   }
 ];
 
@@ -40,13 +41,13 @@ export default function LuxeBento() {
       <Reveal>
         <div className="flex items-end justify-between gap-4">
           <div>
-            <p className="text-xs tracking-[0.28em] uppercase text-ink">Why us</p>
+            <p className="text-xs tracking-[0.28em] uppercase text-ink">{copyText("home.bento.eyebrow")}</p>
             <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-[-0.01em] text-ink leading-tight">
-              Deep tissue and <span className="text-gold">sports massage</span>
+              {`${copyText("home.bento.h2")} `}<span className="text-gold">{copyText("home.bento.h2_accent")}</span>
             </h2>
           </div>
           <div className="hidden md:block text-sm text-mist max-w-md">
-            Firm, targeted work for tight shoulders, backs and legs. Every detail earns its place.
+            {copyText("home.bento.lead")}
           </div>
         </div>
       </Reveal>
