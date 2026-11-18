@@ -36,10 +36,10 @@ import { buildWhatsAppLink, SOURCE_OFFER, SOURCE_OFFER_ENQUIRY } from "@/lib/wha
 // - `illustrative` as above: true for generated artwork of a treatment, never for our premises.
 
 // Fails the build when an entry points at a picture that is not in public/, instead of
-// shipping a broken image to the home page.
+// shipping a broken image to the home page. `image: null` is a text-only card (below).
 function assertImages(list: Promotion[]) {
   for (const p of list) {
-    if (!existsSync(join(process.cwd(), "public", p.image))) {
+    if (p.image !== null && !existsSync(join(process.cwd(), "public", p.image))) {
       throw new Error(`data/promotions.json: ${p.code}: image ${p.image} is not in public/`);
     }
   }
@@ -74,6 +74,7 @@ export default function Campaigns() {
               <PromoGate key={campaign.code} windows={[promotionWindow(campaign)]} initiallyActive={windowActive(promotionWindow(campaign), now)}>
               <Reveal delay={index * 0.08}>
                 <article className="overflow-hidden rounded-[26px] border border-[#dbcba9] bg-[#fffdf8] shadow-[0_14px_36px_rgba(27,58,42,0.1)]">
+                  {campaign.image && (
                   <div className="relative aspect-[4/3] overflow-hidden">
                     <Image src={campaign.image} alt={campaign.illustrative ? `${campaign.title} promotion — illustrative image` : `${campaign.title} promotion`} fill className="object-cover transition duration-700 hover:scale-[1.03]" sizes="(max-width: 1024px) 100vw, 50vw" />
                     {/* The scrim that used to live here was carrying the white title. The title
@@ -91,8 +92,12 @@ export default function Campaigns() {
                       <div className="hidden h-11 w-11 items-center justify-center rounded-full border border-white/30 bg-black/15 backdrop-blur sm:flex"><Sparkles className="h-5 w-5 text-[#eed59a]" /></div>
                     </div>
                   </div>
+                  )}
                   <div className="p-5 md:p-6">
-                    {campaign.illustrative && <p className="mb-2 text-[11px] uppercase tracking-[0.18em] text-[#52655a]">Illustrative image</p>}
+                    {/* A text-only card (`image: null`, which the shop system may send) has no
+                        photograph to carry the eyebrow, so the same cream chip opens the card body. */}
+                    {!campaign.image && <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-[#ebe3d4] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.25em] text-[#6d5223]"><Sparkles className="h-3.5 w-3.5" />{campaign.eyebrow}</div>}
+                    {campaign.illustrative && campaign.image && <p className="mb-2 text-[11px] uppercase tracking-[0.18em] text-[#52655a]">Illustrative image</p>}
                     {/* The title used to sit on the photograph in white, which measured 2.50 on a
                         phone against a threshold of 3.0 — the picture is bright in places and no
                         text colour survives every picture. T11 forbids darkening an image to

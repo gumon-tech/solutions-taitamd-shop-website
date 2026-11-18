@@ -1,0 +1,194 @@
+name: Merge shop system data changes
+# The shop's WhatsApp system (shop-agent) keeps at most ONE open pull request per concern from a branch named
+# shop-agent/<concern>-<id>. Today the only concern is promotions. It rebuilds that branch from main plus every change
+# a manager has confirmed in chat. This workflow merges that pull request by itself, and only if ALL hold:
+#   1. the pull request comes from a branch inside this repository named shop-agent/<concern>-<id> with a known concern
+#   2. against main it changes exactly one file, data/<concern>.json (M: not added, renamed or deleted)
+#   3. the site's own checks pass on the merged result: scripts/check-orphan-assets.mjs, next build, npm run lint and
+#      npm run check:css (the same steps the Pages deploy runs, plus lint)
+#   4. scripts/check-shop-agent-diff.mjs passes: wording already on the site is not edited, nothing is removed or
+#      reordered, and every new card passes the text rules (no health claims, no Thai, no staff names, no links, ...)
+# Anything else stays open for a person, and a comment says which stage failed (the shop system reads it and tells
+# the manager). Uses the built-in GITHUB_TOKEN only. Modelled on the same workflow in the Sri Siam site repository.
+#
+# Jobs, so a write token never meets npm:
+#   check  (check run name "site-check") runs for EVERY pull request from a branch in this repository, so a ruleset on
+#          main could require it later. permissions {}: checkout with no stored credentials, npm ci, the checks. For
+#          shop-agent/* it also enforces rules 1, 2 and 4. Rule 2 runs before npm, so the scripts that run are always
+#          the ones on main (a shop-agent pull request cannot change a script, a workflow or a page, only its data file).
+#   merge  needs check, only for shop-agent/* pull requests that are not drafts: no checkout, no npm.
+#   report comments on a failed check of a shop-agent/* pull request.
+#
+# pull_request_target is deliberate: the workflow definition always comes from main, so a pull request cannot edit this
+# file to skip a check. The pull request's own code is never trusted: rule 2 means it can only change one JSON file.
+#
+# A merge made with GITHUB_TOKEN does not start other workflows, so the merge job starts nextjs.yml (the Pages deploy)
+# by workflow_dispatch, the one event GITHUB_TOKEN may trigger. If main ever gets a rule that needs a review, the merge
+# step fails and the pull request waits for a person.
+#
+# Failure comments carry a marker line the shop system parses:
+#   shop-agent-merge-failed stage=<check|merge|publish> concern=<concern|unknown> sha=<pull request head> run=<url>
+# A run that was replaced by a newer commit on the pull request (the system edits its branch) stays silent.
+on:
+  pull_request_target:
+    types: [opened, reopened, synchronize, ready_for_review]
+    branches: [main]
+
+concurrency:
+  group: site-check-${{ github.event.pull_request.number }}
+  cancel-in-progress: false
+
+permissions: {}
+
+jobs:
+  check:
+    name: site-check
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions: {}
+    outputs:
+      concern: ${{ steps.concern.outputs.concern }}
+    env:
+      SHA: ${{ github.event.pull_request.head.sha }}
+      HEAD_REF: ${{ github.event.pull_request.head.ref }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: refs/pull/${{ github.event.pull_request.number }}/merge
+          fetch-depth: 2   # the merge commit and both parents
+          persist-credentials: false
+
+      # Rule 1. Always succeeds (so the concern is available to the report job); the next step fails on an unknown one.
+      - name: Rule 1, which concern is this shop-agent branch
+        id: concern
+        if: startsWith(github.event.pull_request.head.ref, 'shop-agent/')
+        run: |
+          name="${HEAD_REF#shop-agent/}"
+          concern=unknown
+          if printf '%s' "$name" | grep -Eq '^[A-Za-z0-9._-]+$'; then
+            case "$name" in
+              promotions-?*) concern=promotions ;;
+            esac
+          fi
+          echo "concern=$concern" >> "$GITHUB_OUTPUT"
+          echo "concern: $concern"
+
+      - name: Rule 1, the concern is known
+        if: startsWith(github.event.pull_request.head.ref, 'shop-agent/')
+        env:
+          CONCERN: ${{ steps.concern.outputs.concern }}
+        run: |
+          if [ "$CONCERN" = unknown ]; then
+            echo "::error::branch shop-agent/<concern>-<id> needs a known concern (promotions)"
+            exit 1
+          fi
+
+      - name: Rule 2, only the file of this concern changes, and this is the head that was checked
+        if: startsWith(github.event.pull_request.head.ref, 'shop-agent/')
+        env:
+          CONCERN: ${{ steps.concern.outputs.concern }}
+        run: |
+          changed=$(git diff --name-status HEAD^1 HEAD)
+          printf 'Changed against main:\n%s\n' "$changed"
+          want=$(printf 'M\tdata/%s.json' "$CONCERN")
+          if [ "$changed" != "$want" ]; then
+            echo "::error::this pull request must change exactly data/$CONCERN.json and nothing else"
+            exit 1
+          fi
+          test "$(git rev-parse HEAD^2)" = "$SHA"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: ""
+
+      - run: npm ci
+
+      - name: Rule 3, no new unreferenced files in public/
+        run: node scripts/check-orphan-assets.mjs
+
+      - name: Rule 3, build
+        run: npx --no-install next build
+
+      - name: Rule 3, lint
+        run: npm run lint
+
+      - name: Rule 3, every opacity utility produced a rule
+        run: npm run check:css
+
+      - name: Rule 4, wording already on the site is not edited, nothing is removed, new cards pass the text rules
+        if: startsWith(github.event.pull_request.head.ref, 'shop-agent/')
+        env:
+          CONCERN: ${{ steps.concern.outputs.concern }}
+        run: node scripts/check-shop-agent-diff.mjs "$CONCERN"
+
+  merge:
+    needs: check
+    if: >-
+      startsWith(github.event.pull_request.head.ref, 'shop-agent/') &&
+      github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write        # merge the pull request, delete its branch
+      pull-requests: write   # merge, comment
+      actions: write         # start nextjs.yml
+    env:
+      REPO: ${{ github.repository }}
+      PR: ${{ github.event.pull_request.number }}
+      SHA: ${{ github.event.pull_request.head.sha }}
+      CONCERN: ${{ needs.check.outputs.concern }}
+      RUN: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+    steps:
+      - name: Merge (squash, only if the head is still the one that was checked)
+        id: merge
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh pr merge "$PR" --repo "$REPO" --squash --delete-branch --match-head-commit "$SHA"
+
+      - name: Publish the site (a GITHUB_TOKEN merge does not trigger nextjs.yml)
+        id: publish
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh workflow run nextjs.yml --repo "$REPO" --ref main
+
+      - name: Comment if the merge failed
+        if: failure() && steps.merge.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          head=$(gh pr view "$PR" --repo "$REPO" --json headRefOid --jq .headRefOid)
+          if [ "$head" != "$SHA" ]; then echo "replaced by a newer commit, staying silent"; exit 0; fi
+          gh pr comment "$PR" --repo "$REPO" --body "Automatic merge did not happen: GitHub refused the merge. shop-agent-merge-failed stage=merge concern=${CONCERN:-unknown} sha=$SHA run=$RUN"
+
+      - name: Comment if starting the site publish failed (the merge itself worked)
+        if: failure() && steps.publish.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr comment "$PR" --repo "$REPO" --body "Merged, but starting the Pages workflow failed, so the site shows this when the Pages workflow next runs. shop-agent-merge-failed stage=publish concern=${CONCERN:-unknown} sha=$SHA run=$RUN"
+
+  report:
+    needs: check
+    if: >-
+      always() && needs.check.result == 'failure' &&
+      startsWith(github.event.pull_request.head.ref, 'shop-agent/')
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      pull-requests: write   # comment only
+    env:
+      REPO: ${{ github.repository }}
+      PR: ${{ github.event.pull_request.number }}
+      SHA: ${{ github.event.pull_request.head.sha }}
+      CONCERN: ${{ needs.check.outputs.concern }}
+      RUN: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+    steps:
+      - name: Comment that the checks failed
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          head=$(gh pr view "$PR" --repo "$REPO" --json headRefOid --jq .headRefOid)
+          if [ "$head" != "$SHA" ]; then echo "replaced by a newer commit, staying silent"; exit 0; fi
+          gh pr comment "$PR" --repo "$REPO" --body "Automatic merge did not happen: the checks failed (concern, changed files, build, lint, check:css or the diff rules). shop-agent-merge-failed stage=check concern=${CONCERN:-unknown} sha=$SHA run=$RUN"

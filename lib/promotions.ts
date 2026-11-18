@@ -2,13 +2,15 @@ import data from "@/data/promotions.json";
 import { DAY, londonMidnight } from "./london-day";
 
 // The home page promotions live in data/promotions.json so they can change without touching
-// code: the shop's system (KBOT) proposes edits to that one file, by pull request once it has a
-// token limited to this repo, and by hand until then (owner's instruction relayed by KBOT,
-// 2026-10-14). The field names are shared with KBOT's own database — rename one only together
-// with KBOT. Schema and editing rules: data/PROMOTIONS.md.
+// code. The shop's WhatsApp system writes that file by pull request (branch
+// shop-agent/promotions-*): it adds offers a manager confirmed in chat and ends offers, and
+// .github/workflows/auto-merge-shop-agent.yml merges the pull request when the checks pass.
+// The field names are shared with the shop system's own database, so rename one only together
+// with it. Schema and editing rules: data/PROMOTIONS.md.
 //
-// Every check below throws, so a malformed file stops `next build` — locally and in CI, before
-// deploy — instead of reaching the live page.
+// Every shape check below throws, so a malformed file stops `next build` — locally and in CI,
+// before deploy — instead of reaching the live page. Nothing here depends on today's date: the
+// calendar only decides what is shown (see auditCalendar).
 
 export type PromotionStatus = "live" | "draft" | "ended";
 
@@ -20,7 +22,8 @@ export type Promotion = {
   points: string[];
   offer: string;
   message: string;
-  image: string;
+  /** A picture under /images/, or null for a text-only card. */
+  image: string | null;
   illustrative: boolean;
   starts: string;
   ends: string;
@@ -53,7 +56,7 @@ function validate(raw: unknown): Promotion[] {
       if (!isText(p[key])) fail(code, `\`${key}\` must be non-empty text`);
     }
     if (!Array.isArray(p.points) || !p.points.every(isText)) fail(code, "`points` must be a list of text");
-    if (!isText(p.image) || !p.image.startsWith("/images/")) fail(code, "`image` must be a path under /images/");
+    if (p.image !== null && (!isText(p.image) || !p.image.startsWith("/images/"))) fail(code, "`image` must be null or a path under /images/");
     if (typeof p.illustrative !== "boolean") fail(code, "`illustrative` must be true or false");
     if (!STATUSES.includes(p.status as PromotionStatus)) fail(code, `\`status\` must be one of ${STATUSES.join(", ")}`);
     for (const key of ["starts", "ends"]) {
@@ -69,31 +72,28 @@ const promotions = validate(data);
 // `note` is optional, so read it once through a widened view of the file: casting the parsed
 // JSON straight to `{ note: string }` only compiled while the file happened to carry the field,
 // and stopped compiling the day it was taken out (2026-10-19). An empty string counts as no
-// note, which is the shape KBOT's own `website_payload()` sends when nothing is running.
+// note, which is the shape the shop system sends when nothing is running.
 const note: unknown = (data as { note?: unknown }).note;
-
-export const promotionsNote: string | undefined = isText(note) ? note : undefined;
 
 /**
  * Two things the shape checks above cannot see, because they are about the calendar rather
  * than the file: an offer still marked `live` after its last day, and a note left behind once
- * the last offer has gone. Both are silent by design — the page simply stops showing them —
- * so nothing complained for the three days after the September offers ended on 16 October,
- * while `data/promotions.json` still called two of them live and the note still promised a
- * date that had passed. KBOT reads that file every three hours as the register of what is on,
- * so a stale `live` is wrong for the shop even when no visitor can see it (Q-KBOT-007).
+ * the last offer has gone.
  *
- * Running at import makes `next build` fail, which is where the other five file checks already
- * fail, and the message says what to change. A deploy is blocked until someone edits one line:
- * that is the point, since the quiet version of this cost three days.
+ * These used to fail `next build`. That turned an ordinary passage of time into a blocked
+ * deploy: once an offer's last day passed, every deploy — a new offer from the shop system, a
+ * fix, anything — failed until someone edited the file by hand. Now the build treats such an
+ * offer as ended (upcomingPromotions below already leaves it out of the HTML), drops the
+ * stale note, and prints a warning so the file can still be tidied. The shop system also sets
+ * `status: "ended"` itself the next time it opens a pull request.
  */
 function auditCalendar(list: Promotion[], now: number) {
   const over = list.filter((p) => p.status === "live" && now >= promotionWindow(p)[1]);
   for (const p of over) {
-    fail(p.code, `\`status\` is still "live" but the offer ended on ${p.ends} — set it to "ended"`);
+    console.warn(`data/promotions.json: ${p.code}: \`status\` is still "live" but the offer ended on ${p.ends}; built as ended`);
   }
   if (isText(note) && !list.some((p) => p.status === "live" && now < promotionWindow(p)[1])) {
-    fail("(file)", "`note` is still set while no offer is live — take the field out, or send \"\"");
+    console.warn("data/promotions.json: (file): `note` is still set while no offer is live; not shown");
   }
 }
 
@@ -115,6 +115,10 @@ auditCalendar(promotions, Date.now());
 export function upcomingPromotions(now = Date.now()) {
   return promotions.filter((p) => p.status === "live" && now < promotionWindow(p)[1]);
 }
+
+/** The sentence under the heading, only while at least one offer is still to come. */
+export const promotionsNote: string | undefined =
+  isText(note) && upcomingPromotions().length > 0 ? note : undefined;
 
 /** Whether any promotion is on: the section on the home page and the hero's link to it. */
 export function promotionsGate(now = Date.now()) {
