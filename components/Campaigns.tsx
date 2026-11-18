@@ -69,13 +69,16 @@ export default function Campaigns() {
             )} target="_blank" rel="noreferrer" className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-[#183d2d] px-5 py-3 text-sm font-semibold text-[#f7f3e9] transition hover:bg-[#25563e]"><MessageCircle className="h-4 w-4 text-[#d7b874]" /> Ask about offers <ArrowUpRight className="h-4 w-4 text-[#d7b874]" /></a>
           </div>
 
-          <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {/* The row follows how many offers are showing (a card outside its dates renders nothing, so
+              this counts what the visitor actually sees): one offer gets the full width with the photo
+              beside the text, two or four share the row in halves, three or more go three across. */}
+          <div className="group/promos mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3 md:[&:has(>:only-child)]:grid-cols-1 lg:[&:has(>:only-child)]:grid-cols-1 lg:[&:has(>:nth-child(2):last-child)]:grid-cols-2 lg:[&:has(>:nth-child(4):last-child)]:grid-cols-2">
             {campaigns.map((campaign, index) => (
               <PromoGate key={campaign.code} windows={[promotionWindow(campaign)]} initiallyActive={windowActive(promotionWindow(campaign), now)}>
-              <Reveal delay={index * 0.08}>
-                <article className="overflow-hidden rounded-[26px] border border-[#dbcba9] bg-[#fffdf8] shadow-[0_14px_36px_rgba(27,58,42,0.1)]">
+              <Reveal delay={index * 0.08} className="h-full">
+                <article className="flex h-full flex-col overflow-hidden rounded-[26px] border border-[#dbcba9] bg-[#fffdf8] shadow-[0_14px_36px_rgba(27,58,42,0.1)] md:group-has-[>:only-child]/promos:grid md:group-has-[>:only-child]/promos:grid-cols-2">
                   {campaign.image && (
-                  <div className="relative aspect-[4/3] overflow-hidden">
+                  <div className="relative aspect-[4/3] overflow-hidden md:group-has-[>:only-child]/promos:aspect-auto md:group-has-[>:only-child]/promos:min-h-[340px]">
                     <Image src={campaign.image} alt={campaign.illustrative ? `${campaign.title} promotion — illustrative image` : `${campaign.title} promotion`} fill className="object-cover transition duration-700 hover:scale-[1.03]" sizes="(max-width: 1024px) 100vw, 50vw" />
                     {/* The scrim that used to live here was carrying the white title. The title
                         moved onto the card, and the only thing left on the photograph is a chip
@@ -93,7 +96,7 @@ export default function Campaigns() {
                     </div>
                   </div>
                   )}
-                  <div className="p-5 md:p-6">
+                  <div className="flex flex-1 flex-col p-5 md:p-6 md:group-has-[>:only-child]/promos:self-center md:group-has-[>:only-child]/promos:p-8">
                     {/* A text-only card (`image: null`, which the shop system may send) has no
                         photograph to carry the eyebrow, so the same cream chip opens the card body. */}
                     {!campaign.image && <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-[#ebe3d4] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.25em] text-[#6d5223]"><Sparkles className="h-3.5 w-3.5" />{campaign.eyebrow}</div>}
@@ -106,7 +109,7 @@ export default function Campaigns() {
                     <h3 className="text-2xl font-semibold tracking-[-0.02em] text-[#19392a] md:text-3xl">{campaign.title}</h3>
                     <p className="mt-3 text-sm leading-relaxed text-[#52655a]">{campaign.detail}</p>
                     <div className="mt-4 grid grid-cols-2 gap-2">{campaign.points.map((point) => <div key={point} className="rounded-xl bg-[#f3eee5] px-3 py-2 text-xs font-semibold text-[#284b39]">{point}</div>)}</div>
-                    <div className="mt-5 flex flex-col gap-4 border-t border-[#e7dece] pt-5 sm:flex-row sm:items-center sm:justify-between"><div className="text-sm font-semibold text-[#6d5223]">{campaign.offer}</div><a href={buildWhatsAppLink(campaign.message, SOURCE_OFFER)} target="_blank" rel="noreferrer" className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-[#183d2d] px-4 py-2.5 text-xs font-semibold text-[#f7f3e9] transition hover:bg-[#25563e]"><MessageCircle className="h-4 w-4 text-[#d7b874]" /> Reserve offer</a></div>
+                    <div aria-hidden className="min-h-5 flex-1" /><div className="flex flex-col gap-4 border-t border-[#e7dece] pt-5 sm:flex-row sm:items-center sm:justify-between"><div className="text-sm font-semibold text-[#6d5223]">{campaign.offer}</div><a href={buildWhatsAppLink(campaign.message, SOURCE_OFFER)} target="_blank" rel="noreferrer" className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-[#183d2d] px-4 py-2.5 text-xs font-semibold text-[#f7f3e9] transition hover:bg-[#25563e]"><MessageCircle className="h-4 w-4 text-[#d7b874]" /> Reserve offer</a></div>
                   </div>
                 </article>
               </Reveal>
