@@ -22,7 +22,15 @@ QR ใหม่สร้างจาก `qrencode`-เทียบเท่า: 
 ```
 เวลาทุกค่าที่เขียนลงไฟล์มาจาก `date -u` เท่านั้น (`stat -f '%Sm'` พิมพ์เวลาเครื่อง +07 ได้วันคนละวัน)
 
-## ล่าสุด 2026-11-25T19:35Z · Q-KMKT-010 soft opt-in ข่าวสารการตลาด (KWEB@air)
+## ล่าสุด 2026-11-25T20:25Z · Q-KMKT-012 เอาช่อง opt-out ออกจาก /book/ (คำสั่งเจ้าของ · KWEB@air)
+
+- main `226b021` live (run 45686882144 success) · /book/ ไม่มี checkbox (วัด production 0) · ประโยคแจ้งเหลือ "By booking, you agree ... by email and WhatsApp." + ลิงก์ Terms · `BookChatButtons` กลับเป็น server component
+- โค้ดเติมประโยค opt-out ใน `lib/whatsapp.ts` และตัวตัดใน `Analytics.tsx` ถอดหมด ⇒ **ข้อความ WhatsApp จาก /book/ ไม่มีประโยค opt-out อีก** (KBOT ยังอ่านได้ ไม่เสียหาย)
+- /terms/ และ /privacy/ วิธียกเลิก = STOP หรือ unsubscribe เท่านั้น · privacy บอกว่า STOP ใช้ได้ในคำยืนยันการจองด้วย
+- **ห้ามเอาช่องกลับมาโดยไม่มีคำสั่งเจ้าของ** · คำเคาะ L-11: ถูกกฎหมายตราบที่คำยืนยันการจองของบอทมี "reply STOP" (ของ KBOT)
+- ข้อ Q-KMKT-010 ข้างล่างเป็นประวัติ ส่วนช่องติ๊กไม่มีบนเว็บแล้ว
+
+## ก่อนหน้า 2026-11-25T19:35Z · Q-KMKT-010 soft opt-in ข่าวสารการตลาด (KWEB@air)
 
 - main `bf9e743` live (deploy run 45682994870 success) · ack `gumon-workspace/machines/komphet-air/queue/KWEB/ack/Q-KMKT-010/` · คำเคาะ L-10 ใน `queue/GLOBAL/legal-register/KWEB.md` (`2ca2b157d`)
 - **/book/** `components/BookChatButtons.tsx`: ข้อความแจ้ง + ช่อง "Please don't send me news and offers" **ว่างไว้** (วาดเอง: checkbox ของเบราว์เซอร์บนเว็บนี้เป็นสี่เหลี่ยมทึบเหมือนติ๊กแล้ว) · ติ๊ก ⇒ ประโยค `MARKETING_OPT_OUT_SENTENCE` (`lib/whatsapp.ts`) แทรกก่อนแท็กของ 2 ปุ่มบน /book/ · KBOT ยืนยันรูปแบบ (ประโยคอยู่ = marketing_opt_out=true · ไม่มี = false) ⇒ **เปลี่ยนประโยคต้องตกลงกับ KBOT**
@@ -86,7 +94,7 @@ export PATH="$HOME/.local/bin:$HOME/.nvm/versions/node/v24.19.0/bin:$PATH"   # s
 cd ~/dev/solutions-taitamd-shop-website
 git status -sb                                   # คาด: ## main...origin/main ไม่มีไฟล์ค้าง (next-env.d.ts/tsconfig.json โผล่ = ดูกับดักข้อ 1)
 git fetch -q origin && git rev-list --count HEAD..origin/main   # คาด: 0
-git log --oneline -1                             # คาด: bf9e743 หรือใหม่กว่า · ใหม่กว่า = ไล่ว่าใครออก แล้ววัด live
+git log --oneline -1                             # คาด: 226b021 หรือใหม่กว่า · ใหม่กว่า = ไล่ว่าใครออก แล้ววัด live
 gh run list --limit 3                            # คาด: completed success ทุกแถว · 1 run ต่อ 1 push (ล่าสุด 39446844015)
 git log origin/main --since=2026-10-20 --format='%h %an %s'   # คาด: เฉพาะ commit ของห้องนี้ · คุณคมเพชรเคย merge PR #4 (Codex) ตรงเข้า main เอง
 curl -s -o /dev/null -w "apex %{http_code} %{size_download}\n" https://taitam-d.com/        # คาด: 200 · 160,103 B วันนี้
