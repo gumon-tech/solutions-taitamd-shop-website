@@ -1,11 +1,13 @@
 import { Metadata } from "next";
+import Link from "next/link";
 import ManageConsent from "@/components/ManageConsent";
+import { CONSENT_MAX_AGE_DAYS, CONSENT_STORAGE_KEY } from "@/lib/consent";
 import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Cookie Policy",
   description:
-    "How Taitam-D Beauty & Spa uses cookies on taitam-d.com — what we set, when, and how to change your choice.",
+    "How Taitam-D Beauty & Spa uses cookies on taitam-d.com — no Google Ads or Analytics unless you accept, what is set if you do, and how to change your choice.",
   alternates: { canonical: "/cookies" },
   robots: { index: true, follow: true },
 };
@@ -14,36 +16,52 @@ export default function CookiesPage() {
   return (
     <main className="mx-auto max-w-3xl px-5 md:px-8 pb-24 pt-10 md:pt-16">
       <h1 className="text-3xl md:text-4xl font-semibold">Cookie Policy</h1>
-      <p className="mt-2 text-sm text-mist">Effective 8 August 2026 · taitam-d.com</p>
+      {/*
+        25 November 2026: basic Consent Mode (nothing from Google before Accept), Accept and
+        Reject, the choice key ttd-consent:v2. This room's own ruling (the legal room closed,
+        Q-KWS-118). Set the date to the London day it actually goes live if that is not 25 November.
+      */}
+      <p className="mt-2 text-sm text-mist">Effective 25 November 2026 · taitam-d.com</p>
 
       <div className="mt-8 space-y-8 text-sm leading-relaxed text-ink/90">
         <section>
           <h2 className="text-lg font-medium text-ink">The short version</h2>
           <p className="mt-2">
-            We set <span className="text-gold">no cookies on your device</span> unless you
-            accept. If you decline, our measurement tool still records that an
-            anonymous visit happened — but with no cookie, no advertising
-            identifier and nothing that could be traced back to you.
+            We set <span className="text-gold">no cookies on your device</span> and load no
+            Google Ads or Google Analytics unless you accept. If you reject, or do not choose,
+            neither of them loads: no tag, no cookie, no signal that you visited. (The map on
+            our home and contact pages comes from Google Maps whatever you choose, and Google may read or set its own cookies there; our Privacy
+            Notice explains what that means.)
           </p>
         </section>
 
         <section>
-          <h2 className="text-lg font-medium text-ink">What happens if you decline</h2>
+          <h2 className="text-lg font-medium text-ink">Accept and Reject</h2>
+          {/*
+            Basic Consent Mode since 2026-11-25 (components/Analytics.tsx). Until then the tag
+            loaded on every visit and sent cookieless pings before any answer, and these two
+            paragraphs said so. Now nothing is requested from Google before Accept, so the
+            "to be complete about it" paragraph about pings reaching Google's servers came out:
+            it described something that no longer happens.
+          */}
           <p className="mt-2 text-mist">
-            We use Google Consent Mode. Google&apos;s tag loads on the page, but every
-            storage permission starts switched off and stays off unless you accept.
-            While it is off, the tag sends only a basic, cookieless signal that a
-            page was viewed. It cannot store anything on your device, cannot read a
-            previous visit, and click identifiers from adverts are stripped out
-            before the signal is sent. This lets us see roughly how many people
-            visit without tracking anyone individually.
+            If you reject, or have not chosen yet, this website does not load Google&apos;s tag
+            at all. Nothing is requested from Google Ads or Google Analytics, nothing is stored
+            on your device apart from your choice, and the website works exactly the same.
           </p>
           <p className="mt-3 text-mist">
-            To be complete about it: that signal travels to Google&apos;s servers,
-            which see the IP address of the request in the ordinary way any
-            internet request reveals it, along with your browser type. When you
-            have declined, Google cannot use this to identify you or to follow
-            you from one website to another.
+            If you accept, the website loads Google&apos;s tag for Google Ads and Google
+            Analytics. It is set up for measurement only: Google Ads may store the cookies
+            below to link a visit to an ad click, so that we can see which of our ads lead to
+            WhatsApp enquiries, and{" "}
+            <span className="text-ink">
+              Google does not use it to personalise the adverts you see
+            </span>
+            . Our{" "}
+            <Link href="/privacy" className="underline text-gold hover:text-gold2">
+              Privacy Notice
+            </Link>{" "}
+            explains what Google receives when you accept.
           </p>
         </section>
 
@@ -64,79 +82,64 @@ export default function CookiesPage() {
                 </tr>
               </thead>
               <tbody className="text-mist align-top">
+                {/*
+                  Key and lifetime read from lib/consent.ts, so this row cannot drift from the
+                  code. The entry stays in local storage until replaced or cleared, but a choice
+                  older than the limit is ignored and the banner asks again, so the limit is the
+                  honest lifetime. The older key, ttd-consent, is deleted on the next visit.
+                */}
                 <tr className="border-b border-ink/10">
-                  <td className="py-2 pr-4"><code>ttd-consent</code></td>
-                  <td className="py-2 pr-4">Accept or Decline</td>
+                  <td className="py-2 pr-4"><code>{CONSENT_STORAGE_KEY}</code></td>
+                  <td className="py-2 pr-4">Accept or Reject</td>
                   <td className="py-2 pr-4">
-                    Remembers your choice so we stop asking. Stored in local
-                    storage, not a cookie, and never sent to us or anyone else.
+                    Remembers your choice and when you made it, so we stop asking. Stored in
+                    local storage, not a cookie, and never sent to us or anyone else.
                   </td>
-                  <td className="py-2">Until you clear it</td>
-                </tr>
-                <tr className="border-b border-ink/10">
-                  <td className="py-2 pr-4"><code>_ga</code></td>
-                  <td className="py-2 pr-4">Only if you accept</td>
-                  <td className="py-2 pr-4">
-                    Google Analytics — tells returning visits apart from new ones.
+                  <td className="py-2">
+                    {CONSENT_MAX_AGE_DAYS} days, then we ask again
                   </td>
-                  <td className="py-2">400 days</td>
-                </tr>
-                <tr className="border-b border-ink/10">
-                  <td className="py-2 pr-4"><code>_ga_R8SGQ58R5E</code></td>
-                  <td className="py-2 pr-4">Only if you accept</td>
-                  <td className="py-2 pr-4">
-                    Google Analytics — keeps track of the current visit for this
-                    site&apos;s property.
-                  </td>
-                  <td className="py-2">400 days</td>
                 </tr>
                 {/*
-                  Added 2026-08-23. This one only appears for visitors who arrive
-                  from a Google ad, so it never showed up in a plain load of the
-                  home page — which is how the register was checked until now. It
-                  was reproduced by opening the site with a gclid in the URL and
-                  then accepting: _gcl_aw, 90 days. Wording ruled by Legal in
-                  Q-KWS-013. "Only if you accept" is load-bearing: with the same
-                  gclid and Decline, the site writes nothing at all, which is what
-                  keeps "no advertising identifier" true in the short version above.
-                  A sibling, _gcl_au, was seen once and has not reproduced, so it is
-                  deliberately absent — this table claims to be complete, so a row
-                  we cannot reproduce would be a false claim in the other direction.
+                  Re-measured 2026-11-25 for the basic-mode tag (Accept grants ad_storage and
+                  ad_user_data only; analytics_storage stays denied). Both routes, CLAUDE.md rule 2:
+                  plain visit → Accept: _gcl_au (cookie, 90 days) + _gcl_ls (local storage);
+                  ?gclid=TEST → Accept: _gcl_au + _gcl_aw (cookie, 90 days) + _gcl_ls.
+                  Reject, or no answer, with or without gclid: nothing at all.
+                  _ga and _ga_R8SGQ58R5E no longer appear (analytics_storage denied), so their rows
+                  were removed. _gcl_au now reproduces on every accepted visit, which is the trigger
+                  Q-KWS-013 set for adding it; its reserve wording ended "Does not identify you",
+                  changed here (KWEB legal call, 2026-11-25) because an ad-click reference is an
+                  online identifier under UK GDPR: we say what it does not contain instead.
                 */}
+                <tr className="border-b border-ink/10">
+                  <td className="py-2 pr-4"><code>_gcl_au</code></td>
+                  <td className="py-2 pr-4">Only if you accept</td>
+                  <td className="py-2 pr-4">
+                    Google Ads — a random number for this browser, used to measure which of our
+                    ads lead to WhatsApp enquiries. It does not contain your name or contact
+                    details.
+                  </td>
+                  <td className="py-2">90 days</td>
+                </tr>
                 <tr className="border-b border-ink/10">
                   <td className="py-2 pr-4"><code>_gcl_aw</code></td>
                   <td className="py-2 pr-4">
                     Only if you accept — and only when you arrived from a Google ad
                   </td>
                   <td className="py-2 pr-4">
-                    Google Ads — records which ad click brought you here, so that a
-                    booking or enquiry can be counted against that ad. It does not
-                    identify you.
+                    Google Ads — records which ad click brought you here, so that an enquiry
+                    can be counted against that ad. It does not contain your name or contact
+                    details.
                   </td>
                   <td className="py-2">90 days</td>
                 </tr>
-                {/*
-                  Found 2026-08-23, one day after _gcl_aw, by the same route and for
-                  the same reason: it only appears for someone who arrived from an
-                  advert and then accepted, and a plain visit never produces it. This
-                  one is not a cookie at all — it is a local storage entry, which is
-                  why a cookie-only check would not have found it either. The table
-                  already covers local storage (see ttd-consent), so it belongs here.
-
-                  The wording says "a copy of the same reference" on Legal's ruling:
-                  a reader must be able to see that this is the same ad click id
-                  written twice, not a second identifier, or the table reads as if we
-                  collect more than we do.
-                */}
                 <tr>
                   <td className="py-2 pr-4"><code>_gcl_ls</code></td>
+                  <td className="py-2 pr-4">Only if you accept</td>
                   <td className="py-2 pr-4">
-                    Only if you accept — and only when you arrived from a Google ad
-                  </td>
-                  <td className="py-2 pr-4">
-                    Google Ads — a copy of the same ad-click reference as{" "}
-                    <code>_gcl_aw</code>, kept in local storage (not a cookie) so it
-                    survives if the cookie is cleared. It does not identify you.
+                    Google Ads — a copy of the same Google Ads information as the cookies
+                    above, kept in local storage (not a cookie) so it survives if a cookie is
+                    cleared. It does not contain your name or contact details.
                   </td>
                   <td className="py-2">90 days</td>
                 </tr>
@@ -156,8 +159,13 @@ export default function CookiesPage() {
             time bomb back. If someone asks for that detail, it belongs on
             their page, not ours.
           */}
+          {/*
+            "Both analytics cookies" became "The Google cookies above" on 2026-11-25: the Ads tag
+            is now configured directly, and with cookie_domain "none" too (components/Analytics.tsx),
+            so every Google cookie in the table is host-only, not just the two analytics ones.
+          */}
           <p className="mt-3 text-mist">
-            Both analytics cookies are set for <span className="text-ink">this
+            The Google cookies above are set for <span className="text-ink">this
             website only</span>. They are <span className="text-ink">not shared
             with our Academy site</span> at academy.taitam-d.com — that is a
             separate site, and whatever it stores on your device is covered by{" "}
@@ -183,9 +191,8 @@ export default function CookiesPage() {
         <section>
           <h2 className="text-lg font-medium text-ink">Who else sees this data</h2>
           <p className="mt-2 text-mist">
-            If you accept, measurement data is processed by Google LLC on our
-            behalf (Google Analytics and Google Ads). We do not sell your data or
-            share it with anyone else. We do not use analytics to identify you
+            If you accept, measurement data is shared with Google LLC (Google Ads, and
+            Google Analytics without cookies). We do not sell your data. We do not use analytics to identify you
             personally.
           </p>
           <p className="mt-3 text-mist">
@@ -198,8 +205,10 @@ export default function CookiesPage() {
         <section>
           <h2 className="text-lg font-medium text-ink">Changing your mind</h2>
           <p className="mt-2 text-mist">
-            You can change your choice at any time — use the button below, or
-            clear this site&apos;s data in your browser settings.
+            You can change your choice at any time with the button below or the Cookie
+            settings link at the bottom of every page. If you change to Reject, this website
+            stops Google&apos;s tag and deletes the Google cookies listed above from this
+            website. You can also clear this site&apos;s data in your browser settings.
           </p>
           <ManageConsent />
         </section>

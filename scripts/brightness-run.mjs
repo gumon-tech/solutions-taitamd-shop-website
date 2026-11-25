@@ -131,7 +131,7 @@ await send("Runtime.evaluate", { expression: readFileSync("scripts/brightness-pr
 await send("Runtime.evaluate", {
   awaitPromise: true,
   expression: `(async () => {
-    const b = [...document.querySelectorAll("button")].find((b) => /decline/i.test(b.textContent));
+    const b = [...document.querySelectorAll("button")].find((b) => /^(reject|decline)$/i.test(b.textContent.trim()));
     if (b) b.click();
     await new Promise((r) => setTimeout(r, 300));
   })()`,

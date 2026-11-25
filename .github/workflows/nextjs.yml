@@ -93,6 +93,9 @@ jobs:
       # to a gray that is not in this palette.
       - name: Check every opacity utility produced a rule
         run: node scripts/check-opacity-classes.mjs
+      # Only this shop's own Google tag ids and bot host may ship (ads-and-web-standard §4.6).
+      - name: Check only this shop's Google ids and bot host are in the build
+        run: node scripts/check-ads-ids.mjs
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5
         with:

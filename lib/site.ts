@@ -80,6 +80,38 @@ export const SITE = {
   // Academy
   academy: "https://academy.taitam-d.com/",
 
+  // Google Ads measurement and the ad click reference (standard: gumon-marketing-hub
+  // playbooks/ads-and-web-standard.md §1; design: full-loop-web-design.md Appendix A/B).
+  // Every value here ships in public JavaScript and none of them is a secret.
+  // scripts/check-ads-ids.mjs fails the build if any other AW- or G- id, or another shop's
+  // bot host, appears in out/, so a value copied from another client's site cannot ship.
+  googleAds: {
+    // This shop's own Google Ads tag. Loaded only after Accept (components/Analytics.tsx).
+    tagId: "AW-18372517071",
+    // Ads conversion action "WhatsApp chat start (web)": fixed £1, no business value. Fired on
+    // every press of a WhatsApp chat link while accepted; never for share links, never for
+    // a [web-CR] job-application link (job applicants are not ad customers), never for tel:.
+    whatsappConversion: "AW-18372517071/XVeLCLK1uL8dEM-52bhE",
+    conversionValue: 1,
+    currency: "GBP",
+    // Version of the cookie banner wording. Part of the stored key (lib/consent.ts), so an
+    // Accept counts only for the words it was given to: change the banner's meaning, bump this.
+    consentVersion: "v2",
+    clickRef: {
+      // Equals the bot's SHOP_ID: mixed into the 8-character code and sent as "site".
+      site: "taitamd-kx",
+      // The bot's /m/click route. Empty = off: no [web-AD-XXXXXXXX] code, no POST, no
+      // transaction_id, and the privacy notice leaves out the paragraphs that describe them.
+      // Final value https://shop-agent.taitam-d.com/m/click, set only once KBOT confirms it
+      // answers 2xx for Taitam-D (it returns 404 until they switch the shop on).
+      endpoint: "",
+      // For the privacy notice; these are the bot's numbers (KBOT), not the website's.
+      unclaimedDays: 8, // a code nobody messages with is deleted after this
+      maxDays: 90, // a click reference is deleted once reported, and at most this long after the landing
+      serverLogMonths: 12, // the bot's security logs (IP address, browser details)
+    },
+  },
+
   social: {
     // Instagram is deliberately absent from `sameAs` — there is no business account
     // linked to the page yet, so it is not an official channel we can vouch for (Q-MKT-002).

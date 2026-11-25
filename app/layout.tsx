@@ -37,6 +37,7 @@ import Footer from "@/components/Footer";
 import StickyBookBar from "@/components/StickyBookBar";
 import StructuredData from "@/components/StructuredData";
 import Analytics from "@/components/Analytics";
+import AdSource from "@/components/AdSource";
 import "@/lib/content-assets";
 
 export const metadata: Metadata = {
@@ -114,6 +115,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Footer />
         <StickyBookBar />
         <Analytics />
+        {/* [web-AD] on visits from a Google ad: module memory only, so it runs whatever the cookie choice. */}
+        <AdSource />
       </body>
     </html>
   );

@@ -1,38 +1,45 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import {
+  CONSENT_STORAGE_KEY,
+  clearGoogleStorage,
+  denyConsent,
+  dropOldChoices,
+  grantConsent,
+  gtag,
+  readChoice,
+  writeChoice,
+  type Choice,
+} from "@/lib/consent";
+import { onOpenCookieSettings } from "@/lib/consent-open";
+import { hasClickId, landingUrl } from "@/lib/landing";
+import { SITE } from "@/lib/site";
+import { SOURCE_CAREERS, chatLinkWithTag, isWhatsAppBookingLink, readChatLinkTag } from "@/lib/whatsapp";
 
-// Google Consent Mode v2 (advanced). The tag loads on every visit but every
-// storage type starts denied, so nothing is written to the device and no
-// identifier is sent until the visitor accepts. While denied, Google receives
-// only cookieless pings, which is what lets it model the conversions we would
-// otherwise lose entirely. Accepting flips the storage grants; declining leaves
-// them denied for the rest of the session.
+// Google Consent Mode v2, BASIC implementation (ads-and-web-standard §1.3, 2026-11-25). Until the
+// visitor clicks Accept, now or on an earlier visit, nothing is requested from Google: no gtag.js,
+// no googletagmanager / google-analytics / doubleclick request, no cookieless ping. Reject leaves
+// it that way. Accept is measurement only: ad_storage and ad_user_data granted, ad_personalization
+// and analytics_storage denied (lib/consent.ts), then gtag.js loads once with the Google Ads tag
+// and GA4. GA4 is for analysis only and is not the source of the Ads conversion (standard §1.5);
+// its lead events still fire, after Accept only, because KMKT keeps importing
+// whatsapp_booking_click until the Ads tag's own conversion has matched it for 14 days.
+//
+// Until 2026-11-25 this file ran ADVANCED mode: the tag loaded on every visit and sent cookieless
+// pings before consent, and Accept granted everything including ad_personalization. The banner
+// wording changed with it, so the stored key moved to ttd-consent:v2 and older answers are deleted.
 export const GA_ID = "G-R8SGQ58R5E";
-const CONSENT_KEY = "ttd-consent"; // "granted" | "denied"
+const { tagId: ADS_ID, whatsappConversion, conversionValue, currency } = SITE.googleAds;
 
-declare global {
-  interface Window {
-    dataLayer?: unknown[];
-    gtag?: (...args: unknown[]) => void;
-  }
-}
-
-function ensureGtag() {
-  if (window.gtag) return;
-  window.dataLayer = window.dataLayer || [];
-  function gtag() {
-    // GA requires the Arguments object itself, not a spread copy.
-    // eslint-disable-next-line prefer-rest-params
-    window.dataLayer!.push(arguments);
-  }
-  window.gtag = gtag as unknown as Window["gtag"];
-}
+let loaded = false; // gtag.js was requested in this page
+let accepted = false; // the visitor's current answer in this page
 
 // Anyone who accepted before the host-only switch still carries a .taitam-d.com
 // cookie that surfaces on the Academy subdomain. Clear those once, on the
 // parent domain, so the leak drains instead of lingering for its two-year life.
+// Runs on every load whatever the choice: it only deletes, never requests anything.
 function dropWideCookies() {
   const parent = location.hostname.replace(/^www\./, "");
   for (const raw of document.cookie.split(";")) {
@@ -42,65 +49,47 @@ function dropWideCookies() {
   }
 }
 
-function bootstrap(stored: string | null) {
-  ensureGtag();
+// gtag.js stops sending for an id whose window["ga-disable-<id>"] is true. Set on withdrawal, so
+// GA4's automatic page views on in-site page changes stop too, not only our own events.
+function setTagsDisabled(off: boolean) {
+  const w = window as unknown as Record<string, unknown>;
+  w[`ga-disable-${GA_ID}`] = off;
+  w[`ga-disable-${ADS_ID}`] = off;
+}
 
-  // Defaults must be queued before the library loads, or the first hit escapes
-  // ungoverned.
-  window.gtag!("consent", "default", {
-    ad_storage: "denied",
-    ad_user_data: "denied",
-    ad_personalization: "denied",
-    analytics_storage: "denied",
-    functionality_storage: "denied",
-    personalization_storage: "denied",
-    security_storage: "granted",
-    wait_for_update: 500,
-  });
+/** Accept: consent update first, then (once per page) gtag.js with both tags. */
+function loadTags() {
+  grantConsent();
+  if (loaded) setTagsDisabled(false);
+  accepted = true;
+  if (loaded) return;
+  loaded = true;
 
-  // Without cookies, the ad click id has to survive in the URL instead, and
-  // click identifiers are stripped from the cookieless pings.
-  window.gtag!("set", "url_passthrough", true);
-  window.gtag!("set", "ads_data_redaction", true);
-
-  if (stored === "granted") grantConsent();
-
-  dropWideCookies();
-
-  window.gtag!("js", new Date());
-  // "none" keeps the cookie host-only. The default, "auto", writes to
-  // .taitam-d.com, so an accept here would put _ga on academy.taitam-d.com
-  // too — a site that sets no cookies of its own and says so in its policy.
-  window.gtag!("config", GA_ID, { cookie_domain: "none" });
+  gtag("js", new Date());
+  // "none" keeps every Google cookie host-only, for both tags. The default, "auto", writes to
+  // .taitam-d.com, so an accept here would put _ga / _gcl_* on academy.taitam-d.com too — a
+  // site that sets no cookies of its own and says so in its policy. CLAUDE.md rule 1.
+  // page_location: an Accept given after an in-site page change has lost the click id from the
+  // address bar, so the Ads tag is told the address the visit landed on (as on Sri Siam).
+  const landing = landingUrl();
+  gtag("config", ADS_ID, hasClickId(landing) ? { cookie_domain: "none", page_location: landing } : { cookie_domain: "none" });
+  // Signals and ad personalisation off at the property too, so "not used to show you ads
+  // elsewhere" does not depend on a console setting.
+  gtag("config", GA_ID, { cookie_domain: "none", allow_google_signals: false, allow_ad_personalization_signals: false });
 
   if (document.getElementById("ttd-gtag")) return;
   const s = document.createElement("script");
   s.id = "ttd-gtag";
   s.async = true;
-  s.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
+  s.src = `https://www.googletagmanager.com/gtag/js?id=${ADS_ID}`;
   document.head.appendChild(s);
 }
 
-function grantConsent() {
-  ensureGtag();
-  window.gtag!("consent", "update", {
-    ad_storage: "granted",
-    ad_user_data: "granted",
-    ad_personalization: "granted",
-    analytics_storage: "granted",
-    functionality_storage: "granted",
-    personalization_storage: "granted",
-  });
-}
-
-function denyConsent() {
-  ensureGtag();
-  window.gtag!("consent", "update", {
-    ad_storage: "denied",
-    ad_user_data: "denied",
-    ad_personalization: "denied",
-    analytics_storage: "denied",
-  });
+/** Reject or withdrawal: consent back to denied, no more events, Google's cookies and _gcl_ storage deleted. */
+function stopTags() {
+  accepted = false;
+  if (loaded) setTagsDisabled(true);
+  denyConsent();
 }
 
 // A wa.me link means one of two opposite things, and the difference is the whole
@@ -137,67 +126,140 @@ function leadEventFor(href: string): string | null {
   return null;
 }
 
-// Fire lead events for the site's real conversion paths. Safe to attach regardless
-// of consent: while denied these travel as cookieless pings.
-function trackLeadClicks() {
-  document.addEventListener("click", (e) => {
-    if (!window.gtag) return;
-    const a = (e.target as HTMLElement | null)?.closest?.("a");
-    if (!a?.href) return;
-    // Booking links are counted right here again, as they were before 2026-08-23.
-    // Between then and now they were skipped, because the lead form stood in the
-    // way and reported them itself once the visitor came out the other side. The
-    // form is gone (Q-MKT-078), so this is the only thing left that fires
-    // whatsapp_booking_click — which is the conversion Ads imports. Delete this
-    // listener and the campaign stops seeing enquiries while the site still works
-    // perfectly, which is the kind of break nobody notices for a week.
+// Lead events and the Google Ads conversion, only while accepted and the tag is loaded. Bubble
+// phase on document, so it runs after the capture-phase rewrites (AdSource, lib/clickref.ts) and
+// reads the tag actually sent. It never prevents or delays the navigation.
+function onLeadClick(e: MouseEvent) {
+  if (!accepted || !loaded) return;
+  if (e.type === "auxclick" && e.button !== 1) return;
+  const a = (e.target as HTMLElement | null)?.closest?.("a");
+  if (!a?.href) return;
+  const t = readChatLinkTag(a.href);
+
+  // GA4, as before but after Accept only. This listener is the only thing that fires
+  // whatsapp_booking_click, which KMKT still imports into Ads until the Ads tag's own conversion
+  // below has matched it for 14 days (standard §5). Delete it before then and the campaign stops
+  // seeing enquiries while the site still works perfectly.
+  if (e.type === "click") {
     const name = leadEventFor(a.href);
-    if (!name) return;
-    window.gtag("event", name, { link_url: a.href, page_path: location.pathname });
-  });
-}
-
-export function getConsent(): string | null {
-  try {
-    return localStorage.getItem(CONSENT_KEY);
-  } catch {
-    return null;
+    // The ad click code (lib/clickref.ts) goes to Google Ads as the conversion's reference only,
+    // never into GA4 as part of the link.
+    const linkUrl = t?.code ? chatLinkWithTag(t, t.tag) : a.href;
+    if (name) gtag("event", name, { link_url: linkUrl, page_path: location.pathname });
   }
-}
 
-export function resetConsent() {
+  // Google Ads "WhatsApp chat start (web)": chat links only (not share links, not tel:), never on
+  // a [web-CR] job-application link (same rule as lib/whatsapp.ts adTagApplies). No enhanced
+  // conversions, no user data.
+  if (!isWhatsAppBookingLink(a.href) || t?.tag === SOURCE_CAREERS) return;
+  const params: Record<string, string | number> = {
+    send_to: whatsappConversion,
+    value: conversionValue,
+    currency,
+    transport_type: "beacon",
+  };
+  // Only while lib/site.ts googleAds.clickRef.endpoint is set: the code exists only then.
+  if (t?.code) params.transaction_id = t.code;
   try {
-    localStorage.removeItem(CONSENT_KEY);
+    gtag("event", "conversion", params);
   } catch {
-    /* ignore */
+    // never let measurement get in the way of the click
   }
-  location.reload();
 }
 
 export default function Analytics() {
-  // "pending" keeps the banner hidden until we have read localStorage, so it
-  // never flashes for someone who already chose.
-  const [consent, setConsent] = useState<string | null>("pending");
+  // Closed until storage has been read, so the banner never flashes for someone who already chose.
+  const [open, setOpen] = useState(false);
+  const [current, setCurrent] = useState<Choice | null>(null);
+  const [reopened, setReopened] = useState(false);
+  const opener = useRef<HTMLElement | null>(null);
+  const region = useRef<HTMLDivElement | null>(null);
 
+  // First load: a stored Accept loads the tags; anything else loads nothing and deletes Google's
+  // storage (left by the advanced-mode banner, or by an Accept since withdrawn elsewhere).
   useEffect(() => {
-    const stored = getConsent();
-    setConsent(stored);
-    bootstrap(stored);
-    trackLeadClicks();
+    // Read the landing address now, before any in-site page change drops its query: an Accept
+    // given on a later page still passes it to the Ads tag (AdSource reads it too).
+    landingUrl();
+    dropWideCookies();
+    dropOldChoices();
+    const c = readChoice();
+    setCurrent(c);
+    if (c === "granted") loadTags();
+    else {
+      clearGoogleStorage();
+      if (c === null) setOpen(true);
+    }
+    document.addEventListener("click", onLeadClick);
+    document.addEventListener("auxclick", onLeadClick);
+    return () => {
+      document.removeEventListener("click", onLeadClick);
+      document.removeEventListener("auxclick", onLeadClick);
+    };
   }, []);
 
-  const decide = (value: "granted" | "denied") => {
-    try {
-      localStorage.setItem(CONSENT_KEY, value);
-    } catch {
-      /* ignore */
-    }
-    setConsent(value);
-    if (value === "granted") grantConsent();
-    else denyConsent();
-  };
+  // "Cookie settings" (footer, /privacy, /cookies) reopens the banner in place and moves focus to it.
+  useEffect(
+    () =>
+      onOpenCookieSettings((el) => {
+        opener.current = el;
+        setCurrent(readChoice());
+        setReopened(true);
+        setOpen(true);
+        requestAnimationFrame(() => region.current?.focus());
+      }),
+    [],
+  );
 
-  if (consent !== null) return null;
+  // A choice made in another tab of this site applies here too (withdrawal stops the tags at once).
+  useEffect(() => {
+    const onStorage = (e: StorageEvent) => {
+      if (e.key !== CONSENT_STORAGE_KEY && e.key !== null) return;
+      const c = readChoice();
+      setCurrent(c);
+      if (c === "granted") {
+        loadTags();
+        setOpen(false);
+      } else {
+        stopTags();
+        if (c === "denied") setOpen(false);
+      }
+    };
+    window.addEventListener("storage", onStorage);
+    return () => window.removeEventListener("storage", onStorage);
+  }, []);
+
+  const close = useCallback(() => {
+    setOpen(false);
+    setReopened(false);
+    const back = opener.current;
+    opener.current = null;
+    if (back?.isConnected) back.focus();
+  }, []);
+
+  const decide = useCallback(
+    (c: Choice) => {
+      const saved = writeChoice(c);
+      // Reject, or an Accept that could not be saved: nothing loads, nothing is sent.
+      if (c === "granted" && saved) loadTags();
+      else stopTags();
+      setCurrent(saved ? c : null);
+      close();
+    },
+    [close],
+  );
+
+  // Escape closes the banner only when it was reopened (the earlier choice stands); a first visit must choose.
+  useEffect(() => {
+    if (!open || !reopened) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") close();
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [open, reopened, close]);
+
+  if (!open) return null;
 
   // Compact on phones on purpose. Legal's wording is unchanged; only the footprint
   // shrank. At the previous size this sheet covered roughly a third of a 375px screen,
@@ -215,35 +277,50 @@ export default function Analytics() {
   // Legal's ruling (2026-08-11): PECR reg 6 forbids setting non-essential cookies before
   // consent — it does not ask us to obscure the page, and a banner covering the only
   // route to contact us pushes the consent itself toward a cookie wall.
-  // Consent behaviour is untouched: every storage type still starts denied, clicks travel
-  // as cookieless pings until accepted, the banner stays answerable, and using the site is
-  // never treated as agreement.
+  // Using the site is never treated as agreement, and the banner stays answerable.
+  //
+  // 2026-11-25 (basic mode): the wording above is replaced, this room's own ruling (the legal
+  // room closed under Q-KWS-118). The text is kept to the old sheet's length so the geometry
+  // above still holds; re-measure the sheet height in the visual gate if it grows. Accept and
+  // Reject are the same size and the same style: Reject must be as easy as Accept, and a
+  // filled Accept beside an outlined Decline was a nudge.
+  // "Reject loads no Google Ads or Analytics", not "nothing from Google": the map on the home
+  // and contact pages is a Google Maps frame that loads whatever the choice (see /privacy).
   return (
     <div
+      ref={region}
       role="dialog"
       aria-label="Cookie consent"
-      className="fixed inset-x-3 bottom-1 [@media(max-height:700px)]:bottom-20 md:bottom-4 md:left-auto md:right-4 md:max-w-sm z-[70] rounded-2xl border border-gold/30 bg-bg1/95 backdrop-blur p-3 md:p-4 shadow-2xl"
+      tabIndex={-1}
+      className="fixed inset-x-3 bottom-1 [@media(max-height:700px)]:bottom-20 md:bottom-4 md:left-auto md:right-4 md:max-w-sm z-[70] rounded-2xl border border-gold/30 bg-bg1/95 backdrop-blur p-3 md:p-4 shadow-2xl outline-none"
     >
       <p className="text-xs leading-relaxed text-ink/90 md:text-sm">
-        We&apos;d like to use optional analytics cookies (Google Analytics &amp; Google
-        Ads) to understand visits and improve how we welcome you. If you decline,
-        no cookies are stored on your device.{" "}
+        Accept lets Google measure our visits and, with Google Ads cookies, which of our ads
+        lead to WhatsApp enquiries. It is not used to show you ads elsewhere. Reject loads no
+        Google Ads or Analytics.{" "}
         <Link href="/cookies" className="underline text-gold hover:text-gold2">
-          Cookie policy
+          Cookie Policy
         </Link>
       </p>
+      {reopened && current && (
+        <p className="mt-1.5 text-xs text-mist">
+          Your current choice: {current === "granted" ? "Accepted" : "Rejected"}.
+        </p>
+      )}
       <div className="mt-2.5 flex gap-2 md:mt-3">
         <button
+          type="button"
           onClick={() => decide("granted")}
-          className="flex-1 rounded-full bg-gold text-bg0 text-sm font-medium px-4 py-2 hover:bg-gold2 transition"
+          className="flex-1 rounded-full border border-gold/40 text-ink text-sm font-medium px-4 py-2 hover:border-gold hover:text-gold2 transition"
         >
           Accept
         </button>
         <button
+          type="button"
           onClick={() => decide("denied")}
-          className="flex-1 rounded-full border border-ink/20 text-ink/80 text-sm px-4 py-2 hover:border-ink/40 transition"
+          className="flex-1 rounded-full border border-gold/40 text-ink text-sm font-medium px-4 py-2 hover:border-gold hover:text-gold2 transition"
         >
-          Decline
+          Reject
         </button>
       </div>
     </div>

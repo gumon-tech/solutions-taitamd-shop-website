@@ -249,3 +249,64 @@ export function isWhatsAppBookingLink(href: string): boolean {
     return false;
   }
 }
+
+// ---- ad visits: [web-AD] and the ad click code ------------------------------------------
+// Read by components/AdSource.tsx, lib/clickref.ts and components/Analytics.tsx (the Google Ads
+// conversion), so the three agree on which links an ad visit changes.
+
+/** Replaces a chat link's own letter for the whole visit when it came from a Google ad. */
+export const SOURCE_AD = "AD";
+
+/** 27 characters: no vowels, no 0 1 I L O. The bot's parser: [2-9BCDFGHJKMNPQRSTVWXZ]{8}. */
+export const CLICK_CODE_ALPHABET = "23456789BCDFGHJKMNPQRSTVWXZ";
+
+/**
+ * The tag at the end of a message: " [web-X]" or " [web-AD-K7M2Q9XP]", then any trailing blank
+ * lines. Group 1 the letters, group 2 the code if any, group 3 the trailing whitespace: the
+ * open-chat links end "[web-X]\n\n" (buildOpenChatLink), and a rewrite must keep that blank
+ * line or the visitor starts typing on the tag's line again.
+ */
+export const WEB_TAG_END = new RegExp(` \\[web-([A-Z]{1,2})(?:-([${CLICK_CODE_ALPHABET}]{8}))?\\](\\s*)$`);
+
+export interface ChatLinkTag {
+  url: URL;
+  text: string;
+  tag: string;
+  code: string | null;
+  trail: string;
+}
+
+/**
+ * The tag of a link that opens a chat with us (wa.me with a number path), or null: not WhatsApp,
+ * a bare share link (wa.me/?text=, which opens the visitor's own contacts), or no tag at all.
+ */
+export function readChatLinkTag(href: string): ChatLinkTag | null {
+  try {
+    const url = new URL(href);
+    if (url.hostname !== "wa.me" || !url.pathname.replace(/^\/+|\/+$/g, "")) return null;
+    const text = url.searchParams.get("text") ?? "";
+    const m = WEB_TAG_END.exec(text);
+    if (!m) return null;
+    return { url, text, tag: m[1], code: m[2] ?? null, trail: m[3] };
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Whether an ad visit may change this link: every chat link except a [web-CR] one. Someone
+ * applying for a job came for the job, not because of an ad, and their letter is how the shop's
+ * assistant routes them. One rule by tag (not by page), shared with lib/clickref.ts and the
+ * conversion in Analytics.tsx, so the footer or sticky-bar booking links that stay mounted on
+ * /careers are treated the same way by all three (independent review, 2026-11-25).
+ */
+export function adTagApplies(t: ChatLinkTag, _pathname?: string): boolean {
+  void _pathname;
+  return t.tag !== SOURCE_CAREERS;
+}
+
+/** The same link with a different tag (and code), same encoding as waLink, trailing blank lines kept. */
+export function chatLinkWithTag(t: ChatLinkTag, tag: string): string {
+  const next = t.text.replace(WEB_TAG_END, ` [web-${tag}]${t.trail}`);
+  return `https://wa.me${t.url.pathname}?text=${enc(next)}`;
+}

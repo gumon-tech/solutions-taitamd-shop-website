@@ -2,6 +2,7 @@ import Link from "next/link";
 import { SITE } from "@/lib/site";
 import FollowUs from "@/components/FollowUs";
 import SocialShareBar from "@/components/SocialShareBar";
+import CookieSettingsButton from "@/components/CookieSettingsButton";
 
 export default function Footer() {
   return (
@@ -66,6 +67,10 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link href="/cookies" className="hover:text-ink">Cookie Policy</Link>
+                </li>
+                <li>
+                  {/* Reopens the cookie banner in place, so a choice can be changed from any page. */}
+                  <CookieSettingsButton className="text-left hover:text-ink">Cookie settings</CookieSettingsButton>
                 </li>
               </ul>
             </div>

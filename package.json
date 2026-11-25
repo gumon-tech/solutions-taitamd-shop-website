@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "check:css": "node scripts/check-opacity-classes.mjs",
+    "check:ads": "node scripts/check-ads-ids.mjs",
     "start": "next start",
     "lint": "eslint . --max-warnings=0",
     "check:assets": "node scripts/check-orphan-assets.mjs",

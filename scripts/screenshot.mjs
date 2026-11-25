@@ -121,7 +121,7 @@ await sleep(6000);
 await send("Runtime.evaluate", {
   awaitPromise: true,
   expression: `(async () => {
-    const btn = [...document.querySelectorAll("button")].find((b) => /decline/i.test(b.textContent));
+    const btn = [...document.querySelectorAll("button")].find((b) => /^(reject|decline)$/i.test(b.textContent.trim()));
     if (btn) btn.click();
     document.querySelectorAll("img").forEach((i) => { i.loading = "eager"; });
     const H = document.body.scrollHeight;

@@ -1,11 +1,12 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import { SITE } from "@/lib/site";
+import CookieSettingsButton from "@/components/CookieSettingsButton";
 
 export const metadata: Metadata = {
   title: "Privacy Notice",
   description:
-    "How Taitam-D Beauty & Spa handles your personal data — what we hold, how we use contact details for advertising, and how to opt out.",
+    "How Taitam-D Beauty & Spa handles your personal data — what we hold, how we use contact details for advertising, the Google Ads measurement this website uses only if you accept, and how to opt out.",
   alternates: { canonical: "/privacy" },
   robots: { index: true, follow: true },
 };
@@ -16,6 +17,12 @@ export const metadata: Metadata = {
 // (72-74) next to the company name; site.ts records — with a comment explaining why
 // — that the registered office is 72 only. The controller line is a legal
 // identifier, so it uses the registered office, and Legal was told.
+// The ad click code, the POST to the booking assistant and the upload to Google exist only while
+// lib/site.ts googleAds.clickRef.endpoint is set (lib/clickref.ts), so the paragraphs that describe
+// them render only then: this notice is never ahead of the code.
+const CLICK_REF = SITE.googleAds.clickRef;
+const LINKING = CLICK_REF.endpoint !== "";
+
 export default function PrivacyPage() {
   return (
     <main className="mx-auto max-w-3xl px-5 md:px-8 pb-24 pt-10 md:pt-16">
@@ -25,8 +32,14 @@ export default function PrivacyPage() {
         was drafted and not a date chosen in advance — Legal's rule in 58-, so that
         the register they keep and the page a visitor sees can never disagree.
       */}
+      {/*
+        1.1: Google Ads measurement in basic consent mode, the [web-AD] tag, and the section on
+        linking a booking to an ad; the website lead-form section removed (the form went with
+        Q-MKT-078). This room's own legal ruling, 2026-11-25 (the legal room closed, Q-KWS-118).
+        Set the date to the London day it actually goes live if that is not 25 November.
+      */}
       <p className="mt-2 text-sm text-mist">
-        Version 1.0 · Effective 22 August 2026 · taitam-d.com
+        Version 1.1 · Effective 25 November 2026 · taitam-d.com
       </p>
 
       <div className="mt-8 space-y-8 text-sm leading-relaxed text-ink/90">
@@ -66,21 +79,122 @@ export default function PrivacyPage() {
           </p>
         </section>
 
+        {/*
+          Replaces "When you contact us through this website", which described a name-and-number
+          form that hashed its fields to Google. The form was removed with Q-MKT-078, so the
+          section described something no visitor could do, and its "we may tell Google, in the
+          same hashed form, when an enquiry becomes a booking" would now contradict the upload
+          below, which sends Google the click reference only.
+
+          Written to the code, 2026-11-25: components/Analytics.tsx (basic Consent Mode: nothing
+          from Google before Accept; Accept grants ad_storage and ad_user_data only), AdSource.tsx
+          ([web-AD], module memory only), lib/clickref.ts (the code and the POST). Change the
+          code and this section in the same commit.
+        */}
         <section>
-          <h2 className="text-lg font-medium text-ink">
-            When you contact us through this website
-          </h2>
+          <h2 className="text-lg font-medium text-ink">This website and Google Ads</h2>
           <p className="mt-2 text-mist">
-            If you fill in your name and number before opening WhatsApp and tick
-            the box, your browser sends a hashed copy to Google so we can see
-            which advert led to your enquiry.{" "}
+            When you first visit this website, we ask whether you accept Google measurement.
+            Accept and Reject are equally easy, and the website works the same either way.{" "}
             <span className="text-ink">
-              We do not store that form on this website.
+              If you reject, or do not choose, this website loads nothing from Google Ads or
+              Google Analytics
             </span>{" "}
-            We may also tell Google, in the same hashed form, when an enquiry
-            becomes a booking, so we can measure which adverts work.
+            and sets no Google Ads or Analytics cookies. It keeps only a record of your choice in
+            your browser, so that we do not ask again on every page. The map on our home and
+            contact pages is shown by Google Maps whatever you choose: when it loads, Google
+            receives your IP address and browser details, and may read or set its own cookies,
+            under its own privacy policy. We do not use the map for measurement.
           </p>
+          <p className="mt-2 text-mist">
+            If you accept, this website loads Google&rsquo;s tag for Google Ads and Google
+            Analytics. Google may store the cookies listed in our{" "}
+            <Link href="/cookies" className="underline text-gold hover:text-gold2">
+              Cookie Policy
+            </Link>{" "}
+            on your device, and receives your IP address and details of your visit: the pages
+            you view, your browser and device, and each press of one of our WhatsApp, phone or
+            share buttons, with the message the button types for you but not anything you add. We use this to count visits and to
+            learn which of our Google ads lead to WhatsApp enquiries. The tag is set up so that
+            Google does not use it to personalise the adverts you see. Google handles this under
+            its own privacy policy and may process it outside the UK, including in the United
+            States.
+          </p>
+          <p className="mt-2 text-mist">
+            The booking buttons open WhatsApp with a short message already typed. Each message
+            ends with a code, such as [web-T], that tells us which part of the website you used.
+            If you reached this website from one of our Google ads, the code is [web-AD]
+            instead, wherever you press, except for job applications. The website works this
+            out from the web address you arrived on and keeps it only while the page is open in
+            your browser: it is not stored on your device or sent to us or anyone else, so it
+            does not depend on your cookie choice. Nothing reaches us until you press send in
+            WhatsApp.
+            {LINKING && " If you accepted, the code can be slightly longer, as described below."}
+          </p>
+          <p className="mt-2 text-mist">
+            We use Google&rsquo;s tag only with your consent, which you give by pressing Accept.
+            You can change your mind at any time with Cookie settings, here or at the bottom of
+            every page. If you change to Reject, this website stops Google&rsquo;s tag and
+            deletes the Google cookies it set on this website. Google&rsquo;s own controls for
+            your account are at myadcenter.google.com.
+          </p>
+          <CookieSettingsButton className="mt-3 rounded-full border border-gold/40 text-gold text-sm px-5 py-2 hover:border-gold hover:text-gold2 transition">
+            Cookie settings
+          </CookieSettingsButton>
         </section>
+
+        {LINKING && (
+          <section>
+            <h2 className="text-lg font-medium text-ink">
+              Linking a booking to one of our ads (only if you accepted)
+            </h2>
+            <p className="mt-2 text-mist">
+              If you came to this website from one of our Google ads and pressed Accept, the
+              code at the end of your WhatsApp message is slightly longer, such as
+              [web-AD-K7M2Q9XP]. The website works it out from Google&rsquo;s reference for
+              your ad click, which is in the web address you arrived on. When you press a
+              WhatsApp button, the same code goes to Google with the measurement of that press,
+              as its reference.
+            </p>
+            <p className="mt-2 text-mist">
+              At the same time, the website sends that code and Google&rsquo;s reference for
+              your ad click to our booking assistant, which Gumon Technology runs for us. With
+              them it sends which button you pressed, when your visit started and which version
+              of the cookie banner you accepted.{" "}
+              <span className="text-ink">
+                It does not send your name, your phone number or your message.
+              </span>{" "}
+              As with any request over the internet, our booking assistant also receives your
+              IP address and details of your browser. These are kept in its security logs for{" "}
+              {CLICK_REF.serverLogMonths} months and are not stored with the click reference.
+              This website does not store the click reference on your device.
+            </p>
+            <p className="mt-2 text-mist">
+              When your message reaches us, the code links that ad click to your conversation
+              with us. If you go on to book or visit us, we tell Google Ads that the ad click led
+              to a booking or a paid visit, with its date and, for a paid visit, the amount you
+              paid. We send Google the click reference only.{" "}
+              <span className="text-ink">
+                We never send Google your name, your phone number, your messages, the treatment
+                you chose or anything about your health.
+              </span>
+            </p>
+            <p className="mt-2 text-mist">
+              If nobody messages us with the code, we delete the click reference after{" "}
+              {CLICK_REF.unclaimedDays} days. Otherwise we delete it once the booking or visit
+              has been reported to Google, and in any case no later than {CLICK_REF.maxDays}{" "}
+              days after you arrived from the ad. We do all of this only with your consent, which
+              you give by pressing Accept.
+            </p>
+            <p className="mt-2 text-mist">
+              If you change to Reject with Cookie settings, the website drops the code at once,
+              your messages end with [web-AD] again, and nothing more is sent. To have a click
+              reference we already hold deleted, or to stop a booking being reported to Google,
+              message us on WhatsApp or email {SITE.email}. You can also delete the code from the
+              WhatsApp message before you send it; your booking is not affected.
+            </p>
+          </section>
+        )}
 
         <section>
           <h2 className="text-lg font-medium text-ink">Your choices</h2>
