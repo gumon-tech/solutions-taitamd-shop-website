@@ -22,7 +22,18 @@ QR ใหม่สร้างจาก `qrencode`-เทียบเท่า: 
 ```
 เวลาทุกค่าที่เขียนลงไฟล์มาจาก `date -u` เท่านั้น (`stat -f '%Sm'` พิมพ์เวลาเครื่อง +07 ได้วันคนละวัน)
 
-## ล่าสุด 2026-11-18T22:25Z · Q-TWS-055 บอทร้านแก้เนื้อหาเว็บเองได้ (KWEB@air)
+## ล่าสุด 2026-11-25T16:57Z · มาตรฐานวัดผลโฆษณา §1 (KWEB@air ห้องใหม่ แทน local_a4d70ff2 ที่ปิดแล้ว)
+
+- main `24b5e1e` live (deploy run 45658933885 success) · มาตรฐาน `~/dev/gumon-marketing-hub/playbooks/ads-and-web-standard.md` §1 · ต้นแบบ solution-sst-website PR #31 #33 #38
+- **Consent Mode v2 basic** (`components/Analytics.tsx` · `lib/consent.ts`): ก่อน Accept / Reject = ไม่มี request ถึง Google Ads/Analytics/บอท · Accept = ad_storage + ad_user_data เท่านั้น · key `ttd-consent:v2` 182 วัน (ค่าเก่า `ttd-consent` ถูกลบ) · Cookie settings ที่ footer, /privacy, /cookies เปิดแบนเนอร์ซ้ำ ⇒ Reject ลบ `_gcl_*` `_ga*`
+- **Google Ads tag** `AW-18372517071` หลัง Accept (cookie_domain none) · conversion `AW-18372517071/XVeLCLK1uL8dEM-52bhE` "WhatsApp chat start (web)" £1 ทุกครั้งที่กดลิงก์แชต · ไม่ยิงกับ share / tel / `[web-CR]` · GA4 คงไว้เพื่อวิเคราะห์ (analytics_storage denied ⇒ cookieless) · KMKT ถอด GA4 conversion ออกจากบัญชีแล้ว
+- **[web-AD]** (`components/AdSource.tsx`): landing มี gclid/gbraid/wbraid หรือ utm google/cpc ⇒ ทุกปุ่มแชตยกเว้น `[web-CR]` · เก็บในหน่วยความจำหน้าเท่านั้น
+- 🔴 **รหัสคลิก [web-AD-XXXXXXXX] + POST /m/click + transaction_id สร้างแล้วแต่ปิด**: `lib/site.ts` `googleAds.clickRef.endpoint = ""` · เปิด = ใส่ `https://shop-agent.taitam-d.com/m/click` **หลัง KBOT ยืนยัน 2xx เท่านั้น** (วันนี้ 404) · SHOP_ID `taitamd-kx` (ไม่ใช่ ttd) · Origin allow-list ฝั่ง KBOT: `https://taitam-d.com` `https://www.taitam-d.com` · ย่อหน้า privacy เรื่องรหัสขึ้นเองเมื่อ endpoint ไม่ว่าง ⇒ หลังเปิดต้องตรวจ §5 ข้อ 3 4 5 7 บน production + แก้ประโยค "We do not sell your data" ใน /cookies ถ้าต้องเอ่ยถึง Gumon
+- ทะเบียนคุกกี้วัดใหม่บน production 2026-11-25: `_gcl_au` 90d · `_gcl_aw` 90d (เฉพาะมาจากโฆษณา) · `_gcl_ls` localStorage · ถอด `_ga` · คำเคาะ L-8 L-9 ใน workspace `queue/GLOBAL/legal-register/KWEB.md` (`f48be8e94`)
+- ด่านใหม่ `npm run check:ads` (อยู่ใน CI แล้ว) ⇒ verify ท้องถิ่นเติมต่อท้าย `check:css`
+- ค้าง: ทดสอบข้อความจริง 3 แบบกับบอท (§5 ข้อ 4) รอ endpoint · Maps ยังโหลดก่อน consent (บอกในหน้า privacy แล้ว · ถ้าอยากได้ "Reject = nothing from Google" ต้องทำแผนที่แบบคลิกก่อนโหลด)
+
+## ก่อนหน้า 2026-11-18T22:25Z · Q-TWS-055 บอทร้านแก้เนื้อหาเว็บเองได้ (KWEB@air)
 
 - main `10c307e` live · บอทร้าน (shop-agent) เปิด PR จาก `shop-agent/<concern>-<id>` แล้ว `.github/workflows/auto-merge-shop-agent.yml` merge + deploy เอง ไม่มีคนกด
 - concern: promotions hours closures notice faq services copy photos · สัญญาต่อหมวดอยู่ที่ `data/*.md` · กฎ `scripts/lib/shop-agent-diff.mjs` · ทดสอบ `npm run test:shop-agent` (fixture ไม่อ่านข้อมูลจริง)
