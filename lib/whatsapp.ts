@@ -310,34 +310,3 @@ export function chatLinkWithTag(t: ChatLinkTag, tag: string): string {
   const next = t.text.replace(WEB_TAG_END, ` [web-${tag}]${t.trail}`);
   return `https://wa.me${t.url.pathname}?text=${enc(next)}`;
 }
-
-// ---- marketing opt-out on /book/ (Q-KMKT-010) ------------------------------------------------
-// The site has no booking form: /book/ opens WhatsApp with a message already typed. So the
-// "Please don't send me news and offers" box can only travel inside that message, as this exact
-// sentence just before the [web-…] tag. The shop's assistant (KBOT) reads it as
-// marketing_opt_out=true; no sentence on a /book/ tag (K, D) = false. Change the sentence only
-// together with KBOT's parser. Plain ASCII apostrophe on purpose: a parser match, not typography.
-
-export const MARKETING_OPT_OUT_SENTENCE = "Please don't send me news and offers.";
-
-/**
- * The same chat link with the opt-out sentence added (on) or removed (off), tag, click code and
- * trailing blank lines untouched, so AdSource / lib/clickref.ts rewrites before or after this
- * still hold. Links without a tag are returned unchanged.
- */
-export function chatLinkWithOptOut(href: string, on: boolean): string {
-  const t = readChatLinkTag(href);
-  if (!t) return href;
-  const m = WEB_TAG_END.exec(t.text);
-  if (!m) return href;
-  const had = t.text.slice(0, m.index);
-  if (!on && !had.includes(MARKETING_OPT_OUT_SENTENCE)) return href;
-  let body = had.replace(` ${MARKETING_OPT_OUT_SENTENCE}`, "");
-  if (on) body = `${body} ${MARKETING_OPT_OUT_SENTENCE}`;
-  return `https://wa.me${t.url.pathname}?text=${enc(body + m[0])}`;
-}
-
-/** The link as Google may see it: the opt-out is a choice made for us, not for measurement. */
-export function withoutOptOut(href: string): string {
-  return chatLinkWithOptOut(href, false);
-}

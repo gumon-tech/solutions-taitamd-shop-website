@@ -81,7 +81,7 @@ export default function PrivacyPage() {
         </section>
 
         {/*
-          1.2, 2026-11-25 (Q-KMKT-010): soft opt-in for news and offers. Same facts as app/terms
+          1.2, 2026-11-25 (Q-KMKT-010, booking-page box removed by Q-KMKT-012): soft opt-in for news and offers. Same facts as app/terms
           (#marketing) and the notice on /book/ (components/BookChatButtons.tsx): change all three
           together. Basis: PECR reg. 22(3) (existing customers, similar services, a simple way to
           refuse when details are collected and in every message) and UK GDPR art. 6(1)(f);
@@ -93,9 +93,9 @@ export default function PrivacyPage() {
             If you book or visit us, we may send you occasional news and offers about similar
             treatments from {SITE.name} by email and WhatsApp. We do this on the basis of our
             legitimate interest in keeping in touch with our customers, as the law allows for
-            people who have already used our services. You can refuse when you book (the
-            &ldquo;Please don&rsquo;t send me news and offers&rdquo; box on our booking page),
-            reply STOP to any WhatsApp message, or use the unsubscribe link in any email.{" "}
+            people who have already used our services. You can opt out at any time: reply STOP
+            to any WhatsApp message, including the confirmation we send when you book, or use the
+            unsubscribe link in any email.{" "}
             <span className="text-ink">
               Opting out stops all marketing messages on every channel
             </span>

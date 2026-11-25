@@ -27,6 +27,7 @@ export default function TermsPage() {
   return (
     <main className="mx-auto max-w-3xl px-5 md:px-8 pb-24 pt-10 md:pt-16">
       <h1 className="text-3xl md:text-4xl font-semibold">Terms</h1>
+      {/* Q-KMKT-012: the booking-page tick option removed from "Marketing messages". */}
       <p className="mt-2 text-sm text-mist">Effective 25 November 2026 · taitam-d.com</p>
 
       <div className="mt-8 space-y-8 text-sm leading-relaxed text-ink/90">
@@ -48,9 +49,8 @@ export default function TermsPage() {
           <h2 className="text-lg font-medium text-ink">Marketing messages</h2>
           <p className="mt-2 text-mist">
             When you book or visit {SITE.name}, we may send you news and offers about similar
-            treatments from {SITE.name} by email and WhatsApp. You can opt out at any time: tick
-            &ldquo;Please don&rsquo;t send me news and offers&rdquo; when booking, reply STOP to
-            any WhatsApp message, or use the unsubscribe link in any email.{" "}
+            treatments from {SITE.name} by email and WhatsApp. You can opt out at any time: reply STOP
+            to any WhatsApp message, or use the unsubscribe link in any email.{" "}
             <span className="text-ink">
               Opting out stops all marketing messages on every channel.
             </span>{" "}
