@@ -69,6 +69,9 @@ export default function Footer() {
                   <Link href="/cookies" className="hover:text-ink">Cookie Policy</Link>
                 </li>
                 <li>
+                  <Link href="/terms" className="hover:text-ink">Terms</Link>
+                </li>
+                <li>
                   {/* Reopens the cookie banner in place, so a choice can be changed from any page. */}
                   <CookieSettingsButton className="text-left hover:text-ink">Cookie settings</CookieSettingsButton>
                 </li>

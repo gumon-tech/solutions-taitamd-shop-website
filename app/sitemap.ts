@@ -32,5 +32,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/careers/`, lastModified },
     { url: `${SITE_URL}/cookies/`, lastModified },
     { url: `${SITE_URL}/privacy/`, lastModified },
+    { url: `${SITE_URL}/terms/`, lastModified },
   ];
 }

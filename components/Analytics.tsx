@@ -16,7 +16,7 @@ import {
 import { onOpenCookieSettings } from "@/lib/consent-open";
 import { hasClickId, landingUrl } from "@/lib/landing";
 import { SITE } from "@/lib/site";
-import { SOURCE_CAREERS, chatLinkWithTag, isWhatsAppBookingLink, readChatLinkTag } from "@/lib/whatsapp";
+import { SOURCE_CAREERS, chatLinkWithTag, isWhatsAppBookingLink, readChatLinkTag, withoutOptOut } from "@/lib/whatsapp";
 
 // Google Consent Mode v2, BASIC implementation (ads-and-web-standard §1.3, 2026-11-25). Until the
 // visitor clicks Accept, now or on an earlier visit, nothing is requested from Google: no gtag.js,
@@ -144,7 +144,9 @@ function onLeadClick(e: MouseEvent) {
     const name = leadEventFor(a.href);
     // The ad click code (lib/clickref.ts) goes to Google Ads as the conversion's reference only,
     // never into GA4 as part of the link.
-    const linkUrl = t?.code ? chatLinkWithTag(t, t.tag) : a.href;
+    // The /book/ marketing opt-out sentence (Q-KMKT-010) is a choice made for the shop, not for
+    // measurement: it never reaches Google either.
+    const linkUrl = withoutOptOut(t?.code ? chatLinkWithTag(t, t.tag) : a.href);
     // send_to GA4 only: without it gtag also delivers the event to the Ads tag (seen 2026-11-25).
     if (name) gtag("event", name, { link_url: linkUrl, page_path: location.pathname, send_to: GA_ID });
   }

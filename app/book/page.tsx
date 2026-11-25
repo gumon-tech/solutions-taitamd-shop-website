@@ -1,16 +1,10 @@
 import Image from "next/image";
 import { copyText } from "@/lib/copy";
-import { ArrowUpRight, MessageCircle } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { SITE } from "@/lib/site";
 import { HOURS } from "@/lib/hours";
 import TreatwellWidget from "@/components/TreatwellWidget";
-import {
-  buildOpenChatLink,
-  buildWhatsAppLink,
-  OPEN_CHAT_MESSAGE,
-  SOURCE_BOOK_OPEN_CHAT,
-  SOURCE_BOOK_PAGE,
-} from "@/lib/whatsapp";
+import BookChatButtons from "@/components/BookChatButtons";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -35,16 +29,7 @@ export default function BookPage() {
               <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#6d5223]">{copyText("book.hero.eyebrow")}</p>
               <h1 className="mt-4 max-w-2xl text-4xl font-semibold leading-[1.02] tracking-[-0.04em] md:text-6xl">{`${copyText("book.hero.h1")} `}<span className="text-[#a37d37]">{copyText("book.hero.h1_accent")}</span></h1>
               <p className="mt-5 max-w-xl text-sm leading-relaxed text-[#5b6d62] md:text-base">{copyText("book.hero.lead")}</p>
-              {/*
-                Both buttons carry a letter now (Q-MKT-064, second ruling). They still
-                differ in what they promise: the right one sends a finished request, the
-                left one opens a chat with an opening line and D on it, a blank line, and
-                the rest left to the visitor.
-              */}
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row"><a href={buildOpenChatLink(OPEN_CHAT_MESSAGE.book, SOURCE_BOOK_OPEN_CHAT)} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full bg-[#183d2d] px-5 py-3.5 text-sm font-semibold text-[#f7f3e9] transition hover:bg-[#25563e]"><MessageCircle className="h-4 w-4 text-[#d7b874]" /> Open WhatsApp <ArrowUpRight className="h-4 w-4 text-[#d7b874]" /></a><a href={buildWhatsAppLink(
-                "Hi Taitam-D, I’d like to book a treatment. Please share availability and current offers.",
-                SOURCE_BOOK_PAGE,
-              )} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full border border-[#cdb887] px-5 py-3.5 text-sm font-semibold text-[#345a45] transition hover:bg-white/60">Send a pre-filled message <ArrowUpRight className="h-4 w-4" /></a></div>
+              <BookChatButtons />
               {/* Its own colours: this card is the cream panel, not the site's ink palette. */}
               <p className="mt-4 text-sm text-[#5b6d62]">
                 <a
