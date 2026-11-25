@@ -102,7 +102,7 @@ export const SITE = {
       site: "taitamd-kx",
       // The bot's /m/click route. Empty = off: no [web-AD-XXXXXXXX] code, no POST, no
       // transaction_id, and the privacy notice leaves out the paragraphs that describe them.
-      // Switched on 2026-11-26 after KBOT turned it on for Taitam-D (rel7) and KWEB's own
+      // Switched on 2026-11-25 after KBOT turned it on for Taitam-D (rel7) and KWEB's own
       // probe from Origin https://taitam-d.com returned 204. Never another shop's address.
       endpoint: "https://shop-agent.taitam-d.com/m/click",
       // For the privacy notice; these are the bot's numbers (KBOT), not the website's.

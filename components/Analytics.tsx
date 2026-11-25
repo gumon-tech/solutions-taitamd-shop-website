@@ -145,7 +145,7 @@ function onLeadClick(e: MouseEvent) {
     // The ad click code (lib/clickref.ts) goes to Google Ads as the conversion's reference only,
     // never into GA4 as part of the link.
     const linkUrl = t?.code ? chatLinkWithTag(t, t.tag) : a.href;
-    // send_to GA4 only: without it gtag also delivers the event to the Ads tag (seen 2026-11-26).
+    // send_to GA4 only: without it gtag also delivers the event to the Ads tag (seen 2026-11-25).
     if (name) gtag("event", name, { link_url: linkUrl, page_path: location.pathname, send_to: GA_ID });
   }
 
