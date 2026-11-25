@@ -22,7 +22,18 @@ QR ใหม่สร้างจาก `qrencode`-เทียบเท่า: 
 ```
 เวลาทุกค่าที่เขียนลงไฟล์มาจาก `date -u` เท่านั้น (`stat -f '%Sm'` พิมพ์เวลาเครื่อง +07 ได้วันคนละวัน)
 
-## ล่าสุด 2026-11-25T16:57Z · มาตรฐานวัดผลโฆษณา §1 (KWEB@air ห้องใหม่ แทน local_a4d70ff2 ที่ปิดแล้ว)
+## ล่าสุด 2026-11-25T19:35Z · Q-KMKT-010 soft opt-in ข่าวสารการตลาด (KWEB@air)
+
+- main `bf9e743` live (deploy run 45682994870 success) · ack `gumon-workspace/machines/komphet-air/queue/KWEB/ack/Q-KMKT-010/` · คำเคาะ L-10 ใน `queue/GLOBAL/legal-register/KWEB.md` (`2ca2b157d`)
+- **/book/** `components/BookChatButtons.tsx`: ข้อความแจ้ง + ช่อง "Please don't send me news and offers" **ว่างไว้** (วาดเอง: checkbox ของเบราว์เซอร์บนเว็บนี้เป็นสี่เหลี่ยมทึบเหมือนติ๊กแล้ว) · ติ๊ก ⇒ ประโยค `MARKETING_OPT_OUT_SENTENCE` (`lib/whatsapp.ts`) แทรกก่อนแท็กของ 2 ปุ่มบน /book/ · KBOT ยืนยันรูปแบบ (ประโยคอยู่ = marketing_opt_out=true · ไม่มี = false) ⇒ **เปลี่ยนประโยคต้องตกลงกับ KBOT**
+  - href แก้ที่ element ไม่ผ่าน props เพราะ AdSource/clickref แก้แท็กบน element เดียวกัน · อ่านช่องตอน mount (ติ๊กก่อน hydrate / Back) · `withoutOptOut()` ตัดประโยคออกจาก link_url ที่ส่ง GA4
+  - วัดบน production: ติ๊ก/เลิกติ๊กกับ `[web-AD]` และ `[web-AD-XXXXXXXX]` แท็ก+รหัสคลิกคงเดิม · ไม่เห็น event click ของ GA4 enhanced measurement
+- **/terms/** หน้าใหม่ (footer + sitemap) มีแค่ "About these terms" + "Marketing messages" · เงื่อนไขธุรกิจ (มัดจำ/ยกเลิกนัด) ไม่ได้แต่ง รอเจ้าของให้
+- **/privacy/ 1.2** หัวข้อ "News and offers by email and WhatsApp" (#marketing) · ข้อเท็จจริงสามที่ (book · terms · privacy) ต้องแก้พร้อมกัน
+- งานข้อ 2 ของ brief (รหัสคลิก) เปิดอยู่แล้วตั้งแต่ `cacbd2e` ไม่ต้องทำซ้ำ
+- ค้างที่คนอื่น: KBOT สร้างทะเบียนความยินยอมฝั่งบอท (จะแจ้งเมื่อขึ้น) · reg 22(3)(c) สำหรับ Treatwell/walk-in เป็นของ KBOT/ร้าน
+
+## ก่อนหน้า 2026-11-25T16:57Z · มาตรฐานวัดผลโฆษณา §1 (KWEB@air ห้องใหม่ แทน local_a4d70ff2 ที่ปิดแล้ว)
 
 - main `24b5e1e` live (deploy run 45658933885 success) · มาตรฐาน `~/dev/gumon-marketing-hub/playbooks/ads-and-web-standard.md` §1 · ต้นแบบ solution-sst-website PR #31 #33 #38
 - **Consent Mode v2 basic** (`components/Analytics.tsx` · `lib/consent.ts`): ก่อน Accept / Reject = ไม่มี request ถึง Google Ads/Analytics/บอท · Accept = ad_storage + ad_user_data เท่านั้น · key `ttd-consent:v2` 182 วัน (ค่าเก่า `ttd-consent` ถูกลบ) · Cookie settings ที่ footer, /privacy, /cookies เปิดแบนเนอร์ซ้ำ ⇒ Reject ลบ `_gcl_*` `_ga*`
@@ -75,7 +86,7 @@ export PATH="$HOME/.local/bin:$HOME/.nvm/versions/node/v24.19.0/bin:$PATH"   # s
 cd ~/dev/solutions-taitamd-shop-website
 git status -sb                                   # คาด: ## main...origin/main ไม่มีไฟล์ค้าง (next-env.d.ts/tsconfig.json โผล่ = ดูกับดักข้อ 1)
 git fetch -q origin && git rev-list --count HEAD..origin/main   # คาด: 0
-git log --oneline -1                             # คาด: d2c5bc8 หรือใหม่กว่า · ใหม่กว่า = ไล่ว่าใครออก แล้ววัด live
+git log --oneline -1                             # คาด: bf9e743 หรือใหม่กว่า · ใหม่กว่า = ไล่ว่าใครออก แล้ววัด live
 gh run list --limit 3                            # คาด: completed success ทุกแถว · 1 run ต่อ 1 push (ล่าสุด 39446844015)
 git log origin/main --since=2026-10-20 --format='%h %an %s'   # คาด: เฉพาะ commit ของห้องนี้ · คุณคมเพชรเคย merge PR #4 (Codex) ตรงเข้า main เอง
 curl -s -o /dev/null -w "apex %{http_code} %{size_download}\n" https://taitam-d.com/        # คาด: 200 · 160,103 B วันนี้
