@@ -192,8 +192,19 @@ export default function CookiesPage() {
           <h2 className="text-lg font-medium text-ink">Who else sees this data</h2>
           <p className="mt-2 text-mist">
             If you accept, measurement data is shared with Google LLC (Google Ads, and
-            Google Analytics without cookies). We do not sell your data. We do not use analytics to identify you
-            personally.
+            Google Analytics without cookies).
+            {SITE.googleAds.clickRef.endpoint ? (
+              <>
+                {" "}If you came from one of our Google ads and accepted, pressing a WhatsApp button
+                also sends a short code and Google&apos;s reference for your ad click to our booking
+                assistant, which Gumon Technology runs for us; our{" "}
+                <Link href="/privacy" className="underline text-gold hover:text-gold2">
+                  Privacy Notice
+                </Link>{" "}
+                explains how long it is kept.
+              </>
+            ) : null}{" "}
+            We do not sell your data. We do not use analytics to identify you personally.
           </p>
           <p className="mt-3 text-mist">
             Google processes this outside the UK, including in the United States.
